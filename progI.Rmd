@@ -1,0 +1,44 @@
+---
+title: "Programación Estadística I"
+author: "Alvaro Chirino"
+date: "I-2020"
+output: ioslides_presentation
+#ioslides_presentation
+#slidy_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# Big Data
+
+## Detalles de la Materia
+
+* Docente: Lic. Alvaro Chirino Gutierrez
+* Horario: Lunes - Miercoles 16:00 - 18:00
+* Aula: Laboratoio I
+* Canal de Comunicación: t.me/prog1
+
+## Contenido
+
+1. Programación en R
+2. Scraping Web
+3. Introducción al Big Data
+4. R y Big Data
+5. R y Spark 
+
+## Evaluación
+
+* Parcial 1 (30\%)
+* Parcial 2 (30\%)
+* Proyecto (40\%)
+
+## Bibliografía
+
+* Dalgleish, T., Williams, J. M. G. ., Golden, A.-M. J., Perkins, N., Barrett, L. F., Barnard, P. J., … Watkins, E. (2007). R Cookbook. 
+* Iacus, S. M. (2017). Big Data and Social Science - A Practical Guide to Methods and Tools. Journal of Statistical Software (Vol. 78). 
+* Guller, M. (2015). Big Data Analytics with Spark. Big Data Analytics with Spark. 
+* Munzert, S. (2015). Automated Data Collection with R A Practical Guide to.
+* Prajapati, V. (2013). Big Data Analytics with R and Hadoop.
+
