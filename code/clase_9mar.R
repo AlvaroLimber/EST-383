@@ -13,9 +13,11 @@ library(ggplot2)
 library(dplyr)
 library(maps)
 library(ggvis)
+library(readxl)
 #######################################
-urlfile<-'https://raw.githubusercontent.com/AlvaroLimber/EST-383/master/data/21f.csv'
-bd<-read.csv(urlfile,sep="|")
+urlfile<-url('https://raw.githubusercontent.com/AlvaroLimber/EST-383/master/data/oct20.RData')
+load(urlfile)
+names(computo)[18]<-"MAS"
 #######################################
 #The grammar of graphics is an answer to a question: what is a statistical graphic? 
 
@@ -32,6 +34,8 @@ mpg
 
 ggplot(mpg, aes(x = displ, y = hwy)) + 
   geom_area()
+
+ggplot(computo,aes(MAS,CC))+geom_point()
 
 ggplot(mpg, aes(displ, hwy)) +
   geom_line()
