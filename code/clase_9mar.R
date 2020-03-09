@@ -14,7 +14,8 @@ library(dplyr)
 library(maps)
 library(ggvis)
 #######################################
-
+urlfile<-'https://raw.githubusercontent.com/AlvaroLimber/EST-383/master/data/21f.csv'
+bd<-read.csv(urlfile,sep="|")
 #######################################
 #The grammar of graphics is an answer to a question: what is a statistical graphic? 
 
