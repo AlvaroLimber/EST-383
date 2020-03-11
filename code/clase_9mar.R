@@ -6,9 +6,9 @@
 rm(list=ls())
 #######################################
 #install.packages("ggplot2")
-#install.packages("dplyr")
-#install.packages("maps")
-#install.packages("ggvis")
+#install.packages("dplyr")#atajos sql
+#install.packages("maps")#mapas
+#install.packages("ggvis")#gráficos 1 paso + q ggplot html
 library(ggplot2)
 library(dplyr)
 library(maps)
@@ -30,10 +30,17 @@ names(computo)[18]<-"MAS"
 ## Datos, estetica y geometria (layers)
 
 library(ggplot2)
-mpg
+data(mpg)
+help(mpg)
 
-ggplot(mpg, aes(x = displ, y = hwy)) + 
-  geom_area()
+
+ggplot(mpg,aes(x=displ,y = hwy))
+
+ggplot(mpg,aes(displ,hwy))+geom_point()
+ggplot(computo,aes(MAS,CC))+geom_point()
+
+ggplot(mpg, aes(x = displ)) + 
+  geom_histogram()
 
 ggplot(computo,aes(MAS,CC))+geom_point()
 
@@ -44,21 +51,38 @@ ggplot(mpg, aes(displ)) +
   geom_histogram()
 
 #Color tamaño y forma
+#color
 ggplot(mpg, aes(displ, hwy,colour = class)) +
   geom_point()
 
+ggplot(mpg, aes(displ, hwy,colour = manufacturer)) +
+  geom_point()
+
+ggplot(computo,aes(MAS,CC,colour=Departamento))+geom_point()
+#tamaño
+ggplot(mpg, aes(displ, hwy,size=cyl)) +
+  geom_point()
+#tamaño + color
+ggplot(mpg, aes(displ, hwy,colour=class,size=cyl)) +
+  geom_point()
+
+#forma
 ggplot(mpg, aes(displ, hwy,shape = drv)) +
   geom_point()
-
-ggplot(mpg, aes(displ, hwy,size = cyl)) +
+#color forma y tamaño
+ggplot(mpg, aes(displ, hwy,colour=class,
+        size=cyl,shape = drv)) +
   geom_point()
 
-ggplot(mpg, aes(displ, hwy)) + geom_point(aes(colour = "blue"))
-
-ggplot(mpg, aes(displ, hwy)) + geom_point(colour = "blue")
-
+#la leyenda del color
 ggplot(mpg, aes(displ, hwy)) + 
-  geom_point() + 
+  geom_point(aes(colour = "djkfnsjdfd"))
+#cambiar el color de todos los puntos
+ggplot(mpg, aes(displ, hwy)) + 
+  geom_point(colour = "darkred")
+#geometrias multiples 
+ggplot(mpg, aes(displ, hwy))+
+  geom_point()+
   facet_wrap(~class)
 
 ggplot(mpg, aes(displ, hwy)) + 
@@ -83,17 +107,19 @@ ggplot(mpg, aes(displ, hwy)) +
   geom_point() + 
 geom_smooth(method = "lm")
 
-ggplot(mpg, aes(drv, hwy)) + 
-  geom_point()
+# cuanti vs cual
 
+ggplot(mpg, aes(drv, hwy)) + 
+  geom_boxplot()
+ggplot(mpg, aes(drv, hwy)) + geom_point()
 ggplot(mpg, aes(drv, hwy)) + geom_jitter()
 ggplot(mpg, aes(drv, hwy)) + geom_boxplot()
 ggplot(mpg, aes(drv, hwy)) + geom_violin()
-
+#una cuanti
+ggplot(mpg, aes(hwy)) + geom_boxplot()
 ggplot(mpg, aes(hwy)) + geom_histogram()
-#> `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 ggplot(mpg, aes(hwy)) + geom_freqpoly()
-#> `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+ggplot(mpg, aes(hwy)) + geom_density()
 
 ggplot(mpg, aes(hwy)) + 
   geom_freqpoly(binwidth = 2.5)
@@ -105,28 +131,21 @@ ggplot(mpg, aes(hwy)) +
   geom_density()
 
 ggplot(mpg, aes(displ, colour = drv)) + 
-  geom_freqpoly(binwidth = 0.5)
+  geom_density()
 
 ggplot(mpg, aes(displ, fill = drv)) + 
-  geom_histogram(binwidth = 0.5) 
+  geom_histogram(binwidth = 0.4) 
 
-ggplot(mpg, aes(displ, fill = drv)) + 
+ggplot(mpg, aes(displ,fill=drv)) + 
   geom_histogram(binwidth = 0.5) + 
     facet_wrap(~drv, ncol = 1)
-
+#cuali , cuanti discretas
 ggplot(mpg, aes(manufacturer)) + 
   geom_bar()
 
-aa<-as.data.frame(table(mpg$class))
-aa
-ggplot(aa,aes(Var1,Freq))+ 
-  geom_bar()
-
-ggplot(aa,aes(Var1,Freq)) + geom_bar(stat = "identity")
-ggplot(drugs, aes(drug, effect)) + geom_point()
-
+#ELEMENTOS DEL GRAFICO 
 ggplot(mpg, aes(cty, hwy)) +
-  geom_point(alpha = 1 / 3)
+  geom_point(alpha = 0.2)
 
 ggplot(mpg, aes(cty, hwy)) +
   geom_point(alpha = 1 / 3) + 
@@ -139,20 +158,14 @@ ggplot(mpg, aes(cty, hwy)) +
   xlab(NULL) + 
   ylab(NULL)
 
-ggplot(mpg, aes(drv, hwy)) +
-  geom_jitter(width = 0.25)
+g1<-ggplot(mpg, aes(drv, hwy)) +
+  geom_violin(width = 0.25) + 
+  xlim("r","4") + 
+  ylim(10, 30)
 
-ggplot(mpg, aes(drv, hwy)) +
-  geom_jitter(width = 0.25) + 
-  xlim("f", "r") + 
-  ylim(20, 30)
-#> Warning: Removed 137 rows containing missing values (geom_point).
+ggsave("g1.png",g1)
 
-# For continuous scales, use NA to set only one limit
-ggplot(mpg, aes(drv, hwy)) +
-  geom_jitter(width = 0.25, na.rm = TRUE) + 
-  ylim(NA, 30)
-
+ggsave("g1.pdf",g1)
 
 #output
 p <- ggplot(mpg, aes(displ, hwy, colour = factor(cyl))) +
@@ -160,23 +173,20 @@ p <- ggplot(mpg, aes(displ, hwy, colour = factor(cyl))) +
 
 # Save png to disk
 
-
 ggsave("plot.png", p, width = 5, height = 5)
 
 saveRDS(p, "plot.rds")
 q <- readRDS("plot.rds")
 
-ggplot(faithfuld, aes(eruptions, waiting)) + 
-  geom_contour(aes(z = density, colour = ..level..))
-
-mi_counties <- map_data("world") %>% 
+# 
+mapa <- map_data("world") %>% 
   select(lon = long, lat, group, id = subregion)
 
-ggplot(mi_counties, aes(lon, lat)) + 
+ggplot(mapa, aes(lon, lat)) + 
   geom_point(size = .25, show.legend = FALSE) +
   coord_quickmap()
 
-ggplot(mi_counties, aes(lon, lat, group = group)) +
+ggplot(mapa, aes(lon, lat, group = group)) +
   geom_polygon(fill = "white", colour = "grey50") + 
   coord_quickmap()
 
@@ -190,3 +200,5 @@ theme_minimal()
 theme_classic()
 theme_void()
 
+ggplot(mpg,aes(x=displ,y = hwy))+
+  geom_point()
