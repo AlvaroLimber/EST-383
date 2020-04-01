@@ -1,0 +1,71 @@
+---
+title: "R Markdown"
+author: "Alvaro Chirino"
+date: "4/1/2020"
+output: html_document
+---
+
+# Sección 1 
+
+## Sub sección 1.1 
+
+### Sub sub sección
+
+# Sección 2
+
+# Sección 3
+
+* item 1
+  - a
+  - b
+  - c
+* item 2
+* item 3
+* item 4
+
+1. item 1
+2. item 2
+3. item 3
+
+Esta linea esta destinada a introducir formulas en linea $\beta=2x+y^2$
+
+$$ \sum_{i=1}^N{x_i} $$
+
+```{r,echo=F}
+x<-rnorm(20)
+x
+```
+
+NCDHJCBDSHDSCVDSHGCVSDGHCDHJSBCSHDJBCASJHSDFSF
+
+```{r,eval=FALSE}
+plot(density(x))
+```
+
+```{r,echo=FALSE,eval=F}
+for(i in 10:30){
+  plot(density(rnorm(i)))
+}
+```
+
+
+```{r}
+library(knitr)
+a<-matrix(1:20,4,5)
+a
+kable(a)
+kable(table(1:10,1:10))
+hist(x)
+```
+
+
+
+
+
+
+
+
+
+
+
+
