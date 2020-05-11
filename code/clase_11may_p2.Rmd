@@ -1,0 +1,61 @@
+---
+title: "Mi primer Dashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+# Pestaña 1
+
+### Gráfico de densidad (normal estándar)
+
+```{r}
+plot(density(rnorm(1000)))
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Chart B
+
+```{r}
+boxplot(rnorm(1000))
+```
+
+### Chart C
+
+```{r}
+summary(rnorm(1000))
+```
+
+# Pestaña 2
+
+### Gráfico de densidad (normal estándar)
+
+```{r}
+plot(density(rnorm(1000)))
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Chart B
+
+```{r}
+boxplot(rnorm(1000))
+```
+
+### Chart C
+
+```{r}
+summary(rnorm(1000))
+```
+
