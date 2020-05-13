@@ -1,0 +1,198 @@
+---
+title: "Mi tablero"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+    theme: simplex
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+```
+
+```{r}
+a<-runif(100)
+b<-runif(100)
+bd<-data.frame(a,b)
+```
+
+# Pestaña 1
+
+Column
+-------------------------------------------
+
+### Resumen
+```{r}
+summary(rnorm(100))
+```
+
+### Plot XY
+```{r}
+x<-runif(100)
+y<-runif(100)
+plot(x,y)
+```
+
+### Plot XY
+```{r}
+x<-runif(100)
+y<-runif(100)
+plot(x,y)
+```
+
+### Plot XY
+```{r}
+x<-runif(100)
+y<-runif(100)
+plot(x,y)
+```
+
+Column
+-------------------------------------------
+
+### Densidad
+```{r}
+plot(density(rnorm(100)))
+```
+
+Column
+-------------------------------------------
+
+### Densidad
+```{r}
+plot(density(rnorm(100)))
+```
+
+# Pestaña 2 {data-orientation=rows}
+
+Row
+-------------------------------------------
+
+### Resumen 
+```{r}
+summary(rnorm(100))
+```
+
+### PLOT XY
+```{r}
+x<-runif(100)
+y<-runif(100)
+plot(x,y)
+```
+
+Row
+-------------------------------------------
+
+### 
+```{r}
+plot(density(rnorm(100)))
+```
+
+# Pestaña 3
+
+Column {data-width=700}
+-------------------------------------------
+
+### PLOT XY
+```{r}
+x<-runif(100)
+y<-runif(100)
+plot(x,y)
+```
+
+
+Column {data-width=300}
+-------------------------------------------
+### PLOT XY
+```{r}
+x<-runif(100)
+y<-runif(100)
+plot(x,y)
+```
+
+# Pestaña 4
+
+Column 
+-------------------------------------------
+### Densidad Normal
+```{r}
+plot(density(rnorm(1000)))
+```
+
+### Densidad uniforme
+```{r}
+plot(density(runif(1000)))
+```
+
+### Histograma Normal
+```{r}
+hist(rnorm(1000))
+```
+
+
+Column {.tabset}
+-------------------------------------------
+
+### Densidad Normal
+```{r}
+plot(density(rnorm(1000)))
+```
+
+### Densidad uniforme
+```{r}
+plot(density(runif(1000)))
+```
+
+### Histograma Normal
+```{r}
+hist(rnorm(1000))
+```
+
+# Pestaña 5, (value box)  {data-orientation=rows}
+
+
+Row
+----------------------------------------
+### Número de estudiantes
+```{r}
+valueBox(5,icon = "fa-pencil")
+```
+
+### Número de contagios
+```{r}
+valueBox(3000,icon = "fa-pencil",col="darkred")
+```
+
+### Número de muertes
+```{r}
+valueBox(100,icon = "fa-pencil",col="black")
+```
+
+Row
+----------------------------------------
+
+### Gauge 1
+```{r}
+gauge(42, min = 0, max = 100, symbol = '%', gaugeSectors(
+  success = c(80, 100), warning = c(40, 79), danger = c(0, 39)
+))
+```
+
+### Gauge 2
+```{r}
+gauge(90, min = 0, max = 100, symbol = '%', gaugeSectors(
+  success = c(80, 100), warning = c(40, 79), danger = c(0, 39)
+))
+```
+
+
+# Pestaña 6
+
+Column
+--------------------------------------
+### Tabla con kable
+```{r}
+library(knitr)
+kable(bd)
+```
