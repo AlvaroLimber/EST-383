@@ -1,0 +1,19 @@
+---
+title: "Untitled"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+```
+
+```{r}
+rm(list = ls())
+setwd("C:\\Users\\ALVARO\\Downloads\\bd43 (1)\\SPSS")
+library(foreign)
+eh18p<-read.spss("EH2018_Persona.sav",to.data.frame = T)
+```
+
