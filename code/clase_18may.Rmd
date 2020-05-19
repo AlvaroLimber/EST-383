@@ -1,0 +1,32 @@
+# Fases en el análisis de datos
+
+0. Recolectar la data 
+1. Limpieza de la data
+2. Explorar 
+3. Análisis
+4. Visualización de la información (Rmarkdown, Shiny)
+  * La naturaleza de la base de datos
+  * Mensaje (usuario de la información)
+  * Lenguaje (usuario de la información)
+5. Retro alimentación
+
+# Shiny 
+Esta orientado a generar documentos dinámicos (interactivo para el usuario)
+
+Construcción de un entorno shiny tiene 3 canales:
+  
+  * mediante 2 archivos, ui.R server.R
+  * Mediante un solo archivo denominado app.R
+  * Rmarkdown 
+
+Normalmente a los entornos desarrollados con shiny se le llaman aplicaciones
+o tambien son web app. 
+
+  * En UI se define la interfaz de la aplicacion shiny  
+  * En server se realiza el procesamiento de la aplicación y se 
+  generan las salidas para el UI
+  
+Ejercicio es:
+  
+Adaptar el templete de shiny, para generar una aplicación que permita trabajar 
+con 3 distribuciones estadísticas (valores aleatorios), usar al menos 2 inputs.

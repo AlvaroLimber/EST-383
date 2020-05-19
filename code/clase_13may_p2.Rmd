@@ -12,8 +12,8 @@ library(flexdashboard)
 
 ```{r}
 rm(list = ls())
-setwd("C:\\Users\\ALVARO\\Downloads\\bd43 (1)\\SPSS")
+#setwd("")
 library(foreign)
-eh18p<-read.spss("EH2018_Persona.sav",to.data.frame = T)
+eh18p<-read.spss("C:\\Users\\ALVARO\\Downloads\\bd43 (1)\\SPSS\\EH2018_Persona.sav",to.data.frame = T)
 ```
 
