@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 1 Introducción a R | Big Data en R</title>
+  <meta name="description" content="Este libro esta destinado a la materia de Programación Estadística I de la carrera de Estadística de la Universidad Mayor de San Andres." />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 1 Introducción a R | Big Data en R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Este libro esta destinado a la materia de Programación Estadística I de la carrera de Estadística de la Universidad Mayor de San Andres." />
+  <meta name="github-repo" content="alvarolimber/est-383" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 1 Introducción a R | Big Data en R" />
+  
+  <meta name="twitter:description" content="Este libro esta destinado a la materia de Programación Estadística I de la carrera de Estadística de la Universidad Mayor de San Andres." />
+  
+
+<meta name="author" content="Alvaro Chirino Gutierrez" />
+
+
+<meta name="date" content="2020-04-08" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="scraping-web.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prefacio</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#audiencia"><i class="fa fa-check"></i>Audiencia</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#estructura-del-libro"><i class="fa fa-check"></i>Estructura del libro</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#software-y-acuerdos"><i class="fa fa-check"></i>Software y acuerdos</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#bases-de-datos"><i class="fa fa-check"></i>Bases de datos</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#agradecimiento"><i class="fa fa-check"></i>Agradecimiento</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="introR.html"><a href="introR.html"><i class="fa fa-check"></i><b>1</b> Introducción a R</a><ul>
+<li class="chapter" data-level="1.1" data-path="introR.html"><a href="introR.html#tipos-de-estructuras"><i class="fa fa-check"></i><b>1.1</b> Tipos de estructuras</a></li>
+<li class="chapter" data-level="1.2" data-path="introR.html"><a href="introR.html#loops-y-condiciones"><i class="fa fa-check"></i><b>1.2</b> Loops y condiciones</a></li>
+<li class="chapter" data-level="1.3" data-path="introR.html"><a href="introR.html#funciones"><i class="fa fa-check"></i><b>1.3</b> Funciones</a></li>
+<li class="chapter" data-level="1.4" data-path="introR.html"><a href="introR.html#importacion-de-datos"><i class="fa fa-check"></i><b>1.4</b> Importacion de datos</a></li>
+<li class="chapter" data-level="1.5" data-path="introR.html"><a href="introR.html#dataframe-y-exploración"><i class="fa fa-check"></i><b>1.5</b> Dataframe y exploración</a></li>
+<li class="chapter" data-level="1.6" data-path="introR.html"><a href="introR.html#estadística-descriptiva"><i class="fa fa-check"></i><b>1.6</b> Estadística descriptiva</a></li>
+<li class="chapter" data-level="1.7" data-path="introR.html"><a href="introR.html#muestreo-e-inferencia"><i class="fa fa-check"></i><b>1.7</b> Muestreo e inferencia</a></li>
+<li class="chapter" data-level="1.8" data-path="introR.html"><a href="introR.html#gráficos-de-origen"><i class="fa fa-check"></i><b>1.8</b> Gráficos de origen</a></li>
+<li class="chapter" data-level="1.9" data-path="introR.html"><a href="introR.html#ggplot"><i class="fa fa-check"></i><b>1.9</b> ggplot</a></li>
+<li class="chapter" data-level="1.10" data-path="introR.html"><a href="introR.html#r-markdown"><i class="fa fa-check"></i><b>1.10</b> R Markdown</a><ul>
+<li class="chapter" data-level="1.10.1" data-path="introR.html"><a href="introR.html#instalación"><i class="fa fa-check"></i><b>1.10.1</b> Instalación</a></li>
+<li class="chapter" data-level="1.10.2" data-path="introR.html"><a href="introR.html#yaml-header"><i class="fa fa-check"></i><b>1.10.2</b> YAML Header</a></li>
+<li class="chapter" data-level="1.10.3" data-path="introR.html"><a href="introR.html#sintaxis-básica"><i class="fa fa-check"></i><b>1.10.3</b> Sintaxis básica</a></li>
+<li class="chapter" data-level="1.10.4" data-path="introR.html"><a href="introR.html#tipos-de-documentos"><i class="fa fa-check"></i><b>1.10.4</b> Tipos de documentos</a></li>
+<li class="chapter" data-level="1.10.5" data-path="introR.html"><a href="introR.html#chunks"><i class="fa fa-check"></i><b>1.10.5</b> Chunks</a></li>
+</ul></li>
+<li class="chapter" data-level="1.11" data-path="introR.html"><a href="introR.html#shiny"><i class="fa fa-check"></i><b>1.11</b> Shiny</a><ul>
+<li class="chapter" data-level="1.11.1" data-path="introR.html"><a href="introR.html#ui"><i class="fa fa-check"></i><b>1.11.1</b> UI</a></li>
+<li class="chapter" data-level="1.11.2" data-path="introR.html"><a href="introR.html#server"><i class="fa fa-check"></i><b>1.11.2</b> Server</a></li>
+</ul></li>
+<li class="chapter" data-level="1.12" data-path="introR.html"><a href="introR.html#ejercicios-propuestos"><i class="fa fa-check"></i><b>1.12</b> Ejercicios Propuestos</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="scraping-web.html"><a href="scraping-web.html"><i class="fa fa-check"></i><b>2</b> Scraping Web</a><ul>
+<li class="chapter" data-level="2.1" data-path="scraping-web.html"><a href="scraping-web.html#pasos-para-la-recopilación-de-información"><i class="fa fa-check"></i><b>2.1</b> Pasos para la recopilación de información</a></li>
+<li class="chapter" data-level="2.2" data-path="scraping-web.html"><a href="scraping-web.html#tecnologías-de-diseminación-extracción-y-almacenamiento-web"><i class="fa fa-check"></i><b>2.2</b> Tecnologías de diseminación, extracción y almacenamiento Web</a></li>
+<li class="chapter" data-level="2.3" data-path="scraping-web.html"><a href="scraping-web.html#librerías-en-r"><i class="fa fa-check"></i><b>2.3</b> Librerías en R</a></li>
+<li class="chapter" data-level="2.4" data-path="scraping-web.html"><a href="scraping-web.html#librería-rvest"><i class="fa fa-check"></i><b>2.4</b> Librería rvest</a></li>
+<li class="chapter" data-level="2.5" data-path="scraping-web.html"><a href="scraping-web.html#ejemplo-ketal"><i class="fa fa-check"></i><b>2.5</b> Ejemplo: Ketal</a></li>
+<li class="chapter" data-level="2.6" data-path="scraping-web.html"><a href="scraping-web.html#ejemplo-ministerio-de-educación"><i class="fa fa-check"></i><b>2.6</b> Ejemplo: Ministerio de Educación</a></li>
+<li class="chapter" data-level="2.7" data-path="scraping-web.html"><a href="scraping-web.html#ejercicios-propuestos-1"><i class="fa fa-check"></i><b>2.7</b> Ejercicios Propuestos</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="introduccion-al-big-data.html"><a href="introduccion-al-big-data.html"><i class="fa fa-check"></i><b>3</b> Introduccion al Big Data</a><ul>
+<li class="chapter" data-level="3.1" data-path="introduccion-al-big-data.html"><a href="introduccion-al-big-data.html#ejercicios-propuestos-2"><i class="fa fa-check"></i><b>3.1</b> Ejercicios Propuestos</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="big-data-en-r.html"><a href="big-data-en-r.html"><i class="fa fa-check"></i><b>4</b> Big Data en R</a><ul>
+<li class="chapter" data-level="4.1" data-path="big-data-en-r.html"><a href="big-data-en-r.html#ejercicios-propuestos-3"><i class="fa fa-check"></i><b>4.1</b> Ejercicios Propuestos</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="r-y-spark.html"><a href="r-y-spark.html"><i class="fa fa-check"></i><b>5</b> R y Spark</a><ul>
+<li class="chapter" data-level="5.1" data-path="r-y-spark.html"><a href="r-y-spark.html#ejercicios-propuestos-4"><i class="fa fa-check"></i><b>5.1</b> Ejercicios Propuestos</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Big Data en R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="introR" class="section level1">
+<h1><span class="header-section-number">Chapter 1</span> Introducción a R</h1>
+<p>R es un software de libre distribución</p>
+<div id="tipos-de-estructuras" class="section level2">
+<h2><span class="header-section-number">1.1</span> Tipos de estructuras</h2>
+<ul>
+<li>Vectores</li>
+<li>Matrices</li>
+<li>Arrays</li>
+<li>Dataframes</li>
+<li>Listas</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">rm</span>(<span class="dt">list=</span><span class="kw">ls</span>())</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">v&lt;-<span class="dv">1</span><span class="op">:</span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">v2&lt;-<span class="kw">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;b&quot;</span>,<span class="st">&quot;2&quot;</span>)</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw">as.character</span>(v)</a></code></pre></div>
+<pre><code>##  [1] &quot;1&quot;  &quot;2&quot;  &quot;3&quot;  &quot;4&quot;  &quot;5&quot;  &quot;6&quot;  &quot;7&quot;  &quot;8&quot;  &quot;9&quot;  &quot;10&quot;</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">as.numeric</span>(v)</a></code></pre></div>
+<pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">x1&lt;-<span class="dv">1</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="dv">0</span><span class="op">/</span><span class="dv">0</span></a></code></pre></div>
+<pre><code>## [1] NaN</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">x2&lt;-<span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">x2</a></code></pre></div>
+<pre><code>## NULL</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">str</span>(x1)</a></code></pre></div>
+<pre><code>##  num 1</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">typeof</span>(x1)</a></code></pre></div>
+<pre><code>## [1] &quot;double&quot;</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">typeof</span>(v2)</a></code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="co"># vectores con usos estadisticos</span></a>
+<a class="sourceLine" id="cb15-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="kw">rbinom</span>(<span class="dv">10</span>,<span class="dv">5</span>,<span class="fl">0.1</span>)</a></code></pre></div>
+<pre><code>##  [1] 0 2 1 0 1 0 2 0 0 0</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">rnorm</span>(<span class="dv">10</span>,<span class="dv">5</span>,<span class="dv">10</span>)</a></code></pre></div>
+<pre><code>##  [1]  19.043197   1.030422  17.658619   3.605562   7.453270  -4.575173
+##  [7]   7.048660 -13.169978   3.345203   1.813582</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw">runif</span>(<span class="dv">10</span>,<span class="dv">50</span>,<span class="dv">500</span>)</a></code></pre></div>
+<pre><code>##  [1] 471.95979 400.25041 219.42324 309.25024 352.00815 379.72616  92.66691
+##  [8] 350.79994 397.23294  97.31466</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw">rchisq</span>(<span class="dv">10</span>,<span class="dv">2</span>)</a></code></pre></div>
+<pre><code>##  [1] 0.09527069 1.03900960 1.09472284 2.30848897 0.04019417 0.25676086
+##  [7] 1.95665046 0.66553469 1.79715405 0.20830655</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw">rexp</span>(<span class="dv">10</span>,<span class="dv">5</span>)</a></code></pre></div>
+<pre><code>##  [1] 0.064346136 0.124365327 0.347425888 0.214824014 0.277080186
+##  [6] 0.021249389 0.677803618 0.028905577 0.061597385 0.004476942</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1">x&lt;-<span class="kw">rchisq</span>(<span class="dv">1000</span>,<span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb25-2" data-line-number="2"><span class="kw">hist</span>(x)</a></code></pre></div>
+<p><img src="bigdata_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1">(<span class="kw">sum</span>((x<span class="op">-</span><span class="kw">mean</span>(x))<span class="op">**</span><span class="dv">4</span>)<span class="op">/</span><span class="dv">1000</span>)<span class="op">/</span><span class="kw">sd</span>(x)<span class="op">**</span><span class="dv">4</span></a></code></pre></div>
+<pre><code>## [1] 8.787519</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="kw">median</span>(<span class="kw">rexp</span>(<span class="dv">100000</span>,<span class="dv">3</span>))</a></code></pre></div>
+<pre><code>## [1] 0.2318608</code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="kw">quantile</span>(x,<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">56</span>)<span class="op">/</span><span class="dv">100</span>)</a></code></pre></div>
+<pre><code>##        2%       56% 
+## 0.2151686 2.7048740</code></pre>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="kw">quantile</span>(x,<span class="dv">1</span><span class="op">:</span><span class="dv">100</span><span class="op">/</span><span class="dv">100</span>)</a></code></pre></div>
+<pre><code>##         1%         2%         3%         4%         5%         6% 
+##  0.1169911  0.2151686  0.2603704  0.3562662  0.4075437  0.4544259 
+##         7%         8%         9%        10%        11%        12% 
+##  0.5110714  0.5596904  0.6074651  0.6200685  0.6729432  0.6966650 
+##        13%        14%        15%        16%        17%        18% 
+##  0.7393984  0.7982812  0.8557135  0.8964893  0.9228681  0.9462248 
+##        19%        20%        21%        22%        23%        24% 
+##  0.9810857  1.0434099  1.0685198  1.1201507  1.1517767  1.2024300 
+##        25%        26%        27%        28%        29%        30% 
+##  1.2395161  1.2791477  1.3222790  1.3932607  1.4371502  1.4893259 
+##        31%        32%        33%        34%        35%        36% 
+##  1.5066277  1.5494464  1.5819701  1.6239527  1.6799238  1.7257631 
+##        37%        38%        39%        40%        41%        42% 
+##  1.7881228  1.8187658  1.8730930  1.9590242  2.0041716  2.0373553 
+##        43%        44%        45%        46%        47%        48% 
+##  2.0682756  2.1320639  2.1806710  2.2299797  2.2769126  2.3196204 
+##        49%        50%        51%        52%        53%        54% 
+##  2.3614191  2.4077669  2.4506281  2.5052105  2.5536635  2.6136042 
+##        55%        56%        57%        58%        59%        60% 
+##  2.6759714  2.7048740  2.7546881  2.7890126  2.8405911  2.9095397 
+##        61%        62%        63%        64%        65%        66% 
+##  2.9524362  3.0167074  3.1227715  3.2501020  3.3093173  3.3623487 
+##        67%        68%        69%        70%        71%        72% 
+##  3.4321935  3.5144961  3.5766196  3.6425951  3.7288068  3.8610473 
+##        73%        74%        75%        76%        77%        78% 
+##  3.9667068  4.0384046  4.1258358  4.2550544  4.3550160  4.4436165 
+##        79%        80%        81%        82%        83%        84% 
+##  4.5414308  4.6509308  4.8108445  4.9319480  5.0568410  5.2154307 
+##        85%        86%        87%        88%        89%        90% 
+##  5.3226195  5.4272309  5.6306381  5.8385609  6.0928867  6.3436224 
+##        91%        92%        93%        94%        95%        96% 
+##  6.5215123  6.9084475  7.1868952  7.5438528  8.0537652  8.3646625 
+##        97%        98%        99%       100% 
+##  8.9696386  9.9365973 12.0512168 22.5492662</code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1">a1&lt;-<span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">20</span>,<span class="dv">4</span>,<span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb34-2" data-line-number="2">I&lt;-<span class="kw">diag</span>(<span class="kw">rep</span>(<span class="dv">1</span>,<span class="dv">5</span>))</a>
+<a class="sourceLine" id="cb34-3" data-line-number="3">b1&lt;-<span class="kw">t</span>(a1)<span class="op">%*%</span>a1</a>
+<a class="sourceLine" id="cb34-4" data-line-number="4">b2&lt;-a1<span class="op">%*%</span><span class="kw">t</span>(a1)</a>
+<a class="sourceLine" id="cb34-5" data-line-number="5"><span class="co">#solve(b1)</span></a>
+<a class="sourceLine" id="cb34-6" data-line-number="6"><span class="co">#solve(b2)</span></a>
+<a class="sourceLine" id="cb34-7" data-line-number="7"><span class="kw">det</span>(b1)</a></code></pre></div>
+<pre><code>## [1] 2.791799e-37</code></pre>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1"><span class="kw">det</span>(b2)</a></code></pre></div>
+<pre><code>## [1] 0</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="kw">eigen</span>(b1)</a></code></pre></div>
+<pre><code>## eigen() decomposition
+## $values
+## [1]  2.864414e+03  5.585784e+00 -3.006427e-14 -5.964175e-14 -1.744794e-13
+## 
+## $vectors
+##             [,1]        [,2]        [,3]        [,4]          [,5]
+## [1,] -0.09654784  0.76855612  0.00000000  0.00000000  6.324555e-01
+## [2,] -0.24551564  0.48961420  0.08358281  0.54130760 -6.324555e-01
+## [3,] -0.39448345  0.21067228  0.29202311 -0.78404241 -3.162278e-01
+## [4,] -0.54345125 -0.06826963 -0.83479466 -0.05583796  1.609823e-15
+## [5,] -0.69241905 -0.34721155  0.45918874  0.29857278  3.162278e-01</code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="kw">dim</span>(b1)</a></code></pre></div>
+<pre><code>## [1] 5 5</code></pre>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="co">#indexaci?n</span></a>
+<a class="sourceLine" id="cb42-2" data-line-number="2">v2&lt;-<span class="kw">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;b&quot;</span>,<span class="st">&quot;2&quot;</span>)</a>
+<a class="sourceLine" id="cb42-3" data-line-number="3">v2[<span class="dv">1</span>]</a></code></pre></div>
+<pre><code>## [1] &quot;a&quot;</code></pre>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1">v2[<span class="dv">3</span>]</a></code></pre></div>
+<pre><code>## [1] &quot;2&quot;</code></pre>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1">v3&lt;-<span class="dv">1</span><span class="op">:</span><span class="dv">20</span></a>
+<a class="sourceLine" id="cb46-2" data-line-number="2">v3&lt;-v3<span class="op">/</span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb46-3" data-line-number="3">v3</a></code></pre></div>
+<pre><code>##  [1] 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0 1.1 1.2 1.3 1.4 1.5 1.6 1.7
+## [18] 1.8 1.9 2.0</code></pre>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1">v3[<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">19</span>)]</a></code></pre></div>
+<pre><code>## [1] 0.3 1.9</code></pre>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1">v3[v3<span class="op">&gt;</span><span class="fl">0.5</span>]</a></code></pre></div>
+<pre><code>##  [1] 0.6 0.7 0.8 0.9 1.0 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8 1.9 2.0</code></pre>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1">v3[v3<span class="op">==</span><span class="dv">1</span>]</a></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" data-line-number="1">v3[v3<span class="op">!=</span><span class="fl">0.9</span>]</a></code></pre></div>
+<pre><code>##  [1] 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 1.0 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8
+## [18] 1.9 2.0</code></pre>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" data-line-number="1">v3[v3<span class="op">&gt;</span><span class="fl">0.5</span> <span class="op">&amp;</span><span class="st"> </span>v3<span class="op">&lt;</span><span class="dv">1</span>]</a></code></pre></div>
+<pre><code>## [1] 0.6 0.7 0.8 0.9</code></pre>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" data-line-number="1">v3[v3<span class="op">&gt;</span><span class="fl">0.5</span> <span class="op">||</span><span class="st"> </span>v3<span class="op">&lt;</span><span class="dv">1</span>]</a></code></pre></div>
+<pre><code>##  [1] 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0 1.1 1.2 1.3 1.4 1.5 1.6 1.7
+## [18] 1.8 1.9 2.0</code></pre>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1">a1</a></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5]
+## [1,]    1    5    9   13   17
+## [2,]    2    6   10   14   18
+## [3,]    3    7   11   15   19
+## [4,]    4    8   12   16   20</code></pre>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1">a1[<span class="dv">1</span>,]</a></code></pre></div>
+<pre><code>## [1]  1  5  9 13 17</code></pre>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1">a1[,<span class="dv">1</span>]</a></code></pre></div>
+<pre><code>## [1] 1 2 3 4</code></pre>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1">a1[<span class="dv">3</span>,<span class="dv">1</span>]</a></code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" data-line-number="1">a1[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">4</span>),]</a></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5]
+## [1,]    1    5    9   13   17
+## [2,]    4    8   12   16   20</code></pre>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" data-line-number="1">a1[,<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">4</span>)]</a></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    5   13
+## [2,]    6   14
+## [3,]    7   15
+## [4,]    8   16</code></pre>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" data-line-number="1">a1[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">4</span>),<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">4</span>)]</a></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    5   13
+## [2,]    8   16</code></pre>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" data-line-number="1">a1[,<span class="dv">2</span>]<span class="op">&gt;</span><span class="dv">6</span></a></code></pre></div>
+<pre><code>## [1] FALSE FALSE  TRUE  TRUE</code></pre>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" data-line-number="1">a1[a1[,<span class="dv">2</span>]<span class="op">&gt;</span><span class="dv">6</span>,]</a></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5]
+## [1,]    3    7   11   15   19
+## [2,]    4    8   12   16   20</code></pre>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" data-line-number="1"><span class="kw">mean</span>(a1)</a></code></pre></div>
+<pre><code>## [1] 10.5</code></pre>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" data-line-number="1">a2&lt;-<span class="kw">as.data.frame</span>(a1)</a>
+<a class="sourceLine" id="cb80-2" data-line-number="2">a2</a></code></pre></div>
+<pre><code>##   V1 V2 V3 V4 V5
+## 1  1  5  9 13 17
+## 2  2  6 10 14 18
+## 3  3  7 11 15 19
+## 4  4  8 12 16 20</code></pre>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" data-line-number="1"><span class="kw">str</span>(a2)</a></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    4 obs. of  5 variables:
+##  $ V1: int  1 2 3 4
+##  $ V2: int  5 6 7 8
+##  $ V3: int  9 10 11 12
+##  $ V4: int  13 14 15 16
+##  $ V5: int  17 18 19 20</code></pre>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" data-line-number="1"><span class="kw">mean</span>(a2<span class="op">$</span>V1)</a></code></pre></div>
+<pre><code>## [1] 2.5</code></pre>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" data-line-number="1"><span class="kw">colMeans</span>(a2)</a></code></pre></div>
+<pre><code>##   V1   V2   V3   V4   V5 
+##  2.5  6.5 10.5 14.5 18.5</code></pre>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" data-line-number="1"><span class="kw">summary</span>(a2)</a></code></pre></div>
+<pre><code>##        V1             V2             V3              V4       
+##  Min.   :1.00   Min.   :5.00   Min.   : 9.00   Min.   :13.00  
+##  1st Qu.:1.75   1st Qu.:5.75   1st Qu.: 9.75   1st Qu.:13.75  
+##  Median :2.50   Median :6.50   Median :10.50   Median :14.50  
+##  Mean   :2.50   Mean   :6.50   Mean   :10.50   Mean   :14.50  
+##  3rd Qu.:3.25   3rd Qu.:7.25   3rd Qu.:11.25   3rd Qu.:15.25  
+##  Max.   :4.00   Max.   :8.00   Max.   :12.00   Max.   :16.00  
+##        V5       
+##  Min.   :17.00  
+##  1st Qu.:17.75  
+##  Median :18.50  
+##  Mean   :18.50  
+##  3rd Qu.:19.25  
+##  Max.   :20.00</code></pre>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb90-1" data-line-number="1"><span class="kw">cov</span>(a2)</a></code></pre></div>
+<pre><code>##          V1       V2       V3       V4       V5
+## V1 1.666667 1.666667 1.666667 1.666667 1.666667
+## V2 1.666667 1.666667 1.666667 1.666667 1.666667
+## V3 1.666667 1.666667 1.666667 1.666667 1.666667
+## V4 1.666667 1.666667 1.666667 1.666667 1.666667
+## V5 1.666667 1.666667 1.666667 1.666667 1.666667</code></pre>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" data-line-number="1"><span class="kw">cor</span>(a2)</a></code></pre></div>
+<pre><code>##    V1 V2 V3 V4 V5
+## V1  1  1  1  1  1
+## V2  1  1  1  1  1
+## V3  1  1  1  1  1
+## V4  1  1  1  1  1
+## V5  1  1  1  1  1</code></pre>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" data-line-number="1">a2</a></code></pre></div>
+<pre><code>##   V1 V2 V3 V4 V5
+## 1  1  5  9 13 17
+## 2  2  6 10 14 18
+## 3  3  7 11 15 19
+## 4  4  8 12 16 20</code></pre>
+</div>
+<div id="loops-y-condiciones" class="section level2">
+<h2><span class="header-section-number">1.2</span> Loops y condiciones</h2>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" data-line-number="1"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</a>
+<a class="sourceLine" id="cb96-2" data-line-number="2">x&lt;-<span class="dv">5</span></a>
+<a class="sourceLine" id="cb96-3" data-line-number="3"><span class="co">## if</span></a>
+<a class="sourceLine" id="cb96-4" data-line-number="4"><span class="cf">if</span>(x<span class="op">&gt;</span><span class="dv">6</span>){</a>
+<a class="sourceLine" id="cb96-5" data-line-number="5">  <span class="kw">hist</span>(<span class="kw">rnorm</span>(<span class="dv">100</span>,<span class="dv">3</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb96-6" data-line-number="6">}</a>
+<a class="sourceLine" id="cb96-7" data-line-number="7"><span class="co">## if else</span></a>
+<a class="sourceLine" id="cb96-8" data-line-number="8"><span class="cf">if</span>(x<span class="op">&gt;</span><span class="dv">6</span>){</a>
+<a class="sourceLine" id="cb96-9" data-line-number="9">  <span class="kw">hist</span>(<span class="kw">rnorm</span>(<span class="dv">100</span>,<span class="dv">3</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb96-10" data-line-number="10">} <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb96-11" data-line-number="11">  <span class="kw">boxplot</span>(<span class="kw">rnorm</span>(<span class="dv">100</span>,<span class="dv">3</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb96-12" data-line-number="12">}</a>
+<a class="sourceLine" id="cb96-13" data-line-number="13"><span class="co">## if encadenado</span></a>
+<a class="sourceLine" id="cb96-14" data-line-number="14">x&lt;-<span class="dv">60</span></a>
+<a class="sourceLine" id="cb96-15" data-line-number="15"><span class="cf">if</span>(x<span class="op">&gt;</span><span class="dv">6</span>){</a>
+<a class="sourceLine" id="cb96-16" data-line-number="16">  <span class="kw">hist</span>(<span class="kw">rnorm</span>(<span class="dv">100</span>,<span class="dv">3</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb96-17" data-line-number="17">  <span class="kw">mean</span>(x)</a>
+<a class="sourceLine" id="cb96-18" data-line-number="18">} <span class="cf">else</span> <span class="cf">if</span>(x<span class="op">&lt;</span><span class="dv">6</span>){</a>
+<a class="sourceLine" id="cb96-19" data-line-number="19">  <span class="kw">boxplot</span>(<span class="kw">rnorm</span>(<span class="dv">100</span>,<span class="dv">3</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb96-20" data-line-number="20">} <span class="cf">else</span> <span class="cf">if</span>(<span class="kw">typeof</span>(x)<span class="op">==</span><span class="st">&quot;double&quot;</span>){</a>
+<a class="sourceLine" id="cb96-21" data-line-number="21">  <span class="kw">print</span>(<span class="st">&quot;hola&quot;</span>)</a>
+<a class="sourceLine" id="cb96-22" data-line-number="22">} <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb96-23" data-line-number="23">  <span class="kw">print</span>(<span class="st">&quot;hola hola&quot;</span>)</a>
+<a class="sourceLine" id="cb96-24" data-line-number="24">}</a>
+<a class="sourceLine" id="cb96-25" data-line-number="25"><span class="co">##for</span></a>
+<a class="sourceLine" id="cb96-26" data-line-number="26"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>){</a>
+<a class="sourceLine" id="cb96-27" data-line-number="27">  <span class="kw">print</span>(i)</a>
+<a class="sourceLine" id="cb96-28" data-line-number="28">}</a>
+<a class="sourceLine" id="cb96-29" data-line-number="29"><span class="cf">for</span>(i <span class="cf">in</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">7</span>,<span class="dv">9</span>,<span class="dv">15</span>,<span class="dv">19</span>)){</a>
+<a class="sourceLine" id="cb96-30" data-line-number="30">  <span class="kw">print</span>(i)</a>
+<a class="sourceLine" id="cb96-31" data-line-number="31">}  </a>
+<a class="sourceLine" id="cb96-32" data-line-number="32"><span class="cf">for</span>(i <span class="cf">in</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;b&quot;</span>,<span class="st">&quot;c&quot;</span>)){</a>
+<a class="sourceLine" id="cb96-33" data-line-number="33">  <span class="kw">print</span>(i)</a>
+<a class="sourceLine" id="cb96-34" data-line-number="34">}  </a>
+<a class="sourceLine" id="cb96-35" data-line-number="35"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>){</a>
+<a class="sourceLine" id="cb96-36" data-line-number="36">  <span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">6</span><span class="op">:</span><span class="dv">10</span>){</a>
+<a class="sourceLine" id="cb96-37" data-line-number="37">    <span class="kw">print</span>(i<span class="op">*</span>j)</a>
+<a class="sourceLine" id="cb96-38" data-line-number="38">  }</a>
+<a class="sourceLine" id="cb96-39" data-line-number="39">}</a>
+<a class="sourceLine" id="cb96-40" data-line-number="40"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>){</a>
+<a class="sourceLine" id="cb96-41" data-line-number="41">  <span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">6</span><span class="op">:</span><span class="dv">10</span>){</a>
+<a class="sourceLine" id="cb96-42" data-line-number="42">    aux&lt;-i<span class="op">*</span>j</a>
+<a class="sourceLine" id="cb96-43" data-line-number="43">    <span class="kw">print</span>(aux)</a>
+<a class="sourceLine" id="cb96-44" data-line-number="44">    <span class="cf">if</span>(aux<span class="op">==</span><span class="dv">20</span>){</a>
+<a class="sourceLine" id="cb96-45" data-line-number="45">      <span class="cf">break</span>()</a>
+<a class="sourceLine" id="cb96-46" data-line-number="46">      <span class="kw">print</span>(<span class="st">&quot;hola&quot;</span>)</a>
+<a class="sourceLine" id="cb96-47" data-line-number="47">      <span class="kw">boxplot</span>(<span class="kw">rnorm</span>(<span class="dv">100</span>,i,j))</a>
+<a class="sourceLine" id="cb96-48" data-line-number="48">    }</a>
+<a class="sourceLine" id="cb96-49" data-line-number="49">  }</a>
+<a class="sourceLine" id="cb96-50" data-line-number="50">}</a>
+<a class="sourceLine" id="cb96-51" data-line-number="51"><span class="co">#while</span></a>
+<a class="sourceLine" id="cb96-52" data-line-number="52">z&lt;-<span class="dv">1</span></a>
+<a class="sourceLine" id="cb96-53" data-line-number="53">k&lt;-<span class="dv">1</span></a>
+<a class="sourceLine" id="cb96-54" data-line-number="54"><span class="cf">while</span>(z<span class="op">&gt;</span><span class="fl">0.0001</span>){</a>
+<a class="sourceLine" id="cb96-55" data-line-number="55">  <span class="kw">print</span>(k)</a>
+<a class="sourceLine" id="cb96-56" data-line-number="56">  z&lt;-<span class="dv">1</span><span class="op">/</span>k</a>
+<a class="sourceLine" id="cb96-57" data-line-number="57">  k&lt;-k<span class="op">+</span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb96-58" data-line-number="58">}</a></code></pre></div>
+</div>
+<div id="funciones" class="section level2">
+<h2><span class="header-section-number">1.3</span> Funciones</h2>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb97-1" data-line-number="1">fx&lt;-<span class="cf">function</span>(x){</a>
+<a class="sourceLine" id="cb97-2" data-line-number="2">  y&lt;-<span class="dv">8</span><span class="op">*</span>x<span class="op">**</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb97-3" data-line-number="3">  <span class="kw">return</span>(y)</a>
+<a class="sourceLine" id="cb97-4" data-line-number="4">}</a>
+<a class="sourceLine" id="cb97-5" data-line-number="5"><span class="kw">fx</span>(<span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb97-6" data-line-number="6"><span class="kw">fx</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb97-7" data-line-number="7"><span class="kw">curve</span>(fx,<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">20</span>,<span class="dv">20</span>),<span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1000</span>))</a>
+<a class="sourceLine" id="cb97-8" data-line-number="8"><span class="kw">plot</span>(fx)</a>
+<a class="sourceLine" id="cb97-9" data-line-number="9"><span class="co">##comando de estadisticas de tendencia central</span></a>
+<a class="sourceLine" id="cb97-10" data-line-number="10">tendencia&lt;-<span class="cf">function</span>(x){</a>
+<a class="sourceLine" id="cb97-11" data-line-number="11">  n&lt;-<span class="kw">length</span>(x)</a>
+<a class="sourceLine" id="cb97-12" data-line-number="12">  <span class="kw">cat</span>(<span class="st">&quot;media:&quot;</span>,<span class="dt">fill =</span> T)</a>
+<a class="sourceLine" id="cb97-13" data-line-number="13">  <span class="kw">print</span>(<span class="kw">sum</span>(x)<span class="op">/</span>n)</a>
+<a class="sourceLine" id="cb97-14" data-line-number="14">  <span class="kw">cat</span>(<span class="st">&quot;mediana:&quot;</span>,<span class="dt">fill =</span> T)</a>
+<a class="sourceLine" id="cb97-15" data-line-number="15">  x&lt;-<span class="kw">sort</span>(x)</a>
+<a class="sourceLine" id="cb97-16" data-line-number="16">  <span class="cf">if</span>(n<span class="op">%%</span><span class="dv">2</span><span class="op">==</span><span class="dv">0</span>){</a>
+<a class="sourceLine" id="cb97-17" data-line-number="17">    me&lt;-(x[n<span class="op">/</span><span class="dv">2</span>]<span class="op">+</span>x[n<span class="op">/</span><span class="dv">2</span><span class="op">+</span><span class="dv">1</span>])<span class="op">/</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb97-18" data-line-number="18">  } <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb97-19" data-line-number="19">    me&lt;-x[<span class="kw">ceiling</span>(n<span class="op">/</span><span class="dv">2</span>)]</a>
+<a class="sourceLine" id="cb97-20" data-line-number="20">  }</a>
+<a class="sourceLine" id="cb97-21" data-line-number="21">  <span class="kw">print</span>(me)</a>
+<a class="sourceLine" id="cb97-22" data-line-number="22">  <span class="kw">cat</span>(<span class="st">&quot;moda:&quot;</span>,<span class="dt">fill =</span> T)</a>
+<a class="sourceLine" id="cb97-23" data-line-number="23">  tt&lt;-<span class="kw">table</span>(x)</a>
+<a class="sourceLine" id="cb97-24" data-line-number="24">  mm&lt;-<span class="kw">max</span>(tt)</a>
+<a class="sourceLine" id="cb97-25" data-line-number="25">  <span class="kw">print</span>(<span class="kw">names</span>(tt)[(<span class="kw">table</span>(x)<span class="op">==</span>mm)])</a>
+<a class="sourceLine" id="cb97-26" data-line-number="26">  <span class="kw">cat</span>(<span class="st">&quot;media cuadrática:&quot;</span>,<span class="dt">fill =</span> T)</a>
+<a class="sourceLine" id="cb97-27" data-line-number="27">  mc&lt;-<span class="kw">sqrt</span>(<span class="kw">sum</span>(x<span class="op">**</span><span class="dv">2</span>)<span class="op">/</span>n)</a>
+<a class="sourceLine" id="cb97-28" data-line-number="28">  <span class="kw">print</span>(mc)</a>
+<a class="sourceLine" id="cb97-29" data-line-number="29">  <span class="kw">cat</span>(<span class="st">&quot;media armónica&quot;,fill = T)</span></a>
+<a class="sourceLine" id="cb97-30" data-line-number="30"><span class="st">  ma&lt;-n/sum(1/x)</span></a>
+<a class="sourceLine" id="cb97-31" data-line-number="31"><span class="st">  print(ma)</span></a>
+<a class="sourceLine" id="cb97-32" data-line-number="32"><span class="st">  cat(&quot;</span>media geométrica<span class="op">:</span><span class="st">&quot;,fill = T)</span></a>
+<a class="sourceLine" id="cb97-33" data-line-number="33"><span class="st">  mg&lt;-prod(x)**(1/n)</span></a>
+<a class="sourceLine" id="cb97-34" data-line-number="34"><span class="st">  print(mg)</span></a>
+<a class="sourceLine" id="cb97-35" data-line-number="35"><span class="st">}</span></a>
+<a class="sourceLine" id="cb97-36" data-line-number="36"><span class="st">xx&lt;-scan()</span></a>
+<a class="sourceLine" id="cb97-37" data-line-number="37"><span class="st">a&lt;-tendencia(xx)</span></a>
+<a class="sourceLine" id="cb97-38" data-line-number="38"></a>
+<a class="sourceLine" id="cb97-39" data-line-number="39"><span class="st">tendencia2&lt;-function(x){</span></a>
+<a class="sourceLine" id="cb97-40" data-line-number="40"><span class="st">  n&lt;-length(x)</span></a>
+<a class="sourceLine" id="cb97-41" data-line-number="41"><span class="st">  media&lt;-sum(x)/n</span></a>
+<a class="sourceLine" id="cb97-42" data-line-number="42"><span class="st">  x&lt;-sort(x)</span></a>
+<a class="sourceLine" id="cb97-43" data-line-number="43"><span class="st">  if(n%%2==0){</span></a>
+<a class="sourceLine" id="cb97-44" data-line-number="44"><span class="st">    me&lt;-(x[n/2]+x[n/2+1])/2</span></a>
+<a class="sourceLine" id="cb97-45" data-line-number="45"><span class="st">  } else {</span></a>
+<a class="sourceLine" id="cb97-46" data-line-number="46"><span class="st">    me&lt;-x[ceiling(n/2)]</span></a>
+<a class="sourceLine" id="cb97-47" data-line-number="47"><span class="st">  }</span></a>
+<a class="sourceLine" id="cb97-48" data-line-number="48"><span class="st">  tt&lt;-table(x)</span></a>
+<a class="sourceLine" id="cb97-49" data-line-number="49"><span class="st">  mm&lt;-max(tt)</span></a>
+<a class="sourceLine" id="cb97-50" data-line-number="50"><span class="st">  mo&lt;-names(tt)[(table(x)==mm)]</span></a>
+<a class="sourceLine" id="cb97-51" data-line-number="51"><span class="st">  mc&lt;-sqrt(sum(x**2)/n)</span></a>
+<a class="sourceLine" id="cb97-52" data-line-number="52"><span class="st">  ma&lt;-n/sum(1/x)</span></a>
+<a class="sourceLine" id="cb97-53" data-line-number="53"><span class="st">  mg&lt;-prod(x)**(1/n)</span></a>
+<a class="sourceLine" id="cb97-54" data-line-number="54"><span class="st">  aux&lt;-list(media,me,mo,mc,ma,mg)</span></a>
+<a class="sourceLine" id="cb97-55" data-line-number="55"><span class="st">  return(aux)</span></a>
+<a class="sourceLine" id="cb97-56" data-line-number="56"><span class="st">}</span></a>
+<a class="sourceLine" id="cb97-57" data-line-number="57"><span class="st">a&lt;-tendencia2(xx)</span></a>
+<a class="sourceLine" id="cb97-58" data-line-number="58"></a>
+<a class="sourceLine" id="cb97-59" data-line-number="59"><span class="st">tendenciaF&lt;-function(x,f){</span></a>
+<a class="sourceLine" id="cb97-60" data-line-number="60"><span class="st">  n&lt;-sum(f)</span></a>
+<a class="sourceLine" id="cb97-61" data-line-number="61"><span class="st">  media&lt;-sum(x*f)/n</span></a>
+<a class="sourceLine" id="cb97-62" data-line-number="62"><span class="st">}</span></a></code></pre></div>
+</div>
+<div id="importacion-de-datos" class="section level2">
+<h2><span class="header-section-number">1.4</span> Importacion de datos</h2>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb98-1" data-line-number="1"><span class="co">#importando bases de datos</span></a>
+<a class="sourceLine" id="cb98-2" data-line-number="2"><span class="kw">getwd</span>()</a>
+<a class="sourceLine" id="cb98-3" data-line-number="3"><span class="kw">setwd</span>(<span class="st">&quot;C:</span><span class="ch">\\</span><span class="st">Users</span><span class="ch">\\</span><span class="st">PC18</span><span class="ch">\\</span><span class="st">Documents</span><span class="ch">\\</span><span class="st">R</span><span class="ch">\\</span><span class="st">est383</span><span class="ch">\\</span><span class="st">data</span><span class="ch">\\</span><span class="st">eh18</span><span class="ch">\\</span><span class="st">SPSS&quot;</span>)</a>
+<a class="sourceLine" id="cb98-4" data-line-number="4"><span class="kw">dir</span>()</a>
+<a class="sourceLine" id="cb98-5" data-line-number="5"><span class="co">##SPSS</span></a>
+<a class="sourceLine" id="cb98-6" data-line-number="6"><span class="co">## activar o instalar librerias</span></a>
+<a class="sourceLine" id="cb98-7" data-line-number="7"><span class="kw">library</span>(foreign)</a>
+<a class="sourceLine" id="cb98-8" data-line-number="8">eh18d&lt;-<span class="kw">read.spss</span>(<span class="st">&quot;EH2018_Discriminacion.sav&quot;</span>,</a>
+<a class="sourceLine" id="cb98-9" data-line-number="9">          <span class="dt">to.data.frame =</span> T,<span class="dt">use.value.labels=</span>F)</a>
+<a class="sourceLine" id="cb98-10" data-line-number="10"><span class="kw">names</span>(eh18d)</a>
+<a class="sourceLine" id="cb98-11" data-line-number="11"><span class="kw">table</span>(eh18d<span class="op">$</span>s10a_01a)</a>
+<a class="sourceLine" id="cb98-12" data-line-number="12"><span class="kw">attributes</span>(eh18d)<span class="op">$</span>variable.labels[<span class="dv">5</span>]</a>
+<a class="sourceLine" id="cb98-13" data-line-number="13"><span class="kw">head</span>(eh18d)</a>
+<a class="sourceLine" id="cb98-14" data-line-number="14"><span class="co">##CSV</span></a>
+<a class="sourceLine" id="cb98-15" data-line-number="15"><span class="kw">setwd</span>(<span class="st">&quot;C:</span><span class="ch">\\</span><span class="st">Users</span><span class="ch">\\</span><span class="st">PC18</span><span class="ch">\\</span><span class="st">Documents</span><span class="ch">\\</span><span class="st">R</span><span class="ch">\\</span><span class="st">est383</span><span class="ch">\\</span><span class="st">data</span><span class="ch">\\</span><span class="st">eh18</span><span class="ch">\\</span><span class="st">CSV&quot;</span>)</a>
+<a class="sourceLine" id="cb98-16" data-line-number="16"><span class="kw">dir</span>()</a>
+<a class="sourceLine" id="cb98-17" data-line-number="17">eh18d2&lt;-<span class="kw">read.csv2</span>(<span class="st">&quot;EH2018_Discriminacion.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb98-18" data-line-number="18">aux&lt;-<span class="kw">read.csv</span>(<span class="st">&quot;EH2018_Discriminacion.csv&quot;</span>,<span class="dt">sep=</span><span class="st">&quot;;&quot;</span>)</a>
+<a class="sourceLine" id="cb98-19" data-line-number="19"><span class="kw">table</span>(eh18d2<span class="op">$</span>s10a_01a)</a>
+<a class="sourceLine" id="cb98-20" data-line-number="20">daux&lt;-<span class="kw">c</span>(<span class="st">&quot;Sexo&quot;</span>,<span class="st">&quot;O. Sexual&quot;</span>,<span class="st">&quot;Edad&quot;</span>,<span class="st">&quot;piel&quot;</span>,<span class="st">&quot;Pertenencia&quot;</span>,</a>
+<a class="sourceLine" id="cb98-21" data-line-number="21">        <span class="st">&quot;idioma&quot;</span>,<span class="st">&quot;vestimente&quot;</span>,<span class="st">&quot;procedencia&quot;</span>,<span class="st">&quot;discapacidad&quot;</span>,</a>
+<a class="sourceLine" id="cb98-22" data-line-number="22">        <span class="st">&quot;religion&quot;</span>,<span class="st">&quot;clase&quot;</span>,<span class="st">&quot;otro&quot;</span>)</a>
+<a class="sourceLine" id="cb98-23" data-line-number="23"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">5</span><span class="op">:</span><span class="dv">16</span>){</a>
+<a class="sourceLine" id="cb98-24" data-line-number="24"><span class="kw">barplot</span>(<span class="kw">prop.table</span>(<span class="kw">table</span>(eh18d2[,i]))<span class="op">*</span><span class="dv">100</span>,<span class="dt">main=</span>daux[i<span class="dv">-4</span>])</a>
+<a class="sourceLine" id="cb98-25" data-line-number="25">}</a></code></pre></div>
+</div>
+<div id="dataframe-y-exploración" class="section level2">
+<h2><span class="header-section-number">1.5</span> Dataframe y exploración</h2>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb99-1" data-line-number="1"><span class="kw">rm</span>(<span class="dt">list=</span><span class="kw">ls</span>())</a>
+<a class="sourceLine" id="cb99-2" data-line-number="2"><span class="kw">setwd</span>(<span class="st">&quot;C:</span><span class="ch">\\</span><span class="st">Users</span><span class="ch">\\</span><span class="st">PC18</span><span class="ch">\\</span><span class="st">Documents</span><span class="ch">\\</span><span class="st">R</span><span class="ch">\\</span><span class="st">est383</span><span class="ch">\\</span><span class="st">data</span><span class="ch">\\</span><span class="st">eh18</span><span class="ch">\\</span><span class="st">SPSS&quot;</span>)</a>
+<a class="sourceLine" id="cb99-3" data-line-number="3"><span class="kw">library</span>(foreign)</a>
+<a class="sourceLine" id="cb99-4" data-line-number="4"><span class="kw">dir</span>()</a>
+<a class="sourceLine" id="cb99-5" data-line-number="5">eh18&lt;-<span class="kw">read.spss</span>(<span class="st">&quot;EH2018_Persona.sav&quot;</span>,</a>
+<a class="sourceLine" id="cb99-6" data-line-number="6">          <span class="dt">to.data.frame =</span> T,<span class="dt">use.value.labels=</span>F)</a>
+<a class="sourceLine" id="cb99-7" data-line-number="7"><span class="co">#################################################</span></a>
+<a class="sourceLine" id="cb99-8" data-line-number="8"><span class="kw">names</span>(eh18)<span class="co">#nombres de las variable</span></a>
+<a class="sourceLine" id="cb99-9" data-line-number="9"><span class="kw">str</span>(eh18)</a>
+<a class="sourceLine" id="cb99-10" data-line-number="10"><span class="kw">class</span>(eh18)</a>
+<a class="sourceLine" id="cb99-11" data-line-number="11"><span class="co">##renombrando variables</span></a>
+<a class="sourceLine" id="cb99-12" data-line-number="12"><span class="kw">names</span>(eh18)[<span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">6</span>)]&lt;-<span class="kw">c</span>(<span class="st">&quot;sexo&quot;</span>,<span class="st">&quot;edad&quot;</span>)</a>
+<a class="sourceLine" id="cb99-13" data-line-number="13"><span class="kw">names</span>(eh18)</a>
+<a class="sourceLine" id="cb99-14" data-line-number="14"><span class="co">##crear variable (mujer 1=mujer, 0 eoc)</span></a>
+<a class="sourceLine" id="cb99-15" data-line-number="15">eh18<span class="op">$</span>mujer&lt;-eh18<span class="op">$</span>sexo<span class="op">==</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb99-16" data-line-number="16"><span class="kw">sum</span>(eh18<span class="op">$</span>mujer)</a>
+<a class="sourceLine" id="cb99-17" data-line-number="17"><span class="kw">mean</span>(eh18<span class="op">$</span>mujer)</a>
+<a class="sourceLine" id="cb99-18" data-line-number="18"><span class="co">#exportación (&quot;write&quot;)</span></a>
+<a class="sourceLine" id="cb99-19" data-line-number="19"><span class="kw">write.dta</span>(eh18,<span class="st">&quot;eh18p.dta&quot;</span>)</a>
+<a class="sourceLine" id="cb99-20" data-line-number="20"><span class="kw">getwd</span>()</a>
+<a class="sourceLine" id="cb99-21" data-line-number="21"><span class="co">#excel</span></a>
+<a class="sourceLine" id="cb99-22" data-line-number="22"><span class="kw">library</span>(readxl)</a>
+<a class="sourceLine" id="cb99-23" data-line-number="23"><span class="kw">install.packages</span>(<span class="st">&quot;writexl&quot;</span>)</a>
+<a class="sourceLine" id="cb99-24" data-line-number="24"><span class="kw">library</span>(writexl)</a>
+<a class="sourceLine" id="cb99-25" data-line-number="25"><span class="kw">library</span>(<span class="dt">help=</span>writexl)</a>
+<a class="sourceLine" id="cb99-26" data-line-number="26"><span class="kw">write_xlsx</span>(eh18,<span class="st">&quot;eh18p.xlsx&quot;</span>)</a>
+<a class="sourceLine" id="cb99-27" data-line-number="27"><span class="kw">apropos</span>(<span class="st">&quot;read&quot;</span>)</a>
+<a class="sourceLine" id="cb99-28" data-line-number="28"><span class="kw">apropos</span>(<span class="st">&quot;write&quot;</span>)</a>
+<a class="sourceLine" id="cb99-29" data-line-number="29"><span class="kw">install.packages</span>(<span class="st">&quot;haven&quot;</span>)</a>
+<a class="sourceLine" id="cb99-30" data-line-number="30"><span class="kw">library</span>(haven)</a>
+<a class="sourceLine" id="cb99-31" data-line-number="31"></a>
+<a class="sourceLine" id="cb99-32" data-line-number="32">eh18<span class="op">$</span>s03a_02e&lt;-<span class="kw">substr</span>(<span class="kw">as.character</span>(eh18<span class="op">$</span>s03a_02e),<span class="dv">1</span>,<span class="dv">120</span>)</a>
+<a class="sourceLine" id="cb99-33" data-line-number="33">eh18<span class="op">$</span>s03a_02e&lt;-<span class="kw">gsub</span>(<span class="st">&quot;  &quot;</span>,<span class="st">&quot; &quot;</span>,<span class="kw">as.character</span>(eh18<span class="op">$</span>s03a_02e))</a>
+<a class="sourceLine" id="cb99-34" data-line-number="34"></a>
+<a class="sourceLine" id="cb99-35" data-line-number="35"><span class="kw">gsub</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;7&quot;</span>,<span class="st">&quot;hola&quot;</span>)</a>
+<a class="sourceLine" id="cb99-36" data-line-number="36"><span class="kw">gsub</span>(<span class="st">&quot;`&quot;</span>,<span class="st">&quot;&#39;&quot;</span>,<span class="st">&quot;`s04a_04e`, `s04a_07ge`, `s04b_15e`, `s04b_16e`, `s04b_17e`, `s04b_18e`, `s04e_30c`, `s04f_35e`, `s05a_04`, `s05c_13_e`, `s05d_21e`, `s05d_22_e`, `s06a_06e`, `s06a_09e`, `s06a_10e`, `s06b_11a`, `s06b_11b`, `s06b_12a`, `s06b_12b`, `s06b_13`, `s06b_20e`, `s06e_34e`, `s06f_40a`, `s06f_40b`, `s06h_54e`, `s06h_55e`, `s06h_56e`, `s07a_01e1e`, `s07a_01e2e`, `s07a_02ce`, `s07b_05de`, `s07b_05ee`, `s07c_08e`, `s07c_09e`&quot;</span>)</a>
+<a class="sourceLine" id="cb99-37" data-line-number="37"><span class="kw">nchar</span>(eh18<span class="op">$</span>s03a_02e)</a>
+<a class="sourceLine" id="cb99-38" data-line-number="38"></a>
+<a class="sourceLine" id="cb99-39" data-line-number="39">vv&lt;-<span class="kw">c</span>(<span class="st">&#39;s04a_04e&#39;</span>, <span class="st">&#39;s04a_07ge&#39;</span>, <span class="st">&#39;s04b_15e&#39;</span>, <span class="st">&#39;s04b_16e&#39;</span>, <span class="st">&#39;s04b_17e&#39;</span>, <span class="st">&#39;s04b_18e&#39;</span>, <span class="st">&#39;s04e_30c&#39;</span>, <span class="st">&#39;s04f_35e&#39;</span>, <span class="st">&#39;s05a_04&#39;</span>, <span class="st">&#39;s05c_13_e&#39;</span>, <span class="st">&#39;s05d_21e&#39;</span>, <span class="st">&#39;s05d_22_e&#39;</span>, <span class="st">&#39;s06a_06e&#39;</span>, <span class="st">&#39;s06a_09e&#39;</span>, <span class="st">&#39;s06a_10e&#39;</span>, <span class="st">&#39;s06b_11a&#39;</span>, <span class="st">&#39;s06b_11b&#39;</span>, <span class="st">&#39;s06b_12a&#39;</span>, <span class="st">&#39;s06b_12b&#39;</span>, <span class="st">&#39;s06b_13&#39;</span>, <span class="st">&#39;s06b_20e&#39;</span>, <span class="st">&#39;s06e_34e&#39;</span>, <span class="st">&#39;s06f_40a&#39;</span>, <span class="st">&#39;s06f_40b&#39;</span>, <span class="st">&#39;s06h_54e&#39;</span>, <span class="st">&#39;s06h_55e&#39;</span>, <span class="st">&#39;s06h_56e&#39;</span>, <span class="st">&#39;s07a_01e1e&#39;</span>, <span class="st">&#39;s07a_01e2e&#39;</span>, <span class="st">&#39;s07a_02ce&#39;</span>, <span class="st">&#39;s07b_05de&#39;</span>, <span class="st">&#39;s07b_05ee&#39;</span>, <span class="st">&#39;s07c_08e&#39;</span>, <span class="st">&#39;s07c_09e&#39;</span>)</a>
+<a class="sourceLine" id="cb99-40" data-line-number="40"><span class="cf">for</span>(i <span class="cf">in</span> vv){</a>
+<a class="sourceLine" id="cb99-41" data-line-number="41">  eh18[,i]&lt;-<span class="kw">gsub</span>(<span class="st">&quot;  &quot;</span>,<span class="st">&quot; &quot;</span>,<span class="kw">as.character</span>(eh18[,i]))</a>
+<a class="sourceLine" id="cb99-42" data-line-number="42">  eh18[,i]&lt;-<span class="kw">substr</span>(eh18[,i],<span class="dv">1</span>,<span class="dv">120</span>)</a>
+<a class="sourceLine" id="cb99-43" data-line-number="43">} </a>
+<a class="sourceLine" id="cb99-44" data-line-number="44"><span class="kw">write_sav</span>(eh18,<span class="st">&quot;eh18p.sav&quot;</span>)</a>
+<a class="sourceLine" id="cb99-45" data-line-number="45"><span class="kw">save</span>(eh18,vv,<span class="dt">file=</span><span class="st">&quot;eh18p.RData&quot;</span>)</a>
+<a class="sourceLine" id="cb99-46" data-line-number="46"><span class="kw">rm</span>(<span class="dt">list=</span><span class="kw">ls</span>())</a>
+<a class="sourceLine" id="cb99-47" data-line-number="47"><span class="kw">getwd</span>()</a>
+<a class="sourceLine" id="cb99-48" data-line-number="48"><span class="kw">load</span>(<span class="st">&quot;eh18p.RData&quot;</span>)</a>
+<a class="sourceLine" id="cb99-49" data-line-number="49"><span class="kw">set.seed</span>(<span class="dv">123456</span>)<span class="co">####semilla</span></a>
+<a class="sourceLine" id="cb99-50" data-line-number="50">a&lt;-<span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">20</span>),<span class="dv">5</span>,<span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb99-51" data-line-number="51"></a>
+<a class="sourceLine" id="cb99-52" data-line-number="52"><span class="kw">apply</span>(a, <span class="dv">1</span>, sum)</a>
+<a class="sourceLine" id="cb99-53" data-line-number="53"><span class="kw">apply</span>(a, <span class="dv">2</span>, mean)</a>
+<a class="sourceLine" id="cb99-54" data-line-number="54"><span class="kw">apply</span>(a, <span class="dv">1</span>, sd)</a>
+<a class="sourceLine" id="cb99-55" data-line-number="55">mc&lt;-<span class="cf">function</span>(x){</a>
+<a class="sourceLine" id="cb99-56" data-line-number="56">  n&lt;-<span class="kw">length</span>(x)</a>
+<a class="sourceLine" id="cb99-57" data-line-number="57">  aux&lt;-<span class="kw">sqrt</span>(<span class="kw">sum</span>(x<span class="op">^</span><span class="dv">2</span>)<span class="op">/</span>n)</a>
+<a class="sourceLine" id="cb99-58" data-line-number="58">  <span class="kw">return</span>(aux)</a>
+<a class="sourceLine" id="cb99-59" data-line-number="59">}</a>
+<a class="sourceLine" id="cb99-60" data-line-number="60"><span class="kw">apply</span>(a, <span class="dv">1</span>, mc)</a>
+<a class="sourceLine" id="cb99-61" data-line-number="61"><span class="kw">apply</span>(a, <span class="dv">2</span>, mc)</a>
+<a class="sourceLine" id="cb99-62" data-line-number="62"></a>
+<a class="sourceLine" id="cb99-63" data-line-number="63"><span class="kw">tapply</span>(eh18<span class="op">$</span>mujer,eh18<span class="op">$</span>depto,mean)</a>
+<a class="sourceLine" id="cb99-64" data-line-number="64"><span class="kw">tapply</span>(eh18<span class="op">$</span>mujer,<span class="kw">list</span>(eh18<span class="op">$</span>depto,eh18<span class="op">$</span>area),mean)</a>
+<a class="sourceLine" id="cb99-65" data-line-number="65"><span class="kw">tapply</span>(eh18<span class="op">$</span>edad,<span class="kw">list</span>(eh18<span class="op">$</span>depto,eh18<span class="op">$</span>area),mean)</a>
+<a class="sourceLine" id="cb99-66" data-line-number="66"><span class="kw">tapply</span>(eh18<span class="op">$</span>edad<span class="op">&gt;</span><span class="dv">60</span>,<span class="kw">list</span>(eh18<span class="op">$</span>depto,eh18<span class="op">$</span>area),mean)</a>
+<a class="sourceLine" id="cb99-67" data-line-number="67"><span class="kw">tapply</span>(eh18<span class="op">$</span>edad<span class="op">&lt;</span><span class="dv">5</span>,<span class="kw">list</span>(eh18<span class="op">$</span>depto,eh18<span class="op">$</span>area),mean)</a>
+<a class="sourceLine" id="cb99-68" data-line-number="68"></a>
+<a class="sourceLine" id="cb99-69" data-line-number="69"><span class="kw">tapply</span>(eh18<span class="op">$</span>p0,<span class="kw">list</span>(eh18<span class="op">$</span>depto,eh18<span class="op">$</span>area),mean,<span class="dt">na.rm=</span>T)</a>
+<a class="sourceLine" id="cb99-70" data-line-number="70">aux&lt;-<span class="kw">tapply</span>(eh18<span class="op">$</span>p0,<span class="kw">list</span>(eh18<span class="op">$</span>depto,eh18<span class="op">$</span>area,eh18<span class="op">$</span>niv_ed_g),mean,<span class="dt">na.rm=</span>T)</a>
+<a class="sourceLine" id="cb99-71" data-line-number="71"></a>
+<a class="sourceLine" id="cb99-72" data-line-number="72"><span class="kw">as.data.frame</span>(aux)</a>
+<a class="sourceLine" id="cb99-73" data-line-number="73"></a>
+<a class="sourceLine" id="cb99-74" data-line-number="74"><span class="kw">lapply</span>()</a>
+<a class="sourceLine" id="cb99-75" data-line-number="75"><span class="kw">mapply</span>()</a>
+<a class="sourceLine" id="cb99-76" data-line-number="76"><span class="kw">sapply</span>()</a></code></pre></div>
+</div>
+<div id="estadística-descriptiva" class="section level2">
+<h2><span class="header-section-number">1.6</span> Estadística descriptiva</h2>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb100-1" data-line-number="1"><span class="co">#Estadística descriptiva</span></a>
+<a class="sourceLine" id="cb100-2" data-line-number="2"><span class="kw">rm</span>(<span class="dt">list=</span><span class="kw">ls</span>())</a>
+<a class="sourceLine" id="cb100-3" data-line-number="3"><span class="kw">setwd</span>(<span class="st">&quot;C:</span><span class="ch">\\</span><span class="st">Users</span><span class="ch">\\</span><span class="st">PC18</span><span class="ch">\\</span><span class="st">Documents</span><span class="ch">\\</span><span class="st">R</span><span class="ch">\\</span><span class="st">est383</span><span class="ch">\\</span><span class="st">data</span><span class="ch">\\</span><span class="st">eh18</span><span class="ch">\\</span><span class="st">SPSS&quot;</span>)</a>
+<a class="sourceLine" id="cb100-4" data-line-number="4"><span class="co">#encuesta a hogares 2018</span></a>
+<a class="sourceLine" id="cb100-5" data-line-number="5"><span class="kw">load</span>(<span class="st">&quot;eh18p.RData&quot;</span>)</a>
+<a class="sourceLine" id="cb100-6" data-line-number="6"><span class="kw">data</span>()<span class="co">#muestra las bases de datos disponibles en R</span></a>
+<a class="sourceLine" id="cb100-7" data-line-number="7">ChickWeight</a>
+<a class="sourceLine" id="cb100-8" data-line-number="8"><span class="kw">View</span>(ChickWeight)</a>
+<a class="sourceLine" id="cb100-9" data-line-number="9"><span class="kw">help</span>(<span class="st">&quot;ChickWeight&quot;</span>)</a>
+<a class="sourceLine" id="cb100-10" data-line-number="10"><span class="co">##Porcentajes y tablas de fracuencias</span></a>
+<a class="sourceLine" id="cb100-11" data-line-number="11">t1&lt;-<span class="kw">table</span>(eh18<span class="op">$</span>sexo)<span class="co">#tabla de frcuencias</span></a>
+<a class="sourceLine" id="cb100-12" data-line-number="12">t2&lt;-<span class="kw">table</span>(eh18<span class="op">$</span>depto)</a>
+<a class="sourceLine" id="cb100-13" data-line-number="13">t3&lt;-<span class="kw">table</span>(eh18<span class="op">$</span>edad)</a>
+<a class="sourceLine" id="cb100-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb100-15" data-line-number="15"><span class="kw">barplot</span>(t1,<span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>,<span class="st">&quot;darkgreen&quot;</span>))<span class="co">#diagramas de barra</span></a>
+<a class="sourceLine" id="cb100-16" data-line-number="16"><span class="kw">barplot</span>(t3,<span class="dt">horiz =</span> T)</a>
+<a class="sourceLine" id="cb100-17" data-line-number="17"><span class="kw">barplot</span>(t3,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</a>
+<a class="sourceLine" id="cb100-18" data-line-number="18">ldep&lt;-<span class="kw">c</span>(<span class="st">&quot;CH&quot;</span>,<span class="st">&quot;LP&quot;</span>,<span class="st">&quot;CB&quot;</span>,<span class="st">&quot;OR&quot;</span>,<span class="st">&quot;PT&quot;</span>,<span class="st">&quot;TJ&quot;</span>,<span class="st">&quot;SC&quot;</span>,<span class="st">&quot;BN&quot;</span>,<span class="st">&quot;PD&quot;</span>)</a>
+<a class="sourceLine" id="cb100-19" data-line-number="19"><span class="kw">barplot</span>(t2,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>,<span class="dt">names.arg =</span> ldep)</a>
+<a class="sourceLine" id="cb100-20" data-line-number="20"><span class="co">#llevando a %</span></a>
+<a class="sourceLine" id="cb100-21" data-line-number="21">t2p&lt;-<span class="kw">prop.table</span>(t2)<span class="op">*</span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb100-22" data-line-number="22"><span class="kw">barplot</span>(t2p,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>,<span class="dt">names.arg =</span> ldep,<span class="dt">ylab=</span><span class="st">&quot;%&quot;</span>)</a>
+<a class="sourceLine" id="cb100-23" data-line-number="23"><span class="kw">pie</span>(t2p)</a>
+<a class="sourceLine" id="cb100-24" data-line-number="24"></a>
+<a class="sourceLine" id="cb100-25" data-line-number="25">t3&lt;-<span class="kw">as.data.frame</span>(t3)</a>
+<a class="sourceLine" id="cb100-26" data-line-number="26">t3<span class="op">$</span>F&lt;-<span class="kw">cumsum</span>(t3<span class="op">$</span>Freq)</a>
+<a class="sourceLine" id="cb100-27" data-line-number="27">t3<span class="op">$</span>r&lt;-<span class="kw">prop.table</span>(t3<span class="op">$</span>Freq)</a>
+<a class="sourceLine" id="cb100-28" data-line-number="28">t3<span class="op">$</span>R&lt;-<span class="kw">cumsum</span>(t3<span class="op">$</span>r)</a>
+<a class="sourceLine" id="cb100-29" data-line-number="29"><span class="kw">head</span>(t3)</a>
+<a class="sourceLine" id="cb100-30" data-line-number="30"></a>
+<a class="sourceLine" id="cb100-31" data-line-number="31"><span class="kw">table</span>(ChickWeight<span class="op">$</span>Time)</a>
+<a class="sourceLine" id="cb100-32" data-line-number="32"><span class="kw">table</span>(ChickWeight<span class="op">$</span>Diet)</a>
+<a class="sourceLine" id="cb100-33" data-line-number="33"></a>
+<a class="sourceLine" id="cb100-34" data-line-number="34"><span class="kw">dim</span>(<span class="kw">table</span>(ChickWeight<span class="op">$</span>Chick))</a>
+<a class="sourceLine" id="cb100-35" data-line-number="35"><span class="co">#tabla de contingencia</span></a>
+<a class="sourceLine" id="cb100-36" data-line-number="36">aux&lt;-<span class="kw">table</span>(ChickWeight<span class="op">$</span>Chick,ChickWeight<span class="op">$</span>Diet)</a>
+<a class="sourceLine" id="cb100-37" data-line-number="37">aux[aux<span class="op">!=</span><span class="dv">0</span>]&lt;-<span class="dv">1</span></a>
+<a class="sourceLine" id="cb100-38" data-line-number="38"><span class="kw">apply</span>(aux,<span class="dv">2</span>,sum)</a>
+<a class="sourceLine" id="cb100-39" data-line-number="39"><span class="kw">table</span>(ChickWeight<span class="op">$</span>Time)</a>
+<a class="sourceLine" id="cb100-40" data-line-number="40"><span class="kw">table</span>(ChickWeight<span class="op">$</span>Diet[ChickWeight<span class="op">$</span>Time<span class="op">==</span><span class="dv">0</span>])</a>
+<a class="sourceLine" id="cb100-41" data-line-number="41"><span class="co">##medidas de tendencia central</span></a>
+<a class="sourceLine" id="cb100-42" data-line-number="42"><span class="kw">mean</span>(eh18<span class="op">$</span>edad)</a>
+<a class="sourceLine" id="cb100-43" data-line-number="43"><span class="kw">median</span>(eh18<span class="op">$</span>edad)</a>
+<a class="sourceLine" id="cb100-44" data-line-number="44"></a>
+<a class="sourceLine" id="cb100-45" data-line-number="45"><span class="kw">mean</span>(eh18<span class="op">$</span>ylab,<span class="dt">na.rm =</span> T)</a>
+<a class="sourceLine" id="cb100-46" data-line-number="46"><span class="kw">median</span>(eh18<span class="op">$</span>ylab,<span class="dt">na.rm =</span> T)</a>
+<a class="sourceLine" id="cb100-47" data-line-number="47"><span class="kw">hist</span>(eh18<span class="op">$</span>ylab)</a>
+<a class="sourceLine" id="cb100-48" data-line-number="48"><span class="kw">plot</span>(<span class="kw">density</span>(eh18<span class="op">$</span>ylab,<span class="dt">na.rm =</span> T))</a>
+<a class="sourceLine" id="cb100-49" data-line-number="49"><span class="kw">locator</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb100-50" data-line-number="50"><span class="kw">summary</span>(eh18<span class="op">$</span>ylab)</a>
+<a class="sourceLine" id="cb100-51" data-line-number="51"><span class="co">#medidas de dispersion</span></a>
+<a class="sourceLine" id="cb100-52" data-line-number="52"><span class="kw">var</span>(eh18<span class="op">$</span>ylab,<span class="dt">na.rm =</span> T)</a>
+<a class="sourceLine" id="cb100-53" data-line-number="53"><span class="kw">sd</span>(eh18<span class="op">$</span>ylab,<span class="dt">na.rm =</span> T)</a>
+<a class="sourceLine" id="cb100-54" data-line-number="54"><span class="kw">max</span>(eh18<span class="op">$</span>ylab,<span class="dt">na.rm =</span> T)<span class="op">-</span><span class="kw">min</span>(eh18<span class="op">$</span>ylab,<span class="dt">na.rm =</span> T)</a>
+<a class="sourceLine" id="cb100-55" data-line-number="55"><span class="kw">sd</span>(eh18<span class="op">$</span>ylab,<span class="dt">na.rm =</span> T)<span class="op">/</span><span class="kw">mean</span>(eh18<span class="op">$</span>ylab,<span class="dt">na.rm =</span> T)</a>
+<a class="sourceLine" id="cb100-56" data-line-number="56"><span class="co">#medidas de forma</span></a>
+<a class="sourceLine" id="cb100-57" data-line-number="57"><span class="kw">quantile</span>(eh18<span class="op">$</span>ylab,<span class="kw">c</span>(<span class="fl">0.1</span>,<span class="fl">0.44</span>,<span class="fl">0.99</span>),<span class="dt">na.rm=</span>T)</a>
+<a class="sourceLine" id="cb100-58" data-line-number="58"><span class="kw">hist</span>(eh18<span class="op">$</span>edad)</a>
+<a class="sourceLine" id="cb100-59" data-line-number="59"><span class="co">#Coeficiente de asimetría</span></a>
+<a class="sourceLine" id="cb100-60" data-line-number="60"><span class="co">#EDAD</span></a>
+<a class="sourceLine" id="cb100-61" data-line-number="61">x&lt;-eh18<span class="op">$</span>edad</a>
+<a class="sourceLine" id="cb100-62" data-line-number="62">N&lt;-<span class="kw">length</span>(x)</a>
+<a class="sourceLine" id="cb100-63" data-line-number="63">as&lt;-(<span class="kw">sum</span>((x<span class="op">-</span><span class="kw">mean</span>(x))<span class="op">^</span><span class="dv">3</span>)<span class="op">/</span>N)<span class="op">/</span><span class="kw">sd</span>(x)<span class="op">^</span><span class="dv">3</span></a>
+<a class="sourceLine" id="cb100-64" data-line-number="64">as</a>
+<a class="sourceLine" id="cb100-65" data-line-number="65"><span class="co">#iNGRESO LABORAL</span></a>
+<a class="sourceLine" id="cb100-66" data-line-number="66">x&lt;-eh18<span class="op">$</span>ylab</a>
+<a class="sourceLine" id="cb100-67" data-line-number="67">x&lt;-x[<span class="kw">is.na</span>(x)<span class="op">==</span>F]</a>
+<a class="sourceLine" id="cb100-68" data-line-number="68">x&lt;-x[<span class="kw">complete.cases</span>(x)]</a>
+<a class="sourceLine" id="cb100-69" data-line-number="69">N&lt;-<span class="kw">length</span>(x)</a>
+<a class="sourceLine" id="cb100-70" data-line-number="70">as&lt;-(<span class="kw">sum</span>((x<span class="op">-</span><span class="kw">mean</span>(x))<span class="op">^</span><span class="dv">3</span>)<span class="op">/</span>N)<span class="op">/</span><span class="kw">sd</span>(x)<span class="op">^</span><span class="dv">3</span></a>
+<a class="sourceLine" id="cb100-71" data-line-number="71">as</a>
+<a class="sourceLine" id="cb100-72" data-line-number="72"><span class="co">#kurtosis...</span></a>
+<a class="sourceLine" id="cb100-73" data-line-number="73"><span class="kw">plot</span>(<span class="kw">density</span>(<span class="kw">rnorm</span>(<span class="dv">1000</span>,<span class="dt">sd=</span><span class="dv">40</span>)),<span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">0.08</span>))</a>
+<a class="sourceLine" id="cb100-74" data-line-number="74"><span class="kw">points</span>(<span class="kw">density</span>(<span class="kw">rnorm</span>(<span class="dv">1000</span>,<span class="dt">sd=</span><span class="dv">10</span>)),<span class="dt">type=</span><span class="st">&quot;l&quot;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</a>
+<a class="sourceLine" id="cb100-75" data-line-number="75"><span class="kw">points</span>(<span class="kw">density</span>(<span class="kw">rnorm</span>(<span class="dv">1000</span>,<span class="dt">sd=</span><span class="dv">5</span>)),<span class="dt">type =</span> <span class="st">&quot;l&quot;</span>,<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)</a>
+<a class="sourceLine" id="cb100-76" data-line-number="76"></a>
+<a class="sourceLine" id="cb100-77" data-line-number="77"><span class="kw">lm</span>(ylab<span class="op">~</span>edad,<span class="dt">data=</span>eh18,<span class="dt">weights =</span> f)</a>
+<a class="sourceLine" id="cb100-78" data-line-number="78"><span class="kw">lm</span>(ylab<span class="op">~-</span><span class="dv">1</span><span class="op">+</span>edad,<span class="dt">data=</span>eh18)</a>
+<a class="sourceLine" id="cb100-79" data-line-number="79"><span class="kw">summary</span>(<span class="kw">lm</span>(ylab<span class="op">~</span>edad,<span class="dt">data=</span>eh18))</a></code></pre></div>
+</div>
+<div id="muestreo-e-inferencia" class="section level2">
+<h2><span class="header-section-number">1.7</span> Muestreo e inferencia</h2>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb101-1" data-line-number="1"><span class="kw">rm</span>(<span class="dt">list=</span><span class="kw">ls</span>())</a>
+<a class="sourceLine" id="cb101-2" data-line-number="2">N&lt;-<span class="dv">15</span>;n&lt;-<span class="dv">6</span></a>
+<a class="sourceLine" id="cb101-3" data-line-number="3"><span class="kw">choose</span>(N,n)</a>
+<a class="sourceLine" id="cb101-4" data-line-number="4"><span class="kw">set.seed</span>(<span class="dv">123</span>)</a>
+<a class="sourceLine" id="cb101-5" data-line-number="5">y1&lt;-<span class="kw">rnorm</span>(N,<span class="dv">10</span>,<span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb101-6" data-line-number="6"><span class="kw">set.seed</span>(<span class="dv">234</span>)</a>
+<a class="sourceLine" id="cb101-7" data-line-number="7">y2&lt;-<span class="kw">rexp</span>(N,<span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb101-8" data-line-number="8"><span class="kw">set.seed</span>(<span class="dv">345</span>)</a>
+<a class="sourceLine" id="cb101-9" data-line-number="9">y3&lt;-<span class="kw">runif</span>(N,<span class="dv">500</span>,<span class="dv">3000</span>)</a>
+<a class="sourceLine" id="cb101-10" data-line-number="10"><span class="co">#par?metros</span></a>
+<a class="sourceLine" id="cb101-11" data-line-number="11">theta1&lt;-<span class="kw">mean</span>(y1)</a>
+<a class="sourceLine" id="cb101-12" data-line-number="12">theta2&lt;-<span class="kw">sum</span>(y2)</a>
+<a class="sourceLine" id="cb101-13" data-line-number="13"><span class="co"># sum(y3&gt;1500)/N</span></a>
+<a class="sourceLine" id="cb101-14" data-line-number="14"><span class="co"># mean(y3&gt;1500)</span></a>
+<a class="sourceLine" id="cb101-15" data-line-number="15">theta3&lt;-<span class="kw">mean</span>(y3<span class="op">&gt;</span><span class="dv">1500</span>)</a>
+<a class="sourceLine" id="cb101-16" data-line-number="16"><span class="co">#pr?ctica (real) solo se tiene acceso a una</span></a>
+<a class="sourceLine" id="cb101-17" data-line-number="17"><span class="co">#muestra</span></a>
+<a class="sourceLine" id="cb101-18" data-line-number="18">U&lt;-<span class="dv">1</span><span class="op">:</span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb101-19" data-line-number="19"><span class="kw">set.seed</span>(<span class="dv">888</span>)</a>
+<a class="sourceLine" id="cb101-20" data-line-number="20">s&lt;-<span class="kw">sample</span>(U,n)</a>
+<a class="sourceLine" id="cb101-21" data-line-number="21">s</a>
+<a class="sourceLine" id="cb101-22" data-line-number="22">y1</a>
+<a class="sourceLine" id="cb101-23" data-line-number="23"><span class="co">#estimaciones</span></a>
+<a class="sourceLine" id="cb101-24" data-line-number="24"><span class="kw">mean</span>(y1[s]);theta1</a>
+<a class="sourceLine" id="cb101-25" data-line-number="25"><span class="kw">mean</span>(y2[s])<span class="op">*</span>N ; theta2</a>
+<a class="sourceLine" id="cb101-26" data-line-number="26"><span class="kw">mean</span>(y3[s]<span class="op">&gt;</span><span class="dv">1500</span>) ; theta3</a>
+<a class="sourceLine" id="cb101-27" data-line-number="27"></a>
+<a class="sourceLine" id="cb101-28" data-line-number="28"><span class="kw">combn</span>(U,<span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb101-29" data-line-number="29"><span class="kw">combn</span>(y1,<span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb101-30" data-line-number="30"></a>
+<a class="sourceLine" id="cb101-31" data-line-number="31"><span class="kw">combn</span>(y1,<span class="dv">3</span>,mean)</a>
+<a class="sourceLine" id="cb101-32" data-line-number="32"><span class="co">#theta1</span></a>
+<a class="sourceLine" id="cb101-33" data-line-number="33">t1s&lt;-<span class="kw">apply</span>(<span class="kw">combn</span>(y1,n),<span class="dv">2</span>,mean)</a>
+<a class="sourceLine" id="cb101-34" data-line-number="34"><span class="kw">mean</span>(t1s)</a>
+<a class="sourceLine" id="cb101-35" data-line-number="35">theta1</a>
+<a class="sourceLine" id="cb101-36" data-line-number="36"><span class="kw">hist</span>(t1s)</a>
+<a class="sourceLine" id="cb101-37" data-line-number="37"><span class="kw">plot</span>(<span class="kw">density</span>(t1s))</a>
+<a class="sourceLine" id="cb101-38" data-line-number="38"><span class="kw">shapiro.test</span>(t1s)</a>
+<a class="sourceLine" id="cb101-39" data-line-number="39"><span class="co">#theta2</span></a>
+<a class="sourceLine" id="cb101-40" data-line-number="40">t2s&lt;-<span class="kw">apply</span>(<span class="kw">combn</span>(y2,n),<span class="dv">2</span>,mean)<span class="op">*</span>N</a>
+<a class="sourceLine" id="cb101-41" data-line-number="41"><span class="kw">mean</span>(t2s);theta2</a>
+<a class="sourceLine" id="cb101-42" data-line-number="42"><span class="kw">hist</span>(t2s)</a>
+<a class="sourceLine" id="cb101-43" data-line-number="43"><span class="kw">plot</span>(<span class="kw">density</span>(t2s))</a>
+<a class="sourceLine" id="cb101-44" data-line-number="44"><span class="kw">shapiro.test</span>(t2s)</a>
+<a class="sourceLine" id="cb101-45" data-line-number="45"><span class="co">#theta3</span></a>
+<a class="sourceLine" id="cb101-46" data-line-number="46">t3s&lt;-<span class="kw">apply</span>(<span class="kw">combn</span>(y3,n)<span class="op">&gt;</span><span class="dv">1500</span>,<span class="dv">2</span>,mean)</a>
+<a class="sourceLine" id="cb101-47" data-line-number="47"><span class="kw">mean</span>(t3s);theta3</a>
+<a class="sourceLine" id="cb101-48" data-line-number="48"><span class="kw">hist</span>(t3s)</a>
+<a class="sourceLine" id="cb101-49" data-line-number="49"><span class="kw">plot</span>(<span class="kw">density</span>(t3s))</a>
+<a class="sourceLine" id="cb101-50" data-line-number="50"><span class="kw">shapiro.test</span>(t3s)</a>
+<a class="sourceLine" id="cb101-51" data-line-number="51"><span class="co">####Inferencia a partir de una muestra</span></a>
+<a class="sourceLine" id="cb101-52" data-line-number="52"><span class="co">#libreria survey</span></a>
+<a class="sourceLine" id="cb101-53" data-line-number="53"><span class="kw">install.packages</span>(<span class="st">&quot;survey&quot;</span>)</a>
+<a class="sourceLine" id="cb101-54" data-line-number="54"><span class="kw">library</span>(survey)</a>
+<a class="sourceLine" id="cb101-55" data-line-number="55">bd&lt;-<span class="kw">data.frame</span>(y1,y2,<span class="dt">y3=</span>y3<span class="op">&gt;</span><span class="dv">1500</span>)</a>
+<a class="sourceLine" id="cb101-56" data-line-number="56"><span class="kw">set.seed</span>(<span class="dv">123</span>)</a>
+<a class="sourceLine" id="cb101-57" data-line-number="57">s&lt;-<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">15</span>,<span class="dv">7</span>)</a>
+<a class="sourceLine" id="cb101-58" data-line-number="58">bds&lt;-bd[s,]</a>
+<a class="sourceLine" id="cb101-59" data-line-number="59">bds<span class="op">$</span>w&lt;-<span class="dv">15</span><span class="op">/</span><span class="dv">7</span></a>
+<a class="sourceLine" id="cb101-60" data-line-number="60">bds<span class="op">$</span>pk&lt;-<span class="dv">7</span><span class="op">/</span><span class="dv">15</span></a>
+<a class="sourceLine" id="cb101-61" data-line-number="61">bds</a>
+<a class="sourceLine" id="cb101-62" data-line-number="62">dm1&lt;-<span class="kw">svydesign</span>(<span class="dt">ids=</span><span class="op">~</span><span class="dv">0</span>,<span class="dt">probs =</span> <span class="op">~</span>pk,<span class="dt">data=</span>bds)</a>
+<a class="sourceLine" id="cb101-63" data-line-number="63"><span class="kw">svymean</span>(<span class="op">~</span>y1,<span class="dt">design =</span> dm1)</a>
+<a class="sourceLine" id="cb101-64" data-line-number="64"><span class="kw">svytotal</span>(<span class="op">~</span>y2,<span class="dt">design =</span> dm1)</a>
+<a class="sourceLine" id="cb101-65" data-line-number="65"><span class="kw">library</span>(<span class="dt">help=</span>survey)</a></code></pre></div>
+</div>
+<div id="gráficos-de-origen" class="section level2">
+<h2><span class="header-section-number">1.8</span> Gráficos de origen</h2>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb102-1" data-line-number="1"><span class="kw">rm</span>(<span class="dt">list=</span><span class="kw">ls</span>())</a>
+<a class="sourceLine" id="cb102-2" data-line-number="2"><span class="co">################</span></a>
+<a class="sourceLine" id="cb102-3" data-line-number="3"><span class="kw">plot</span>(<span class="dv">0</span>,<span class="dv">0</span>)<span class="co">#inicia una hoja en blanco</span></a>
+<a class="sourceLine" id="cb102-4" data-line-number="4"><span class="kw">plot</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dt">type =</span> <span class="st">&quot;n&quot;</span>)</a>
+<a class="sourceLine" id="cb102-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb102-6" data-line-number="6">x&lt;-<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">7</span>,<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb102-7" data-line-number="7">y&lt;-<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">6</span>,<span class="dv">9</span>,<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb102-8" data-line-number="8"><span class="kw">plot</span>(x,y,<span class="dt">type=</span><span class="st">&quot;p&quot;</span>)</a>
+<a class="sourceLine" id="cb102-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb102-10" data-line-number="10"><span class="kw">plot</span>(x,y,<span class="dt">type=</span><span class="st">&quot;h&quot;</span>)</a>
+<a class="sourceLine" id="cb102-11" data-line-number="11"><span class="kw">plot</span>(x,y,<span class="dt">type=</span><span class="st">&quot;l&quot;</span>)</a>
+<a class="sourceLine" id="cb102-12" data-line-number="12"><span class="kw">plot</span>(x[<span class="kw">order</span>(x)],y[<span class="kw">order</span>(x)],<span class="dt">type=</span><span class="st">&quot;l&quot;</span>)</a>
+<a class="sourceLine" id="cb102-13" data-line-number="13"><span class="kw">plot</span>(x,y,<span class="dt">type =</span> <span class="st">&quot;b&quot;</span>)</a>
+<a class="sourceLine" id="cb102-14" data-line-number="14"><span class="kw">plot</span>(x,y,<span class="dt">type =</span> <span class="st">&quot;o&quot;</span>)</a>
+<a class="sourceLine" id="cb102-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb102-16" data-line-number="16"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb102-17" data-line-number="17"><span class="kw">plot</span>(x,y,<span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">10</span>),<span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">10</span>),<span class="dt">main=</span><span class="st">&quot;c/PUNTOS&quot;</span>)</a>
+<a class="sourceLine" id="cb102-18" data-line-number="18"><span class="kw">plot</span>(x,y,<span class="dt">type=</span><span class="st">&quot;n&quot;</span>,<span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">10</span>),<span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">10</span>),<span class="dt">main =</span> <span class="st">&quot;S/puntos&quot;</span>)</a>
+<a class="sourceLine" id="cb102-19" data-line-number="19"><span class="kw">plot</span>(x,y,<span class="dt">type=</span><span class="st">&quot;n&quot;</span>,<span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">10</span>),<span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">10</span>),</a>
+<a class="sourceLine" id="cb102-20" data-line-number="20">     <span class="dt">axes =</span> F,<span class="dt">main=</span><span class="st">&quot;sin ejes&quot;</span>)</a>
+<a class="sourceLine" id="cb102-21" data-line-number="21"><span class="kw">plot</span>(x,y,<span class="dt">type=</span><span class="st">&quot;n&quot;</span>,<span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">10</span>),<span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">10</span>),</a>
+<a class="sourceLine" id="cb102-22" data-line-number="22">     <span class="dt">axes =</span> F,<span class="dt">ann =</span> F,<span class="dt">main =</span> <span class="st">&quot;blanco&quot;</span>)</a>
+<a class="sourceLine" id="cb102-23" data-line-number="23"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb102-24" data-line-number="24"></a>
+<a class="sourceLine" id="cb102-25" data-line-number="25"><span class="kw">plot</span>(x,y,<span class="dt">type=</span><span class="st">&quot;n&quot;</span>,<span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">10</span>),<span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">10</span>),</a>
+<a class="sourceLine" id="cb102-26" data-line-number="26">     <span class="dt">axes =</span> F,<span class="dt">ann =</span> F)</a>
+<a class="sourceLine" id="cb102-27" data-line-number="27"><span class="kw">points</span>(x,y,<span class="dt">cex=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>)<span class="op">+</span><span class="dv">1</span>)     </a>
+<a class="sourceLine" id="cb102-28" data-line-number="28"><span class="kw">points</span>(x,y,<span class="dt">cex=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>)<span class="op">+</span><span class="dv">1</span>,<span class="dt">pch=</span><span class="dv">15</span>)     </a>
+<a class="sourceLine" id="cb102-29" data-line-number="29"><span class="kw">points</span>(x,y,<span class="dt">cex=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>)<span class="op">+</span><span class="dv">1</span>,<span class="dt">pch=</span><span class="dv">15</span>,<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)     </a>
+<a class="sourceLine" id="cb102-30" data-line-number="30"><span class="kw">points</span>(x,y,<span class="dt">cex=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>)<span class="op">+</span><span class="dv">1</span>,<span class="dt">pch=</span><span class="dv">0</span><span class="op">:</span><span class="dv">3</span>,</a>
+<a class="sourceLine" id="cb102-31" data-line-number="31">       <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;red&quot;</span>,<span class="st">&quot;darkblue&quot;</span>,<span class="st">&quot;pink&quot;</span>,<span class="st">&quot;darkgreen&quot;</span>))</a>
+<a class="sourceLine" id="cb102-32" data-line-number="32"><span class="co">#points(x,y,cex=2)     </span></a>
+<a class="sourceLine" id="cb102-33" data-line-number="33"><span class="kw">pdf</span>(<span class="st">&quot;figura1.pdf&quot;</span>,<span class="dt">width =</span> <span class="dv">15</span>,<span class="dt">height =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb102-34" data-line-number="34"><span class="kw">plot</span>(x,y,<span class="dt">type=</span><span class="st">&quot;n&quot;</span>,<span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">20</span>),<span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">20</span>),</a>
+<a class="sourceLine" id="cb102-35" data-line-number="35">     <span class="dt">axes =</span> F,<span class="dt">ann =</span> F)</a>
+<a class="sourceLine" id="cb102-36" data-line-number="36"><span class="kw">points</span>(<span class="kw">seq</span>(<span class="dv">2</span>,<span class="dv">10</span>,<span class="dv">2</span>),<span class="kw">seq</span>(<span class="dv">2</span>,<span class="dv">10</span>,<span class="dv">2</span>),<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">lwd=</span><span class="dv">4</span>,</a>
+<a class="sourceLine" id="cb102-37" data-line-number="37">       <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>,<span class="dt">lty=</span><span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb102-38" data-line-number="38"><span class="kw">text</span>(<span class="kw">seq</span>(<span class="dv">2</span>,<span class="dv">10</span>,<span class="dv">2</span>),<span class="kw">seq</span>(<span class="dv">2</span>,<span class="dv">10</span>,<span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb102-39" data-line-number="39">     <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;p1&quot;</span>,<span class="st">&quot;p2&quot;</span>,<span class="st">&quot;p3&quot;</span>,<span class="st">&quot;p4&quot;</span>,<span class="st">&quot;p5&quot;</span>),<span class="dt">pos=</span><span class="dv">3</span>,</a>
+<a class="sourceLine" id="cb102-40" data-line-number="40">     <span class="dt">cex=</span><span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,<span class="dt">col=</span><span class="st">&quot;brown&quot;</span>)</a>
+<a class="sourceLine" id="cb102-41" data-line-number="41"><span class="kw">axis</span>(<span class="dv">1</span>,<span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">20</span>,<span class="dv">10</span>),<span class="dt">lwd=</span><span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb102-42" data-line-number="42"><span class="kw">axis</span>(<span class="dv">2</span>,<span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">20</span>,<span class="dv">5</span>),<span class="dt">lwd=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb102-43" data-line-number="43"><span class="kw">axis</span>(<span class="dv">4</span>,<span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">20</span>,<span class="dv">5</span>),<span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">400</span>,<span class="dv">100</span>),<span class="dt">lwd=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb102-44" data-line-number="44"><span class="kw">axis</span>(<span class="dv">3</span>,<span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">20</span>,<span class="dv">10</span>),<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;C&quot;</span>),<span class="dt">lwd=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb102-45" data-line-number="45"><span class="kw">title</span>(<span class="dt">main=</span><span class="st">&quot;Plot en R&quot;</span>,<span class="dt">col.main=</span><span class="st">&quot;darkred&quot;</span>,</a>
+<a class="sourceLine" id="cb102-46" data-line-number="46">      <span class="dt">cex.main=</span><span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb102-47" data-line-number="47"><span class="kw">title</span>(<span class="dt">xlab =</span> <span class="st">&quot;Eje X&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;Eje Y&quot;</span>,<span class="dt">cex.lab=</span><span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb102-48" data-line-number="48">      <span class="dt">col.lab=</span><span class="st">&quot;gray&quot;</span>)</a>
+<a class="sourceLine" id="cb102-49" data-line-number="49"><span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>,<span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;b&quot;</span>,<span class="st">&quot;c&quot;</span>),</a>
+<a class="sourceLine" id="cb102-50" data-line-number="50">       <span class="dt">lwd=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>),<span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;darkred&quot;</span>,<span class="st">&quot;black&quot;</span>,<span class="st">&quot;gray&quot;</span>))</a>
+<a class="sourceLine" id="cb102-51" data-line-number="51"><span class="kw">dev.off</span>()</a>
+<a class="sourceLine" id="cb102-52" data-line-number="52"><span class="kw">getwd</span>()</a>
+<a class="sourceLine" id="cb102-53" data-line-number="53"></a>
+<a class="sourceLine" id="cb102-54" data-line-number="54"><span class="kw">png</span>(<span class="st">&quot;figura1.png&quot;</span>)</a>
+<a class="sourceLine" id="cb102-55" data-line-number="55"><span class="kw">plot</span>(x,y,<span class="dt">type=</span><span class="st">&quot;n&quot;</span>,<span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">20</span>),<span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">20</span>),</a>
+<a class="sourceLine" id="cb102-56" data-line-number="56">     <span class="dt">axes =</span> F,<span class="dt">ann =</span> F)</a>
+<a class="sourceLine" id="cb102-57" data-line-number="57"><span class="kw">points</span>(<span class="kw">seq</span>(<span class="dv">2</span>,<span class="dv">10</span>,<span class="dv">2</span>),<span class="kw">seq</span>(<span class="dv">2</span>,<span class="dv">10</span>,<span class="dv">2</span>),<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">lwd=</span><span class="dv">4</span>,</a>
+<a class="sourceLine" id="cb102-58" data-line-number="58">       <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>,<span class="dt">lty=</span><span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb102-59" data-line-number="59"><span class="kw">dev.off</span>()</a>
+<a class="sourceLine" id="cb102-60" data-line-number="60"></a>
+<a class="sourceLine" id="cb102-61" data-line-number="61"><span class="kw">pdf</span>(<span class="st">&quot;sec.pdf&quot;</span>)</a>
+<a class="sourceLine" id="cb102-62" data-line-number="62"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>){</a>
+<a class="sourceLine" id="cb102-63" data-line-number="63">  <span class="kw">plot</span>(i,<span class="dv">0</span>,<span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">10</span>))</a>
+<a class="sourceLine" id="cb102-64" data-line-number="64">}</a>
+<a class="sourceLine" id="cb102-65" data-line-number="65"><span class="kw">dev.off</span>()</a>
+<a class="sourceLine" id="cb102-66" data-line-number="66"></a>
+<a class="sourceLine" id="cb102-67" data-line-number="67"></a>
+<a class="sourceLine" id="cb102-68" data-line-number="68"><span class="kw">abline</span>(<span class="dt">h=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>),<span class="dt">lty=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb102-69" data-line-number="69"><span class="kw">abline</span>(<span class="dt">v=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>))</a>
+<a class="sourceLine" id="cb102-70" data-line-number="70"></a>
+<a class="sourceLine" id="cb102-71" data-line-number="71">bd&lt;-<span class="kw">as.data.frame</span>(state.x77)</a>
+<a class="sourceLine" id="cb102-72" data-line-number="72">bd<span class="op">$</span>name&lt;-<span class="kw">row.names</span>(bd)</a>
+<a class="sourceLine" id="cb102-73" data-line-number="73"><span class="kw">head</span>(bd)</a></code></pre></div>
+</div>
+<div id="ggplot" class="section level2">
+<h2><span class="header-section-number">1.9</span> ggplot</h2>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb103-1" data-line-number="1"><span class="co">#######################################</span></a>
+<a class="sourceLine" id="cb103-2" data-line-number="2"><span class="co"># Clase: gráficos en R, ggplot</span></a>
+<a class="sourceLine" id="cb103-3" data-line-number="3"><span class="co"># Materia: Programación Estadística I</span></a>
+<a class="sourceLine" id="cb103-4" data-line-number="4"><span class="co"># Fecha: 9 de Marzo</span></a>
+<a class="sourceLine" id="cb103-5" data-line-number="5"><span class="co">#######################################</span></a>
+<a class="sourceLine" id="cb103-6" data-line-number="6"><span class="kw">rm</span>(<span class="dt">list=</span><span class="kw">ls</span>())</a>
+<a class="sourceLine" id="cb103-7" data-line-number="7"><span class="co">#######################################</span></a>
+<a class="sourceLine" id="cb103-8" data-line-number="8"><span class="co">#install.packages(&quot;ggplot2&quot;)</span></a>
+<a class="sourceLine" id="cb103-9" data-line-number="9"><span class="co">#install.packages(&quot;dplyr&quot;)</span></a>
+<a class="sourceLine" id="cb103-10" data-line-number="10"><span class="co">#install.packages(&quot;maps&quot;)</span></a>
+<a class="sourceLine" id="cb103-11" data-line-number="11"><span class="co">#install.packages(&quot;ggvis&quot;)</span></a>
+<a class="sourceLine" id="cb103-12" data-line-number="12"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb103-13" data-line-number="13"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb103-14" data-line-number="14"><span class="kw">library</span>(maps)</a>
+<a class="sourceLine" id="cb103-15" data-line-number="15"><span class="kw">library</span>(ggvis)</a>
+<a class="sourceLine" id="cb103-16" data-line-number="16"><span class="kw">library</span>(readxl)</a>
+<a class="sourceLine" id="cb103-17" data-line-number="17"><span class="co">#######################################</span></a>
+<a class="sourceLine" id="cb103-18" data-line-number="18">urlfile&lt;-<span class="kw">url</span>(<span class="st">&#39;https://raw.githubusercontent.com/AlvaroLimber/EST-383/master/data/oct20.RData&#39;</span>)</a>
+<a class="sourceLine" id="cb103-19" data-line-number="19"><span class="kw">load</span>(urlfile)</a>
+<a class="sourceLine" id="cb103-20" data-line-number="20"><span class="kw">names</span>(computo)[<span class="dv">18</span>]&lt;-<span class="st">&quot;MAS&quot;</span></a>
+<a class="sourceLine" id="cb103-21" data-line-number="21"><span class="co">#######################################</span></a>
+<a class="sourceLine" id="cb103-22" data-line-number="22"><span class="co">#The grammar of graphics is an answer to a question: what is a statistical graphic? </span></a>
+<a class="sourceLine" id="cb103-23" data-line-number="23"></a>
+<a class="sourceLine" id="cb103-24" data-line-number="24"><span class="co">#base graphics 1983</span></a>
+<a class="sourceLine" id="cb103-25" data-line-number="25"><span class="co">#grid 2000</span></a>
+<a class="sourceLine" id="cb103-26" data-line-number="26"><span class="co">#lattice 1993</span></a>
+<a class="sourceLine" id="cb103-27" data-line-number="27"><span class="co">#ggplot 2005</span></a>
+<a class="sourceLine" id="cb103-28" data-line-number="28"><span class="co">#ggvis 2014</span></a>
+<a class="sourceLine" id="cb103-29" data-line-number="29"></a>
+<a class="sourceLine" id="cb103-30" data-line-number="30"><span class="co">## Datos, estetica y geometria (layers)</span></a>
+<a class="sourceLine" id="cb103-31" data-line-number="31"></a>
+<a class="sourceLine" id="cb103-32" data-line-number="32"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb103-33" data-line-number="33">mpg</a>
+<a class="sourceLine" id="cb103-34" data-line-number="34"></a>
+<a class="sourceLine" id="cb103-35" data-line-number="35"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb103-36" data-line-number="36"><span class="st">  </span><span class="kw">geom_area</span>()</a>
+<a class="sourceLine" id="cb103-37" data-line-number="37"></a>
+<a class="sourceLine" id="cb103-38" data-line-number="38"><span class="kw">ggplot</span>(computo,<span class="kw">aes</span>(MAS,CC))<span class="op">+</span><span class="kw">geom_point</span>()</a>
+<a class="sourceLine" id="cb103-39" data-line-number="39"></a>
+<a class="sourceLine" id="cb103-40" data-line-number="40"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb103-41" data-line-number="41"><span class="st">  </span><span class="kw">geom_line</span>()</a>
+<a class="sourceLine" id="cb103-42" data-line-number="42"></a>
+<a class="sourceLine" id="cb103-43" data-line-number="43"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb103-44" data-line-number="44"><span class="st">  </span><span class="kw">geom_histogram</span>()</a>
+<a class="sourceLine" id="cb103-45" data-line-number="45"></a>
+<a class="sourceLine" id="cb103-46" data-line-number="46"><span class="co">#Color tamaño y forma</span></a>
+<a class="sourceLine" id="cb103-47" data-line-number="47"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy,<span class="dt">colour =</span> class)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb103-48" data-line-number="48"><span class="st">  </span><span class="kw">geom_point</span>()</a>
+<a class="sourceLine" id="cb103-49" data-line-number="49"></a>
+<a class="sourceLine" id="cb103-50" data-line-number="50"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy,<span class="dt">shape =</span> drv)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb103-51" data-line-number="51"><span class="st">  </span><span class="kw">geom_point</span>()</a>
+<a class="sourceLine" id="cb103-52" data-line-number="52"></a>
+<a class="sourceLine" id="cb103-53" data-line-number="53"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy,<span class="dt">size =</span> cyl)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb103-54" data-line-number="54"><span class="st">  </span><span class="kw">geom_point</span>()</a>
+<a class="sourceLine" id="cb103-55" data-line-number="55"></a>
+<a class="sourceLine" id="cb103-56" data-line-number="56"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> <span class="st">&quot;blue&quot;</span>))</a>
+<a class="sourceLine" id="cb103-57" data-line-number="57"></a>
+<a class="sourceLine" id="cb103-58" data-line-number="58"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">colour =</span> <span class="st">&quot;blue&quot;</span>)</a>
+<a class="sourceLine" id="cb103-59" data-line-number="59"></a>
+<a class="sourceLine" id="cb103-60" data-line-number="60"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb103-61" data-line-number="61"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb103-62" data-line-number="62"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>class)</a>
+<a class="sourceLine" id="cb103-63" data-line-number="63"></a>
+<a class="sourceLine" id="cb103-64" data-line-number="64"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb103-65" data-line-number="65"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb103-66" data-line-number="66"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>class<span class="op">+</span>drv)</a>
+<a class="sourceLine" id="cb103-67" data-line-number="67"></a>
+<a class="sourceLine" id="cb103-68" data-line-number="68"><span class="co">#geoms</span></a>
+<a class="sourceLine" id="cb103-69" data-line-number="69"><span class="kw">geom_smooth</span>() <span class="co"># ajuste y en x</span></a>
+<a class="sourceLine" id="cb103-70" data-line-number="70"><span class="kw">geom_boxplot</span>()</a>
+<a class="sourceLine" id="cb103-71" data-line-number="71"><span class="kw">geom_histogram</span>()</a>
+<a class="sourceLine" id="cb103-72" data-line-number="72"><span class="kw">geom_freqpoly</span>()</a>
+<a class="sourceLine" id="cb103-73" data-line-number="73"><span class="kw">geom_bar</span>()</a>
+<a class="sourceLine" id="cb103-74" data-line-number="74"><span class="kw">geom_path</span>()</a>
+<a class="sourceLine" id="cb103-75" data-line-number="75"><span class="kw">geom_line</span>()</a>
+<a class="sourceLine" id="cb103-76" data-line-number="76"></a>
+<a class="sourceLine" id="cb103-77" data-line-number="77"><span class="co">#ajuste de un modelo</span></a>
+<a class="sourceLine" id="cb103-78" data-line-number="78"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb103-79" data-line-number="79"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb103-80" data-line-number="80"><span class="st">  </span><span class="kw">geom_smooth</span>()</a>
+<a class="sourceLine" id="cb103-81" data-line-number="81"></a>
+<a class="sourceLine" id="cb103-82" data-line-number="82"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb103-83" data-line-number="83"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb103-84" data-line-number="84"><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>)</a>
+<a class="sourceLine" id="cb103-85" data-line-number="85"></a>
+<a class="sourceLine" id="cb103-86" data-line-number="86"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(drv, hwy)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb103-87" data-line-number="87"><span class="st">  </span><span class="kw">geom_point</span>()</a>
+<a class="sourceLine" id="cb103-88" data-line-number="88"></a>
+<a class="sourceLine" id="cb103-89" data-line-number="89"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(drv, hwy)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_jitter</span>()</a>
+<a class="sourceLine" id="cb103-90" data-line-number="90"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(drv, hwy)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>()</a>
+<a class="sourceLine" id="cb103-91" data-line-number="91"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(drv, hwy)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_violin</span>()</a>
+<a class="sourceLine" id="cb103-92" data-line-number="92"></a>
+<a class="sourceLine" id="cb103-93" data-line-number="93"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(hwy)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>()</a>
+<a class="sourceLine" id="cb103-94" data-line-number="94"><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></a>
+<a class="sourceLine" id="cb103-95" data-line-number="95"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(hwy)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_freqpoly</span>()</a>
+<a class="sourceLine" id="cb103-96" data-line-number="96"><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></a>
+<a class="sourceLine" id="cb103-97" data-line-number="97"></a>
+<a class="sourceLine" id="cb103-98" data-line-number="98"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(hwy)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb103-99" data-line-number="99"><span class="st">  </span><span class="kw">geom_freqpoly</span>(<span class="dt">binwidth =</span> <span class="fl">2.5</span>)</a>
+<a class="sourceLine" id="cb103-100" data-line-number="100"></a>
+<a class="sourceLine" id="cb103-101" data-line-number="101"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(hwy)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb103-102" data-line-number="102"><span class="st">  </span><span class="kw">geom_freqpoly</span>(<span class="dt">binwidth =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb103-103" data-line-number="103"></a>
+<a class="sourceLine" id="cb103-104" data-line-number="104"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(hwy)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb103-105" data-line-number="105"><span class="st">  </span><span class="kw">geom_density</span>()</a>
+<a class="sourceLine" id="cb103-106" data-line-number="106"></a>
+<a class="sourceLine" id="cb103-107" data-line-number="107"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, <span class="dt">colour =</span> drv)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb103-108" data-line-number="108"><span class="st">  </span><span class="kw">geom_freqpoly</span>(<span class="dt">binwidth =</span> <span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb103-109" data-line-number="109"></a>
+<a class="sourceLine" id="cb103-110" data-line-number="110"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, <span class="dt">fill =</span> drv)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb103-111" data-line-number="111"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">0.5</span>) </a>
+<a class="sourceLine" id="cb103-112" data-line-number="112"></a>
+<a class="sourceLine" id="cb103-113" data-line-number="113"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, <span class="dt">fill =</span> drv)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb103-114" data-line-number="114"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">0.5</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb103-115" data-line-number="115"><span class="st">    </span><span class="kw">facet_wrap</span>(<span class="op">~</span>drv, <span class="dt">ncol =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb103-116" data-line-number="116"></a>
+<a class="sourceLine" id="cb103-117" data-line-number="117"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(manufacturer)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb103-118" data-line-number="118"><span class="st">  </span><span class="kw">geom_bar</span>()</a>
+<a class="sourceLine" id="cb103-119" data-line-number="119"></a>
+<a class="sourceLine" id="cb103-120" data-line-number="120">aa&lt;-<span class="kw">as.data.frame</span>(<span class="kw">table</span>(mpg<span class="op">$</span>class))</a>
+<a class="sourceLine" id="cb103-121" data-line-number="121">aa</a>
+<a class="sourceLine" id="cb103-122" data-line-number="122"><span class="kw">ggplot</span>(aa,<span class="kw">aes</span>(Var1,Freq))<span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb103-123" data-line-number="123"><span class="st">  </span><span class="kw">geom_bar</span>()</a>
+<a class="sourceLine" id="cb103-124" data-line-number="124"></a>
+<a class="sourceLine" id="cb103-125" data-line-number="125"><span class="kw">ggplot</span>(aa,<span class="kw">aes</span>(Var1,Freq)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>)</a>
+<a class="sourceLine" id="cb103-126" data-line-number="126"><span class="kw">ggplot</span>(drugs, <span class="kw">aes</span>(drug, effect)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</a>
+<a class="sourceLine" id="cb103-127" data-line-number="127"></a>
+<a class="sourceLine" id="cb103-128" data-line-number="128"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(cty, hwy)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb103-129" data-line-number="129"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb103-130" data-line-number="130"></a>
+<a class="sourceLine" id="cb103-131" data-line-number="131"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(cty, hwy)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb103-132" data-line-number="132"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">3</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb103-133" data-line-number="133"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;city driving (mpg)&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb103-134" data-line-number="134"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;highway driving (mpg)&quot;</span>)</a>
+<a class="sourceLine" id="cb103-135" data-line-number="135"></a>
+<a class="sourceLine" id="cb103-136" data-line-number="136"><span class="co"># Remove the axis labels with NULL</span></a>
+<a class="sourceLine" id="cb103-137" data-line-number="137"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(cty, hwy)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb103-138" data-line-number="138"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">3</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb103-139" data-line-number="139"><span class="st">  </span><span class="kw">xlab</span>(<span class="ot">NULL</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb103-140" data-line-number="140"><span class="st">  </span><span class="kw">ylab</span>(<span class="ot">NULL</span>)</a>
+<a class="sourceLine" id="cb103-141" data-line-number="141"></a>
+<a class="sourceLine" id="cb103-142" data-line-number="142"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(drv, hwy)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb103-143" data-line-number="143"><span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">width =</span> <span class="fl">0.25</span>)</a>
+<a class="sourceLine" id="cb103-144" data-line-number="144"></a>
+<a class="sourceLine" id="cb103-145" data-line-number="145"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(drv, hwy)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb103-146" data-line-number="146"><span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">width =</span> <span class="fl">0.25</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb103-147" data-line-number="147"><span class="st">  </span><span class="kw">xlim</span>(<span class="st">&quot;f&quot;</span>, <span class="st">&quot;r&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb103-148" data-line-number="148"><span class="st">  </span><span class="kw">ylim</span>(<span class="dv">20</span>, <span class="dv">30</span>)</a>
+<a class="sourceLine" id="cb103-149" data-line-number="149"><span class="co">#&gt; Warning: Removed 137 rows containing missing values (geom_point).</span></a>
+<a class="sourceLine" id="cb103-150" data-line-number="150"></a>
+<a class="sourceLine" id="cb103-151" data-line-number="151"><span class="co"># For continuous scales, use NA to set only one limit</span></a>
+<a class="sourceLine" id="cb103-152" data-line-number="152"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(drv, hwy)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb103-153" data-line-number="153"><span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">width =</span> <span class="fl">0.25</span>, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb103-154" data-line-number="154"><span class="st">  </span><span class="kw">ylim</span>(<span class="ot">NA</span>, <span class="dv">30</span>)</a>
+<a class="sourceLine" id="cb103-155" data-line-number="155"></a>
+<a class="sourceLine" id="cb103-156" data-line-number="156"></a>
+<a class="sourceLine" id="cb103-157" data-line-number="157"><span class="co">#output</span></a>
+<a class="sourceLine" id="cb103-158" data-line-number="158">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy, <span class="dt">colour =</span> <span class="kw">factor</span>(cyl))) <span class="op">+</span></a>
+<a class="sourceLine" id="cb103-159" data-line-number="159"><span class="st">  </span><span class="kw">geom_point</span>()</a>
+<a class="sourceLine" id="cb103-160" data-line-number="160"></a>
+<a class="sourceLine" id="cb103-161" data-line-number="161"><span class="co"># Save png to disk</span></a>
+<a class="sourceLine" id="cb103-162" data-line-number="162"></a>
+<a class="sourceLine" id="cb103-163" data-line-number="163"></a>
+<a class="sourceLine" id="cb103-164" data-line-number="164"><span class="kw">ggsave</span>(<span class="st">&quot;plot.png&quot;</span>, p, <span class="dt">width =</span> <span class="dv">5</span>, <span class="dt">height =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb103-165" data-line-number="165"></a>
+<a class="sourceLine" id="cb103-166" data-line-number="166"><span class="kw">saveRDS</span>(p, <span class="st">&quot;plot.rds&quot;</span>)</a>
+<a class="sourceLine" id="cb103-167" data-line-number="167">q &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&quot;plot.rds&quot;</span>)</a>
+<a class="sourceLine" id="cb103-168" data-line-number="168"></a>
+<a class="sourceLine" id="cb103-169" data-line-number="169"><span class="kw">ggplot</span>(faithfuld, <span class="kw">aes</span>(eruptions, waiting)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb103-170" data-line-number="170"><span class="st">  </span><span class="kw">geom_contour</span>(<span class="kw">aes</span>(<span class="dt">z =</span> density, <span class="dt">colour =</span> ..level..))</a>
+<a class="sourceLine" id="cb103-171" data-line-number="171"></a>
+<a class="sourceLine" id="cb103-172" data-line-number="172">mi_counties &lt;-<span class="st"> </span><span class="kw">map_data</span>(<span class="st">&quot;world&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb103-173" data-line-number="173"><span class="st">  </span><span class="kw">select</span>(<span class="dt">lon =</span> long, lat, group, <span class="dt">id =</span> subregion)</a>
+<a class="sourceLine" id="cb103-174" data-line-number="174"></a>
+<a class="sourceLine" id="cb103-175" data-line-number="175"><span class="kw">ggplot</span>(mi_counties, <span class="kw">aes</span>(lon, lat)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb103-176" data-line-number="176"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="fl">.25</span>, <span class="dt">show.legend =</span> <span class="ot">FALSE</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb103-177" data-line-number="177"><span class="st">  </span><span class="kw">coord_quickmap</span>()</a>
+<a class="sourceLine" id="cb103-178" data-line-number="178"></a>
+<a class="sourceLine" id="cb103-179" data-line-number="179"><span class="kw">ggplot</span>(mi_counties, <span class="kw">aes</span>(lon, lat, <span class="dt">group =</span> group)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb103-180" data-line-number="180"><span class="st">  </span><span class="kw">geom_polygon</span>(<span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;grey50&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb103-181" data-line-number="181"><span class="st">  </span><span class="kw">coord_quickmap</span>()</a>
+<a class="sourceLine" id="cb103-182" data-line-number="182"></a>
+<a class="sourceLine" id="cb103-183" data-line-number="183"><span class="co">#temas</span></a>
+<a class="sourceLine" id="cb103-184" data-line-number="184"><span class="kw">theme_bw</span>()</a>
+<a class="sourceLine" id="cb103-185" data-line-number="185"><span class="kw">theme_grey</span>()</a>
+<a class="sourceLine" id="cb103-186" data-line-number="186"><span class="kw">theme_linedraw</span>()</a>
+<a class="sourceLine" id="cb103-187" data-line-number="187"><span class="kw">theme_light</span>()</a>
+<a class="sourceLine" id="cb103-188" data-line-number="188"><span class="kw">theme_dark</span>()</a>
+<a class="sourceLine" id="cb103-189" data-line-number="189"><span class="kw">theme_minimal</span>()</a>
+<a class="sourceLine" id="cb103-190" data-line-number="190"><span class="kw">theme_classic</span>()</a>
+<a class="sourceLine" id="cb103-191" data-line-number="191"><span class="kw">theme_void</span>()</a></code></pre></div>
+</div>
+<div id="r-markdown" class="section level2">
+<h2><span class="header-section-number">1.10</span> R Markdown</h2>
+<p><strong>“R Markdown”</strong> se introdujo por primera vez en el paquete knitr a principios de 2012. La idea era incrustar fragmentos de código (de R u otros) en los documentos de Markdown. De hecho, knitr soportó varios lenguajes de autoría desde el principio además de Markdown, incluidos LaTeX, HTML, AsciiDoc, reStructuredText y Textile.</p>
+<p>Markdown se ha convertido en el formato de documento más popular. La simplicidad de Markdown se destaca claramente entre estos formatos de documentos.</p>
+<div id="instalación" class="section level3">
+<h3><span class="header-section-number">1.10.1</span> Instalación</h3>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb104-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">&#39;rmarkdown&#39;</span>)</a>
+<a class="sourceLine" id="cb104-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb104-3" data-line-number="3"><span class="co"># Si se prefiere la versión en desarrollo</span></a>
+<a class="sourceLine" id="cb104-4" data-line-number="4"><span class="cf">if</span> (<span class="op">!</span><span class="kw">requireNamespace</span>(<span class="st">&quot;devtools&quot;</span>))</a>
+<a class="sourceLine" id="cb104-5" data-line-number="5">  <span class="kw">install.packages</span>(<span class="st">&#39;devtools&#39;</span>)</a>
+<a class="sourceLine" id="cb104-6" data-line-number="6">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&#39;rstudio/rmarkdown&#39;</span>)</a></code></pre></div>
+<p>Si el objetivo es usar Markdown para generar documentos PDF se necesita instalar Latex.</p>
+<p>Existen cheatsheets utiles para usar markdown, como: <a href="https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf">cheatsheets</a></p>
+</div>
+<div id="yaml-header" class="section level3">
+<h3><span class="header-section-number">1.10.2</span> YAML Header</h3>
+<p>Al inicio del archivo y entre las lineas —</p>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb105-1" data-line-number="1"><span class="op">---</span></a>
+<a class="sourceLine" id="cb105-2" data-line-number="2">title<span class="op">:</span><span class="st"> </span>Mi documento</a>
+<a class="sourceLine" id="cb105-3" data-line-number="3">author<span class="op">:</span><span class="st"> </span>Juan Perez</a>
+<a class="sourceLine" id="cb105-4" data-line-number="4">date<span class="op">:</span><span class="st"> </span>Marzo <span class="dv">22</span>, <span class="dv">20220</span></a>
+<a class="sourceLine" id="cb105-5" data-line-number="5">output<span class="op">:</span><span class="st"> </span>html_document</a>
+<a class="sourceLine" id="cb105-6" data-line-number="6"><span class="op">---</span></a></code></pre></div>
+</div>
+<div id="sintaxis-básica" class="section level3">
+<h3><span class="header-section-number">1.10.3</span> Sintaxis básica</h3>
+<p>Énfasis sobre el texto,</p>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb106-1" data-line-number="1"><span class="op">*</span>italic<span class="op">*</span><span class="st">   </span><span class="er">**</span>bold<span class="op">**</span></a>
+<a class="sourceLine" id="cb106-2" data-line-number="2">_italic_   __bold__</a></code></pre></div>
+<p>Secciones,</p>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb107-1" data-line-number="1"><span class="co"># Header 1</span></a>
+<a class="sourceLine" id="cb107-2" data-line-number="2"><span class="co">## Header 2</span></a>
+<a class="sourceLine" id="cb107-3" data-line-number="3"><span class="co">### Header 3</span></a></code></pre></div>
+<p>Items (viñetas) no ordenadas y ordenadas,</p>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb108-1" data-line-number="1"><span class="op">*</span><span class="st"> </span>Item <span class="dv">1</span></a>
+<a class="sourceLine" id="cb108-2" data-line-number="2"><span class="op">*</span><span class="st"> </span>Item <span class="dv">2</span></a>
+<a class="sourceLine" id="cb108-3" data-line-number="3">    <span class="op">+</span><span class="st"> </span>Item 2a</a>
+<a class="sourceLine" id="cb108-4" data-line-number="4">    <span class="op">+</span><span class="st"> </span>Item 2b</a>
+<a class="sourceLine" id="cb108-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb108-6" data-line-number="6"><span class="fl">1.</span> Item <span class="dv">1</span></a>
+<a class="sourceLine" id="cb108-7" data-line-number="7"><span class="fl">2.</span> Item <span class="dv">2</span></a>
+<a class="sourceLine" id="cb108-8" data-line-number="8"><span class="fl">3.</span> Item <span class="dv">3</span></a>
+<a class="sourceLine" id="cb108-9" data-line-number="9">    <span class="op">+</span><span class="st"> </span>Item 3a</a>
+<a class="sourceLine" id="cb108-10" data-line-number="10">    <span class="op">+</span><span class="st"> </span>Item 3b</a></code></pre></div>
+<p>Palabras clave con referencias web,</p>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb109-1" data-line-number="1">[linked phrase](http<span class="op">:</span><span class="er">//</span>example.com)</a></code></pre></div>
+<p>Imágenes simples o con titulo,</p>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb110-1" data-line-number="1"><span class="op">!</span>[](http<span class="op">:</span><span class="er">//</span>example.com<span class="op">/</span>logo.png)</a>
+<a class="sourceLine" id="cb110-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb110-3" data-line-number="3"><span class="op">!</span>[optional caption text](figures<span class="op">/</span>img.png)</a></code></pre></div>
+<p>Blockquotes</p>
+<blockquote>
+<p>It’s always better to give than to receive.</p>
+</blockquote>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb111-1" data-line-number="1">A friend once said<span class="op">:</span></a>
+<a class="sourceLine" id="cb111-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb111-3" data-line-number="3"><span class="er">&gt;</span><span class="st"> </span>It<span class="st">&#39;s always better to give than to receive.</span></a></code></pre></div>
+<p>Ecuaciones en linea y en párrafo,</p>
+<p>En linea <span class="math inline">\(\sum_i{x^2}\)</span> o en párrafo:</p>
+<p><span class="math display">\[\sum_i{x^2}\]</span></p>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb112-1" data-line-number="1"><span class="op">$</span>equation<span class="op">$</span></a>
+<a class="sourceLine" id="cb112-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb112-3" data-line-number="3"><span class="er">$$</span><span class="st"> </span>equation <span class="op">$</span><span class="er">$</span></a></code></pre></div>
+</div>
+<div id="tipos-de-documentos" class="section level3">
+<h3><span class="header-section-number">1.10.4</span> Tipos de documentos</h3>
+<ul>
+<li>beamer_presentation</li>
+<li>github_document</li>
+<li>html_document</li>
+<li>ioslides_presentation</li>
+<li>latex_document</li>
+<li>md_document</li>
+<li>odt_document</li>
+<li>pdf_document</li>
+<li>powerpoint_presentation</li>
+<li>rtf_document</li>
+<li>slidy_presentation</li>
+<li>word_document</li>
+</ul>
+</div>
+<div id="chunks" class="section level3">
+<h3><span class="header-section-number">1.10.5</span> Chunks</h3>
+<p>Los chunks son entornos que permiten incluir código en R dentro de las distintos tipos de documentos que genera Rmarkdown, los chunks inician con <code>```{r} y termina con ```</code>, también es posible introducir chunks en linea con el texto, esto se logra introduciendo</p>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb113-1" data-line-number="1">Texto ... <span class="st">`</span><span class="dt">r &lt;code&gt;</span><span class="st">`</span> ... texto</a></code></pre></div>
+<p>La parte {r} del chunk sirve para introducir las distintas opciones que va a contener ese chunk, las opciones disponibles son:</p>
+<ul>
+<li>echo (default = TRUE), muestra el código del chunk en la salida del documento</li>
+<li>eval (default = TRUE), corre el código del chunk</li>
+<li>message (default = TRUE), muestra los mensajes que genera el chunk</li>
+</ul>
+<p>Existen funciones útiles para mejorar las salidas de tablas, tales como xtable y kable de la librería knitr.</p>
+</div>
+</div>
+<div id="shiny" class="section level2">
+<h2><span class="header-section-number">1.11</span> Shiny</h2>
+<p>Shiny es una librería de RStudio orientada a crear aplicaciones web interactivas con R. Una vez instalada existen dos formas de crear una aplicación en Shiny.</p>
+<ol style="list-style-type: decimal">
+<li>Mediante un solo archivo denominando app.R</li>
+<li>Mediante dos archivos separados, el server.R y ui.R</li>
+</ol>
+<p>Se recomienda que en cualquiera de las dos alternativas, estos archivos estén contenidos en alguna carpeta. Existen dos partes esenciales al momento de definir una app en Shiny, el UI que es una función que define la interfaz de la aplicación y el Server que define una función con instrucciones sobre cómo construir y reconstruir los objetos R que se mostraran en la UI. La composición básica según las formas de aplicarlas son:</p>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb114-1" data-line-number="1"><span class="co"># app.R</span></a>
+<a class="sourceLine" id="cb114-2" data-line-number="2"><span class="kw">library</span>(shiny)</a>
+<a class="sourceLine" id="cb114-3" data-line-number="3">ui &lt;-<span class="st"> </span><span class="kw">fluidPage</span>(</a>
+<a class="sourceLine" id="cb114-4" data-line-number="4"><span class="kw">numericInput</span>(<span class="dt">inputId =</span> <span class="st">&quot;n&quot;</span>,</a>
+<a class="sourceLine" id="cb114-5" data-line-number="5"><span class="st">&quot;Sample size&quot;</span>, <span class="dt">value =</span> <span class="dv">25</span>),</a>
+<a class="sourceLine" id="cb114-6" data-line-number="6"><span class="kw">plotOutput</span>(<span class="dt">outputId =</span> <span class="st">&quot;hist&quot;</span>)</a>
+<a class="sourceLine" id="cb114-7" data-line-number="7">)</a>
+<a class="sourceLine" id="cb114-8" data-line-number="8">server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output) {</a>
+<a class="sourceLine" id="cb114-9" data-line-number="9">output<span class="op">$</span>hist &lt;-<span class="st"> </span><span class="kw">renderPlot</span>({</a>
+<a class="sourceLine" id="cb114-10" data-line-number="10"><span class="kw">hist</span>(<span class="kw">rnorm</span>(input<span class="op">$</span>n))</a>
+<a class="sourceLine" id="cb114-11" data-line-number="11">})</a>
+<a class="sourceLine" id="cb114-12" data-line-number="12">}</a>
+<a class="sourceLine" id="cb114-13" data-line-number="13"><span class="kw">shinyApp</span>(<span class="dt">ui =</span> ui, <span class="dt">server =</span> server)</a></code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb115-1" data-line-number="1"><span class="co"># ui.R</span></a>
+<a class="sourceLine" id="cb115-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb115-3" data-line-number="3"><span class="kw">fluidPage</span>(</a>
+<a class="sourceLine" id="cb115-4" data-line-number="4"><span class="kw">numericInput</span>(<span class="dt">inputId =</span> <span class="st">&quot;n&quot;</span>,</a>
+<a class="sourceLine" id="cb115-5" data-line-number="5"><span class="st">&quot;Sample size&quot;</span>, <span class="dt">value =</span> <span class="dv">25</span>),</a>
+<a class="sourceLine" id="cb115-6" data-line-number="6"><span class="kw">plotOutput</span>(<span class="dt">outputId =</span> <span class="st">&quot;hist&quot;</span>)</a>
+<a class="sourceLine" id="cb115-7" data-line-number="7">)</a>
+<a class="sourceLine" id="cb115-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb115-9" data-line-number="9"><span class="co"># server.R</span></a>
+<a class="sourceLine" id="cb115-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb115-11" data-line-number="11"><span class="cf">function</span>(input, output) {</a>
+<a class="sourceLine" id="cb115-12" data-line-number="12">output<span class="op">$</span>hist &lt;-<span class="st"> </span><span class="kw">renderPlot</span>({</a>
+<a class="sourceLine" id="cb115-13" data-line-number="13"><span class="kw">hist</span>(<span class="kw">rnorm</span>(input<span class="op">$</span>n))</a>
+<a class="sourceLine" id="cb115-14" data-line-number="14">})</a></code></pre></div>
+<div id="ui" class="section level3">
+<h3><span class="header-section-number">1.11.1</span> UI</h3>
+<p>Al ser UI la interfaz esta permite la interacción directa con el usuario, a estas se las denominan los entradas <span class="math inline">\(input\)</span>, las opciones de <em>input</em> son:</p>
+<ul>
+<li><strong>Botón de acción:</strong> actionButton(inputId, label, icon)</li>
+<li><strong>Enlace:</strong> actionLink(inputId, label, icon,)</li>
+<li><strong>Check box múltiple:</strong> checkboxGroupInput(inputId,label, choices, selected, inline)</li>
+<li><strong>Check box simple:</strong> checkboxInput(inputId, label,value)</li>
+<li><strong>Fecha:</strong> dateInput(inputId, label, value,min, max, format, startview,weekstart, language)</li>
+<li><strong>Rango de fecha:</strong> dateRangeInput(inputId, label,start, end, min, max, format,startview, weekstart, language,separator)</li>
+<li><strong>Cargar archivo:</strong> fileInput(inputId, label, multiple,accept)</li>
+<li><strong>Entrada numérica:</strong> numericInput(inputId, label, value,min, max, step)</li>
+<li><strong>Tipo contraseña:</strong> passwordInput(inputId, label,value)</li>
+<li><strong>Selección tipo botones:</strong> radioButtons(inputId, label,choices, selected, inline)</li>
+<li><strong>Seleccionable:</strong> selectInput(inputId, label, choices,selected, multiple, selectize,width, size)</li>
+<li><strong>Slider:</strong> sliderInput(inputId, label, min,max, value, step, round, format,locale, ticks, animate, * width,sep,pre, post)</li>
+<li><strong>Enviar</strong> submitButton(text, icon)</li>
+<li><strong>Entrada de texto</strong> textInput(inputId, label, value)</li>
+</ul>
+<p>Los inputs principalmente tienen dos argumentos el <strong>inputId</strong> que se refiere al identificador del input, este se utiliza en el server, y el <strong>label</strong> que es la etiqueta que aparece en la interfaz visual, estos inputs se asignan a algún objeto (xx&lt;-input()). En el server se tiene acceso al input mediante input$xx.</p>
+</div>
+<div id="server" class="section level3">
+<h3><span class="header-section-number">1.11.2</span> Server</h3>
+<p>En cuanto el server, este usa los distintos inputs para generar las salidas (outputs), las opciones de salidas disponibles son:</p>
+<ul>
+<li>DT::renderDataTable(expr, options,callback, escape, env, quoted)</li>
+<li>renderImage(expr, env, quoted,deleteFile)</li>
+<li>renderPlot(expr, width, height, res, …,env, quoted, func)</li>
+<li>renderPrint(expr, env, quoted, func,width)</li>
+<li>renderTable(expr,…, env, quoted, func)</li>
+<li>renderText(expr, env, quoted, func)</li>
+<li>renderUI(expr, env, quoted, func)</li>
+</ul>
+<p>Estos outputs “render” se asignan a un objeto y luego ellos deben ser incluidos dentro del UI con su correspondiente Output:</p>
+<ul>
+<li>dataTableOutput(outputId, icon, …)</li>
+<li>imageOutput(outputId, width, height,click, dblclick, hover, hoverDelay, inline,hoverDelayType, brush, clickId,hoverId)</li>
+<li>plotOutput(outputId, width, height, click,dblclick, hover, hoverDelay, inline,hoverDelayType, brush, clickId,hoverId)</li>
+<li>verbatimTextOutput(outputId)</li>
+<li>tableOutput(outputId)</li>
+<li>textOutput(outputId, container, inline)</li>
+<li>uiOutput(outputId, inline, container, …) y htmlOutput(outputId, inline, container, …)</li>
+</ul>
+</div>
+</div>
+<div id="ejercicios-propuestos" class="section level2">
+<h2><span class="header-section-number">1.12</span> Ejercicios Propuestos</h2>
+<ol style="list-style-type: decimal">
+<li>Crear una función que devuelva los <span class="math inline">\(k\)</span> primeros números primos</li>
+<li>Crear una función que calcule la mediana para tablas de frecuencias con intervalos de clases</li>
+<li>Crear una función que calcule los Quantiles para tablas de frecuencias con intervalos de clases</li>
+<li>Realice una función para el calculo del tamaño de muestra para el muestreo aleatorio simple, considere la media, el margen de error relativo y coeficientes de confianza.</li>
+<li>Crear una función que realice la prueba de independencia Chi-cuadrado</li>
+<li>Empleando la ENDSA muestre por año y departamento el porcentaje de personas que fuman</li>
+<li>Utilizando la base de datos del COVID-19 genere un gráfico de evolución de contagios, muertes y recuperados. Use los gráficos de origen</li>
+<li>Utilizando la base de datos del COVID-19 genere un gráfico de evolución de contagios, muertes y recuperados. Use ggplot</li>
+<li>Utilizando la encuesta 2018, genere un reporte que presente:
+<ul>
+<li>Total de población y viviendas por departamento y área</li>
+<li>Pobreza moderada por Departamento y área</li>
+<li>Indice de Gini por departamento</li>
+</ul></li>
+<li>Realice una función en Shiny empleando la base de datos electoral del <span class="math inline">\(20o\)</span> que permita ver los resultados por recinto, seleccionando, su país, departamento, municipio, recinto.</li>
+<li>Usando la EH 2018, determine el porcentaje de personas que sufrieron un Atraco (Robo a personas) en la vía pública en los últimos 12 meses.</li>
+</ol>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="scraping-web.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

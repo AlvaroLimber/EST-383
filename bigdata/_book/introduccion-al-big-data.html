@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Introduccion al Big Data | Big Data en R</title>
+  <meta name="description" content="Este libro esta destinado a la materia de Programación Estadística I de la carrera de Estadística de la Universidad Mayor de San Andres." />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Introduccion al Big Data | Big Data en R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Este libro esta destinado a la materia de Programación Estadística I de la carrera de Estadística de la Universidad Mayor de San Andres." />
+  <meta name="github-repo" content="alvarolimber/EST-383" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Introduccion al Big Data | Big Data en R" />
+  
+  <meta name="twitter:description" content="Este libro esta destinado a la materia de Programación Estadística I de la carrera de Estadística de la Universidad Mayor de San Andres." />
+  
+
+<meta name="author" content="Alvaro Chirino Gutierrez" />
+
+
+<meta name="date" content="2020-05-10" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="scraping-web.html"/>
+<link rel="next" href="big-data-en-r.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prefacio</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#audiencia"><i class="fa fa-check"></i>Audiencia</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#estructura-del-libro"><i class="fa fa-check"></i>Estructura del libro</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#software-y-acuerdos"><i class="fa fa-check"></i>Software y acuerdos</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#bases-de-datos"><i class="fa fa-check"></i>Bases de datos</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#agradecimiento"><i class="fa fa-check"></i>Agradecimiento</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="introR.html"><a href="introR.html"><i class="fa fa-check"></i><b>1</b> Introducción a R</a><ul>
+<li class="chapter" data-level="1.1" data-path="introR.html"><a href="introR.html#tipos-de-estructuras"><i class="fa fa-check"></i><b>1.1</b> Tipos de estructuras</a></li>
+<li class="chapter" data-level="1.2" data-path="introR.html"><a href="introR.html#loops-y-condiciones"><i class="fa fa-check"></i><b>1.2</b> Loops y condiciones</a></li>
+<li class="chapter" data-level="1.3" data-path="introR.html"><a href="introR.html#funciones"><i class="fa fa-check"></i><b>1.3</b> Funciones</a></li>
+<li class="chapter" data-level="1.4" data-path="introR.html"><a href="introR.html#importacion-de-datos"><i class="fa fa-check"></i><b>1.4</b> Importacion de datos</a></li>
+<li class="chapter" data-level="1.5" data-path="introR.html"><a href="introR.html#dataframe-y-exploración"><i class="fa fa-check"></i><b>1.5</b> Dataframe y exploración</a></li>
+<li class="chapter" data-level="1.6" data-path="introR.html"><a href="introR.html#estadística-descriptiva"><i class="fa fa-check"></i><b>1.6</b> Estadística descriptiva</a></li>
+<li class="chapter" data-level="1.7" data-path="introR.html"><a href="introR.html#muestreo-e-inferencia"><i class="fa fa-check"></i><b>1.7</b> Muestreo e inferencia</a></li>
+<li class="chapter" data-level="1.8" data-path="introR.html"><a href="introR.html#gráficos-de-origen"><i class="fa fa-check"></i><b>1.8</b> Gráficos de origen</a></li>
+<li class="chapter" data-level="1.9" data-path="introR.html"><a href="introR.html#ggplot"><i class="fa fa-check"></i><b>1.9</b> ggplot</a></li>
+<li class="chapter" data-level="1.10" data-path="introR.html"><a href="introR.html#r-markdown"><i class="fa fa-check"></i><b>1.10</b> R Markdown</a><ul>
+<li class="chapter" data-level="1.10.1" data-path="introR.html"><a href="introR.html#instalación"><i class="fa fa-check"></i><b>1.10.1</b> Instalación</a></li>
+<li class="chapter" data-level="1.10.2" data-path="introR.html"><a href="introR.html#yaml-header"><i class="fa fa-check"></i><b>1.10.2</b> YAML Header</a></li>
+<li class="chapter" data-level="1.10.3" data-path="introR.html"><a href="introR.html#sintaxis-básica"><i class="fa fa-check"></i><b>1.10.3</b> Sintaxis básica</a></li>
+<li class="chapter" data-level="1.10.4" data-path="introR.html"><a href="introR.html#tipos-de-documentos"><i class="fa fa-check"></i><b>1.10.4</b> Tipos de documentos</a></li>
+<li class="chapter" data-level="1.10.5" data-path="introR.html"><a href="introR.html#chunks"><i class="fa fa-check"></i><b>1.10.5</b> Chunks</a></li>
+</ul></li>
+<li class="chapter" data-level="1.11" data-path="introR.html"><a href="introR.html#shiny"><i class="fa fa-check"></i><b>1.11</b> Shiny</a><ul>
+<li class="chapter" data-level="1.11.1" data-path="introR.html"><a href="introR.html#ui"><i class="fa fa-check"></i><b>1.11.1</b> UI</a></li>
+<li class="chapter" data-level="1.11.2" data-path="introR.html"><a href="introR.html#server"><i class="fa fa-check"></i><b>1.11.2</b> Server</a></li>
+</ul></li>
+<li class="chapter" data-level="1.12" data-path="introR.html"><a href="introR.html#ejercicios-propuestos"><i class="fa fa-check"></i><b>1.12</b> Ejercicios Propuestos</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="scraping-web.html"><a href="scraping-web.html"><i class="fa fa-check"></i><b>2</b> Scraping Web</a><ul>
+<li class="chapter" data-level="2.1" data-path="scraping-web.html"><a href="scraping-web.html#pasos-para-la-recopilación-de-información"><i class="fa fa-check"></i><b>2.1</b> Pasos para la recopilación de información</a></li>
+<li class="chapter" data-level="2.2" data-path="scraping-web.html"><a href="scraping-web.html#tecnologías-de-diseminación-extracción-y-almacenamiento-web"><i class="fa fa-check"></i><b>2.2</b> Tecnologías de diseminación, extracción y almacenamiento Web</a></li>
+<li class="chapter" data-level="2.3" data-path="scraping-web.html"><a href="scraping-web.html#librerías-en-r"><i class="fa fa-check"></i><b>2.3</b> Librerías en R</a></li>
+<li class="chapter" data-level="2.4" data-path="scraping-web.html"><a href="scraping-web.html#librería-rvest"><i class="fa fa-check"></i><b>2.4</b> Librería rvest</a></li>
+<li class="chapter" data-level="2.5" data-path="scraping-web.html"><a href="scraping-web.html#ejemplo-ketal"><i class="fa fa-check"></i><b>2.5</b> Ejemplo: Ketal</a></li>
+<li class="chapter" data-level="2.6" data-path="scraping-web.html"><a href="scraping-web.html#ejemplo-ministerio-de-educación"><i class="fa fa-check"></i><b>2.6</b> Ejemplo: Ministerio de Educación</a></li>
+<li class="chapter" data-level="2.7" data-path="scraping-web.html"><a href="scraping-web.html#apis"><i class="fa fa-check"></i><b>2.7</b> APIs</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="scraping-web.html"><a href="scraping-web.html#api-banco-mundial"><i class="fa fa-check"></i><b>2.7.1</b> API Banco Mundial</a></li>
+<li class="chapter" data-level="2.7.2" data-path="scraping-web.html"><a href="scraping-web.html#api-google-trends"><i class="fa fa-check"></i><b>2.7.2</b> API Google trends</a></li>
+<li class="chapter" data-level="2.7.3" data-path="scraping-web.html"><a href="scraping-web.html#api-google-maps"><i class="fa fa-check"></i><b>2.7.3</b> API Google Maps</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="scraping-web.html"><a href="scraping-web.html#ejercicios-propuestos-1"><i class="fa fa-check"></i><b>2.8</b> Ejercicios Propuestos</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="introduccion-al-big-data.html"><a href="introduccion-al-big-data.html"><i class="fa fa-check"></i><b>3</b> Introduccion al Big Data</a><ul>
+<li class="chapter" data-level="3.1" data-path="introduccion-al-big-data.html"><a href="introduccion-al-big-data.html#definiendo-al-big-data"><i class="fa fa-check"></i><b>3.1</b> Definiendo al Big Data</a></li>
+<li class="chapter" data-level="3.2" data-path="introduccion-al-big-data.html"><a href="introduccion-al-big-data.html#las-5-v-en-el-big-data"><i class="fa fa-check"></i><b>3.2</b> Las 5 V en el Big Data</a></li>
+<li class="chapter" data-level="3.3" data-path="introduccion-al-big-data.html"><a href="introduccion-al-big-data.html#ciclo-de-vida-de-un-proyecto-de-análisis-de-datos"><i class="fa fa-check"></i><b>3.3</b> Ciclo de vida de un proyecto de análisis de datos</a></li>
+<li class="chapter" data-level="3.4" data-path="introduccion-al-big-data.html"><a href="introduccion-al-big-data.html#inferencia-y-big-data"><i class="fa fa-check"></i><b>3.4</b> Inferencia y Big Data</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="introduccion-al-big-data.html"><a href="introduccion-al-big-data.html#descriptivo"><i class="fa fa-check"></i><b>3.4.1</b> Descriptivo</a></li>
+<li class="chapter" data-level="3.4.2" data-path="introduccion-al-big-data.html"><a href="introduccion-al-big-data.html#causal"><i class="fa fa-check"></i><b>3.4.2</b> Causal</a></li>
+<li class="chapter" data-level="3.4.3" data-path="introduccion-al-big-data.html"><a href="introduccion-al-big-data.html#predictivo"><i class="fa fa-check"></i><b>3.4.3</b> Predictivo</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="introduccion-al-big-data.html"><a href="introduccion-al-big-data.html#calidad-de-dato-y-big-data"><i class="fa fa-check"></i><b>3.5</b> Calidad de dato y Big Data</a></li>
+<li class="chapter" data-level="3.6" data-path="introduccion-al-big-data.html"><a href="introduccion-al-big-data.html#captura-y-preservación"><i class="fa fa-check"></i><b>3.6</b> Captura y preservación</a></li>
+<li class="chapter" data-level="3.7" data-path="introduccion-al-big-data.html"><a href="introduccion-al-big-data.html#análisis-y-modelado"><i class="fa fa-check"></i><b>3.7</b> Análisis y modelado</a></li>
+<li class="chapter" data-level="3.8" data-path="introduccion-al-big-data.html"><a href="introduccion-al-big-data.html#inferencia-y-ética"><i class="fa fa-check"></i><b>3.8</b> Inferencia y ética</a></li>
+<li class="chapter" data-level="3.9" data-path="introduccion-al-big-data.html"><a href="introduccion-al-big-data.html#ejercicios-propuestos-2"><i class="fa fa-check"></i><b>3.9</b> Ejercicios Propuestos</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="big-data-en-r.html"><a href="big-data-en-r.html"><i class="fa fa-check"></i><b>4</b> Big Data en R</a><ul>
+<li class="chapter" data-level="4.1" data-path="big-data-en-r.html"><a href="big-data-en-r.html#limitaciones-en-r"><i class="fa fa-check"></i><b>4.1</b> Limitaciones en R</a></li>
+<li class="chapter" data-level="4.2" data-path="big-data-en-r.html"><a href="big-data-en-r.html#a-los-límites-de-la-memoria-y-más-allá"><i class="fa fa-check"></i><b>4.2</b> A los límites de la memoria y más allá</a></li>
+<li class="chapter" data-level="4.3" data-path="big-data-en-r.html"><a href="big-data-en-r.html#parallel-r"><i class="fa fa-check"></i><b>4.3</b> Parallel R</a></li>
+<li class="chapter" data-level="4.4" data-path="big-data-en-r.html"><a href="big-data-en-r.html#aumento-del-rendimiento-de-r-con-la-libreria-data.table-y-otras-herramientas"><i class="fa fa-check"></i><b>4.4</b> Aumento del rendimiento de R con la libreria data.table y otras herramientas</a></li>
+<li class="chapter" data-level="4.5" data-path="big-data-en-r.html"><a href="big-data-en-r.html#ejercicios-propuestos-3"><i class="fa fa-check"></i><b>4.5</b> Ejercicios Propuestos</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="r-y-spark.html"><a href="r-y-spark.html"><i class="fa fa-check"></i><b>5</b> R y Spark</a><ul>
+<li class="chapter" data-level="5.1" data-path="r-y-spark.html"><a href="r-y-spark.html#introducción"><i class="fa fa-check"></i><b>5.1</b> Introducción</a></li>
+<li class="chapter" data-level="5.2" data-path="r-y-spark.html"><a href="r-y-spark.html#arrancando-spark"><i class="fa fa-check"></i><b>5.2</b> Arrancando Spark</a></li>
+<li class="chapter" data-level="5.3" data-path="r-y-spark.html"><a href="r-y-spark.html#análisis-con-spark"><i class="fa fa-check"></i><b>5.3</b> Análisis con Spark</a></li>
+<li class="chapter" data-level="5.4" data-path="r-y-spark.html"><a href="r-y-spark.html#ejercicios-propuestos-4"><i class="fa fa-check"></i><b>5.4</b> Ejercicios Propuestos</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Big Data en R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="introduccion-al-big-data" class="section level1">
+<h1><span class="header-section-number">Chapter 3</span> Introduccion al Big Data</h1>
+<div id="definiendo-al-big-data" class="section level2">
+<h2><span class="header-section-number">3.1</span> Definiendo al Big Data</h2>
+<p>De forma simple el Big Data se define como:</p>
+<p><strong>DATA&gt;RAM</strong></p>
+<p>O de forma mas literal “cualquier cosa demasiado grande para caber en su computadora.”</p>
+<p>La Asociación Americana de Investigación de Opinión Pública menciona: “El término” Big Data “es una descripción imprecisa de un conjunto rico y complicado de características, prácticas, técnicas, cuestiones éticas y resultados, todos asociados con los datos”.</p>
+</div>
+<div id="las-5-v-en-el-big-data" class="section level2">
+<h2><span class="header-section-number">3.2</span> Las 5 V en el Big Data</h2>
+<ul>
+<li>Velocidad</li>
+<li>Volumen</li>
+<li>Valor</li>
+<li>Variedad</li>
+<li>Veracidad</li>
+</ul>
+</div>
+<div id="ciclo-de-vida-de-un-proyecto-de-análisis-de-datos" class="section level2">
+<h2><span class="header-section-number">3.3</span> Ciclo de vida de un proyecto de análisis de datos</h2>
+<p>Se pueden identificar 4 fases:</p>
+<ol style="list-style-type: decimal">
+<li>Clarify: (Clarificar) Llegar a familiarizarse con los datos</li>
+<li>Develop: (Desarrollar) Crear un modelop de trabajo</li>
+<li>Productize: (Producir) Automatizar e integrar</li>
+<li>Publish: (Publicar) Socializar</li>
+</ol>
+<p>Estas fases pueden contener nodos adicionales según el proyecto:</p>
+<ol start="0" style="list-style-type: decimal">
+<li>Subset: Extraer los datos a explorar, los datos de trabajo</li>
+<li>Clarify: (Clarificar) Llegar a familiarizarse con los datos</li>
+<li>Develop: (Desarrollar) Crear un modelop de trabajo
+*. Scale Up: Generalizar a la base de datos completa</li>
+<li>Productize: (Producir) Automatizar e integrar</li>
+<li>Publish: (Publicar) Socializar</li>
+</ol>
+<p>Otros ciclos de trabajo puedes ser:</p>
+<ol style="list-style-type: decimal">
+<li>Identificar el problema</li>
+<li>Diseño del requerimiento de datos</li>
+<li>Procesar los datos</li>
+<li>Desarrollo del analisis sobre los datos</li>
+<li>Vizualizar los datos</li>
+</ol>
+</div>
+<div id="inferencia-y-big-data" class="section level2">
+<h2><span class="header-section-number">3.4</span> Inferencia y Big Data</h2>
+<p>El objetivo de la inferencia es poder decir algo de la población objetivo a partir de la información disponibles. Se debe tener en cuenta los tipos de estudio provenientes; ya sean de encuestas probabilísticas, diseño experimentales o estudios de observación. Se debe estar seguro de la calidad de la base de datos proveniente, ya sean estos los errores de muestreo, procesos de calibración, ponderacion, post estratificación en el caso de muestreo o el el propensity score y la estratificacion principal para repara diseño experimentales rotos.</p>
+<p>Se puede distinguir tres metas en el proceso de inferencia:</p>
+<ul>
+<li>Descriptivo</li>
+<li>Causal</li>
+<li>Predictivo</li>
+</ul>
+<div id="descriptivo" class="section level3">
+<h3><span class="header-section-number">3.4.1</span> Descriptivo</h3>
+<p>La estadística descriptiva puede ser; (1) a un nivel simple de descripción de una base de datos sin la búsqueda de querer expandir los resultados (registros administrativos, censos, estudios de observación) o (2) para encuestas probabilisticas, realizar las estimaciones de la muestra con sus respectivos errores muestrales y a partir de estas estimaciones describir a la población</p>
+<blockquote>
+<p><strong>Ejemplo:</strong> El INE estima a partir de la EH-2018 que la incidencia de pobreza moderadara en Bolivia para el 2018 alcanza el …%</p>
+</blockquote>
+<p>Ejemplos como este muestra que el proposito es puramente descriptivo en cuanto a la pobreza.</p>
+</div>
+<div id="causal" class="section level3">
+<h3><span class="header-section-number">3.4.2</span> Causal</h3>
+<p>Muchos investigadores buscan explorar hipotesis, aveces originadas en la teoria o en alguna relación observada de forma empírica, con la idea central de permitir la inferencia causal.</p>
+<p>La data para esto proviene de diseños experimentales o fuertes estudios no experimentales (cuasi-experimentales), el interés de estos estudios es principalmente encontrar el efecto de de una variable entre otra.</p>
+<p><span class="math display">\[X \rightarrow Y\]</span>
+Aspecto que es logrado facilmente mediante los diseños experimentales. En este tipo de estudio el componente descriptvo no es tan importante como el metodo para identificar la causalidad. Es importante diferenciar en este punto <em>la causalidad de la correlación</em>.</p>
+<blockquote>
+<p><strong>Ejemplo:</strong> (3ie) Este informe se basa en un estudio de Dupas, Duflo y Kremer que se realizó en colaboración con el gobierno de Ghana. El estudio examinó los impactos a mediano plazo de otorgar becas de cuatro años a estudiantes que no podían matricularse en escuelas secundarias superiores (SHS) debido a limitaciones financieras. Los investigadores encontraron que el programa de becas tuvo un impacto significativo en el logro educativo y las habilidades cognitivas, particularmente entre las niñas. El programa también tuvo un mayor impacto en las tasas de finalización de SHS de las niñas en términos porcentuales.</p>
+</blockquote>
+<blockquote>
+<p><strong>Ejemplo:</strong> UDAPE el 2013 realizó el calculo del impacto de la renta dignidad en Bolivia empleando el método de regresión discontinua un método cuasi-experimental.</p>
+</blockquote>
+<p>Una de las debilidades principales de estos estudios es la falta o poca de validez externa, es decir, es dificil poder generalizar los resultados.</p>
+</div>
+<div id="predictivo" class="section level3">
+<h3><span class="header-section-number">3.4.3</span> Predictivo</h3>
+<p>El pronóstico o predicción tiene un rol diferenciado según la ciencia de aplicación, teniendo un rol significativo dentro de las estadística oficiales, principalmente en lo social (proyecciones poblacionales) y económico (indicadores macroeconómicos), principalmente para hacedores de política, gobernates y empresarios. Similar a
+En la configuración de inferencia causal, es de suma importancia que conozcamos el proceso que generó los datos, y podemos descartar cualquier mecanismo de selección sistemática desconocido o no observado.</p>
+<blockquote>
+<p><strong>Ejemplo:</strong> El Institute of Global Health, Faculty of Medicine, University of Geneva tiene una página web que realiza pronosticos por país para los casos de COVID-19. <img src="https://renkulab.shinyapps.io/COVID-19-Epidemic-Forecasting/" alt="Enlace" /></p>
+</blockquote>
+</div>
+</div>
+<div id="calidad-de-dato-y-big-data" class="section level2">
+<h2><span class="header-section-number">3.5</span> Calidad de dato y Big Data</h2>
+</div>
+<div id="captura-y-preservación" class="section level2">
+<h2><span class="header-section-number">3.6</span> Captura y preservación</h2>
+</div>
+<div id="análisis-y-modelado" class="section level2">
+<h2><span class="header-section-number">3.7</span> Análisis y modelado</h2>
+</div>
+<div id="inferencia-y-ética" class="section level2">
+<h2><span class="header-section-number">3.8</span> Inferencia y ética</h2>
+</div>
+<div id="ejercicios-propuestos-2" class="section level2">
+<h2><span class="header-section-number">3.9</span> Ejercicios Propuestos</h2>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="scraping-web.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="big-data-en-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
