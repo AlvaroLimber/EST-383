@@ -1,0 +1,5 @@
+"0","res <- gtrends(""Coronavirus"", geo = c(""BO""))
+"
+"2","Error in FUN(X[[i]], ...) : 
+  Status code was not 200. Returned status code:401
+"

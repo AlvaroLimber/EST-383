@@ -1,0 +1,30 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+# Ejercicio, Evalue la posibilidad de calcular la inflación usando 
+información proveniente del internet, para Bolivia.
+
+```{r}
+library(rvest)
+#paso 0: Estadísticas del covid-19 en Bolivia
+#paso 1: cargar la www de interés
+bs<-read_html("https://www.boliviasegura.gob.bo/")
+ww<-read_html("https://www.worldometers.info/coronavirus/")
+#paso 2: Raspar la información de interés
+node0<-html_nodes(bs,"h1")
+node1<-html_text(node0)
+node2<-as.numeric(node1) 
+barplot(node2,legend.text = c("Confirmados","Recuperados","Muertes"))
+
+aux<-html_nodes(bs,".mapanuevos")
+#paso 3: trabajando con tablas
+tabla<-html_table(bs,fill = T)
+tabla[[2]]
+#paso 4: limpieza
+#paso 5: Análisis
+```
+
+#Ejercicio 1: Usar la informacion de worldometers y generar un gráfico de contagios por millon de los distintos paises.
+

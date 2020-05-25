@@ -54,7 +54,7 @@ df<-read.csv.ffdf("2018.csv")
 
 ## Parallel R
 
-```{r,eval=F}
+```{r}
 #install.packages("parallel")
 library()
 ```

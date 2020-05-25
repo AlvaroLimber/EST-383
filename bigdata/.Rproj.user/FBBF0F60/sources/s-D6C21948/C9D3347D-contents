@@ -1,3 +1,60 @@
+--- 
+title: "Big Data en R"
+subtitle: "EST-383"
+author: "Alvaro Chirino Gutierrez"
+description: "Este libro esta destinado a la materia de Programación Estadística I de la carrera de Estadística de la Universidad Mayor de San Andres."
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+graphics: yes
+github-repo: alvarolimber/EST-383
+bibliography: book.bib
+nocite: '@*'
+pandoc_args: ["-Fpandoc-crossref"]
+---
+
+# Prefacio {-}
+
+Placeholder
+
+
+## Audiencia  {-}
+## Estructura del libro  {-}
+## Software y acuerdos {-}
+## Bases de datos {-}
+## Agradecimiento  {-}
+
+<!--chapter:end:index.Rmd-->
+
+
+# Introducción a R {#introR}
+
+Placeholder
+
+
+## Tipos de estructuras
+## Loops y condiciones
+## Funciones
+## Importacion de datos
+## Dataframe y exploración
+## Estadística descriptiva
+## Muestreo e inferencia
+## Gráficos de origen
+## ggplot
+## R Markdown 
+### Instalación
+### YAML Header
+### Sintaxis básica
+### Tipos de documentos
+### Chunks
+## Shiny 
+### UI
+### Server
+## Ejercicios Propuestos
+
+<!--chapter:end:1_introR.Rmd-->
+
 # Scraping Web
 
 La definición del scraping web que se toma en este documento proviene de [@Mitchell2015] que expresa:
@@ -216,3 +273,71 @@ google_map(key = map_key,location = c(-16.5030161,-68.1292566),zoom = 8) %>% add
 3. Armar una base de datos en base a la página https://www.infocasas.com.bo
 4. Explorar librarias API con acceso a Youtube y encontrar los 10 videos con más visualizaciones que incluyan a Bolivia en su titulo.
 5. Explorar la libraria gtrendsR y explorar en que meses en Bolivia es mas frecuente la búsqueda de 
+
+<!--chapter:end:2_scraping.Rmd-->
+
+
+# Introduccion al Big Data
+
+Placeholder
+
+
+## Definiendo al Big Data
+## Las 5 V en el Big Data
+## Ciclo de vida de un proyecto de análisis de datos
+## Inferencia y Big Data
+### Descriptivo
+### Causal
+### Predictivo
+## Calidad de dato y Big Data
+## Captura y preservación
+### Fuentes convencionales
+### Datos web y APIs
+### Record Linkage
+### Bases de datos
+### Programando con Big Data
+## Análisis y modelado
+### Machine learning
+### Análisis de texto
+### Networks
+## Inferencia y ética
+### Información y visualización
+### Error e inferencia
+### Privacidad y confidencialidad
+### Workbooks
+## Ejercicios Propuestos
+
+<!--chapter:end:3_introBD.Rmd-->
+
+
+# Big Data en R (Descubriendo el poder dentro de R)
+
+Placeholder
+
+
+## Limitaciones en R
+### Memoria
+### Velocidad de procesamiento
+## A los límites de la memoria y más allá
+### Transformacion y agregacion de datos con la libraria ff y ffbase 
+### Modelogs GLM con la las librerias ff y ffbase
+### Expandiendo la memoria con la libreria bigmemory
+## Parallel R
+## Aumento del rendimiento de R con la libreria data.table y otras herramientas
+## Ejercicios Propuestos
+
+<!--chapter:end:4_BDinR.Rmd-->
+
+
+# R y Spark
+
+## Introducción
+
+## Arrancando Spark
+
+## Análisis con Spark
+
+## Ejercicios Propuestos
+
+<!--chapter:end:5_RandSpark.Rmd-->
+
