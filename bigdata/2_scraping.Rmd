@@ -148,6 +148,28 @@ k<-k+1
 write.xlsx(bd,"ue2017.xlsx",row.names = F)
 ```
 
+## Ejemplo, informacion COVID-19 en Bolivia
+
+```{r}
+library(rvest)
+#paso 0: Estadísticas del covid-19 en Bolivia
+#paso 1: cargar la www de interés
+bs<-read_html("https://www.boliviasegura.gob.bo/")
+ww<-read_html("https://www.worldometers.info/coronavirus/")
+#paso 2: Raspar la información de interés
+node0<-html_nodes(bs,"h1")
+node1<-html_text(node0)
+node2<-as.numeric(node1) 
+barplot(node2,legend.text = c("Confirmados","Recuperados","Muertes"))
+
+aux<-html_nodes(bs,".mapanuevos")
+#paso 3: trabajando con tablas
+tabla<-html_table(bs,fill = T)
+tabla[[2]]
+#paso 4: limpieza
+#paso 5: Análisis
+```
+
 ## APIs
 
 Conocida también por la sigla API,"application programming interface", es un conjunto de subrutinas, funciones y procedimientos (o métodos, en la programación orientada a objetos) que ofrece cierta biblioteca para ser utilizado por otro software. Ofrece una entrada a los datos que distribuye el API.
@@ -216,3 +238,4 @@ google_map(key = map_key,location = c(-16.5030161,-68.1292566),zoom = 8) %>% add
 3. Armar una base de datos en base a la página https://www.infocasas.com.bo
 4. Explorar librarias API con acceso a Youtube y encontrar los 10 videos con más visualizaciones que incluyan a Bolivia en su titulo.
 5. Explorar la libraria gtrendsR y explorar en que meses en Bolivia es mas frecuente la búsqueda de 
+6. Usar la informacion de worldometers y generar un gráfico de contagios por millon de los distintos paises.
