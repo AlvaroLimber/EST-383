@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1590718601559.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2920058128",
+    "id" : "83FE3C4D",
+    "lastKnownWriteTime" : 1590718707,
+    "last_content_update" : 1590718707716,
+    "path" : "~/GitHub/EST-383/bigdata/2_scraping.Rmd",
+    "project_path" : "2_scraping.Rmd",
+    "properties" : {
+        "cursorPosition" : "32,12",
+        "scrollLine" : "27"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

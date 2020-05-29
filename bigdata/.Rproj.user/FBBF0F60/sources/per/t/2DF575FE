@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1590718580978.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "501008279",
+    "id" : "2DF575FE",
+    "lastKnownWriteTime" : 1589163994,
+    "last_content_update" : 1589163994,
+    "path" : "~/GitHub/EST-383/bigdata/3_introBD.Rmd",
+    "project_path" : "3_introBD.Rmd",
+    "properties" : {
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

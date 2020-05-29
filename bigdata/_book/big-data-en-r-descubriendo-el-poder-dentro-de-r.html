@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Big Data en R</title>
+  <title>Chapter 4 Big Data en R (Descubriendo el poder dentro de R) | Big Data en R</title>
   <meta name="description" content="Este libro esta destinado a la materia de Programación Estadística I de la carrera de Estadística de la Universidad Mayor de San Andres." />
   <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Big Data en R" />
+  <meta property="og:title" content="Chapter 4 Big Data en R (Descubriendo el poder dentro de R) | Big Data en R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="alvarolimber/EST-383" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Big Data en R" />
+  <meta name="twitter:title" content="Chapter 4 Big Data en R (Descubriendo el poder dentro de R) | Big Data en R" />
   
   <meta name="twitter:description" content="Este libro esta destinado a la materia de Programación Estadística I de la carrera de Estadística de la Universidad Mayor de San Andres." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="acerca-del-autor.html"/>
+<link rel="prev" href="introduccion-al-big-data.html"/>
+<link rel="next" href="r-y-spark.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -240,79 +240,65 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Big Data en R</h1>
-<h2 class="subtitle"><em>EST-383</em></h2>
-<p class="author"><em>Alvaro Chirino Gutierrez</em></p>
-<p class="date"><em>2020-05-28</em></p>
+<div id="big-data-en-r-descubriendo-el-poder-dentro-de-r" class="section level1">
+<h1><span class="header-section-number">Chapter 4</span> Big Data en R (Descubriendo el poder dentro de R)</h1>
+<p>R en un software que se adapta perfectamente con las fases del ciclo de vida de los proyectos de datos, ofreciendo herramientas para cada una de ellas; Entre las mas interesantes, R Markdown, Shiny, sweave, etc.</p>
+<p>Adicionalmente existen multiples librerias que permite trabajar con otros software, principalmente los asociados a bases de datos.</p>
+<p><img src="images/r1.png" /></p>
+<p>En el capitulo 1 se enfatiza el uso de R para el manejo, procesamiento y análisis de bases de datos, sumado a esto el conocimiento de distintas estadísticas en base a los cursos de formación, en este capitulo se buscar unir ambos topicos y explicar como usar el poder del modelado matematico y de datos en R, considerando bases de datos <strong>grandes</strong>, esto sin necesidad de recurrir a otros equipos.</p>
+<p>Lo que se espera a partir de este capitulo es:</p>
+<ul>
+<li>Conocer las limitaciones de R para el Big Data y como ellas pueden resolverse</li>
+<li>El uso de las librerias ff, ffbase, ffbase2, y bigmemory, para el manejo de la memoria del equipo</li>
+<li>El uso de metodos estadisticos para objetos grandes en R, atraves de las librerias bigglm y ffbase</li>
+<li>Mejorar la velocidad del procesamiento de datos con librerias que permiten la computación paralela (parallel computing)</li>
+<li>Manipulación de datos más rápidos con el uso de la libreria data.table</li>
+</ul>
+<div id="limitaciones-en-r" class="section level2">
+<h2><span class="header-section-number">4.1</span> Limitaciones en R</h2>
+<p>A manera que uno va aprendiendo mas del R en la universidad o en el trabajo se valora cada vez mas la flexibilidad de R, su constante crecimiento, la ventaja de ser de codigo abierto, etc. Sin embargo, es importante tener en cuenta las limitaciones de R:</p>
+<ul>
+<li>Los datos se ajustan a la RAM</li>
+<li>R es generalmente muy lento comparado con otros lenguajes</li>
+</ul>
+<div id="memoria" class="section level3">
+<h3><span class="header-section-number">4.1.1</span> Memoria</h3>
 </div>
-<div id="prefacio" class="section level1 unnumbered">
-<h1>Prefacio</h1>
-<p><a href="https://www.crcpress.com/product/isbn/9781138700109" target="_blank"><img src="images/cover.png" style="display: block; margin: auto;" /></a></p>
-<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />Este documento de <a href="https://twiiter/alvarochirinog">Alvaro Chirino</a> esta bajo la licencia de <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.</p>
-<div id="audiencia" class="section level2 unnumbered">
-<h2>Audiencia</h2>
-<p>El libro fue diseñado originalmente para los estudiantes de la materia de Programación Estadística I, una materia optativa del pregrado de la carrera de Estadística de la Universidad Mayor de San Andres.</p>
-<p>Este documento representa un primer acercamiento a los estudiantes de estadistica al software R y al mundo del Big Data.</p>
+<div id="velocidad-de-procesamiento" class="section level3">
+<h3><span class="header-section-number">4.1.2</span> Velocidad de procesamiento</h3>
 </div>
-<div id="estructura-del-libro" class="section level2 unnumbered">
-<h2>Estructura del libro</h2>
-<p>El libro inluye 5 capitulos, estos son:</p>
-<ol style="list-style-type: decimal">
-<li>Introducción a R</li>
-<li>Scraping Web en R</li>
-<li>Introducción al Big Data</li>
-<li>Big Data en R</li>
-<li>R y Spark</li>
-</ol>
 </div>
-<div id="software-y-acuerdos" class="section level2 unnumbered">
-<h2>Software y acuerdos</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">sessionInfo</span>()</a></code></pre></div>
-<pre><code>## R version 4.0.0 (2020-04-24)
-## Platform: x86_64-w64-mingw32/x64 (64-bit)
-## Running under: Windows 10 x64 (build 18363)
-## 
-## Matrix products: default
-## 
-## locale:
-## [1] LC_COLLATE=Spanish_Bolivia.1252  LC_CTYPE=Spanish_Bolivia.1252   
-## [3] LC_MONETARY=Spanish_Bolivia.1252 LC_NUMERIC=C                    
-## [5] LC_TIME=Spanish_Bolivia.1252    
-## 
-## attached base packages:
-## [1] tools     stats     graphics  grDevices utils     datasets 
-## [7] methods   base     
-## 
-## other attached packages:
-## [1] rvest_0.3.5         xml2_1.3.2          xtable_1.8-4       
-## [4] packagefinder_0.2.1 knitr_1.28         
-## 
-## loaded via a namespace (and not attached):
-##  [1] Rcpp_1.0.4.6        rstudioapi_0.11     magrittr_1.5       
-##  [4] R6_2.4.1            rlang_0.4.5         stringr_1.4.0      
-##  [7] httr_1.4.1          packrat_0.5.0       xfun_0.13          
-## [10] selectr_0.4-2       htmltools_0.4.0     yaml_2.2.1         
-## [13] digest_0.6.25       crayon_1.3.4        bookdown_0.18      
-## [16] htmlwidgets_1.5.1   curl_4.3            evaluate_0.14      
-## [19] rmarkdown_2.1       stringi_1.4.6       compiler_4.0.0     
-## [22] formattable_0.2.0.1 jsonlite_1.6.1</code></pre>
+<div id="a-los-límites-de-la-memoria-y-más-allá" class="section level2">
+<h2><span class="header-section-number">4.2</span> A los límites de la memoria y más allá</h2>
+<div id="transformacion-y-agregacion-de-datos-con-la-libraria-ff-y-ffbase" class="section level3">
+<h3><span class="header-section-number">4.2.1</span> Transformacion y agregacion de datos con la libraria ff y ffbase</h3>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb129-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;ff&quot;</span>)</a>
+<a class="sourceLine" id="cb129-2" title="2"><span class="kw">install.packages</span>(<span class="st">&quot;ffbase&quot;</span>)</a>
+<a class="sourceLine" id="cb129-3" title="3"><span class="kw">install.packages</span>(<span class="st">&quot;ffbase2&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb130-1" title="1"><span class="kw">library</span>(ff)</a>
+<a class="sourceLine" id="cb130-2" title="2"><span class="kw">library</span>(ffbase)</a>
+<a class="sourceLine" id="cb130-3" title="3"><span class="kw">setwd</span>(<span class="st">&quot;C:</span><span class="ch">\\</span><span class="st">Users</span><span class="ch">\\</span><span class="st">ALVARO</span><span class="ch">\\</span><span class="st">Desktop</span><span class="ch">\\</span><span class="st">db_bolivia</span><span class="ch">\\</span><span class="st">bigdata&quot;</span>)</a>
+<a class="sourceLine" id="cb130-4" title="4"><span class="kw">system</span>(<span class="st">&quot;mkdir ffdf&quot;</span>)</a>
+<a class="sourceLine" id="cb130-5" title="5">df&lt;-<span class="kw">read.csv.ffdf</span>(<span class="st">&quot;2018.csv&quot;</span>)</a></code></pre></div>
 </div>
-<div id="bases-de-datos" class="section level2 unnumbered">
-<h2>Bases de datos</h2>
-<p>En este documento se emplearan 4 bases de datos del contecto Boliviano:</p>
-<ol style="list-style-type: decimal">
-<li>Encuesta a Hogares 2018. Vivienda y Personas</li>
-<li>Encuesta de Demografia y Salud 1989 - 2008</li>
-<li>Encuesta de Niños, niñas y adolescentes 2016</li>
-<li>Computo oficial de las elecciones del 20 de Octubre de 2020</li>
-<li>Bases de datos de contagios, muertes y recpurados del COVID-19 del Johns Hopkins Institute.</li>
-</ol>
-<p>Estas bases de datos se encuentran disponibles en formato <span class="math inline">\(.RData\)</span> en el repositorio de Github del texto.</p>
+<div id="modelogs-glm-con-la-las-librerias-ff-y-ffbase" class="section level3">
+<h3><span class="header-section-number">4.2.2</span> Modelogs GLM con la las librerias ff y ffbase</h3>
 </div>
-<div id="agradecimiento" class="section level2 unnumbered">
-<h2>Agradecimiento</h2>
-<p>Eponine…</p>
+<div id="expandiendo-la-memoria-con-la-libreria-bigmemory" class="section level3">
+<h3><span class="header-section-number">4.2.3</span> Expandiendo la memoria con la libreria bigmemory</h3>
+</div>
+</div>
+<div id="parallel-r" class="section level2">
+<h2><span class="header-section-number">4.3</span> Parallel R</h2>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb131-1" title="1"><span class="co">#install.packages(&quot;parallel&quot;)</span></a>
+<a class="sourceLine" id="cb131-2" title="2"><span class="kw">library</span>()</a></code></pre></div>
+</div>
+<div id="aumento-del-rendimiento-de-r-con-la-libreria-data.table-y-otras-herramientas" class="section level2">
+<h2><span class="header-section-number">4.4</span> Aumento del rendimiento de R con la libreria data.table y otras herramientas</h2>
+</div>
+<div id="ejercicios-propuestos-3" class="section level2">
+<h2><span class="header-section-number">4.5</span> Ejercicios Propuestos</h2>
+
 </div>
 </div>
             </section>
@@ -320,8 +306,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-
-<a href="acerca-del-autor.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="introduccion-al-big-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="r-y-spark.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

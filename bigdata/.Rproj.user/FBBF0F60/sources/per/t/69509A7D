@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1590718563224.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "222393058",
+    "id" : "69509A7D",
+    "lastKnownWriteTime" : 1590718591,
+    "last_content_update" : 1590718591812,
+    "path" : "~/GitHub/EST-383/bigdata/4_BDinR.Rmd",
+    "project_path" : "4_BDinR.Rmd",
+    "properties" : {
+        "chunk_output_type" : "console",
+        "cursorPosition" : "0,0",
+        "scrollLine" : "0"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
