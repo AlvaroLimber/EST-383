@@ -5,13 +5,16 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "501008279",
+    "hash" : "2570862668",
     "id" : "2DF575FE",
-    "lastKnownWriteTime" : 1589163994,
-    "last_content_update" : 1589163994,
+    "lastKnownWriteTime" : 1591647128,
+    "last_content_update" : 1591647128673,
     "path" : "~/GitHub/EST-383/bigdata/3_introBD.Rmd",
     "project_path" : "3_introBD.Rmd",
     "properties" : {
+        "cursorPosition" : "258,0",
+        "docOutlineVisible" : "0",
+        "scrollLine" : "0"
     },
     "read_only" : false,
     "read_only_alternatives" : [

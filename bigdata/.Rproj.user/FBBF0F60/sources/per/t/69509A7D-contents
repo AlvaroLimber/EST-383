@@ -1,4 +1,4 @@
-# Big Data en R (Descubriendo el poder dentro de R)
+# Big Data en R 
 [comment]: <> (Principalmente Big Data Analytics with R, Simon Walkowiak capitulo 3)
 
 R en un software que se adapta perfectamente con las fases del ciclo de vida de los proyectos de datos, ofreciendo herramientas para cada una de ellas; Entre las mas interesantes, R Markdown, Shiny, sweave, etc.
@@ -24,37 +24,86 @@ A manera que uno va aprendiendo mas del R en la universidad o en el trabajo se v
 * R es generalmente muy lento comparado con otros lenguajes
 
 ### Memoria
+
+  * R permite trabajar con bases de datos que no superen el 50-60% de la RAM de la computadora
+  * Existen soluciones en R sin tener que recurrir aun a plataformas como; Microsoft Azure, Amazon EC2, or
+Google Cloud Platform.
+  * Existe tambien la opción de trabajar con RStudio-Cloud, https://rstudio.cloud/plans/free
+
 ### Velocidad de procesamiento
 
+  1. R se considera un lenguaje interpretado y, como tal, su ejecución de código más lenta viene por definición.
+  2. Procesos linea por linea 
+  3. El bajo rendimiento del código R puede deberse al hecho de que el lenguaje no está formalmente definido
 
 ## A los límites de la memoria y más allá
-### Transformacion y agregacion de datos con la libraria ff y ffbase 
+
+### Transformacion y agregación de datos con la librería ff y ffbase 
+
 ```{r,eval=F}
 install.packages("ff")
 install.packages("ffbase")
-install.packages("ffbase2")
+#install.packages("ffbase2") / github
 ```
 
 ```{r,eval=FALSE}
-library(ff)
+library(help=ff)
 library(ffbase)
 setwd("C:\\Users\\ALVARO\\Desktop\\db_bolivia\\bigdata")
+bd1<-read.csv("200614COVID19MEXICO.csv",sep=",",header=T)
+object.size(bd1)
+head(bd1)
+#paso 1: tener un directorio para archivos temporales de ff
 system("mkdir ffdf")
-df<-read.csv.ffdf("2018.csv")
+#paso 2: definir la carpeta temporal
+options(fftempdir="C:\\Users\\ALVARO\\Desktop\\db_bolivia\\bigdata\\ffdf")
+#paso 3: Cargar la base de datos
+bd2<-read.csv.ffdf(file="200614COVID19MEXICO.csv",sep=",",header=T,
+                   next.rows=100000,colClasses=NA,VERBOSE=F)
+bd3<-read.csv.ffdf(file="200614COVID19MEXICO.csv",sep=",",header=T,
+                   first.rows=-1,colClasses=NA,VERBOSE=T)
+bd4<-read.csv.ffdf(file="200614COVID19MEXICO.csv",sep=",",header=T,
+                   next.rows=1000,colClasses=NA,VERBOSE=T)
+
+object.size(bd1)/1000000 # CSV DE R
+object.size(bd2)/1000000 # CSV.FFDF 100000
+object.size(bd3)/1000000 # CSV.FFDF TODO
+object.size(bd4)/1000000 # CSV.FFDF 1000
+
+#USO DE LAS FFDF
+table(bd2$SEXO)
+barplot(table(bd2$SEXO))
+library(tictoc)
+tic("R")
+table(bd1$SEXO)
+toc()
+
+tic("ffdf")
+table(bd2$SEXO)
+toc()
+
+tic("ffdf table")
+table.ff(bd2$SEXO)
+toc()
+
+#R: 1 G -> 
+#FFDF: 200 M -> 
+class(bd1)
+class(bd2)
+bd5<-as.data.frame.ffdf(bd2)
+library(Hmisc)
+describe(bd1)
+describe(bd5)
+object.size(bd5)
+object.size(bd1)
+object.size(bd2)
 ```
 
 
 ### Modelogs GLM con la las librerias ff y ffbase
+
 ### Expandiendo la memoria con la libreria bigmemory
 
 ## Parallel R
-
-```{r,eval=F}
-#install.packages("parallel")
-library()
-```
-
-
-## Aumento del rendimiento de R con la libreria data.table y otras herramientas
 
 ## Ejercicios Propuestos

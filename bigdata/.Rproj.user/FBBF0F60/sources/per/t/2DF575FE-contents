@@ -1,4 +1,4 @@
-# Introduccion al Big Data
+# Introducción al Big Data
 [comment]: <> (Principalmente de: BIG DATA AND SOCIAL SCIENCE, Jeff Gill)
 
 ## Definiendo al Big Data
@@ -76,6 +76,13 @@ $$X \rightarrow Y$$
  
 Una de las debilidades principales de estos estudios es la falta o poca de validez  externa, es decir, es dificil poder generalizar los resultados. 
 
+  * Métodos cuasi-experimentales
+    + Diferencia en diferencia
+    + Propensity Score Matching (PSM) Probit. 
+    + Variables intrumentales
+    + Modelos estructurales
+    + Regresión Discontinua.
+
 ### Predictivo
 El pronóstico o predicción tiene un rol diferenciado según la ciencia de aplicación, teniendo un rol significativo dentro de las estadística oficiales, principalmente en lo social (proyecciones poblacionales) y económico (indicadores macroeconómicos), principalmente para hacedores de política, gobernates y empresarios. Similar a
 En la configuración de inferencia causal, es de suma importancia que conozcamos el proceso que generó los datos, y podemos descartar cualquier mecanismo de selección sistemática desconocido o no observado.
@@ -110,21 +117,147 @@ Estas estan basadas en la información que se distribuye de forma tradicional me
 * SNIS
 * UDAPE
 
-
 ### Datos web y APIs
+
+Referirse al capítulo 2 de scraping web, estos son los mecanismos para extraer información en internet
+
 ### Record Linkage
+
+Se refiere al proceso de concatenar o unir observaciones dispuestas en múltiples bases de datos.
+
+  * Puede ser usado para compensar la falta de información
+  * Se usa para crear estudios longitudinales
+  * Se pueden armar seudo-paneles
+
+Esto permite mejorar la cobertura (append), ampliar las temáticas de estudio (merge). 
+
+![Pre-procesamiento](images/bd1.png)
+
+  * Matching: Une información a partir de una clave, existen muchos problemas con claves tipo texto.
+  * Aproximaciones a reglas para hacer math: Definir criterios para posibilitar el match basados en reglas, distancias cercanas, etc.
+  * Match basados en probabilidad: Fellegi–Sunter method
+
+![](images/bd2.PNG)
+
 ### Bases de datos
+
+Una vez que los datos fueron recolectados y enlazados entre diferentes fuentes, es necesario guardar la información. Ahora se siscute las alternativas para guardar la información. 
+
+  * DBMS (databasemanagement systems) Sistema de gestión de base de datos: Decidir que herramienta usar segun la dimensión de los archivos.
+  
+![](images/bd3.PNG)
+  
+  * Bases de datos espaciales
+  * Múltiples formatos: https://juliael.carto.com/
+
 ### Programando con Big Data
+
+  * MapReduce: map, shuffle y reduce
+
+![](images/bd5.PNG)
+
+  * Apache hadoop MapReduce (Hadoop Distributed File System HDFS)
+  * Apache Spark
+  
+![](images/bd4.PNG)
 
 ## Análisis y modelado
 
 ### Machine learning
-### Análisis de texto
+
+**¿Machine learning = Statistics?**
+
+Veran que muchos métodos discutidos a lo largo de su formación como estadisticos aparecen dentro del matching learning y que son llamados con otros nombres. 
+
+Al pensar en machine learning debemos asociarlo directamente con procesos computacionales, muchos otros conceptos giran al rededor de esta idea como la inteligencia artificial. Proceso de machine learning hoy:
+
+  * Permiten manejar autos de forma autonoma
+  * Puede recomendar libros, amistades, música, etc
+  * Identificar drogas, proteinas y ciertos genes
+  * Se usa para detectar ciertos tipos de cancer y otras enfermedades médicas
+  * Ayudan a conocer que estudiantes necesitan un apoyo adicional 
+  * Ayudan a persuadir por que candidato votar en las elecciones.
+
+#### El proceso del machine learning
+  
+  * Entender el problema y la meta
+  * Formular esto como un problema de machine learning
+  * Explorar y preparar los datos
+  * Feature engineeing 
+  * Selección del método
+  * Evaluación
+  * Deployment
+
+#### Formulación del problema
+En ML existen 2 grandes categorías
+
+  1. Aprendizaje supervisado: Existe una $Y$ que queremos predecir o clasificar a partir de los datos. El fin es el ajuste y la generalización
+    * Clasificación ($Y$ cualitativa)
+    * Predicción 
+    * Regresión ($Y$ cuantitativa)
+    
+  2. Aprendizaje no supervisado: No existe una variable objetivo, se quiere conocer, entender las asociaciones y patrones naturales en los datos. 
+    * Clustering
+    * PCA, MCA
+    
+![](images/bd6.PNG)
+
+### Análisis de texto: Entendiendo lo que la gente escribe
+
+  * Clasificación de documentos
+  * Análisis de sentimientos
+  * Etiquetado de discursos
+  
 ### Networks
+
+![](images/bd7.PNG)
+![](images/bd8.PNG)
 
 ## Inferencia y ética
 
 ### Información y visualización
+
+> Los usuarios pueden escanear, reconocer, comprender y recordar representaciones visualmente estructuradas más rápidamente de lo que pueden procesar representaciones no estructuradas
+
+> La ciencia de la visualización se basa en múltiples campos, como la psicología perceptiva, las estadísticas y el diseño gráfico para presentar información
+
+> La efectividad de una visualización depende tanto de las necesidades de análisis como de los objetivos de diseño.
+
+> El diseño, el desarrollo y la evaluación de una visualización se guían por la comprensión de los antecedentes y las metas del público objetivo.
+
+El desarrollo de una visualización efectiva es un proceso iterativo que generalmente incluye los siguientes pasos:
+
+  * Especificar las necesidades del usuario, tareas, requisitos de accesibilidad y criterios para el éxito.
+  * Preparar datos (limpiar, transformar).
+  * Diseñar representaciones visuales.
+  * Interacción de diseño.
+  * Planifique el intercambio de ideas, procedencia.
+  * Prototipo / evaluación, incluidas las pruebas de usabilidad.
+  * Implementar (supervisar el uso, proporcionar soporte al usuario, gestionar el proceso de revisión).
+
+![](https://www.babynamewizard.com/voyager)
+
+#### Dashboards
+
+![](images/bd9.PNG)
+![](images/bd10.PNG)
+
+#### Elementos
+
+![](images/bd11.PNG)
+
+#### Datos espaciales
+
+![](images/bd12.PNG)
+
+* Datos temporales
+* Datos jerarquicos
+* Datos de redes
+* Datos de texto
+
+Tarea: resumir los siguientes puntos del libro: Big Data and Social Science, Ian Foster.
+
+
 ### Error e inferencia
 ### Privacidad y confidencialidad
 ### Workbooks

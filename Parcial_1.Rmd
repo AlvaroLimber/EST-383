@@ -1,0 +1,57 @@
+---
+title: "Primer Parcial (30pts)"
+subtitle: "Programacion Estadística I"
+author: "Lic. Alvaro Chirino Gutierrez"
+date: "10/6/2020"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Instrucciones
+  * Duración: 3 horas. 16:15 a 19:15
+  * Forma de entrega, incluir solo las respuestas en archivos separados, el nombre del archivo debe ser: respuesta_1, respuesta_2, etc.
+  * La entrega al correo achirino.stat@gmail.com máximo hasta las 19:15, 
+  pasado el tiempo se reduciran 5 puntos por cada 10 minutos de retraso
+  * Incluir en el correo su nombre completo.
+
+## Pregunta 1 (5pts).
+  * (1pt) ¿Qué libreria en R permite definir el diseño muestral de una encuesta por muestreo?
+  * (1pt) ¿Qué diferencia existe entre un dataframe y una matriz en R? 
+  * (2pt) Se realizó una prueba de independencia chi-cuadrado entre el sexo y el partido pólitico de interés en EEUU. El resultado del comando chisq.test en R es el siguiente:
+  
+```{r,echo=FALSE}
+library(knitr)
+M <- as.table(rbind(c(762, 327, 468), c(484, 239, 477)))
+dimnames(M) <- list(sexo = c("F", "M"),
+                    partido = c("Democrata","Independiente", "Republicano"))
+kable(M,format = "latex")
+(Xsq <- chisq.test(M))  # Prints test summary
+```
+ ¿Qué puede concluir acerca de la independencia o no del sexo y el partido politico?, justifique su respuesta.
+  
+  * (1pt) Mencione en forma resumida los pasos para la recopilación de información en el scraping web.
+
+## Pregunta 2 (5 pts)
+
+Escribir el código en R para los siguientes casos:
+
+  * (1pt) $\sum_{i=10}^{40}{\left(\frac{2^i}{i}+\frac{3^i}{i^2} \right)}$
+  * (1pt) Crear una matriz de $4*5$ que contengan valores aleatorios de una uniforme con $a=0, b=10$
+  * (1pt) Calcular $\sum_{i=1}^{20}{\sum_{j=2}^5{\frac{i^3}{2+ij}}}$
+  * (2pts) Crear una función que dado un vector numérico devuelva el coeficiente de variación y el coeficiente de asimetría de Pearson y Fisher.
+  
+
+## Pregunta 3 (10 pts) 
+Usando la información de www.worldometers.com sobre el COVID con la libreria rvest, generar en un documento R markdown.
+
+  * Una tabla que muestre los 10 países con más altos contagios por millón
+  * Un gráfico de los casos por millón ($X$) versus los test por millón ($Y$), incluir en el gráfico los nombres de los países.
+
+
+## Pregunta 4 (10 pts) 
+Realice una función en Shiny empleando la base de datos electoral del $20o$ que permita ver los resultados por municipio de las elecciones presidenciales, la aplicación debe permitir seleccionar el departamento y también el municipio de interés y ver los resultados en una tabla y un gráfico a elección. 
+
+Puede ayudar; aggregate(), kable(). https://shiny.rstudio.com/articles/dynamic-ui.html

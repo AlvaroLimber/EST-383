@@ -5,16 +5,17 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "222393058",
+    "hash" : "3737080102",
     "id" : "69509A7D",
-    "lastKnownWriteTime" : 1590718591,
-    "last_content_update" : 1590718591812,
+    "lastKnownWriteTime" : 1592257890,
+    "last_content_update" : 1592257890890,
     "path" : "~/GitHub/EST-383/bigdata/4_BDinR.Rmd",
     "project_path" : "4_BDinR.Rmd",
     "properties" : {
         "chunk_output_type" : "console",
-        "cursorPosition" : "0,0",
-        "scrollLine" : "0"
+        "cursorPosition" : "91,10",
+        "docOutlineVisible" : "0",
+        "scrollLine" : "87"
     },
     "read_only" : false,
     "read_only_alternatives" : [
