@@ -24,7 +24,7 @@
 <meta name="author" content="Alvaro Chirino Gutierrez" />
 
 
-<meta name="date" content="2020-06-15" />
+<meta name="date" content="2020-06-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -210,17 +210,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="big-data-en-r.html"><a href="big-data-en-r.html#a-los-límites-de-la-memoria-y-más-allá"><i class="fa fa-check"></i><b>4.2</b> A los límites de la memoria y más allá</a><ul>
 <li class="chapter" data-level="4.2.1" data-path="big-data-en-r.html"><a href="big-data-en-r.html#transformacion-y-agregación-de-datos-con-la-librería-ff-y-ffbase"><i class="fa fa-check"></i><b>4.2.1</b> Transformacion y agregación de datos con la librería ff y ffbase</a></li>
-<li class="chapter" data-level="4.2.2" data-path="big-data-en-r.html"><a href="big-data-en-r.html#modelogs-glm-con-la-las-librerias-ff-y-ffbase"><i class="fa fa-check"></i><b>4.2.2</b> Modelogs GLM con la las librerias ff y ffbase</a></li>
+<li class="chapter" data-level="4.2.2" data-path="big-data-en-r.html"><a href="big-data-en-r.html#modelos-glm-con-la-las-librerias-ff-y-ffbase"><i class="fa fa-check"></i><b>4.2.2</b> Modelos GLM con la las librerias ff y ffbase</a></li>
 <li class="chapter" data-level="4.2.3" data-path="big-data-en-r.html"><a href="big-data-en-r.html#expandiendo-la-memoria-con-la-libreria-bigmemory"><i class="fa fa-check"></i><b>4.2.3</b> Expandiendo la memoria con la libreria bigmemory</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="big-data-en-r.html"><a href="big-data-en-r.html#parallel-r"><i class="fa fa-check"></i><b>4.3</b> Parallel R</a></li>
-<li class="chapter" data-level="4.4" data-path="big-data-en-r.html"><a href="big-data-en-r.html#ejercicios-propuestos-3"><i class="fa fa-check"></i><b>4.4</b> Ejercicios Propuestos</a></li>
+<li class="chapter" data-level="4.3" data-path="big-data-en-r.html"><a href="big-data-en-r.html#parallel-r"><i class="fa fa-check"></i><b>4.3</b> Parallel R</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="big-data-en-r.html"><a href="big-data-en-r.html#libreria-parallel"><i class="fa fa-check"></i><b>4.3.1</b> Libreria parallel</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="r-y-spark.html"><a href="r-y-spark.html"><i class="fa fa-check"></i><b>5</b> R y Spark</a><ul>
 <li class="chapter" data-level="5.1" data-path="r-y-spark.html"><a href="r-y-spark.html#introducción"><i class="fa fa-check"></i><b>5.1</b> Introducción</a></li>
 <li class="chapter" data-level="5.2" data-path="r-y-spark.html"><a href="r-y-spark.html#arrancando-spark"><i class="fa fa-check"></i><b>5.2</b> Arrancando Spark</a></li>
 <li class="chapter" data-level="5.3" data-path="r-y-spark.html"><a href="r-y-spark.html#análisis-con-spark"><i class="fa fa-check"></i><b>5.3</b> Análisis con Spark</a></li>
-<li class="chapter" data-level="5.4" data-path="r-y-spark.html"><a href="r-y-spark.html#ejercicios-propuestos-4"><i class="fa fa-check"></i><b>5.4</b> Ejercicios Propuestos</a></li>
+<li class="chapter" data-level="5.4" data-path="r-y-spark.html"><a href="r-y-spark.html#ejercicios-propuestos-3"><i class="fa fa-check"></i><b>5.4</b> Ejercicios Propuestos</a></li>
 </ul></li>
 </ul>
 
@@ -243,7 +244,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1 class="title">Big Data en R</h1>
 <h2 class="subtitle"><em>EST-383</em></h2>
 <p class="author"><em>Alvaro Chirino Gutierrez</em></p>
-<p class="date"><em>2020-06-15</em></p>
+<p class="date"><em>2020-06-24</em></p>
 </div>
 <div id="prefacio" class="section level1 unnumbered">
 <h1>Prefacio</h1>
@@ -275,19 +276,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Matrix products: default
 ## 
 ## locale:
-## [1] LC_COLLATE=Spanish_Bolivia.1252  LC_CTYPE=Spanish_Bolivia.1252   
-## [3] LC_MONETARY=Spanish_Bolivia.1252 LC_NUMERIC=C                    
+## [1] LC_COLLATE=Spanish_Bolivia.1252 
+## [2] LC_CTYPE=Spanish_Bolivia.1252   
+## [3] LC_MONETARY=Spanish_Bolivia.1252
+## [4] LC_NUMERIC=C                    
 ## [5] LC_TIME=Spanish_Bolivia.1252    
 ## 
 ## attached base packages:
-## [1] stats     graphics  grDevices utils     datasets  methods   base     
+## [1] parallel  stats     graphics  grDevices utils     datasets 
+## [7] methods   base     
+## 
+## other attached packages:
+## [1] biglm_0.9-2 DBI_1.1.0   dplyr_0.8.5 doBy_4.6.6  rvest_0.3.5
+## [6] xml2_1.3.2  snow_0.4-3 
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] compiler_4.0.0  magrittr_1.5    bookdown_0.18   htmltools_0.4.0
-##  [5] tools_4.0.0     rstudioapi_0.11 yaml_2.2.1      Rcpp_1.0.4.6   
-##  [9] stringi_1.4.6   rmarkdown_2.1   knitr_1.28      stringr_1.4.0  
-## [13] xfun_0.13       digest_0.6.25   packrat_0.5.0   rlang_0.4.5    
-## [17] evaluate_0.14</code></pre>
+##  [1] Rcpp_1.0.4.6     compiler_4.0.0   pillar_1.4.3    
+##  [4] tools_4.0.0      digest_0.6.25    packrat_0.5.0   
+##  [7] nlme_3.1-147     evaluate_0.14    tibble_3.0.1    
+## [10] lifecycle_0.2.0  lattice_0.20-41  pkgconfig_2.0.3 
+## [13] rlang_0.4.5      Matrix_1.2-18    rstudioapi_0.11 
+## [16] curl_4.3         yaml_2.2.1       xfun_0.13       
+## [19] httr_1.4.1       stringr_1.4.0    knitr_1.28      
+## [22] generics_0.0.2   vctrs_0.2.4      tidyselect_1.0.0
+## [25] grid_4.0.0       glue_1.4.1       R6_2.4.1        
+## [28] rmarkdown_2.1    bookdown_0.18    tidyr_1.0.2     
+## [31] purrr_0.3.4      selectr_0.4-2    magrittr_1.5    
+## [34] backports_1.1.6  htmltools_0.4.0  ellipsis_0.3.0  
+## [37] MASS_7.3-51.5    assertthat_0.2.1 Deriv_4.0       
+## [40] stringi_1.4.6    broom_0.5.6      crayon_1.3.4</code></pre>
 </div>
 <div id="bases-de-datos" class="section level2 unnumbered">
 <h2>Bases de datos</h2>
