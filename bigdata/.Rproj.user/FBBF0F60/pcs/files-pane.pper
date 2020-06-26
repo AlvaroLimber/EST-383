@@ -1,9 +1,9 @@
 {
-    "path" : "~/GitHub/EST-383/bigdata",
-    "sortOrder" : [
+    "path": "~/GitHub/EST-383/bigdata",
+    "sortOrder": [
         {
-            "ascending" : true,
-            "columnIndex" : 2
+            "ascending": true,
+            "columnIndex": 2
         }
     ]
 }
