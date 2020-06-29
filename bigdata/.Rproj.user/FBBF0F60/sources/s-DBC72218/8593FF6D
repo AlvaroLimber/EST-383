@@ -1,0 +1,25 @@
+{
+    "id": "8593FF6D",
+    "path": "~/GitHub/EST-383/bigdata/5_RandSpark.Rmd",
+    "project_path": "5_RandSpark.Rmd",
+    "type": "r_markdown",
+    "hash": "2783795778",
+    "contents": "",
+    "dirty": true,
+    "created": 1590718561296.0,
+    "source_on_save": false,
+    "relative_order": 1,
+    "properties": {
+        "cursorPosition": "155,3",
+        "scrollLine": "128",
+        "chunk_output_type": "console"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1593461799,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1593461855619,
+    "read_only": false,
+    "read_only_alternatives": []
+}

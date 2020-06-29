@@ -1,0 +1,25 @@
+{
+    "id": "611C3134",
+    "path": null,
+    "project_path": null,
+    "type": "object_explorer",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1593318378834.0,
+    "source_on_save": false,
+    "relative_order": 5,
+    "properties": {
+        "id": "d1da0c035ddb48dca202536a5bcf4ec2",
+        "name": "sp_covid",
+        "title": "sp_covid"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 8030800081905000458,
+    "encoding": "",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1593318378834,
+    "read_only": false,
+    "read_only_alternatives": []
+}

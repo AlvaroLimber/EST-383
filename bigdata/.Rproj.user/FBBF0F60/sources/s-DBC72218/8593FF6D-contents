@@ -1,0 +1,158 @@
+# R y Spark
+
+## Introducción
+
+En este capítulo emplearemos Spark junto con R para el procesamiento de datos. Spark es un framework que permite realizar procesos de división y paralelismo en un equipo o múltiples equipos. 
+
+### Hadoop
+Google (2004) publicó un nuevo documento que describe cómo realizar operaciones en todo el Sistema de archivos de Google, un enfoque que se conoció como MapReduce. Como era de esperar, hay dos operaciones en MapReduce: map y reduce. La operación de map proporciona una forma arbitraria de transformar cada archivo en un nuevo archivo, mientras que la operación de reduce combina dos archivos. Ambas operaciones requieren un código de computadora personalizado, pero el marco MapReduce se encarga de ejecutarlas automáticamente en muchas computadoras a la vez. Estas dos operaciones son suficientes para procesar todos los datos disponibles en la web, al tiempo que proporcionan suficiente flexibilidad para extraer información significativa de la misma.
+
+### Spark 
+
+En 2009, Apache Spark comenzó como un proyecto de investigación en AMPLab de UC Berkeley para mejorar MapReduce. Específicamente, Spark proporcionó un conjunto más rico de verbos más allá de MapReduce para facilitar la optimización del código que se ejecuta en múltiples máquinas. Spark también cargó datos en la memoria, lo que hace que las operaciones sean mucho más rápidas que el almacenamiento en disco de Hadoop
+
+![Spark](images/spark1.png)
+
+Componetes:
+
+  1. Spark Core: Base donde se apoya el resto de los componentes
+  2. Spark SQL: Procesamiento de dato estructurados y no estructurados
+  3. Spark streaming: Procesamiento de datos en tiempo real. 
+  4. Spark MLLib: Machine learning
+  5. Spark graph: Procesamiento de grafos
+
+Algunos conceptos importantes
+
+> HDFS: Sistema de ficheros
+
+### Sparklyr
+Oficialmente, sparklyr es una interfaz R para Apache Spark. Está disponible en CRAN y funciona como cualquier otro paquete de CRAN, lo que significa que es independiente de las versiones de Spark, es fácil de instalar, sirve a la comunidad R, abarca otros paquetes y prácticas de la comunidad R, y así sucesivamente. Está alojado en GitHub y tiene licencia de Apache 2.0, que le permite clonar, modificar y contribuir de nuevo a este proyecto.
+
+## Arrancando Spark
+
+### Prerequisitos
+
+  * R
+  * RStudio
+  * Java 8
+
+```{r,eval=FALSE}
+system("java -version")
+```
+
+### Instalación
+
+```{r,eval=F}
+#Habilitando la libreria
+library(sparklyr)
+#versiones disponibles
+spark_available_versions()
+#versiones instaladas
+spark_installed_versions()
+#instalando spark desde R
+spark_install()
+#si se quiere desinstalar alguna versión en particular
+```
+
+### Creando una sesión en Spark
+
+```{r,eval=F}
+#configuración
+conf <- spark_config()
+  conf$`sparklyr.shell.driver-memory` <- "2G"  
+  conf$spark.memory.fraction <- 0.8 
+#conección  
+sc <- spark_connect(master = "local", version = "2.4.3",config = conf)  
+#apagar conexión
+spark_disconnect(sc)
+spark_disconnect_all()
+```
+
+### Interface web
+
+```{r,eval=F}
+spark_web(sc)
+```
+
+  * http://localhost:4040/jobs/
+  * http://127.0.0.1:4040/executors/
+
+  + Jobs
+  + Stages
+  + Storage
+  + Environment
+  + Executors
+  + SQL
+
+## Análisis con Spark
+
+![Pasos en el análisis de datos](images/spark2.png)
+
+### Importando los datos
+Por lo general, importar significa que R leerá los archivos y los cargará en la memoria; cuando se usa Spark, los datos se importan a Spark, no a R.
+
+![Pasos en el análisis de datos](images/spark3.png)
+
+![Pasos en el análisis de datos](images/spark4.png)
+
+Colección de documentos
+
+```{r,eval=F}
+#Schema
+top_rows <- read.csv("C:\\Users\\ALVARO\\Documents\\GitHub\\EST-383\\data\\covid_mx\\200627COVID19MEXICO.csv",sep=",", nrows = 5)
+spec_with_r <- sapply(top_rows, class)
+spec_with_r
+#csv/covid mexico
+sp_covid<-spark_read_csv(sc,
+  name="covid",
+  path = "C:\\Users\\ALVARO\\Documents\\GitHub\\EST-383\\data\\covid_mx\\")
+# esquema
+sp_covid<-spark_read_csv(sc,
+  name="covid",
+  path = "C:\\Users\\ALVARO\\Documents\\GitHub\\EST-383\\data\\covid_mx\\",
+  columns = spec_with_r)
+# memoria
+object.size(sp_covid)
+#spark SQL
+library(DBI)
+top10 <- dbGetQuery(sc, "Select * from covid limit 10")
+top10
+```
+
+Comando copy_to
+
+```{r,eval=F}
+load("C:\\Users\\ALVARO\\Documents\\GitHub\\EST-383\\data\\oct20.RData")
+oct20<-copy_to(sc,computo)
+```
+
+Documento específico
+
+```{r,eval=F}
+sp_covid2<-spark_read_csv(sc,
+  name="covid2",
+  path = "C:\\Users\\ALVARO\\Desktop\\db_bolivia\\bigdata\\200614COVID19MEXICO.csv",
+  columns = spec_with_r)
+```
+
+### Librería DPLYR (Gramática de manipulación de datos)
+
+  * https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html
+
+```{r,eval=F}
+sp_covid %>% tally
+sp_covid2 %>% tally
+oct20 %>% tally
+covid_cache <- sp_covid %>% 
+    compute("covid_ch")
+covid_cache %>% tally
+```
+
+```{r,eval=F}
+dimnames(sp_covid)
+sp_covid %>% count(SEXO)
+sp_covid2 %>% count(SEXO,NEUMONIA)
+sp_covid2 %>% group_by(SEXO) %>% summarise(mean(EDAD),na.rm=T)
+```
+  
+## Modelado

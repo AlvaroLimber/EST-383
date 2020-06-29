@@ -24,7 +24,7 @@
 <meta name="author" content="Alvaro Chirino Gutierrez" />
 
 
-<meta name="date" content="2020-06-25" />
+<meta name="date" content="2020-06-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -221,10 +221,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="r-y-spark.html"><a href="r-y-spark.html"><i class="fa fa-check"></i><b>5</b> R y Spark</a><ul>
-<li class="chapter" data-level="5.1" data-path="r-y-spark.html"><a href="r-y-spark.html#introducción"><i class="fa fa-check"></i><b>5.1</b> Introducción</a></li>
-<li class="chapter" data-level="5.2" data-path="r-y-spark.html"><a href="r-y-spark.html#arrancando-spark"><i class="fa fa-check"></i><b>5.2</b> Arrancando Spark</a></li>
-<li class="chapter" data-level="5.3" data-path="r-y-spark.html"><a href="r-y-spark.html#análisis-con-spark"><i class="fa fa-check"></i><b>5.3</b> Análisis con Spark</a></li>
-<li class="chapter" data-level="5.4" data-path="r-y-spark.html"><a href="r-y-spark.html#ejercicios-propuestos-3"><i class="fa fa-check"></i><b>5.4</b> Ejercicios Propuestos</a></li>
+<li class="chapter" data-level="5.1" data-path="r-y-spark.html"><a href="r-y-spark.html#introducción"><i class="fa fa-check"></i><b>5.1</b> Introducción</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="r-y-spark.html"><a href="r-y-spark.html#hadoop"><i class="fa fa-check"></i><b>5.1.1</b> Hadoop</a></li>
+<li class="chapter" data-level="5.1.2" data-path="r-y-spark.html"><a href="r-y-spark.html#spark"><i class="fa fa-check"></i><b>5.1.2</b> Spark</a></li>
+<li class="chapter" data-level="5.1.3" data-path="r-y-spark.html"><a href="r-y-spark.html#sparklyr"><i class="fa fa-check"></i><b>5.1.3</b> Sparklyr</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="r-y-spark.html"><a href="r-y-spark.html#arrancando-spark"><i class="fa fa-check"></i><b>5.2</b> Arrancando Spark</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="r-y-spark.html"><a href="r-y-spark.html#prerequisitos"><i class="fa fa-check"></i><b>5.2.1</b> Prerequisitos</a></li>
+<li class="chapter" data-level="5.2.2" data-path="r-y-spark.html"><a href="r-y-spark.html#instalación-1"><i class="fa fa-check"></i><b>5.2.2</b> Instalación</a></li>
+<li class="chapter" data-level="5.2.3" data-path="r-y-spark.html"><a href="r-y-spark.html#creando-una-sesión-en-spark"><i class="fa fa-check"></i><b>5.2.3</b> Creando una sesión en Spark</a></li>
+<li class="chapter" data-level="5.2.4" data-path="r-y-spark.html"><a href="r-y-spark.html#interface-web"><i class="fa fa-check"></i><b>5.2.4</b> Interface web</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="r-y-spark.html"><a href="r-y-spark.html#análisis-con-spark"><i class="fa fa-check"></i><b>5.3</b> Análisis con Spark</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="r-y-spark.html"><a href="r-y-spark.html#importando-los-datos"><i class="fa fa-check"></i><b>5.3.1</b> Importando los datos</a></li>
+<li class="chapter" data-level="5.3.2" data-path="r-y-spark.html"><a href="r-y-spark.html#librería-dplyr-gramática-de-manipulación-de-datos"><i class="fa fa-check"></i><b>5.3.2</b> Librería DPLYR (Gramática de manipulación de datos)</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="r-y-spark.html"><a href="r-y-spark.html#modelado"><i class="fa fa-check"></i><b>5.4</b> Modelado</a></li>
 </ul></li>
 </ul>
 
@@ -285,13 +297,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Identificar el problema</li>
 <li>Diseño del requerimiento de datos</li>
 <li>Procesar los datos</li>
-<li>Desarrollo del analisis sobre los datos</li>
-<li>Vizualizar los datos</li>
+<li>Desarrollo del análisis sobre los datos</li>
+<li>Visualizar los datos</li>
 </ol>
 </div>
 <div id="inferencia-y-big-data" class="section level2">
 <h2><span class="header-section-number">3.4</span> Inferencia y Big Data</h2>
-<p>El objetivo de la inferencia es poder decir algo de la población objetivo a partir de la información disponibles. Se debe tener en cuenta los tipos de estudio provenientes; ya sean de encuestas probabilísticas, diseño experimentales o estudios de observación. Se debe estar seguro de la calidad de la base de datos proveniente, ya sean estos los errores de muestreo, procesos de calibración, ponderacion, post estratificación en el caso de muestreo o el el propensity score y la estratificacion principal para repara diseño experimentales rotos.</p>
+<p>El objetivo de la inferencia es poder decir algo de la población objetivo a partir de la información disponibles. Se debe tener en cuenta los tipos de estudio provenientes; ya sean de encuestas probabilísticas, diseño experimentales o estudios de observación. Se debe estar seguro de la calidad de la base de datos proveniente, ya sean estos los errores de muestreo, procesos de calibración, ponderación, post estratificación en el caso de muestreo o el el propensity score y la estratificación principal para repara diseño experimentales rotos.</p>
 <p>Se puede distinguir tres metas en el proceso de inferencia:</p>
 <ul>
 <li>Descriptivo</li>
@@ -304,14 +316,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <blockquote>
 <p><strong>Ejemplo:</strong> El INE estima a partir de la EH-2018 que la incidencia de pobreza moderadara en Bolivia para el 2018 alcanza el …%</p>
 </blockquote>
-<p>Ejemplos como este muestra que el proposito es puramente descriptivo en cuanto a la pobreza.</p>
+<p>Ejemplos como este muestra que el propósito es puramente descriptivo en cuanto a la pobreza.</p>
 </div>
 <div id="causal" class="section level3">
 <h3><span class="header-section-number">3.4.2</span> Causal</h3>
-<p>Muchos investigadores buscan explorar hipotesis, aveces originadas en la teoria o en alguna relación observada de forma empírica, con la idea central de permitir la inferencia causal.</p>
+<p>Muchos investigadores buscan explorar hipótesis, aveces originadas en la teoria o en alguna relación observada de forma empírica, con la idea central de permitir la inferencia causal.</p>
 <p>La data para esto proviene de diseños experimentales o fuertes estudios no experimentales (cuasi-experimentales), el interés de estos estudios es principalmente encontrar el efecto de de una variable entre otra.</p>
 <p><span class="math display">\[X \rightarrow Y\]</span>
-Aspecto que es logrado facilmente mediante los diseños experimentales. En este tipo de estudio el componente descriptvo no es tan importante como el metodo para identificar la causalidad. Es importante diferenciar en este punto <em>la causalidad de la correlación</em>.</p>
+Aspecto que es logrado fácilmente mediante los diseños experimentales. En este tipo de estudio el componente descriptivo no es tan importante como el metodo para identificar la causalidad. Es importante diferenciar en este punto <em>la causalidad de la correlación</em>.</p>
 <blockquote>
 <p><strong>Ejemplo:</strong> (3ie) Este informe se basa en un estudio de Dupas, Duflo y Kremer que se realizó en colaboración con el gobierno de Ghana. El estudio examinó los impactos a mediano plazo de otorgar becas de cuatro años a estudiantes que no podían matricularse en escuelas secundarias superiores (SHS) debido a limitaciones financieras. Los investigadores encontraron que el programa de becas tuvo un impacto significativo en el logro educativo y las habilidades cognitivas, particularmente entre las niñas. El programa también tuvo un mayor impacto en las tasas de finalización de SHS de las niñas en términos porcentuales.</p>
 </blockquote>

@@ -24,7 +24,7 @@
 <meta name="author" content="Alvaro Chirino Gutierrez" />
 
 
-<meta name="date" content="2020-06-25" />
+<meta name="date" content="2020-06-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -221,10 +221,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="r-y-spark.html"><a href="r-y-spark.html"><i class="fa fa-check"></i><b>5</b> R y Spark</a><ul>
-<li class="chapter" data-level="5.1" data-path="r-y-spark.html"><a href="r-y-spark.html#introducción"><i class="fa fa-check"></i><b>5.1</b> Introducción</a></li>
-<li class="chapter" data-level="5.2" data-path="r-y-spark.html"><a href="r-y-spark.html#arrancando-spark"><i class="fa fa-check"></i><b>5.2</b> Arrancando Spark</a></li>
-<li class="chapter" data-level="5.3" data-path="r-y-spark.html"><a href="r-y-spark.html#análisis-con-spark"><i class="fa fa-check"></i><b>5.3</b> Análisis con Spark</a></li>
-<li class="chapter" data-level="5.4" data-path="r-y-spark.html"><a href="r-y-spark.html#ejercicios-propuestos-3"><i class="fa fa-check"></i><b>5.4</b> Ejercicios Propuestos</a></li>
+<li class="chapter" data-level="5.1" data-path="r-y-spark.html"><a href="r-y-spark.html#introducción"><i class="fa fa-check"></i><b>5.1</b> Introducción</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="r-y-spark.html"><a href="r-y-spark.html#hadoop"><i class="fa fa-check"></i><b>5.1.1</b> Hadoop</a></li>
+<li class="chapter" data-level="5.1.2" data-path="r-y-spark.html"><a href="r-y-spark.html#spark"><i class="fa fa-check"></i><b>5.1.2</b> Spark</a></li>
+<li class="chapter" data-level="5.1.3" data-path="r-y-spark.html"><a href="r-y-spark.html#sparklyr"><i class="fa fa-check"></i><b>5.1.3</b> Sparklyr</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="r-y-spark.html"><a href="r-y-spark.html#arrancando-spark"><i class="fa fa-check"></i><b>5.2</b> Arrancando Spark</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="r-y-spark.html"><a href="r-y-spark.html#prerequisitos"><i class="fa fa-check"></i><b>5.2.1</b> Prerequisitos</a></li>
+<li class="chapter" data-level="5.2.2" data-path="r-y-spark.html"><a href="r-y-spark.html#instalación-1"><i class="fa fa-check"></i><b>5.2.2</b> Instalación</a></li>
+<li class="chapter" data-level="5.2.3" data-path="r-y-spark.html"><a href="r-y-spark.html#creando-una-sesión-en-spark"><i class="fa fa-check"></i><b>5.2.3</b> Creando una sesión en Spark</a></li>
+<li class="chapter" data-level="5.2.4" data-path="r-y-spark.html"><a href="r-y-spark.html#interface-web"><i class="fa fa-check"></i><b>5.2.4</b> Interface web</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="r-y-spark.html"><a href="r-y-spark.html#análisis-con-spark"><i class="fa fa-check"></i><b>5.3</b> Análisis con Spark</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="r-y-spark.html"><a href="r-y-spark.html#importando-los-datos"><i class="fa fa-check"></i><b>5.3.1</b> Importando los datos</a></li>
+<li class="chapter" data-level="5.3.2" data-path="r-y-spark.html"><a href="r-y-spark.html#librería-dplyr-gramática-de-manipulación-de-datos"><i class="fa fa-check"></i><b>5.3.2</b> Librería DPLYR (Gramática de manipulación de datos)</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="r-y-spark.html"><a href="r-y-spark.html#modelado"><i class="fa fa-check"></i><b>5.4</b> Modelado</a></li>
 </ul></li>
 </ul>
 
@@ -247,15 +259,151 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Chapter 5</span> R y Spark</h1>
 <div id="introducción" class="section level2">
 <h2><span class="header-section-number">5.1</span> Introducción</h2>
+<p>En este capítulo emplearemos Spark junto con R para el procesamiento de datos. Spark es un framework que permite realizar procesos de división y paralelismo en un equipo o múltiples equipos.</p>
+<div id="hadoop" class="section level3">
+<h3><span class="header-section-number">5.1.1</span> Hadoop</h3>
+<p>Google (2004) publicó un nuevo documento que describe cómo realizar operaciones en todo el Sistema de archivos de Google, un enfoque que se conoció como MapReduce. Como era de esperar, hay dos operaciones en MapReduce: map y reduce. La operación de map proporciona una forma arbitraria de transformar cada archivo en un nuevo archivo, mientras que la operación de reduce combina dos archivos. Ambas operaciones requieren un código de computadora personalizado, pero el marco MapReduce se encarga de ejecutarlas automáticamente en muchas computadoras a la vez. Estas dos operaciones son suficientes para procesar todos los datos disponibles en la web, al tiempo que proporcionan suficiente flexibilidad para extraer información significativa de la misma.</p>
+</div>
+<div id="spark" class="section level3">
+<h3><span class="header-section-number">5.1.2</span> Spark</h3>
+<p>En 2009, Apache Spark comenzó como un proyecto de investigación en AMPLab de UC Berkeley para mejorar MapReduce. Específicamente, Spark proporcionó un conjunto más rico de verbos más allá de MapReduce para facilitar la optimización del código que se ejecuta en múltiples máquinas. Spark también cargó datos en la memoria, lo que hace que las operaciones sean mucho más rápidas que el almacenamiento en disco de Hadoop</p>
+<div class="figure">
+<img src="images/spark1.png" alt="" />
+<p class="caption">Spark</p>
+</div>
+<p>Componetes:</p>
+<ol style="list-style-type: decimal">
+<li>Spark Core: Base donde se apoya el resto de los componentes</li>
+<li>Spark SQL: Procesamiento de dato estructurados y no estructurados</li>
+<li>Spark streaming: Procesamiento de datos en tiempo real.</li>
+<li>Spark MLLib: Machine learning</li>
+<li>Spark graph: Procesamiento de grafos</li>
+</ol>
+<p>Algunos conceptos importantes</p>
+<blockquote>
+<p>HDFS: Sistema de ficheros</p>
+</blockquote>
+</div>
+<div id="sparklyr" class="section level3">
+<h3><span class="header-section-number">5.1.3</span> Sparklyr</h3>
+<p>Oficialmente, sparklyr es una interfaz R para Apache Spark. Está disponible en CRAN y funciona como cualquier otro paquete de CRAN, lo que significa que es independiente de las versiones de Spark, es fácil de instalar, sirve a la comunidad R, abarca otros paquetes y prácticas de la comunidad R, y así sucesivamente. Está alojado en GitHub y tiene licencia de Apache 2.0, que le permite clonar, modificar y contribuir de nuevo a este proyecto.</p>
+</div>
 </div>
 <div id="arrancando-spark" class="section level2">
 <h2><span class="header-section-number">5.2</span> Arrancando Spark</h2>
+<div id="prerequisitos" class="section level3">
+<h3><span class="header-section-number">5.2.1</span> Prerequisitos</h3>
+<ul>
+<li>R</li>
+<li>RStudio</li>
+<li>Java 8</li>
+</ul>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="r-y-spark.html#cb139-1"></a><span class="kw">system</span>(<span class="st">&quot;java -version&quot;</span>)</span></code></pre></div>
+</div>
+<div id="instalación-1" class="section level3">
+<h3><span class="header-section-number">5.2.2</span> Instalación</h3>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="r-y-spark.html#cb140-1"></a><span class="co">#Habilitando la libreria</span></span>
+<span id="cb140-2"><a href="r-y-spark.html#cb140-2"></a><span class="kw">library</span>(sparklyr)</span>
+<span id="cb140-3"><a href="r-y-spark.html#cb140-3"></a><span class="co">#versiones disponibles</span></span>
+<span id="cb140-4"><a href="r-y-spark.html#cb140-4"></a><span class="kw">spark_available_versions</span>()</span>
+<span id="cb140-5"><a href="r-y-spark.html#cb140-5"></a><span class="co">#versiones instaladas</span></span>
+<span id="cb140-6"><a href="r-y-spark.html#cb140-6"></a><span class="kw">spark_installed_versions</span>()</span>
+<span id="cb140-7"><a href="r-y-spark.html#cb140-7"></a><span class="co">#instalando spark desde R</span></span>
+<span id="cb140-8"><a href="r-y-spark.html#cb140-8"></a><span class="kw">spark_install</span>()</span>
+<span id="cb140-9"><a href="r-y-spark.html#cb140-9"></a><span class="co">#si se quiere desinstalar alguna versión en particular</span></span></code></pre></div>
+</div>
+<div id="creando-una-sesión-en-spark" class="section level3">
+<h3><span class="header-section-number">5.2.3</span> Creando una sesión en Spark</h3>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="r-y-spark.html#cb141-1"></a><span class="co">#configuración</span></span>
+<span id="cb141-2"><a href="r-y-spark.html#cb141-2"></a>conf &lt;-<span class="st"> </span><span class="kw">spark_config</span>()</span>
+<span id="cb141-3"><a href="r-y-spark.html#cb141-3"></a>  conf<span class="op">$</span><span class="st">`</span><span class="dt">sparklyr.shell.driver-memory</span><span class="st">`</span> &lt;-<span class="st"> &quot;2G&quot;</span>  </span>
+<span id="cb141-4"><a href="r-y-spark.html#cb141-4"></a>  conf<span class="op">$</span>spark.memory.fraction &lt;-<span class="st"> </span><span class="fl">0.8</span> </span>
+<span id="cb141-5"><a href="r-y-spark.html#cb141-5"></a><span class="co">#conección  </span></span>
+<span id="cb141-6"><a href="r-y-spark.html#cb141-6"></a>sc &lt;-<span class="st"> </span><span class="kw">spark_connect</span>(<span class="dt">master =</span> <span class="st">&quot;local&quot;</span>, <span class="dt">version =</span> <span class="st">&quot;2.4.3&quot;</span>,<span class="dt">config =</span> conf)  </span>
+<span id="cb141-7"><a href="r-y-spark.html#cb141-7"></a><span class="co">#apagar conexión</span></span>
+<span id="cb141-8"><a href="r-y-spark.html#cb141-8"></a><span class="kw">spark_disconnect</span>(sc)</span>
+<span id="cb141-9"><a href="r-y-spark.html#cb141-9"></a><span class="kw">spark_disconnect_all</span>()</span></code></pre></div>
+</div>
+<div id="interface-web" class="section level3">
+<h3><span class="header-section-number">5.2.4</span> Interface web</h3>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="r-y-spark.html#cb142-1"></a><span class="kw">spark_web</span>(sc)</span></code></pre></div>
+<ul>
+<li><p><a href="http://localhost:4040/jobs/" class="uri">http://localhost:4040/jobs/</a></p></li>
+<li><p><a href="http://127.0.0.1:4040/executors/" class="uri">http://127.0.0.1:4040/executors/</a></p></li>
+<li><p>Jobs</p></li>
+<li><p>Stages</p></li>
+<li><p>Storage</p></li>
+<li><p>Environment</p></li>
+<li><p>Executors</p></li>
+<li><p>SQL</p></li>
+</ul>
+</div>
 </div>
 <div id="análisis-con-spark" class="section level2">
 <h2><span class="header-section-number">5.3</span> Análisis con Spark</h2>
+<div class="figure">
+<img src="images/spark2.png" alt="" />
+<p class="caption">Pasos en el análisis de datos</p>
 </div>
-<div id="ejercicios-propuestos-3" class="section level2">
-<h2><span class="header-section-number">5.4</span> Ejercicios Propuestos</h2>
+<div id="importando-los-datos" class="section level3">
+<h3><span class="header-section-number">5.3.1</span> Importando los datos</h3>
+<p>Por lo general, importar significa que R leerá los archivos y los cargará en la memoria; cuando se usa Spark, los datos se importan a Spark, no a R.</p>
+<div class="figure">
+<img src="images/spark3.png" alt="" />
+<p class="caption">Pasos en el análisis de datos</p>
+</div>
+<div class="figure">
+<img src="images/spark4.PNG" alt="" />
+<p class="caption">Pasos en el análisis de datos</p>
+</div>
+<p>Colección de documentos</p>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="r-y-spark.html#cb143-1"></a><span class="co">#Schema</span></span>
+<span id="cb143-2"><a href="r-y-spark.html#cb143-2"></a>top_rows &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;C:</span><span class="ch">\\</span><span class="st">Users</span><span class="ch">\\</span><span class="st">ALVARO</span><span class="ch">\\</span><span class="st">Documents</span><span class="ch">\\</span><span class="st">GitHub</span><span class="ch">\\</span><span class="st">EST-383</span><span class="ch">\\</span><span class="st">data</span><span class="ch">\\</span><span class="st">covid_mx</span><span class="ch">\\</span><span class="st">200627COVID19MEXICO.csv&quot;</span>,<span class="dt">sep=</span><span class="st">&quot;,&quot;</span>, <span class="dt">nrows =</span> <span class="dv">5</span>)</span>
+<span id="cb143-3"><a href="r-y-spark.html#cb143-3"></a>spec_with_r &lt;-<span class="st"> </span><span class="kw">sapply</span>(top_rows, class)</span>
+<span id="cb143-4"><a href="r-y-spark.html#cb143-4"></a>spec_with_r</span>
+<span id="cb143-5"><a href="r-y-spark.html#cb143-5"></a><span class="co">#csv/covid mexico</span></span>
+<span id="cb143-6"><a href="r-y-spark.html#cb143-6"></a>sp_covid&lt;-<span class="kw">spark_read_csv</span>(sc,</span>
+<span id="cb143-7"><a href="r-y-spark.html#cb143-7"></a>  <span class="dt">name=</span><span class="st">&quot;covid&quot;</span>,</span>
+<span id="cb143-8"><a href="r-y-spark.html#cb143-8"></a>  <span class="dt">path =</span> <span class="st">&quot;C:</span><span class="ch">\\</span><span class="st">Users</span><span class="ch">\\</span><span class="st">ALVARO</span><span class="ch">\\</span><span class="st">Documents</span><span class="ch">\\</span><span class="st">GitHub</span><span class="ch">\\</span><span class="st">EST-383</span><span class="ch">\\</span><span class="st">data</span><span class="ch">\\</span><span class="st">covid_mx</span><span class="ch">\\</span><span class="st">&quot;</span>)</span>
+<span id="cb143-9"><a href="r-y-spark.html#cb143-9"></a><span class="co"># esquema</span></span>
+<span id="cb143-10"><a href="r-y-spark.html#cb143-10"></a>sp_covid&lt;-<span class="kw">spark_read_csv</span>(sc,</span>
+<span id="cb143-11"><a href="r-y-spark.html#cb143-11"></a>  <span class="dt">name=</span><span class="st">&quot;covid&quot;</span>,</span>
+<span id="cb143-12"><a href="r-y-spark.html#cb143-12"></a>  <span class="dt">path =</span> <span class="st">&quot;C:</span><span class="ch">\\</span><span class="st">Users</span><span class="ch">\\</span><span class="st">ALVARO</span><span class="ch">\\</span><span class="st">Documents</span><span class="ch">\\</span><span class="st">GitHub</span><span class="ch">\\</span><span class="st">EST-383</span><span class="ch">\\</span><span class="st">data</span><span class="ch">\\</span><span class="st">covid_mx</span><span class="ch">\\</span><span class="st">&quot;</span>,</span>
+<span id="cb143-13"><a href="r-y-spark.html#cb143-13"></a>  <span class="dt">columns =</span> spec_with_r)</span>
+<span id="cb143-14"><a href="r-y-spark.html#cb143-14"></a><span class="co"># memoria</span></span>
+<span id="cb143-15"><a href="r-y-spark.html#cb143-15"></a><span class="kw">object.size</span>(sp_covid)</span>
+<span id="cb143-16"><a href="r-y-spark.html#cb143-16"></a><span class="co">#spark SQL</span></span>
+<span id="cb143-17"><a href="r-y-spark.html#cb143-17"></a><span class="kw">library</span>(DBI)</span>
+<span id="cb143-18"><a href="r-y-spark.html#cb143-18"></a>top10 &lt;-<span class="st"> </span><span class="kw">dbGetQuery</span>(sc, <span class="st">&quot;Select * from covid limit 10&quot;</span>)</span>
+<span id="cb143-19"><a href="r-y-spark.html#cb143-19"></a>top10</span></code></pre></div>
+<p>Comando copy_to</p>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="r-y-spark.html#cb144-1"></a><span class="kw">load</span>(<span class="st">&quot;C:</span><span class="ch">\\</span><span class="st">Users</span><span class="ch">\\</span><span class="st">ALVARO</span><span class="ch">\\</span><span class="st">Documents</span><span class="ch">\\</span><span class="st">GitHub</span><span class="ch">\\</span><span class="st">EST-383</span><span class="ch">\\</span><span class="st">data</span><span class="ch">\\</span><span class="st">oct20.RData&quot;</span>)</span>
+<span id="cb144-2"><a href="r-y-spark.html#cb144-2"></a>oct20&lt;-<span class="kw">copy_to</span>(sc,computo)</span></code></pre></div>
+<p>Documento específico</p>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="r-y-spark.html#cb145-1"></a>sp_covid2&lt;-<span class="kw">spark_read_csv</span>(sc,</span>
+<span id="cb145-2"><a href="r-y-spark.html#cb145-2"></a>  <span class="dt">name=</span><span class="st">&quot;covid2&quot;</span>,</span>
+<span id="cb145-3"><a href="r-y-spark.html#cb145-3"></a>  <span class="dt">path =</span> <span class="st">&quot;C:</span><span class="ch">\\</span><span class="st">Users</span><span class="ch">\\</span><span class="st">ALVARO</span><span class="ch">\\</span><span class="st">Desktop</span><span class="ch">\\</span><span class="st">db_bolivia</span><span class="ch">\\</span><span class="st">bigdata</span><span class="ch">\\</span><span class="st">200614COVID19MEXICO.csv&quot;</span>,</span>
+<span id="cb145-4"><a href="r-y-spark.html#cb145-4"></a>  <span class="dt">columns =</span> spec_with_r)</span></code></pre></div>
+</div>
+<div id="librería-dplyr-gramática-de-manipulación-de-datos" class="section level3">
+<h3><span class="header-section-number">5.3.2</span> Librería DPLYR (Gramática de manipulación de datos)</h3>
+<ul>
+<li><a href="https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html" class="uri">https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html</a></li>
+</ul>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="r-y-spark.html#cb146-1"></a>sp_covid <span class="op">%&gt;%</span><span class="st"> </span>tally</span>
+<span id="cb146-2"><a href="r-y-spark.html#cb146-2"></a>sp_covid2 <span class="op">%&gt;%</span><span class="st"> </span>tally</span>
+<span id="cb146-3"><a href="r-y-spark.html#cb146-3"></a>oct20 <span class="op">%&gt;%</span><span class="st"> </span>tally</span>
+<span id="cb146-4"><a href="r-y-spark.html#cb146-4"></a>covid_cache &lt;-<span class="st"> </span>sp_covid <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb146-5"><a href="r-y-spark.html#cb146-5"></a><span class="st">    </span><span class="kw">compute</span>(<span class="st">&quot;covid_ch&quot;</span>)</span>
+<span id="cb146-6"><a href="r-y-spark.html#cb146-6"></a>covid_cache <span class="op">%&gt;%</span><span class="st"> </span>tally</span></code></pre></div>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="r-y-spark.html#cb147-1"></a><span class="kw">dimnames</span>(sp_covid)</span>
+<span id="cb147-2"><a href="r-y-spark.html#cb147-2"></a>sp_covid <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>(SEXO)</span>
+<span id="cb147-3"><a href="r-y-spark.html#cb147-3"></a>sp_covid2 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>(SEXO,NEUMONIA)</span>
+<span id="cb147-4"><a href="r-y-spark.html#cb147-4"></a>sp_covid2 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(SEXO) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="kw">mean</span>(EDAD),<span class="dt">na.rm=</span>T)</span></code></pre></div>
+</div>
+</div>
+<div id="modelado" class="section level2">
+<h2><span class="header-section-number">5.4</span> Modelado</h2>
 
 <div id="refs" class="references">
 <div>

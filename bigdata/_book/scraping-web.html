@@ -24,7 +24,7 @@
 <meta name="author" content="Alvaro Chirino Gutierrez" />
 
 
-<meta name="date" content="2020-06-25" />
+<meta name="date" content="2020-06-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -221,10 +221,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="r-y-spark.html"><a href="r-y-spark.html"><i class="fa fa-check"></i><b>5</b> R y Spark</a><ul>
-<li class="chapter" data-level="5.1" data-path="r-y-spark.html"><a href="r-y-spark.html#introducción"><i class="fa fa-check"></i><b>5.1</b> Introducción</a></li>
-<li class="chapter" data-level="5.2" data-path="r-y-spark.html"><a href="r-y-spark.html#arrancando-spark"><i class="fa fa-check"></i><b>5.2</b> Arrancando Spark</a></li>
-<li class="chapter" data-level="5.3" data-path="r-y-spark.html"><a href="r-y-spark.html#análisis-con-spark"><i class="fa fa-check"></i><b>5.3</b> Análisis con Spark</a></li>
-<li class="chapter" data-level="5.4" data-path="r-y-spark.html"><a href="r-y-spark.html#ejercicios-propuestos-3"><i class="fa fa-check"></i><b>5.4</b> Ejercicios Propuestos</a></li>
+<li class="chapter" data-level="5.1" data-path="r-y-spark.html"><a href="r-y-spark.html#introducción"><i class="fa fa-check"></i><b>5.1</b> Introducción</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="r-y-spark.html"><a href="r-y-spark.html#hadoop"><i class="fa fa-check"></i><b>5.1.1</b> Hadoop</a></li>
+<li class="chapter" data-level="5.1.2" data-path="r-y-spark.html"><a href="r-y-spark.html#spark"><i class="fa fa-check"></i><b>5.1.2</b> Spark</a></li>
+<li class="chapter" data-level="5.1.3" data-path="r-y-spark.html"><a href="r-y-spark.html#sparklyr"><i class="fa fa-check"></i><b>5.1.3</b> Sparklyr</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="r-y-spark.html"><a href="r-y-spark.html#arrancando-spark"><i class="fa fa-check"></i><b>5.2</b> Arrancando Spark</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="r-y-spark.html"><a href="r-y-spark.html#prerequisitos"><i class="fa fa-check"></i><b>5.2.1</b> Prerequisitos</a></li>
+<li class="chapter" data-level="5.2.2" data-path="r-y-spark.html"><a href="r-y-spark.html#instalación-1"><i class="fa fa-check"></i><b>5.2.2</b> Instalación</a></li>
+<li class="chapter" data-level="5.2.3" data-path="r-y-spark.html"><a href="r-y-spark.html#creando-una-sesión-en-spark"><i class="fa fa-check"></i><b>5.2.3</b> Creando una sesión en Spark</a></li>
+<li class="chapter" data-level="5.2.4" data-path="r-y-spark.html"><a href="r-y-spark.html#interface-web"><i class="fa fa-check"></i><b>5.2.4</b> Interface web</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="r-y-spark.html"><a href="r-y-spark.html#análisis-con-spark"><i class="fa fa-check"></i><b>5.3</b> Análisis con Spark</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="r-y-spark.html"><a href="r-y-spark.html#importando-los-datos"><i class="fa fa-check"></i><b>5.3.1</b> Importando los datos</a></li>
+<li class="chapter" data-level="5.3.2" data-path="r-y-spark.html"><a href="r-y-spark.html#librería-dplyr-gramática-de-manipulación-de-datos"><i class="fa fa-check"></i><b>5.3.2</b> Librería DPLYR (Gramática de manipulación de datos)</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="r-y-spark.html"><a href="r-y-spark.html#modelado"><i class="fa fa-check"></i><b>5.4</b> Modelado</a></li>
 </ul></li>
 </ul>
 
@@ -397,15 +409,15 @@ El Web Scraping es la recolección automática de información de los sitios web
 <span id="cb125-3"><a href="scraping-web.html#cb125-3"></a>tabla&lt;-<span class="kw">html_table</span>(bs,<span class="dt">fill =</span> T)</span>
 <span id="cb125-4"><a href="scraping-web.html#cb125-4"></a>tabla[[<span class="dv">2</span>]]</span></code></pre></div>
 <pre><code>##   Departamento Hoy Acumulado Decesos Recuperados
-## 1         Beni  33     3,920     206          87
-## 2   Chuquisaca  48       470      29          22
-## 3   Cochabamba  50     2,970     136         117
-## 4       La Paz 212     2,373      68         365
-## 5        Oruro  22       721      54         107
-## 6        Pando   6       513      20          14
-## 7       Potosí  12       588      17          40
-## 8   Santa Cruz 571    16,555     373        6558
-## 9       Tarija  62       393      10          28</code></pre>
+## 1         Beni  66     4,041     218          98
+## 2   Chuquisaca  59       637      31          23
+## 3   Cochabamba  52     3,468     165         138
+## 4       La Paz 108     2,882      76         382
+## 5        Oruro  84       878      55         113
+## 6        Pando   0       567      25          14
+## 7       Potosí  38       641      19          50
+## 8   Santa Cruz 418    17,873     412        7669
+## 9       Tarija  23       537      13          30</code></pre>
 <div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="scraping-web.html#cb127-1"></a><span class="co">#paso 4: limpieza</span></span>
 <span id="cb127-2"><a href="scraping-web.html#cb127-2"></a><span class="co">#paso 5: Análisis</span></span></code></pre></div>
 </div>
