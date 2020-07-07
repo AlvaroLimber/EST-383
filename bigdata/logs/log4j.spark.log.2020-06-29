@@ -1,0 +1,175 @@
+20/06/29 17:21:08 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+20/06/29 17:21:14 INFO SparkContext: Running Spark version 2.4.3
+20/06/29 17:21:14 WARN SparkConf: Note that spark.local.dir will be overridden by the value set by the cluster manager (via SPARK_LOCAL_DIRS in mesos/standalone/kubernetes and LOCAL_DIRS in YARN).
+20/06/29 17:21:14 INFO SparkContext: Submitted application: sparklyr
+20/06/29 17:21:14 INFO SecurityManager: Changing view acls to: ALVARO
+20/06/29 17:21:14 INFO SecurityManager: Changing modify acls to: ALVARO
+20/06/29 17:21:14 INFO SecurityManager: Changing view acls groups to: 
+20/06/29 17:21:14 INFO SecurityManager: Changing modify acls groups to: 
+20/06/29 17:21:14 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(ALVARO); groups with view permissions: Set(); users  with modify permissions: Set(ALVARO); groups with modify permissions: Set()
+20/06/29 17:21:15 INFO Utils: Successfully started service 'sparkDriver' on port 52549.
+20/06/29 17:21:15 INFO SparkEnv: Registering MapOutputTracker
+20/06/29 17:21:15 INFO SparkEnv: Registering BlockManagerMaster
+20/06/29 17:21:15 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+20/06/29 17:21:15 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
+20/06/29 17:21:15 INFO DiskBlockManager: Created local directory at C:\Users\ALVARO\AppData\Local\spark\spark-2.4.3-bin-hadoop2.7\tmp\local\blockmgr-dc374b48-0f35-44df-b0d8-40cfeed02c68
+20/06/29 17:21:16 INFO MemoryStore: MemoryStore started with capacity 912.3 MB
+20/06/29 17:21:16 INFO SparkEnv: Registering OutputCommitCoordinator
+20/06/29 17:21:16 WARN Utils: The configured local directories are not expected to be URIs; however, got suspicious values [C:/Users/ALVARO/AppData/Local/spark/spark-2.4.3-bin-hadoop2.7/tmp/local]. Please check your configured local directories.
+20/06/29 17:21:19 INFO Utils: Successfully started service 'SparkUI' on port 4040.
+20/06/29 17:21:19 INFO SparkUI: Bound SparkUI to 127.0.0.1, and started at http://127.0.0.1:4040
+20/06/29 17:21:19 INFO SparkContext: Added JAR file:/C:/Users/ALVARO/Documents/R/win-library/4.0/sparklyr/java/sparklyr-2.4-2.11.jar at spark://127.0.0.1:52549/jars/sparklyr-2.4-2.11.jar with timestamp 1593465679531
+20/06/29 17:21:20 INFO Executor: Starting executor ID driver on host localhost
+20/06/29 17:21:21 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 52570.
+20/06/29 17:21:21 INFO NettyBlockTransferService: Server created on 127.0.0.1:52570
+20/06/29 17:21:21 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+20/06/29 17:21:21 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, 127.0.0.1, 52570, None)
+20/06/29 17:21:21 INFO BlockManagerMasterEndpoint: Registering block manager 127.0.0.1:52570 with 912.3 MB RAM, BlockManagerId(driver, 127.0.0.1, 52570, None)
+20/06/29 17:21:21 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, 127.0.0.1, 52570, None)
+20/06/29 17:21:21 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, 127.0.0.1, 52570, None)
+20/06/29 17:21:22 INFO SharedState: loading hive config file: file:/C:/Users/ALVARO/AppData/Local/spark/spark-2.4.3-bin-hadoop2.7/conf/hive-site.xml
+20/06/29 17:21:22 INFO SharedState: Setting hive.metastore.warehouse.dir ('C:/Users/ALVARO/AppData/Local/spark/spark-2.4.3-bin-hadoop2.7/tmp/hive') to the value of spark.sql.warehouse.dir ('C:/Users/ALVARO/AppData/Local/spark/spark-2.4.3-bin-hadoop2.7/tmp/hive').
+20/06/29 17:21:22 INFO SharedState: Warehouse path is 'C:/Users/ALVARO/AppData/Local/spark/spark-2.4.3-bin-hadoop2.7/tmp/hive'.
+20/06/29 17:21:26 INFO StateStoreCoordinatorRef: Registered StateStoreCoordinator endpoint
+20/06/29 17:21:35 INFO HiveUtils: Initializing HiveMetastoreConnection version 1.2.1 using Spark classes.
+20/06/29 17:21:37 INFO HiveMetaStore: 0: Opening raw store with implemenation class:org.apache.hadoop.hive.metastore.ObjectStore
+20/06/29 17:21:37 INFO ObjectStore: ObjectStore, initialize called
+20/06/29 17:21:38 INFO Persistence: Propiedad hive.metastore.integral.jdo.pushdown desconocida - vamos a ignorarla
+20/06/29 17:21:38 INFO Persistence: Propiedad datanucleus.cache.level2 desconocida - vamos a ignorarla
+20/06/29 17:21:41 INFO ObjectStore: Setting MetaStore object pin classes with hive.metastore.cache.pinobjtypes="Table,StorageDescriptor,SerDeInfo,Partition,Database,Type,FieldSchema,Order"
+20/06/29 17:21:43 INFO Datastore: La clase "org.apache.hadoop.hive.metastore.model.MFieldSchema" es "embedded-only" asi que no tiene su propia tabla.
+20/06/29 17:21:43 INFO Datastore: La clase "org.apache.hadoop.hive.metastore.model.MOrder" es "embedded-only" asi que no tiene su propia tabla.
+20/06/29 17:21:44 INFO Datastore: La clase "org.apache.hadoop.hive.metastore.model.MFieldSchema" es "embedded-only" asi que no tiene su propia tabla.
+20/06/29 17:21:44 INFO Datastore: La clase "org.apache.hadoop.hive.metastore.model.MOrder" es "embedded-only" asi que no tiene su propia tabla.
+20/06/29 17:21:44 INFO MetaStoreDirectSql: Using direct SQL, underlying DB is DERBY
+20/06/29 17:21:44 INFO ObjectStore: Initialized ObjectStore
+20/06/29 17:21:45 WARN ObjectStore: Version information not found in metastore. hive.metastore.schema.verification is not enabled so recording the schema version 1.2.0
+20/06/29 17:21:45 WARN ObjectStore: Failed to get database default, returning NoSuchObjectException
+20/06/29 17:21:45 INFO HiveMetaStore: Added admin role in metastore
+20/06/29 17:21:45 INFO HiveMetaStore: Added public role in metastore
+20/06/29 17:21:45 INFO HiveMetaStore: No user is added in admin role, since config is empty
+20/06/29 17:21:45 INFO HiveMetaStore: 0: get_all_databases
+20/06/29 17:21:45 INFO audit: ugi=ALVARO	ip=unknown-ip-addr	cmd=get_all_databases	
+20/06/29 17:21:45 INFO HiveMetaStore: 0: get_functions: db=default pat=*
+20/06/29 17:21:45 INFO audit: ugi=ALVARO	ip=unknown-ip-addr	cmd=get_functions: db=default pat=*	
+20/06/29 17:21:45 INFO Datastore: La clase "org.apache.hadoop.hive.metastore.model.MResourceUri" es "embedded-only" asi que no tiene su propia tabla.
+20/06/29 17:21:46 INFO SessionState: Created local directory: C:/Users/ALVARO/AppData/Local/Temp/1a8b6b0e-f881-4afd-8ef8-ba0e1c2b581e_resources
+20/06/29 17:21:46 INFO SessionState: Created HDFS directory: C:/Users/ALVARO/AppData/Local/spark/spark-2.4.3-bin-hadoop2.7/tmp/hive/ALVARO/1a8b6b0e-f881-4afd-8ef8-ba0e1c2b581e
+20/06/29 17:21:46 INFO SessionState: Created local directory: C:/Users/ALVARO/AppData/Local/spark/spark-2.4.3-bin-hadoop2.7/tmp/hive/1a8b6b0e-f881-4afd-8ef8-ba0e1c2b581e
+20/06/29 17:21:46 INFO SessionState: Created HDFS directory: C:/Users/ALVARO/AppData/Local/spark/spark-2.4.3-bin-hadoop2.7/tmp/hive/ALVARO/1a8b6b0e-f881-4afd-8ef8-ba0e1c2b581e/_tmp_space.db
+20/06/29 17:21:46 INFO HiveClientImpl: Warehouse location for Hive client (version 1.2.2) is C:/Users/ALVARO/AppData/Local/spark/spark-2.4.3-bin-hadoop2.7/tmp/hive
+20/06/29 17:21:46 INFO HiveMetaStore: 0: get_database: default
+20/06/29 17:21:46 INFO audit: ugi=ALVARO	ip=unknown-ip-addr	cmd=get_database: default	
+20/06/29 17:21:46 INFO HiveMetaStore: 0: get_database: global_temp
+20/06/29 17:21:46 INFO audit: ugi=ALVARO	ip=unknown-ip-addr	cmd=get_database: global_temp	
+20/06/29 17:21:46 WARN ObjectStore: Failed to get database global_temp, returning NoSuchObjectException
+20/06/29 17:21:46 INFO HiveMetaStore: 0: get_database: default
+20/06/29 17:21:46 INFO audit: ugi=ALVARO	ip=unknown-ip-addr	cmd=get_database: default	
+20/06/29 17:21:46 INFO HiveMetaStore: 0: get_database: default
+20/06/29 17:21:46 INFO audit: ugi=ALVARO	ip=unknown-ip-addr	cmd=get_database: default	
+20/06/29 17:21:46 INFO HiveMetaStore: 0: get_tables: db=default pat=*
+20/06/29 17:21:46 INFO audit: ugi=ALVARO	ip=unknown-ip-addr	cmd=get_tables: db=default pat=*	
+20/06/29 17:21:48 INFO CodeGenerator: Code generated in 471.5968 ms
+20/06/29 17:21:48 INFO HiveMetaStore: 0: get_database: default
+20/06/29 17:21:48 INFO audit: ugi=ALVARO	ip=unknown-ip-addr	cmd=get_database: default	
+20/06/29 17:21:49 INFO HiveMetaStore: 0: get_database: default
+20/06/29 17:21:49 INFO audit: ugi=ALVARO	ip=unknown-ip-addr	cmd=get_database: default	
+20/06/29 17:21:49 INFO HiveMetaStore: 0: get_tables: db=default pat=*
+20/06/29 17:21:49 INFO audit: ugi=ALVARO	ip=unknown-ip-addr	cmd=get_tables: db=default pat=*	
+20/06/29 17:25:04 INFO ContextCleaner: Cleaned accumulator 1
+20/06/29 17:25:04 INFO ContextCleaner: Cleaned accumulator 0
+20/06/29 17:28:53 INFO SparkContext: Invoking stop() from shutdown hook
+20/06/29 17:28:53 INFO SparkUI: Stopped Spark web UI at http://127.0.0.1:4040
+20/06/29 17:28:53 INFO MapOutputTrackerMasterEndpoint: MapOutputTrackerMasterEndpoint stopped!
+20/06/29 17:28:53 INFO MemoryStore: MemoryStore cleared
+20/06/29 17:28:53 INFO BlockManager: BlockManager stopped
+20/06/29 17:28:53 INFO BlockManagerMaster: BlockManagerMaster stopped
+20/06/29 17:28:53 INFO OutputCommitCoordinator$OutputCommitCoordinatorEndpoint: OutputCommitCoordinator stopped!
+20/06/29 17:28:53 INFO SparkContext: Successfully stopped SparkContext
+20/06/29 17:28:53 INFO ShutdownHookManager: Shutdown hook called
+20/06/29 17:28:53 INFO ShutdownHookManager: Deleting directory C:\Users\ALVARO\AppData\Local\spark\spark-2.4.3-bin-hadoop2.7\tmp\local\spark-9aa7a482-f9ab-4018-a363-77fb8f009cd8
+20/06/29 17:28:53 INFO ShutdownHookManager: Deleting directory C:\Users\ALVARO\AppData\Local\Temp\spark-e89fc8a4-03d7-4c87-8dcb-35e57f6d6fc1
+20/06/29 17:33:37 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+20/06/29 17:33:40 INFO SparkContext: Running Spark version 2.4.3
+20/06/29 17:33:40 WARN SparkConf: Note that spark.local.dir will be overridden by the value set by the cluster manager (via SPARK_LOCAL_DIRS in mesos/standalone/kubernetes and LOCAL_DIRS in YARN).
+20/06/29 17:33:40 INFO SparkContext: Submitted application: sparklyr
+20/06/29 17:33:40 INFO SecurityManager: Changing view acls to: ALVARO
+20/06/29 17:33:40 INFO SecurityManager: Changing modify acls to: ALVARO
+20/06/29 17:33:40 INFO SecurityManager: Changing view acls groups to: 
+20/06/29 17:33:40 INFO SecurityManager: Changing modify acls groups to: 
+20/06/29 17:33:40 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(ALVARO); groups with view permissions: Set(); users  with modify permissions: Set(ALVARO); groups with modify permissions: Set()
+20/06/29 17:33:40 INFO Utils: Successfully started service 'sparkDriver' on port 52849.
+20/06/29 17:33:40 INFO SparkEnv: Registering MapOutputTracker
+20/06/29 17:33:40 INFO SparkEnv: Registering BlockManagerMaster
+20/06/29 17:33:40 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+20/06/29 17:33:40 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
+20/06/29 17:33:40 INFO DiskBlockManager: Created local directory at C:\Users\ALVARO\AppData\Local\spark\spark-2.4.3-bin-hadoop2.7\tmp\local\blockmgr-1669135d-87d1-4201-86c7-c9d817d263e3
+20/06/29 17:33:40 INFO MemoryStore: MemoryStore started with capacity 1216.4 MB
+20/06/29 17:33:40 INFO SparkEnv: Registering OutputCommitCoordinator
+20/06/29 17:33:40 WARN Utils: The configured local directories are not expected to be URIs; however, got suspicious values [C:/Users/ALVARO/AppData/Local/spark/spark-2.4.3-bin-hadoop2.7/tmp/local]. Please check your configured local directories.
+20/06/29 17:33:41 INFO Utils: Successfully started service 'SparkUI' on port 4040.
+20/06/29 17:33:41 INFO SparkUI: Bound SparkUI to 127.0.0.1, and started at http://127.0.0.1:4040
+20/06/29 17:33:41 INFO SparkContext: Added JAR file:/C:/Users/ALVARO/Documents/R/win-library/4.0/sparklyr/java/sparklyr-2.4-2.11.jar at spark://127.0.0.1:52849/jars/sparklyr-2.4-2.11.jar with timestamp 1593466421176
+20/06/29 17:33:41 INFO Executor: Starting executor ID driver on host localhost
+20/06/29 17:33:41 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 52870.
+20/06/29 17:33:41 INFO NettyBlockTransferService: Server created on 127.0.0.1:52870
+20/06/29 17:33:41 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+20/06/29 17:33:41 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, 127.0.0.1, 52870, None)
+20/06/29 17:33:41 INFO BlockManagerMasterEndpoint: Registering block manager 127.0.0.1:52870 with 1216.4 MB RAM, BlockManagerId(driver, 127.0.0.1, 52870, None)
+20/06/29 17:33:41 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, 127.0.0.1, 52870, None)
+20/06/29 17:33:41 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, 127.0.0.1, 52870, None)
+20/06/29 17:33:42 INFO SharedState: loading hive config file: file:/C:/Users/ALVARO/AppData/Local/spark/spark-2.4.3-bin-hadoop2.7/conf/hive-site.xml
+20/06/29 17:33:42 INFO SharedState: Setting hive.metastore.warehouse.dir ('C:/Users/ALVARO/AppData/Local/spark/spark-2.4.3-bin-hadoop2.7/tmp/hive') to the value of spark.sql.warehouse.dir ('C:/Users/ALVARO/AppData/Local/spark/spark-2.4.3-bin-hadoop2.7/tmp/hive').
+20/06/29 17:33:42 INFO SharedState: Warehouse path is 'C:/Users/ALVARO/AppData/Local/spark/spark-2.4.3-bin-hadoop2.7/tmp/hive'.
+20/06/29 17:33:43 INFO StateStoreCoordinatorRef: Registered StateStoreCoordinator endpoint
+20/06/29 17:33:46 INFO HiveUtils: Initializing HiveMetastoreConnection version 1.2.1 using Spark classes.
+20/06/29 17:33:48 INFO HiveMetaStore: 0: Opening raw store with implemenation class:org.apache.hadoop.hive.metastore.ObjectStore
+20/06/29 17:33:48 INFO ObjectStore: ObjectStore, initialize called
+20/06/29 17:33:48 INFO Persistence: Propiedad hive.metastore.integral.jdo.pushdown desconocida - vamos a ignorarla
+20/06/29 17:33:48 INFO Persistence: Propiedad datanucleus.cache.level2 desconocida - vamos a ignorarla
+20/06/29 17:33:50 INFO ObjectStore: Setting MetaStore object pin classes with hive.metastore.cache.pinobjtypes="Table,StorageDescriptor,SerDeInfo,Partition,Database,Type,FieldSchema,Order"
+20/06/29 17:33:52 INFO Datastore: La clase "org.apache.hadoop.hive.metastore.model.MFieldSchema" es "embedded-only" asi que no tiene su propia tabla.
+20/06/29 17:33:52 INFO Datastore: La clase "org.apache.hadoop.hive.metastore.model.MOrder" es "embedded-only" asi que no tiene su propia tabla.
+20/06/29 17:33:53 INFO Datastore: La clase "org.apache.hadoop.hive.metastore.model.MFieldSchema" es "embedded-only" asi que no tiene su propia tabla.
+20/06/29 17:33:53 INFO Datastore: La clase "org.apache.hadoop.hive.metastore.model.MOrder" es "embedded-only" asi que no tiene su propia tabla.
+20/06/29 17:33:53 INFO MetaStoreDirectSql: Using direct SQL, underlying DB is DERBY
+20/06/29 17:33:53 INFO ObjectStore: Initialized ObjectStore
+20/06/29 17:33:53 WARN ObjectStore: Version information not found in metastore. hive.metastore.schema.verification is not enabled so recording the schema version 1.2.0
+20/06/29 17:33:53 WARN ObjectStore: Failed to get database default, returning NoSuchObjectException
+20/06/29 17:33:53 INFO HiveMetaStore: Added admin role in metastore
+20/06/29 17:33:53 INFO HiveMetaStore: Added public role in metastore
+20/06/29 17:33:53 INFO HiveMetaStore: No user is added in admin role, since config is empty
+20/06/29 17:33:54 INFO HiveMetaStore: 0: get_all_databases
+20/06/29 17:33:54 INFO audit: ugi=ALVARO	ip=unknown-ip-addr	cmd=get_all_databases	
+20/06/29 17:33:54 INFO HiveMetaStore: 0: get_functions: db=default pat=*
+20/06/29 17:33:54 INFO audit: ugi=ALVARO	ip=unknown-ip-addr	cmd=get_functions: db=default pat=*	
+20/06/29 17:33:54 INFO Datastore: La clase "org.apache.hadoop.hive.metastore.model.MResourceUri" es "embedded-only" asi que no tiene su propia tabla.
+20/06/29 17:33:54 INFO SessionState: Created local directory: C:/Users/ALVARO/AppData/Local/Temp/29477fac-d387-403e-9f2c-47623e06c98b_resources
+20/06/29 17:33:54 INFO SessionState: Created HDFS directory: C:/Users/ALVARO/AppData/Local/spark/spark-2.4.3-bin-hadoop2.7/tmp/hive/ALVARO/29477fac-d387-403e-9f2c-47623e06c98b
+20/06/29 17:33:54 INFO SessionState: Created local directory: C:/Users/ALVARO/AppData/Local/spark/spark-2.4.3-bin-hadoop2.7/tmp/hive/29477fac-d387-403e-9f2c-47623e06c98b
+20/06/29 17:33:54 INFO SessionState: Created HDFS directory: C:/Users/ALVARO/AppData/Local/spark/spark-2.4.3-bin-hadoop2.7/tmp/hive/ALVARO/29477fac-d387-403e-9f2c-47623e06c98b/_tmp_space.db
+20/06/29 17:33:54 INFO HiveClientImpl: Warehouse location for Hive client (version 1.2.2) is C:/Users/ALVARO/AppData/Local/spark/spark-2.4.3-bin-hadoop2.7/tmp/hive
+20/06/29 17:33:54 INFO HiveMetaStore: 0: get_database: default
+20/06/29 17:33:54 INFO audit: ugi=ALVARO	ip=unknown-ip-addr	cmd=get_database: default	
+20/06/29 17:33:54 INFO HiveMetaStore: 0: get_database: global_temp
+20/06/29 17:33:54 INFO audit: ugi=ALVARO	ip=unknown-ip-addr	cmd=get_database: global_temp	
+20/06/29 17:33:54 WARN ObjectStore: Failed to get database global_temp, returning NoSuchObjectException
+20/06/29 17:33:54 INFO HiveMetaStore: 0: get_database: default
+20/06/29 17:33:54 INFO audit: ugi=ALVARO	ip=unknown-ip-addr	cmd=get_database: default	
+20/06/29 17:33:54 INFO HiveMetaStore: 0: get_database: default
+20/06/29 17:33:54 INFO audit: ugi=ALVARO	ip=unknown-ip-addr	cmd=get_database: default	
+20/06/29 17:33:54 INFO HiveMetaStore: 0: get_tables: db=default pat=*
+20/06/29 17:33:54 INFO audit: ugi=ALVARO	ip=unknown-ip-addr	cmd=get_tables: db=default pat=*	
+20/06/29 17:33:55 INFO CodeGenerator: Code generated in 318.3846 ms
+20/06/29 17:35:00 INFO ContextCleaner: Cleaned accumulator 0
+20/06/29 18:13:49 INFO SparkContext: Invoking stop() from shutdown hook
+20/06/29 18:13:49 INFO SparkUI: Stopped Spark web UI at http://127.0.0.1:4040
+20/06/29 18:13:49 INFO MapOutputTrackerMasterEndpoint: MapOutputTrackerMasterEndpoint stopped!
+20/06/29 18:13:49 INFO MemoryStore: MemoryStore cleared
+20/06/29 18:13:49 INFO BlockManager: BlockManager stopped
+20/06/29 18:13:49 INFO BlockManagerMaster: BlockManagerMaster stopped
+20/06/29 18:13:49 INFO OutputCommitCoordinator$OutputCommitCoordinatorEndpoint: OutputCommitCoordinator stopped!
+20/06/29 18:13:49 INFO SparkContext: Successfully stopped SparkContext
+20/06/29 18:13:49 INFO ShutdownHookManager: Shutdown hook called
+20/06/29 18:13:49 INFO ShutdownHookManager: Deleting directory C:\Users\ALVARO\AppData\Local\spark\spark-2.4.3-bin-hadoop2.7\tmp\local\spark-bb02f260-0d20-49ee-8044-8b7912c3af07
+20/06/29 18:13:49 INFO ShutdownHookManager: Deleting directory C:\Users\ALVARO\AppData\Local\Temp\spark-bd9ac7df-b33e-42b2-a519-c80d5dba8663

@@ -150,7 +150,7 @@ write.xlsx(bd,"ue2017.xlsx",row.names = F)
 
 ## Ejemplo, informacion COVID-19 en Bolivia
 
-```{r}
+```{r,eval=F}
 library(rvest)
 #paso 0: Estadísticas del covid-19 en Bolivia
 #paso 1: cargar la www de interés

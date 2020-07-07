@@ -43,24 +43,31 @@ system("java -version")
 ### Instalación
 
 ```{r,eval=F}
-#Habilitando la libreria
+#instalar la libraría sparlyr
+install.packages("sparklyr")
+#Habilitando la librería
 library(sparklyr)
 #versiones disponibles
 spark_available_versions()
 #versiones instaladas
 spark_installed_versions()
 #instalando spark desde R
-spark_install()
-#si se quiere desinstalar alguna versión en particular
+spark_install("2.3")
+#spark_install(version="2.3")
 ```
 
 ### Creando una sesión en Spark
 
 ```{r,eval=F}
+#inicia la sesión
+sc <- spark_connect(master = "local", version = "2.4.3")
+spark_disconnect(sc)
 #configuración
 conf <- spark_config()
-  conf$`sparklyr.shell.driver-memory` <- "2G"  
+  conf$`sparklyr.shell.driver-memory` <- "2G"
   conf$spark.memory.fraction <- 0.8 
+  #spark_home="C:\\Users\\ALVARO\\AppData\\Local\\spark\\spark-2.4.3-bin-hadoop2.7"
+  #conf$sparklyr.gateway.port <- 9090
 #conección  
 sc <- spark_connect(master = "local", version = "2.4.3",config = conf)  
 #apagar conexión
@@ -91,68 +98,120 @@ spark_web(sc)
 ### Importando los datos
 Por lo general, importar significa que R leerá los archivos y los cargará en la memoria; cuando se usa Spark, los datos se importan a Spark, no a R.
 
-![Pasos en el análisis de datos](images/spark3.png)
+![](images/spark3.png)
 
-![Pasos en el análisis de datos](images/spark4.png)
+![](images/spark4.png)
 
 Colección de documentos
 
 ```{r,eval=F}
-#Schema
-top_rows <- read.csv("C:\\Users\\ALVARO\\Documents\\GitHub\\EST-383\\data\\covid_mx\\200627COVID19MEXICO.csv",sep=",", nrows = 5)
+#csv/importaciones
+sp_importaciones<-spark_read_csv(sc,
+  name="importaciones",
+  path = "C:\\Users\\ALVARO\\Desktop\\db_bolivia\\importaciones\\importaciones_csv")
+###########
+#esquema
+###########
+top_rows <- read.csv("C:\\Users\\ALVARO\\Desktop\\db_bolivia\\importaciones\\importaciones_csv\\1993.csv",sep=",", nrows = 5)
 spec_with_r <- sapply(top_rows, class)
-spec_with_r
-#csv/covid mexico
-sp_covid<-spark_read_csv(sc,
-  name="covid",
-  path = "C:\\Users\\ALVARO\\Documents\\GitHub\\EST-383\\data\\covid_mx\\")
-# esquema
-sp_covid<-spark_read_csv(sc,
-  name="covid",
-  path = "C:\\Users\\ALVARO\\Documents\\GitHub\\EST-383\\data\\covid_mx\\",
+spec_with_r[6]<-"factor"
+
+sp_importaciones2<-spark_read_csv(sc,
+  name="importaciones2",
+  path = "C:\\Users\\ALVARO\\Desktop\\db_bolivia\\importaciones\\importaciones_csv",
   columns = spec_with_r)
 # memoria
-object.size(sp_covid)
-#spark SQL
-library(DBI)
-top10 <- dbGetQuery(sc, "Select * from covid limit 10")
-top10
+object.size(sp_importaciones)
 ```
 
 Comando copy_to
 
 ```{r,eval=F}
+m1<-data.frame(matrix(rnorm(10^7),ncol=20))
+object.size(m1)/(10^6)
+sp_m1<-copy_to(sc,m1)
+rm(m1)
+
 load("C:\\Users\\ALVARO\\Documents\\GitHub\\EST-383\\data\\oct20.RData")
-oct20<-copy_to(sc,computo)
+object.size(computo)/10^6
+sp_computo<-copy_to(sc,computo)
+rm(computo)
 ```
 
 Documento específico
 
 ```{r,eval=F}
-sp_covid2<-spark_read_csv(sc,
-  name="covid2",
-  path = "C:\\Users\\ALVARO\\Desktop\\db_bolivia\\bigdata\\200614COVID19MEXICO.csv",
-  columns = spec_with_r)
+sp_covid<-spark_read_csv(sc,
+  name="covid",
+  path = "C:\\Users\\ALVARO\\Desktop\\db_bolivia\\bigdata\\200614COVID19MEXICO.csv")
 ```
 
 ### Librería DPLYR (Gramática de manipulación de datos)
 
   * https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html
 
+
+Eliminar un objeto en spark
+
+```{r,eval=FALSE}
+library(dplyr)
+db_drop_table(sc,"importaciones2")
+db_drop_table(sc,"m1")
+spark_disconnect(sc)
+```
+
+
 ```{r,eval=F}
-sp_covid %>% tally
+load("C:\\Users\\ALVARO\\Documents\\GitHub\\EST-383\\data\\oct20.RData")
+head(computo)
+#filtrado
+aux<-computo[computo$País=="Bolivia",] #en R
+aux2<-computo %>% filter(País=="Bolivia") 
+```
+
+
+```{r,eval=F}
+#spark SQL
+library(DBI)
+top10 <- dbGetQuery(sc, "Select * from importaciones limit 10")
+top10
+library(dplyr)
+sp_importaciones %>% tally
 sp_covid2 %>% tally
 oct20 %>% tally
-covid_cache <- sp_covid %>% 
+covid_cache <- sp_covid2 %>% 
     compute("covid_ch")
 covid_cache %>% tally
 ```
 
 ```{r,eval=F}
-dimnames(sp_covid)
-sp_covid %>% count(SEXO)
+#importaciones
+dimnames(sp_importaciones)
+
+sp_t1<-sp_importaciones %>% count(GESTION) %>% compute("t1")
+
+aa<-sp_importaciones %>% count(GESTION) %>% collect()
+aa<-sp_importaciones %>% count(GESTION,DESDEPTO) %>% collect()
 sp_covid2 %>% count(SEXO,NEUMONIA)
 sp_covid2 %>% group_by(SEXO) %>% summarise(mean(EDAD),na.rm=T)
+
+ww<-sp_importaciones %>% group_by(GESTION,DESDEPTO,NANDINA) %>% summarise(total=sum(FOB,na.rm=T)) %>% collect()
+sp_importaciones %>%  tbl(GESTION)
+
+oct20 %>% select(MAS__IPSP,CC)%>%  summarise_all(mean)
+oct20 %>% select(MAS__IPSP,CC)%>%  summarise_all(mean) %>% show_query()
+oct20 %>% summarise(qq=quantile(CC,probs=0.5))
+oct20 %>% select(MAS__IPSP,CC) %>% ml_corr()
+
+#figuras
+oct20 %>% select(CC) %>% hist()
+
+library(dbplot)
+oct20 %>% dbplot_histogram(CC,binwidth = 3)
+sp_importaciones %>%  dbplot_bar(GESTION)
+oct20 %>%  dbplot_raster(CC,MAS__IPSP)
+
+oct20 %>% filter(PaAs=="Bolivia")%>%  group_by(Departamento) %>% summarise(voto=mean(CC)) %>% ggplot(aes(Departamento,voto))+geom_bar(stat="identity")
+
+ggplot(oct20,aes(CC,MAS__IPSP))+geom_point()
 ```
-  
-## Modelado

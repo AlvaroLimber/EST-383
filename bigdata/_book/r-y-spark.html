@@ -24,7 +24,7 @@
 <meta name="author" content="Alvaro Chirino Gutierrez" />
 
 
-<meta name="date" content="2020-06-29" />
+<meta name="date" content="2020-07-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -236,7 +236,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.3.1" data-path="r-y-spark.html"><a href="r-y-spark.html#importando-los-datos"><i class="fa fa-check"></i><b>5.3.1</b> Importando los datos</a></li>
 <li class="chapter" data-level="5.3.2" data-path="r-y-spark.html"><a href="r-y-spark.html#librería-dplyr-gramática-de-manipulación-de-datos"><i class="fa fa-check"></i><b>5.3.2</b> Librería DPLYR (Gramática de manipulación de datos)</a></li>
 </ul></li>
-<li class="chapter" data-level="5.4" data-path="r-y-spark.html"><a href="r-y-spark.html#modelado"><i class="fa fa-check"></i><b>5.4</b> Modelado</a></li>
 </ul></li>
 </ul>
 
@@ -298,35 +297,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>RStudio</li>
 <li>Java 8</li>
 </ul>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="r-y-spark.html#cb139-1"></a><span class="kw">system</span>(<span class="st">&quot;java -version&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="r-y-spark.html#cb134-1"></a><span class="kw">system</span>(<span class="st">&quot;java -version&quot;</span>)</span></code></pre></div>
 </div>
 <div id="instalación-1" class="section level3">
 <h3><span class="header-section-number">5.2.2</span> Instalación</h3>
-<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="r-y-spark.html#cb140-1"></a><span class="co">#Habilitando la libreria</span></span>
-<span id="cb140-2"><a href="r-y-spark.html#cb140-2"></a><span class="kw">library</span>(sparklyr)</span>
-<span id="cb140-3"><a href="r-y-spark.html#cb140-3"></a><span class="co">#versiones disponibles</span></span>
-<span id="cb140-4"><a href="r-y-spark.html#cb140-4"></a><span class="kw">spark_available_versions</span>()</span>
-<span id="cb140-5"><a href="r-y-spark.html#cb140-5"></a><span class="co">#versiones instaladas</span></span>
-<span id="cb140-6"><a href="r-y-spark.html#cb140-6"></a><span class="kw">spark_installed_versions</span>()</span>
-<span id="cb140-7"><a href="r-y-spark.html#cb140-7"></a><span class="co">#instalando spark desde R</span></span>
-<span id="cb140-8"><a href="r-y-spark.html#cb140-8"></a><span class="kw">spark_install</span>()</span>
-<span id="cb140-9"><a href="r-y-spark.html#cb140-9"></a><span class="co">#si se quiere desinstalar alguna versión en particular</span></span></code></pre></div>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="r-y-spark.html#cb135-1"></a><span class="co">#instalar la libraría sparlyr</span></span>
+<span id="cb135-2"><a href="r-y-spark.html#cb135-2"></a><span class="kw">install.packages</span>(<span class="st">&quot;sparklyr&quot;</span>)</span>
+<span id="cb135-3"><a href="r-y-spark.html#cb135-3"></a><span class="co">#Habilitando la librería</span></span>
+<span id="cb135-4"><a href="r-y-spark.html#cb135-4"></a><span class="kw">library</span>(sparklyr)</span>
+<span id="cb135-5"><a href="r-y-spark.html#cb135-5"></a><span class="co">#versiones disponibles</span></span>
+<span id="cb135-6"><a href="r-y-spark.html#cb135-6"></a><span class="kw">spark_available_versions</span>()</span>
+<span id="cb135-7"><a href="r-y-spark.html#cb135-7"></a><span class="co">#versiones instaladas</span></span>
+<span id="cb135-8"><a href="r-y-spark.html#cb135-8"></a><span class="kw">spark_installed_versions</span>()</span>
+<span id="cb135-9"><a href="r-y-spark.html#cb135-9"></a><span class="co">#instalando spark desde R</span></span>
+<span id="cb135-10"><a href="r-y-spark.html#cb135-10"></a><span class="kw">spark_install</span>(<span class="st">&quot;2.3&quot;</span>)</span>
+<span id="cb135-11"><a href="r-y-spark.html#cb135-11"></a><span class="co">#spark_install(version=&quot;2.3&quot;)</span></span></code></pre></div>
 </div>
 <div id="creando-una-sesión-en-spark" class="section level3">
 <h3><span class="header-section-number">5.2.3</span> Creando una sesión en Spark</h3>
-<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="r-y-spark.html#cb141-1"></a><span class="co">#configuración</span></span>
-<span id="cb141-2"><a href="r-y-spark.html#cb141-2"></a>conf &lt;-<span class="st"> </span><span class="kw">spark_config</span>()</span>
-<span id="cb141-3"><a href="r-y-spark.html#cb141-3"></a>  conf<span class="op">$</span><span class="st">`</span><span class="dt">sparklyr.shell.driver-memory</span><span class="st">`</span> &lt;-<span class="st"> &quot;2G&quot;</span>  </span>
-<span id="cb141-4"><a href="r-y-spark.html#cb141-4"></a>  conf<span class="op">$</span>spark.memory.fraction &lt;-<span class="st"> </span><span class="fl">0.8</span> </span>
-<span id="cb141-5"><a href="r-y-spark.html#cb141-5"></a><span class="co">#conección  </span></span>
-<span id="cb141-6"><a href="r-y-spark.html#cb141-6"></a>sc &lt;-<span class="st"> </span><span class="kw">spark_connect</span>(<span class="dt">master =</span> <span class="st">&quot;local&quot;</span>, <span class="dt">version =</span> <span class="st">&quot;2.4.3&quot;</span>,<span class="dt">config =</span> conf)  </span>
-<span id="cb141-7"><a href="r-y-spark.html#cb141-7"></a><span class="co">#apagar conexión</span></span>
-<span id="cb141-8"><a href="r-y-spark.html#cb141-8"></a><span class="kw">spark_disconnect</span>(sc)</span>
-<span id="cb141-9"><a href="r-y-spark.html#cb141-9"></a><span class="kw">spark_disconnect_all</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="r-y-spark.html#cb136-1"></a><span class="co">#inicia la sesión</span></span>
+<span id="cb136-2"><a href="r-y-spark.html#cb136-2"></a>sc &lt;-<span class="st"> </span><span class="kw">spark_connect</span>(<span class="dt">master =</span> <span class="st">&quot;local&quot;</span>, <span class="dt">version =</span> <span class="st">&quot;2.4.3&quot;</span>)</span>
+<span id="cb136-3"><a href="r-y-spark.html#cb136-3"></a><span class="kw">spark_disconnect</span>(sc)</span>
+<span id="cb136-4"><a href="r-y-spark.html#cb136-4"></a><span class="co">#configuración</span></span>
+<span id="cb136-5"><a href="r-y-spark.html#cb136-5"></a>conf &lt;-<span class="st"> </span><span class="kw">spark_config</span>()</span>
+<span id="cb136-6"><a href="r-y-spark.html#cb136-6"></a>  conf<span class="op">$</span><span class="st">`</span><span class="dt">sparklyr.shell.driver-memory</span><span class="st">`</span> &lt;-<span class="st"> &quot;2G&quot;</span></span>
+<span id="cb136-7"><a href="r-y-spark.html#cb136-7"></a>  conf<span class="op">$</span>spark.memory.fraction &lt;-<span class="st"> </span><span class="fl">0.8</span> </span>
+<span id="cb136-8"><a href="r-y-spark.html#cb136-8"></a>  <span class="co">#spark_home=&quot;C:\\Users\\ALVARO\\AppData\\Local\\spark\\spark-2.4.3-bin-hadoop2.7&quot;</span></span>
+<span id="cb136-9"><a href="r-y-spark.html#cb136-9"></a>  <span class="co">#conf$sparklyr.gateway.port &lt;- 9090</span></span>
+<span id="cb136-10"><a href="r-y-spark.html#cb136-10"></a><span class="co">#conección  </span></span>
+<span id="cb136-11"><a href="r-y-spark.html#cb136-11"></a>sc &lt;-<span class="st"> </span><span class="kw">spark_connect</span>(<span class="dt">master =</span> <span class="st">&quot;local&quot;</span>, <span class="dt">version =</span> <span class="st">&quot;2.4.3&quot;</span>,<span class="dt">config =</span> conf)  </span>
+<span id="cb136-12"><a href="r-y-spark.html#cb136-12"></a><span class="co">#apagar conexión</span></span>
+<span id="cb136-13"><a href="r-y-spark.html#cb136-13"></a><span class="kw">spark_disconnect</span>(sc)</span>
+<span id="cb136-14"><a href="r-y-spark.html#cb136-14"></a><span class="kw">spark_disconnect_all</span>()</span></code></pre></div>
 </div>
 <div id="interface-web" class="section level3">
 <h3><span class="header-section-number">5.2.4</span> Interface web</h3>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="r-y-spark.html#cb142-1"></a><span class="kw">spark_web</span>(sc)</span></code></pre></div>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="r-y-spark.html#cb137-1"></a><span class="kw">spark_web</span>(sc)</span></code></pre></div>
 <ul>
 <li><p><a href="http://localhost:4040/jobs/" class="uri">http://localhost:4040/jobs/</a></p></li>
 <li><p><a href="http://127.0.0.1:4040/executors/" class="uri">http://127.0.0.1:4040/executors/</a></p></li>
@@ -348,62 +354,96 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="importando-los-datos" class="section level3">
 <h3><span class="header-section-number">5.3.1</span> Importando los datos</h3>
 <p>Por lo general, importar significa que R leerá los archivos y los cargará en la memoria; cuando se usa Spark, los datos se importan a Spark, no a R.</p>
-<div class="figure">
-<img src="images/spark3.png" alt="" />
-<p class="caption">Pasos en el análisis de datos</p>
-</div>
-<div class="figure">
-<img src="images/spark4.PNG" alt="" />
-<p class="caption">Pasos en el análisis de datos</p>
-</div>
+<p><img src="images/spark3.png" /></p>
+<p><img src="images/spark4.PNG" /></p>
 <p>Colección de documentos</p>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="r-y-spark.html#cb143-1"></a><span class="co">#Schema</span></span>
-<span id="cb143-2"><a href="r-y-spark.html#cb143-2"></a>top_rows &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;C:</span><span class="ch">\\</span><span class="st">Users</span><span class="ch">\\</span><span class="st">ALVARO</span><span class="ch">\\</span><span class="st">Documents</span><span class="ch">\\</span><span class="st">GitHub</span><span class="ch">\\</span><span class="st">EST-383</span><span class="ch">\\</span><span class="st">data</span><span class="ch">\\</span><span class="st">covid_mx</span><span class="ch">\\</span><span class="st">200627COVID19MEXICO.csv&quot;</span>,<span class="dt">sep=</span><span class="st">&quot;,&quot;</span>, <span class="dt">nrows =</span> <span class="dv">5</span>)</span>
-<span id="cb143-3"><a href="r-y-spark.html#cb143-3"></a>spec_with_r &lt;-<span class="st"> </span><span class="kw">sapply</span>(top_rows, class)</span>
-<span id="cb143-4"><a href="r-y-spark.html#cb143-4"></a>spec_with_r</span>
-<span id="cb143-5"><a href="r-y-spark.html#cb143-5"></a><span class="co">#csv/covid mexico</span></span>
-<span id="cb143-6"><a href="r-y-spark.html#cb143-6"></a>sp_covid&lt;-<span class="kw">spark_read_csv</span>(sc,</span>
-<span id="cb143-7"><a href="r-y-spark.html#cb143-7"></a>  <span class="dt">name=</span><span class="st">&quot;covid&quot;</span>,</span>
-<span id="cb143-8"><a href="r-y-spark.html#cb143-8"></a>  <span class="dt">path =</span> <span class="st">&quot;C:</span><span class="ch">\\</span><span class="st">Users</span><span class="ch">\\</span><span class="st">ALVARO</span><span class="ch">\\</span><span class="st">Documents</span><span class="ch">\\</span><span class="st">GitHub</span><span class="ch">\\</span><span class="st">EST-383</span><span class="ch">\\</span><span class="st">data</span><span class="ch">\\</span><span class="st">covid_mx</span><span class="ch">\\</span><span class="st">&quot;</span>)</span>
-<span id="cb143-9"><a href="r-y-spark.html#cb143-9"></a><span class="co"># esquema</span></span>
-<span id="cb143-10"><a href="r-y-spark.html#cb143-10"></a>sp_covid&lt;-<span class="kw">spark_read_csv</span>(sc,</span>
-<span id="cb143-11"><a href="r-y-spark.html#cb143-11"></a>  <span class="dt">name=</span><span class="st">&quot;covid&quot;</span>,</span>
-<span id="cb143-12"><a href="r-y-spark.html#cb143-12"></a>  <span class="dt">path =</span> <span class="st">&quot;C:</span><span class="ch">\\</span><span class="st">Users</span><span class="ch">\\</span><span class="st">ALVARO</span><span class="ch">\\</span><span class="st">Documents</span><span class="ch">\\</span><span class="st">GitHub</span><span class="ch">\\</span><span class="st">EST-383</span><span class="ch">\\</span><span class="st">data</span><span class="ch">\\</span><span class="st">covid_mx</span><span class="ch">\\</span><span class="st">&quot;</span>,</span>
-<span id="cb143-13"><a href="r-y-spark.html#cb143-13"></a>  <span class="dt">columns =</span> spec_with_r)</span>
-<span id="cb143-14"><a href="r-y-spark.html#cb143-14"></a><span class="co"># memoria</span></span>
-<span id="cb143-15"><a href="r-y-spark.html#cb143-15"></a><span class="kw">object.size</span>(sp_covid)</span>
-<span id="cb143-16"><a href="r-y-spark.html#cb143-16"></a><span class="co">#spark SQL</span></span>
-<span id="cb143-17"><a href="r-y-spark.html#cb143-17"></a><span class="kw">library</span>(DBI)</span>
-<span id="cb143-18"><a href="r-y-spark.html#cb143-18"></a>top10 &lt;-<span class="st"> </span><span class="kw">dbGetQuery</span>(sc, <span class="st">&quot;Select * from covid limit 10&quot;</span>)</span>
-<span id="cb143-19"><a href="r-y-spark.html#cb143-19"></a>top10</span></code></pre></div>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="r-y-spark.html#cb138-1"></a><span class="co">#csv/importaciones</span></span>
+<span id="cb138-2"><a href="r-y-spark.html#cb138-2"></a>sp_importaciones&lt;-<span class="kw">spark_read_csv</span>(sc,</span>
+<span id="cb138-3"><a href="r-y-spark.html#cb138-3"></a>  <span class="dt">name=</span><span class="st">&quot;importaciones&quot;</span>,</span>
+<span id="cb138-4"><a href="r-y-spark.html#cb138-4"></a>  <span class="dt">path =</span> <span class="st">&quot;C:</span><span class="ch">\\</span><span class="st">Users</span><span class="ch">\\</span><span class="st">ALVARO</span><span class="ch">\\</span><span class="st">Desktop</span><span class="ch">\\</span><span class="st">db_bolivia</span><span class="ch">\\</span><span class="st">importaciones</span><span class="ch">\\</span><span class="st">importaciones_csv&quot;</span>)</span>
+<span id="cb138-5"><a href="r-y-spark.html#cb138-5"></a><span class="co">###########</span></span>
+<span id="cb138-6"><a href="r-y-spark.html#cb138-6"></a><span class="co">#esquema</span></span>
+<span id="cb138-7"><a href="r-y-spark.html#cb138-7"></a><span class="co">###########</span></span>
+<span id="cb138-8"><a href="r-y-spark.html#cb138-8"></a>top_rows &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;C:</span><span class="ch">\\</span><span class="st">Users</span><span class="ch">\\</span><span class="st">ALVARO</span><span class="ch">\\</span><span class="st">Desktop</span><span class="ch">\\</span><span class="st">db_bolivia</span><span class="ch">\\</span><span class="st">importaciones</span><span class="ch">\\</span><span class="st">importaciones_csv</span><span class="ch">\\</span><span class="st">1993.csv&quot;</span>,<span class="dt">sep=</span><span class="st">&quot;,&quot;</span>, <span class="dt">nrows =</span> <span class="dv">5</span>)</span>
+<span id="cb138-9"><a href="r-y-spark.html#cb138-9"></a>spec_with_r &lt;-<span class="st"> </span><span class="kw">sapply</span>(top_rows, class)</span>
+<span id="cb138-10"><a href="r-y-spark.html#cb138-10"></a>spec_with_r[<span class="dv">6</span>]&lt;-<span class="st">&quot;factor&quot;</span></span>
+<span id="cb138-11"><a href="r-y-spark.html#cb138-11"></a></span>
+<span id="cb138-12"><a href="r-y-spark.html#cb138-12"></a>sp_importaciones2&lt;-<span class="kw">spark_read_csv</span>(sc,</span>
+<span id="cb138-13"><a href="r-y-spark.html#cb138-13"></a>  <span class="dt">name=</span><span class="st">&quot;importaciones2&quot;</span>,</span>
+<span id="cb138-14"><a href="r-y-spark.html#cb138-14"></a>  <span class="dt">path =</span> <span class="st">&quot;C:</span><span class="ch">\\</span><span class="st">Users</span><span class="ch">\\</span><span class="st">ALVARO</span><span class="ch">\\</span><span class="st">Desktop</span><span class="ch">\\</span><span class="st">db_bolivia</span><span class="ch">\\</span><span class="st">importaciones</span><span class="ch">\\</span><span class="st">importaciones_csv&quot;</span>,</span>
+<span id="cb138-15"><a href="r-y-spark.html#cb138-15"></a>  <span class="dt">columns =</span> spec_with_r)</span>
+<span id="cb138-16"><a href="r-y-spark.html#cb138-16"></a><span class="co"># memoria</span></span>
+<span id="cb138-17"><a href="r-y-spark.html#cb138-17"></a><span class="kw">object.size</span>(sp_importaciones)</span></code></pre></div>
 <p>Comando copy_to</p>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="r-y-spark.html#cb144-1"></a><span class="kw">load</span>(<span class="st">&quot;C:</span><span class="ch">\\</span><span class="st">Users</span><span class="ch">\\</span><span class="st">ALVARO</span><span class="ch">\\</span><span class="st">Documents</span><span class="ch">\\</span><span class="st">GitHub</span><span class="ch">\\</span><span class="st">EST-383</span><span class="ch">\\</span><span class="st">data</span><span class="ch">\\</span><span class="st">oct20.RData&quot;</span>)</span>
-<span id="cb144-2"><a href="r-y-spark.html#cb144-2"></a>oct20&lt;-<span class="kw">copy_to</span>(sc,computo)</span></code></pre></div>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="r-y-spark.html#cb139-1"></a>m1&lt;-<span class="kw">data.frame</span>(<span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">10</span><span class="op">^</span><span class="dv">7</span>),<span class="dt">ncol=</span><span class="dv">20</span>))</span>
+<span id="cb139-2"><a href="r-y-spark.html#cb139-2"></a><span class="kw">object.size</span>(m1)<span class="op">/</span>(<span class="dv">10</span><span class="op">^</span><span class="dv">6</span>)</span>
+<span id="cb139-3"><a href="r-y-spark.html#cb139-3"></a>sp_m1&lt;-<span class="kw">copy_to</span>(sc,m1)</span>
+<span id="cb139-4"><a href="r-y-spark.html#cb139-4"></a><span class="kw">rm</span>(m1)</span>
+<span id="cb139-5"><a href="r-y-spark.html#cb139-5"></a></span>
+<span id="cb139-6"><a href="r-y-spark.html#cb139-6"></a><span class="kw">load</span>(<span class="st">&quot;C:</span><span class="ch">\\</span><span class="st">Users</span><span class="ch">\\</span><span class="st">ALVARO</span><span class="ch">\\</span><span class="st">Documents</span><span class="ch">\\</span><span class="st">GitHub</span><span class="ch">\\</span><span class="st">EST-383</span><span class="ch">\\</span><span class="st">data</span><span class="ch">\\</span><span class="st">oct20.RData&quot;</span>)</span>
+<span id="cb139-7"><a href="r-y-spark.html#cb139-7"></a><span class="kw">object.size</span>(computo)<span class="op">/</span><span class="dv">10</span><span class="op">^</span><span class="dv">6</span></span>
+<span id="cb139-8"><a href="r-y-spark.html#cb139-8"></a>sp_computo&lt;-<span class="kw">copy_to</span>(sc,computo)</span>
+<span id="cb139-9"><a href="r-y-spark.html#cb139-9"></a><span class="kw">rm</span>(computo)</span></code></pre></div>
 <p>Documento específico</p>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="r-y-spark.html#cb145-1"></a>sp_covid2&lt;-<span class="kw">spark_read_csv</span>(sc,</span>
-<span id="cb145-2"><a href="r-y-spark.html#cb145-2"></a>  <span class="dt">name=</span><span class="st">&quot;covid2&quot;</span>,</span>
-<span id="cb145-3"><a href="r-y-spark.html#cb145-3"></a>  <span class="dt">path =</span> <span class="st">&quot;C:</span><span class="ch">\\</span><span class="st">Users</span><span class="ch">\\</span><span class="st">ALVARO</span><span class="ch">\\</span><span class="st">Desktop</span><span class="ch">\\</span><span class="st">db_bolivia</span><span class="ch">\\</span><span class="st">bigdata</span><span class="ch">\\</span><span class="st">200614COVID19MEXICO.csv&quot;</span>,</span>
-<span id="cb145-4"><a href="r-y-spark.html#cb145-4"></a>  <span class="dt">columns =</span> spec_with_r)</span></code></pre></div>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="r-y-spark.html#cb140-1"></a>sp_covid&lt;-<span class="kw">spark_read_csv</span>(sc,</span>
+<span id="cb140-2"><a href="r-y-spark.html#cb140-2"></a>  <span class="dt">name=</span><span class="st">&quot;covid&quot;</span>,</span>
+<span id="cb140-3"><a href="r-y-spark.html#cb140-3"></a>  <span class="dt">path =</span> <span class="st">&quot;C:</span><span class="ch">\\</span><span class="st">Users</span><span class="ch">\\</span><span class="st">ALVARO</span><span class="ch">\\</span><span class="st">Desktop</span><span class="ch">\\</span><span class="st">db_bolivia</span><span class="ch">\\</span><span class="st">bigdata</span><span class="ch">\\</span><span class="st">200614COVID19MEXICO.csv&quot;</span>)</span></code></pre></div>
 </div>
 <div id="librería-dplyr-gramática-de-manipulación-de-datos" class="section level3">
 <h3><span class="header-section-number">5.3.2</span> Librería DPLYR (Gramática de manipulación de datos)</h3>
 <ul>
 <li><a href="https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html" class="uri">https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html</a></li>
 </ul>
-<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="r-y-spark.html#cb146-1"></a>sp_covid <span class="op">%&gt;%</span><span class="st"> </span>tally</span>
-<span id="cb146-2"><a href="r-y-spark.html#cb146-2"></a>sp_covid2 <span class="op">%&gt;%</span><span class="st"> </span>tally</span>
-<span id="cb146-3"><a href="r-y-spark.html#cb146-3"></a>oct20 <span class="op">%&gt;%</span><span class="st"> </span>tally</span>
-<span id="cb146-4"><a href="r-y-spark.html#cb146-4"></a>covid_cache &lt;-<span class="st"> </span>sp_covid <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb146-5"><a href="r-y-spark.html#cb146-5"></a><span class="st">    </span><span class="kw">compute</span>(<span class="st">&quot;covid_ch&quot;</span>)</span>
-<span id="cb146-6"><a href="r-y-spark.html#cb146-6"></a>covid_cache <span class="op">%&gt;%</span><span class="st"> </span>tally</span></code></pre></div>
-<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="r-y-spark.html#cb147-1"></a><span class="kw">dimnames</span>(sp_covid)</span>
-<span id="cb147-2"><a href="r-y-spark.html#cb147-2"></a>sp_covid <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>(SEXO)</span>
-<span id="cb147-3"><a href="r-y-spark.html#cb147-3"></a>sp_covid2 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>(SEXO,NEUMONIA)</span>
-<span id="cb147-4"><a href="r-y-spark.html#cb147-4"></a>sp_covid2 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(SEXO) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="kw">mean</span>(EDAD),<span class="dt">na.rm=</span>T)</span></code></pre></div>
-</div>
-</div>
-<div id="modelado" class="section level2">
-<h2><span class="header-section-number">5.4</span> Modelado</h2>
+<p>Eliminar un objeto en spark</p>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="r-y-spark.html#cb141-1"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb141-2"><a href="r-y-spark.html#cb141-2"></a><span class="kw">db_drop_table</span>(sc,<span class="st">&quot;importaciones2&quot;</span>)</span>
+<span id="cb141-3"><a href="r-y-spark.html#cb141-3"></a><span class="kw">db_drop_table</span>(sc,<span class="st">&quot;m1&quot;</span>)</span>
+<span id="cb141-4"><a href="r-y-spark.html#cb141-4"></a><span class="kw">spark_disconnect</span>(sc)</span></code></pre></div>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="r-y-spark.html#cb142-1"></a><span class="kw">load</span>(<span class="st">&quot;C:</span><span class="ch">\\</span><span class="st">Users</span><span class="ch">\\</span><span class="st">ALVARO</span><span class="ch">\\</span><span class="st">Documents</span><span class="ch">\\</span><span class="st">GitHub</span><span class="ch">\\</span><span class="st">EST-383</span><span class="ch">\\</span><span class="st">data</span><span class="ch">\\</span><span class="st">oct20.RData&quot;</span>)</span>
+<span id="cb142-2"><a href="r-y-spark.html#cb142-2"></a><span class="kw">head</span>(computo)</span>
+<span id="cb142-3"><a href="r-y-spark.html#cb142-3"></a><span class="co">#filtrado</span></span>
+<span id="cb142-4"><a href="r-y-spark.html#cb142-4"></a>aux&lt;-computo[computo<span class="op">$</span>País<span class="op">==</span><span class="st">&quot;Bolivia&quot;</span>,] <span class="co">#en R</span></span>
+<span id="cb142-5"><a href="r-y-spark.html#cb142-5"></a>aux2&lt;-computo <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(País<span class="op">==</span><span class="st">&quot;Bolivia&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="r-y-spark.html#cb143-1"></a><span class="co">#spark SQL</span></span>
+<span id="cb143-2"><a href="r-y-spark.html#cb143-2"></a><span class="kw">library</span>(DBI)</span>
+<span id="cb143-3"><a href="r-y-spark.html#cb143-3"></a>top10 &lt;-<span class="st"> </span><span class="kw">dbGetQuery</span>(sc, <span class="st">&quot;Select * from importaciones limit 10&quot;</span>)</span>
+<span id="cb143-4"><a href="r-y-spark.html#cb143-4"></a>top10</span>
+<span id="cb143-5"><a href="r-y-spark.html#cb143-5"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb143-6"><a href="r-y-spark.html#cb143-6"></a>sp_importaciones <span class="op">%&gt;%</span><span class="st"> </span>tally</span>
+<span id="cb143-7"><a href="r-y-spark.html#cb143-7"></a>sp_covid2 <span class="op">%&gt;%</span><span class="st"> </span>tally</span>
+<span id="cb143-8"><a href="r-y-spark.html#cb143-8"></a>oct20 <span class="op">%&gt;%</span><span class="st"> </span>tally</span>
+<span id="cb143-9"><a href="r-y-spark.html#cb143-9"></a>covid_cache &lt;-<span class="st"> </span>sp_covid2 <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb143-10"><a href="r-y-spark.html#cb143-10"></a><span class="st">    </span><span class="kw">compute</span>(<span class="st">&quot;covid_ch&quot;</span>)</span>
+<span id="cb143-11"><a href="r-y-spark.html#cb143-11"></a>covid_cache <span class="op">%&gt;%</span><span class="st"> </span>tally</span></code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="r-y-spark.html#cb144-1"></a><span class="co">#importaciones</span></span>
+<span id="cb144-2"><a href="r-y-spark.html#cb144-2"></a><span class="kw">dimnames</span>(sp_importaciones)</span>
+<span id="cb144-3"><a href="r-y-spark.html#cb144-3"></a></span>
+<span id="cb144-4"><a href="r-y-spark.html#cb144-4"></a>sp_t1&lt;-sp_importaciones <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>(GESTION) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">compute</span>(<span class="st">&quot;t1&quot;</span>)</span>
+<span id="cb144-5"><a href="r-y-spark.html#cb144-5"></a></span>
+<span id="cb144-6"><a href="r-y-spark.html#cb144-6"></a>aa&lt;-sp_importaciones <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>(GESTION) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">collect</span>()</span>
+<span id="cb144-7"><a href="r-y-spark.html#cb144-7"></a>aa&lt;-sp_importaciones <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>(GESTION,DESDEPTO) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">collect</span>()</span>
+<span id="cb144-8"><a href="r-y-spark.html#cb144-8"></a>sp_covid2 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>(SEXO,NEUMONIA)</span>
+<span id="cb144-9"><a href="r-y-spark.html#cb144-9"></a>sp_covid2 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(SEXO) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="kw">mean</span>(EDAD),<span class="dt">na.rm=</span>T)</span>
+<span id="cb144-10"><a href="r-y-spark.html#cb144-10"></a></span>
+<span id="cb144-11"><a href="r-y-spark.html#cb144-11"></a>ww&lt;-sp_importaciones <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(GESTION,DESDEPTO,NANDINA) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">total=</span><span class="kw">sum</span>(FOB,<span class="dt">na.rm=</span>T)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">collect</span>()</span>
+<span id="cb144-12"><a href="r-y-spark.html#cb144-12"></a>sp_importaciones <span class="op">%&gt;%</span><span class="st">  </span><span class="kw">tbl</span>(GESTION)</span>
+<span id="cb144-13"><a href="r-y-spark.html#cb144-13"></a></span>
+<span id="cb144-14"><a href="r-y-spark.html#cb144-14"></a>oct20 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(MAS__IPSP,CC)<span class="op">%&gt;%</span><span class="st">  </span><span class="kw">summarise_all</span>(mean)</span>
+<span id="cb144-15"><a href="r-y-spark.html#cb144-15"></a>oct20 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(MAS__IPSP,CC)<span class="op">%&gt;%</span><span class="st">  </span><span class="kw">summarise_all</span>(mean) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">show_query</span>()</span>
+<span id="cb144-16"><a href="r-y-spark.html#cb144-16"></a>oct20 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">qq=</span><span class="kw">quantile</span>(CC,<span class="dt">probs=</span><span class="fl">0.5</span>))</span>
+<span id="cb144-17"><a href="r-y-spark.html#cb144-17"></a>oct20 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(MAS__IPSP,CC) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ml_corr</span>()</span>
+<span id="cb144-18"><a href="r-y-spark.html#cb144-18"></a></span>
+<span id="cb144-19"><a href="r-y-spark.html#cb144-19"></a><span class="co">#figuras</span></span>
+<span id="cb144-20"><a href="r-y-spark.html#cb144-20"></a>oct20 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(CC) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">hist</span>()</span>
+<span id="cb144-21"><a href="r-y-spark.html#cb144-21"></a></span>
+<span id="cb144-22"><a href="r-y-spark.html#cb144-22"></a><span class="kw">library</span>(dbplot)</span>
+<span id="cb144-23"><a href="r-y-spark.html#cb144-23"></a>oct20 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbplot_histogram</span>(CC,<span class="dt">binwidth =</span> <span class="dv">3</span>)</span>
+<span id="cb144-24"><a href="r-y-spark.html#cb144-24"></a>sp_importaciones <span class="op">%&gt;%</span><span class="st">  </span><span class="kw">dbplot_bar</span>(GESTION)</span>
+<span id="cb144-25"><a href="r-y-spark.html#cb144-25"></a>oct20 <span class="op">%&gt;%</span><span class="st">  </span><span class="kw">dbplot_raster</span>(CC,MAS__IPSP)</span>
+<span id="cb144-26"><a href="r-y-spark.html#cb144-26"></a></span>
+<span id="cb144-27"><a href="r-y-spark.html#cb144-27"></a>oct20 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(PaAs<span class="op">==</span><span class="st">&quot;Bolivia&quot;</span>)<span class="op">%&gt;%</span><span class="st">  </span><span class="kw">group_by</span>(Departamento) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">voto=</span><span class="kw">mean</span>(CC)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Departamento,voto))<span class="op">+</span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>)</span>
+<span id="cb144-28"><a href="r-y-spark.html#cb144-28"></a></span>
+<span id="cb144-29"><a href="r-y-spark.html#cb144-29"></a><span class="kw">ggplot</span>(oct20,<span class="kw">aes</span>(CC,MAS__IPSP))<span class="op">+</span><span class="kw">geom_point</span>()</span></code></pre></div>
 
 <div id="refs" class="references">
 <div>
@@ -420,6 +460,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div>
 <p>Xie, Yihui, J. J. Allaire, and Garrett Grolemund. 2018. “How to Read This Book.” <em>Transforming Climate Finance and Green Investment with Blockchains</em>, 1. <a href="https://doi.org/10.1016/b978-0-12-814447-3.00041-0">https://doi.org/10.1016/b978-0-12-814447-3.00041-0</a>.</p>
+</div>
 </div>
 </div>
 </div>

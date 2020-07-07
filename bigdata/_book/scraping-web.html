@@ -24,7 +24,7 @@
 <meta name="author" content="Alvaro Chirino Gutierrez" />
 
 
-<meta name="date" content="2020-06-29" />
+<meta name="date" content="2020-07-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -236,7 +236,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.3.1" data-path="r-y-spark.html"><a href="r-y-spark.html#importando-los-datos"><i class="fa fa-check"></i><b>5.3.1</b> Importando los datos</a></li>
 <li class="chapter" data-level="5.3.2" data-path="r-y-spark.html"><a href="r-y-spark.html#librería-dplyr-gramática-de-manipulación-de-datos"><i class="fa fa-check"></i><b>5.3.2</b> Librería DPLYR (Gramática de manipulación de datos)</a></li>
 </ul></li>
-<li class="chapter" data-level="5.4" data-path="r-y-spark.html"><a href="r-y-spark.html#modelado"><i class="fa fa-check"></i><b>5.4</b> Modelado</a></li>
 </ul></li>
 </ul>
 
@@ -392,34 +391,23 @@ El Web Scraping es la recolección automática de información de los sitios web
 </div>
 <div id="ejemplo-informacion-covid-19-en-bolivia" class="section level2">
 <h2><span class="header-section-number">2.7</span> Ejemplo, informacion COVID-19 en Bolivia</h2>
-<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="scraping-web.html#cb122-1"></a><span class="kw">library</span>(rvest)</span></code></pre></div>
-<pre><code>## Loading required package: xml2</code></pre>
-<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="scraping-web.html#cb124-1"></a><span class="co">#paso 0: Estadísticas del covid-19 en Bolivia</span></span>
-<span id="cb124-2"><a href="scraping-web.html#cb124-2"></a><span class="co">#paso 1: cargar la www de interés</span></span>
-<span id="cb124-3"><a href="scraping-web.html#cb124-3"></a>bs&lt;-<span class="kw">read_html</span>(<span class="st">&quot;https://www.boliviasegura.gob.bo/&quot;</span>)</span>
-<span id="cb124-4"><a href="scraping-web.html#cb124-4"></a>ww&lt;-<span class="kw">read_html</span>(<span class="st">&quot;https://www.worldometers.info/coronavirus/&quot;</span>)</span>
-<span id="cb124-5"><a href="scraping-web.html#cb124-5"></a><span class="co">#paso 2: Raspar la información de interés</span></span>
-<span id="cb124-6"><a href="scraping-web.html#cb124-6"></a>node0&lt;-<span class="kw">html_nodes</span>(bs,<span class="st">&quot;h1&quot;</span>)</span>
-<span id="cb124-7"><a href="scraping-web.html#cb124-7"></a>node1&lt;-<span class="kw">html_text</span>(node0)</span>
-<span id="cb124-8"><a href="scraping-web.html#cb124-8"></a>node2&lt;-<span class="kw">as.numeric</span>(node1) </span>
-<span id="cb124-9"><a href="scraping-web.html#cb124-9"></a><span class="kw">barplot</span>(node2,<span class="dt">legend.text =</span> <span class="kw">c</span>(<span class="st">&quot;Confirmados&quot;</span>,<span class="st">&quot;Recuperados&quot;</span>,<span class="st">&quot;Muertes&quot;</span>))</span></code></pre></div>
-<p><img src="bigdata_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
-<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="scraping-web.html#cb125-1"></a>aux&lt;-<span class="kw">html_nodes</span>(bs,<span class="st">&quot;.mapanuevos&quot;</span>)</span>
-<span id="cb125-2"><a href="scraping-web.html#cb125-2"></a><span class="co">#paso 3: trabajando con tablas</span></span>
-<span id="cb125-3"><a href="scraping-web.html#cb125-3"></a>tabla&lt;-<span class="kw">html_table</span>(bs,<span class="dt">fill =</span> T)</span>
-<span id="cb125-4"><a href="scraping-web.html#cb125-4"></a>tabla[[<span class="dv">2</span>]]</span></code></pre></div>
-<pre><code>##   Departamento Hoy Acumulado Decesos Recuperados
-## 1         Beni  66     4,041     218          98
-## 2   Chuquisaca  59       637      31          23
-## 3   Cochabamba  52     3,468     165         138
-## 4       La Paz 108     2,882      76         382
-## 5        Oruro  84       878      55         113
-## 6        Pando   0       567      25          14
-## 7       Potosí  38       641      19          50
-## 8   Santa Cruz 418    17,873     412        7669
-## 9       Tarija  23       537      13          30</code></pre>
-<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="scraping-web.html#cb127-1"></a><span class="co">#paso 4: limpieza</span></span>
-<span id="cb127-2"><a href="scraping-web.html#cb127-2"></a><span class="co">#paso 5: Análisis</span></span></code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="scraping-web.html#cb122-1"></a><span class="kw">library</span>(rvest)</span>
+<span id="cb122-2"><a href="scraping-web.html#cb122-2"></a><span class="co">#paso 0: Estadísticas del covid-19 en Bolivia</span></span>
+<span id="cb122-3"><a href="scraping-web.html#cb122-3"></a><span class="co">#paso 1: cargar la www de interés</span></span>
+<span id="cb122-4"><a href="scraping-web.html#cb122-4"></a>bs&lt;-<span class="kw">read_html</span>(<span class="st">&quot;https://www.boliviasegura.gob.bo/&quot;</span>)</span>
+<span id="cb122-5"><a href="scraping-web.html#cb122-5"></a>ww&lt;-<span class="kw">read_html</span>(<span class="st">&quot;https://www.worldometers.info/coronavirus/&quot;</span>)</span>
+<span id="cb122-6"><a href="scraping-web.html#cb122-6"></a><span class="co">#paso 2: Raspar la información de interés</span></span>
+<span id="cb122-7"><a href="scraping-web.html#cb122-7"></a>node0&lt;-<span class="kw">html_nodes</span>(bs,<span class="st">&quot;h1&quot;</span>)</span>
+<span id="cb122-8"><a href="scraping-web.html#cb122-8"></a>node1&lt;-<span class="kw">html_text</span>(node0)</span>
+<span id="cb122-9"><a href="scraping-web.html#cb122-9"></a>node2&lt;-<span class="kw">as.numeric</span>(node1) </span>
+<span id="cb122-10"><a href="scraping-web.html#cb122-10"></a><span class="kw">barplot</span>(node2,<span class="dt">legend.text =</span> <span class="kw">c</span>(<span class="st">&quot;Confirmados&quot;</span>,<span class="st">&quot;Recuperados&quot;</span>,<span class="st">&quot;Muertes&quot;</span>))</span>
+<span id="cb122-11"><a href="scraping-web.html#cb122-11"></a></span>
+<span id="cb122-12"><a href="scraping-web.html#cb122-12"></a>aux&lt;-<span class="kw">html_nodes</span>(bs,<span class="st">&quot;.mapanuevos&quot;</span>)</span>
+<span id="cb122-13"><a href="scraping-web.html#cb122-13"></a><span class="co">#paso 3: trabajando con tablas</span></span>
+<span id="cb122-14"><a href="scraping-web.html#cb122-14"></a>tabla&lt;-<span class="kw">html_table</span>(bs,<span class="dt">fill =</span> T)</span>
+<span id="cb122-15"><a href="scraping-web.html#cb122-15"></a>tabla[[<span class="dv">2</span>]]</span>
+<span id="cb122-16"><a href="scraping-web.html#cb122-16"></a><span class="co">#paso 4: limpieza</span></span>
+<span id="cb122-17"><a href="scraping-web.html#cb122-17"></a><span class="co">#paso 5: Análisis</span></span></code></pre></div>
 </div>
 <div id="apis" class="section level2">
 <h2><span class="header-section-number">2.8</span> APIs</h2>
@@ -436,38 +424,38 @@ El Web Scraping es la recolección automática de información de los sitios web
 <li>Y otros, <a href="https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation">ver</a></li>
 </ul>
 <p>En R s epuede acceder mediante la libreria wbstats.</p>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="scraping-web.html#cb128-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;wbstats&quot;</span>)</span>
-<span id="cb128-2"><a href="scraping-web.html#cb128-2"></a><span class="kw">library</span>(wbstats)</span>
-<span id="cb128-3"><a href="scraping-web.html#cb128-3"></a><span class="co">#acceso a todos los indicadores disponibles</span></span>
-<span id="cb128-4"><a href="scraping-web.html#cb128-4"></a><span class="kw">wbindicators</span>(<span class="st">&quot;es&quot;</span>)</span>
-<span id="cb128-5"><a href="scraping-web.html#cb128-5"></a><span class="co">#acceso al catalogo de datos</span></span>
-<span id="cb128-6"><a href="scraping-web.html#cb128-6"></a><span class="kw">wbdatacatalog</span>()</span>
-<span id="cb128-7"><a href="scraping-web.html#cb128-7"></a><span class="co">#búsqueda de indicador</span></span>
-<span id="cb128-8"><a href="scraping-web.html#cb128-8"></a><span class="kw">wbsearch</span>(<span class="dt">pattern =</span> <span class="st">&quot;education&quot;</span>)</span>
-<span id="cb128-9"><a href="scraping-web.html#cb128-9"></a><span class="co"># ver los países y sus códigos </span></span>
-<span id="cb128-10"><a href="scraping-web.html#cb128-10"></a><span class="kw">wbcountries</span>()             </span>
-<span id="cb128-11"><a href="scraping-web.html#cb128-11"></a><span class="co">#Comando para extraer los indicadores</span></span>
-<span id="cb128-12"><a href="scraping-web.html#cb128-12"></a><span class="kw">wb</span>(<span class="dt">country =</span> <span class="st">&quot;BOL&quot;</span>,<span class="dt">indicator =</span> <span class="st">&quot;NY.GDP.MKTP.CD&quot;</span>, <span class="dt">startdate =</span> <span class="dv">2000</span>, <span class="dt">enddate =</span> <span class="dv">2016</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="scraping-web.html#cb123-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;wbstats&quot;</span>)</span>
+<span id="cb123-2"><a href="scraping-web.html#cb123-2"></a><span class="kw">library</span>(wbstats)</span>
+<span id="cb123-3"><a href="scraping-web.html#cb123-3"></a><span class="co">#acceso a todos los indicadores disponibles</span></span>
+<span id="cb123-4"><a href="scraping-web.html#cb123-4"></a><span class="kw">wbindicators</span>(<span class="st">&quot;es&quot;</span>)</span>
+<span id="cb123-5"><a href="scraping-web.html#cb123-5"></a><span class="co">#acceso al catalogo de datos</span></span>
+<span id="cb123-6"><a href="scraping-web.html#cb123-6"></a><span class="kw">wbdatacatalog</span>()</span>
+<span id="cb123-7"><a href="scraping-web.html#cb123-7"></a><span class="co">#búsqueda de indicador</span></span>
+<span id="cb123-8"><a href="scraping-web.html#cb123-8"></a><span class="kw">wbsearch</span>(<span class="dt">pattern =</span> <span class="st">&quot;education&quot;</span>)</span>
+<span id="cb123-9"><a href="scraping-web.html#cb123-9"></a><span class="co"># ver los países y sus códigos </span></span>
+<span id="cb123-10"><a href="scraping-web.html#cb123-10"></a><span class="kw">wbcountries</span>()             </span>
+<span id="cb123-11"><a href="scraping-web.html#cb123-11"></a><span class="co">#Comando para extraer los indicadores</span></span>
+<span id="cb123-12"><a href="scraping-web.html#cb123-12"></a><span class="kw">wb</span>(<span class="dt">country =</span> <span class="st">&quot;BOL&quot;</span>,<span class="dt">indicator =</span> <span class="st">&quot;NY.GDP.MKTP.CD&quot;</span>, <span class="dt">startdate =</span> <span class="dv">2000</span>, <span class="dt">enddate =</span> <span class="dv">2016</span>)</span></code></pre></div>
 </div>
 <div id="api-google-trends" class="section level3">
 <h3><span class="header-section-number">2.8.2</span> API Google trends</h3>
 <p>La librari gtrendsR permite acceder a la API de <a href="https://trends.google.es/trends/?geo=ES">google trends</a>, esta permite acceder a las tendencias de busqueda que se realizan mediante el motor de busqueda de Google.</p>
-<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="scraping-web.html#cb129-1"></a><span class="co">#install.packages(&quot;gtrendsR&quot;)</span></span>
-<span id="cb129-2"><a href="scraping-web.html#cb129-2"></a><span class="kw">library</span>(gtrendsR)</span>
-<span id="cb129-3"><a href="scraping-web.html#cb129-3"></a><span class="kw">library</span>(knitr)</span>
-<span id="cb129-4"><a href="scraping-web.html#cb129-4"></a>res &lt;-<span class="st"> </span><span class="kw">gtrends</span>(<span class="st">&quot;Coronavirus&quot;</span>, <span class="dt">geo =</span> <span class="kw">c</span>(<span class="st">&quot;BO&quot;</span>))</span>
-<span id="cb129-5"><a href="scraping-web.html#cb129-5"></a><span class="kw">plot</span>(res)</span>
-<span id="cb129-6"><a href="scraping-web.html#cb129-6"></a></span>
-<span id="cb129-7"><a href="scraping-web.html#cb129-7"></a><span class="kw">kable</span>(<span class="kw">head</span>(res<span class="op">$</span>interest_over_time,<span class="dv">10</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="scraping-web.html#cb124-1"></a><span class="co">#install.packages(&quot;gtrendsR&quot;)</span></span>
+<span id="cb124-2"><a href="scraping-web.html#cb124-2"></a><span class="kw">library</span>(gtrendsR)</span>
+<span id="cb124-3"><a href="scraping-web.html#cb124-3"></a><span class="kw">library</span>(knitr)</span>
+<span id="cb124-4"><a href="scraping-web.html#cb124-4"></a>res &lt;-<span class="st"> </span><span class="kw">gtrends</span>(<span class="st">&quot;Coronavirus&quot;</span>, <span class="dt">geo =</span> <span class="kw">c</span>(<span class="st">&quot;BO&quot;</span>))</span>
+<span id="cb124-5"><a href="scraping-web.html#cb124-5"></a><span class="kw">plot</span>(res)</span>
+<span id="cb124-6"><a href="scraping-web.html#cb124-6"></a></span>
+<span id="cb124-7"><a href="scraping-web.html#cb124-7"></a><span class="kw">kable</span>(<span class="kw">head</span>(res<span class="op">$</span>interest_over_time,<span class="dv">10</span>))</span></code></pre></div>
 </div>
 <div id="api-google-maps" class="section level3">
 <h3><span class="header-section-number">2.8.3</span> API Google Maps</h3>
 <p>R tiene la librari googleway que permite tener acceso a la API de google maps, es necesario una llave de autentificación.</p>
 <p>Para la llave seguir los pasos en el <a href="https://developers.google.com/maps/documentation/javascript/get-api-key?hl=es-419">enlace</a></p>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="scraping-web.html#cb130-1"></a><span class="co">#install.packages(&quot;googleway&quot;)</span></span>
-<span id="cb130-2"><a href="scraping-web.html#cb130-2"></a><span class="kw">library</span>(googleway)</span>
-<span id="cb130-3"><a href="scraping-web.html#cb130-3"></a>map_key &lt;-<span class="st"> &#39;xxx&#39;</span></span>
-<span id="cb130-4"><a href="scraping-web.html#cb130-4"></a><span class="kw">google_map</span>(<span class="dt">key =</span> map_key,<span class="dt">location =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">16.5030161</span>,<span class="op">-</span><span class="fl">68.1292566</span>),<span class="dt">zoom =</span> <span class="dv">8</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">add_traffic</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="scraping-web.html#cb125-1"></a><span class="co">#install.packages(&quot;googleway&quot;)</span></span>
+<span id="cb125-2"><a href="scraping-web.html#cb125-2"></a><span class="kw">library</span>(googleway)</span>
+<span id="cb125-3"><a href="scraping-web.html#cb125-3"></a>map_key &lt;-<span class="st"> &#39;xxx&#39;</span></span>
+<span id="cb125-4"><a href="scraping-web.html#cb125-4"></a><span class="kw">google_map</span>(<span class="dt">key =</span> map_key,<span class="dt">location =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">16.5030161</span>,<span class="op">-</span><span class="fl">68.1292566</span>),<span class="dt">zoom =</span> <span class="dv">8</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">add_traffic</span>()</span></code></pre></div>
 </div>
 </div>
 <div id="ejercicios-propuestos-1" class="section level2">
