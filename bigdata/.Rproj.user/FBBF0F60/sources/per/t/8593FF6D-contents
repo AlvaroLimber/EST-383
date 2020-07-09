@@ -162,6 +162,91 @@ spark_disconnect(sc)
 
 
 ```{r,eval=F}
+library(dplyr)
+load(url("https://github.com/AlvaroLimber/EST-383/raw/master/data/oct20.RData"))
+names(computo)[1]<-"pais"
+##############################
+### Columnas -> variables
+##############################
+#cambio de nombre de las variables
+computo<-computo %>% rename(mas=`MAS - IPSP`,cc=CC)
+computo<-computo %>% rename(idep=`Número departamento`,imun=5)
+names(computo)
+# Selección de variables
+bd1<-computo %>% select(pais,cc,mas)
+head(bd1)
+# Crear nuevas variables
+bd1<-bd1 %>% mutate(a=1,s_mas_cc=cc+mas,raiz_mas=sqrt(mas),lcc=log(cc))
+bd1<-bd1 %>% mutate(mas100=mas>100,mean_mas=mas>mean(mas))
+# ordenando las variables  
+bd1<-bd1 %>% relocate(lcc:mas,before=a)#pendiente
+bd1[,c("cc","pais","a")]
+##############################
+### Filas-> Observaciones
+##############################
+#filtrado
+# elección presidencial solo Bolivia 
+pv<-computo %>% filter(Elección=="Presidente y Vicepresidente")
+pvbol<-computo %>% filter(Elección=="Presidente y Vicepresidente" & pais=="Bolivia")
+##############################
+### Resumen estadístico
+##############################
+# summarise
+pvbol %>% summarise(media_mas=mean(mas),media_cc=mean(cc),max_mas=max(mas),max_cc=max(cc))
+pvbol %>% summarise(p100mas=mean(mas>100)*100,p100cc=mean(cc>100)*100)
+# group_by
+pvbol %>% group_by(Departamento) %>% summarise(p100mas=mean(mas>100)*100,p100cc=mean(cc>100)*100)
+
+pvbol %>% group_by(Departamento,Provincia) %>% summarise(p100mas=mean(mas>100)*100,p100cc=mean(cc>100)*100)
+#count tally
+pvbol %>% group_by(Departamento,Provincia) %>% count()
+pvbol %>% group_by(Departamento,Provincia) %>% tally()
+# encadenamiento masivo
+pvbol %>% filter(Departamento=="Beni") %>% select(mas,cc) %>% plot()
+pvbol %>% filter(Departamento=="Beni") %>% select(mas,cc) %>% cor()
+```
+
+DPLYR en Spark
+
+```{r,eval=F}
+library(sparklyr)
+sc <- spark_connect(master = "local", version = "2.4.3")
+spark_web(sc)
+# cargar el pvbol
+sp_pvbol<-copy_to(sc,pvbol,name="elecciones")
+rm(pvbol)
+# interactuar con la base en spark
+sp_pvbol %>% count()
+t0<-sp_pvbol %>% group_by(Departamento) %>% count()
+#collect es para guardar la salida en la memoria de R
+t1<-sp_pvbol %>% group_by(Departamento) %>% count() %>% collect()
+# compute es para guardar la salida en la memoria de spark
+sp_t2<-sp_pvbol %>% group_by(Departamento) %>% count() %>% compute("t2")
+# consultas a spark
+
+sp_pvbol %>%  group_by(Departamento,Provincia) %>% summarise(media_mas=mean(mas),media_cc=mean(cc),sd(mas))
+
+# SQL show_query
+sp_pvbol %>% group_by(Departamento) %>% count() %>% show_query()
+
+sp_pvbol %>% group_by(Departamento) %>% select(mas,cc) %>% summarise_all(mean) %>% show_query()
+
+# spark SQL
+library(DBI)
+e10<-dbGetQuery(sc,"Select * from elecciones limit 10")
+
+# figuras 
+sp_pvbol %>% select(cc) %>% hist()
+
+library(ggplot2)
+ggplot(sp_pvbol,aes(cc))+geom_histogram()
+ggplot(sp_pvbol,aes(cc,mas))+geom_point()
+
+# recomendación ml
+```
+
+
+```{r,eval=F}
 load("C:\\Users\\ALVARO\\Documents\\GitHub\\EST-383\\data\\oct20.RData")
 head(computo)
 #filtrado
@@ -184,6 +269,7 @@ covid_cache <- sp_covid2 %>%
 covid_cache %>% tally
 ```
 
+Para correr con las bases de la parte de importaciones
 ```{r,eval=F}
 #importaciones
 dimnames(sp_importaciones)

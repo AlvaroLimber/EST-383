@@ -24,7 +24,7 @@
 <meta name="author" content="Alvaro Chirino Gutierrez" />
 
 
-<meta name="date" content="2020-07-07" />
+<meta name="date" content="2020-07-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -270,8 +270,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-2"><a href="introR.html#cb3-2"></a>v&lt;-<span class="dv">1</span><span class="op">:</span><span class="dv">10</span></span>
 <span id="cb3-3"><a href="introR.html#cb3-3"></a>v2&lt;-<span class="kw">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;b&quot;</span>,<span class="st">&quot;2&quot;</span>)</span>
 <span id="cb3-4"><a href="introR.html#cb3-4"></a><span class="kw">as.character</span>(v)</span></code></pre></div>
-<pre><code>##  [1] &quot;1&quot;  &quot;2&quot;  &quot;3&quot;  &quot;4&quot;  &quot;5&quot;  &quot;6&quot;  &quot;7&quot;  &quot;8&quot; 
-##  [9] &quot;9&quot;  &quot;10&quot;</code></pre>
+<pre><code>##  [1] &quot;1&quot;  &quot;2&quot;  &quot;3&quot;  &quot;4&quot;  &quot;5&quot;  &quot;6&quot;  &quot;7&quot;  &quot;8&quot;  &quot;9&quot;  &quot;10&quot;</code></pre>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="introR.html#cb5-1"></a><span class="kw">as.numeric</span>(v)</span></code></pre></div>
 <pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="introR.html#cb7-1"></a>x1&lt;-<span class="dv">1</span></span>
@@ -289,87 +288,72 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="introR.html#cb17-1"></a><span class="co"># vectores con usos estadisticos</span></span>
 <span id="cb17-2"><a href="introR.html#cb17-2"></a></span>
 <span id="cb17-3"><a href="introR.html#cb17-3"></a><span class="kw">rbinom</span>(<span class="dv">10</span>,<span class="dv">5</span>,<span class="fl">0.1</span>)</span></code></pre></div>
-<pre><code>##  [1] 1 0 0 0 0 0 1 0 1 1</code></pre>
+<pre><code>##  [1] 0 0 0 1 1 0 1 1 0 0</code></pre>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="introR.html#cb19-1"></a><span class="kw">rnorm</span>(<span class="dv">10</span>,<span class="dv">5</span>,<span class="dv">10</span>)</span></code></pre></div>
-<pre><code>##  [1]  1.5488417  1.9768795 -2.2970077
-##  [4] 26.7754746 16.1411177  8.4883020
-##  [7]  4.4354475  1.5689654 -0.7428907
-## [10]  3.6092916</code></pre>
+<pre><code>##  [1] 27.157296 11.320256 -5.091891  5.008421 12.823312
+##  [6]  8.206849 10.285113  8.554199 -1.436817 10.358984</code></pre>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="introR.html#cb21-1"></a><span class="kw">runif</span>(<span class="dv">10</span>,<span class="dv">50</span>,<span class="dv">500</span>)</span></code></pre></div>
-<pre><code>##  [1] 435.3517 354.4784 449.7286 455.2262
-##  [5] 452.9519 222.3358 106.0236 122.3197
-##  [9] 372.9463 214.8435</code></pre>
+<pre><code>##  [1] 190.2218 358.4033 408.8127 382.9173 338.2122
+##  [6] 499.4865 381.9262 144.3887 312.2437 423.0482</code></pre>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="introR.html#cb23-1"></a><span class="kw">rchisq</span>(<span class="dv">10</span>,<span class="dv">2</span>)</span></code></pre></div>
-<pre><code>##  [1] 5.42903863 0.20240516 2.63549899
-##  [4] 0.25160810 0.36195551 0.70476277
-##  [7] 0.95982696 2.98504484 0.41190901
-## [10] 0.04276061</code></pre>
+<pre><code>##  [1] 0.54617209 5.95664494 0.56102838 7.94557985
+##  [5] 3.83121861 0.02828089 0.33186597 4.91873628
+##  [9] 0.17856213 2.11725207</code></pre>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="introR.html#cb25-1"></a><span class="kw">rexp</span>(<span class="dv">10</span>,<span class="dv">5</span>)</span></code></pre></div>
-<pre><code>##  [1] 0.03532545 0.25524139 0.06194090
-##  [4] 0.01864155 0.73298809 0.02994094
-##  [7] 0.18653838 0.06827333 0.33283568
-## [10] 0.11191735</code></pre>
+<pre><code>##  [1] 0.46240930 0.01254943 0.09347959 0.19108844
+##  [5] 0.35410664 0.64852368 0.41575365 0.25297395
+##  [9] 0.04986379 0.35640126</code></pre>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="introR.html#cb27-1"></a>x&lt;-<span class="kw">rchisq</span>(<span class="dv">1000</span>,<span class="dv">3</span>)</span>
 <span id="cb27-2"><a href="introR.html#cb27-2"></a><span class="kw">hist</span>(x)</span></code></pre></div>
 <p><img src="bigdata_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="introR.html#cb28-1"></a>(<span class="kw">sum</span>((x<span class="op">-</span><span class="kw">mean</span>(x))<span class="op">**</span><span class="dv">4</span>)<span class="op">/</span><span class="dv">1000</span>)<span class="op">/</span><span class="kw">sd</span>(x)<span class="op">**</span><span class="dv">4</span></span></code></pre></div>
-<pre><code>## [1] 10.66836</code></pre>
+<pre><code>## [1] 7.516191</code></pre>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="introR.html#cb30-1"></a><span class="kw">median</span>(<span class="kw">rexp</span>(<span class="dv">100000</span>,<span class="dv">3</span>))</span></code></pre></div>
-<pre><code>## [1] 0.2326753</code></pre>
+<pre><code>## [1] 0.2311383</code></pre>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="introR.html#cb32-1"></a><span class="kw">quantile</span>(x,<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">56</span>)<span class="op">/</span><span class="dv">100</span>)</span></code></pre></div>
 <pre><code>##        2%       56% 
-## 0.2576386 2.6288079</code></pre>
+## 0.2099445 2.5897074</code></pre>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="introR.html#cb34-1"></a><span class="kw">quantile</span>(x,<span class="dv">1</span><span class="op">:</span><span class="dv">100</span><span class="op">/</span><span class="dv">100</span>)</span></code></pre></div>
-<pre><code>##         1%         2%         3%         4% 
-##  0.1580865  0.2576386  0.3115421  0.3568531 
-##         5%         6%         7%         8% 
-##  0.3951752  0.4435480  0.4749346  0.5355659 
-##         9%        10%        11%        12% 
-##  0.5659685  0.6184605  0.6727515  0.7279134 
-##        13%        14%        15%        16% 
-##  0.7598616  0.8090497  0.8436240  0.8894347 
-##        17%        18%        19%        20% 
-##  0.9152357  0.9313615  0.9725229  1.0066915 
-##        21%        22%        23%        24% 
-##  1.0453866  1.0924564  1.1305900  1.1823884 
-##        25%        26%        27%        28% 
-##  1.2167661  1.2481618  1.2777698  1.3004415 
-##        29%        30%        31%        32% 
-##  1.3363334  1.3829556  1.4259377  1.4677506 
-##        33%        34%        35%        36% 
-##  1.4984504  1.5227898  1.5634518  1.5887422 
-##        37%        38%        39%        40% 
-##  1.6146103  1.6517434  1.6799587  1.7318260 
-##        41%        42%        43%        44% 
-##  1.7689390  1.7896038  1.8443091  1.9356421 
-##        45%        46%        47%        48% 
-##  1.9863310  2.0567815  2.1272870  2.2104167 
-##        49%        50%        51%        52% 
-##  2.2728831  2.3134810  2.3605653  2.4227979 
-##        53%        54%        55%        56% 
-##  2.4491611  2.5465941  2.5943083  2.6288079 
-##        57%        58%        59%        60% 
-##  2.6970350  2.7404384  2.8357283  2.9313051 
-##        61%        62%        63%        64% 
-##  2.9790832  3.0269390  3.0825741  3.1637737 
-##        65%        66%        67%        68% 
-##  3.2323719  3.2747984  3.3239364  3.3985643 
-##        69%        70%        71%        72% 
-##  3.4542668  3.5434723  3.6099552  3.7203932 
-##        73%        74%        75%        76% 
-##  3.7660022  3.8971416  3.9587382  4.0101769 
-##        77%        78%        79%        80% 
-##  4.0770590  4.1462316  4.2466769  4.3391928 
-##        81%        82%        83%        84% 
-##  4.5456299  4.7166945  4.9080726  5.0279774 
-##        85%        86%        87%        88% 
-##  5.2354224  5.3229850  5.5632107  5.7642100 
-##        89%        90%        91%        92% 
-##  6.0472280  6.2080178  6.4326281  6.6396079 
-##        93%        94%        95%        96% 
-##  6.9005173  7.3176049  7.6814175  8.0895531 
-##        97%        98%        99%       100% 
-##  8.8527206  9.9434530 12.4217231 21.1654161</code></pre>
+<pre><code>##         1%         2%         3%         4%         5% 
+##  0.1531941  0.2099445  0.2569116  0.2997850  0.3524163 
+##         6%         7%         8%         9%        10% 
+##  0.3976342  0.4630673  0.5028479  0.5455623  0.5910836 
+##        11%        12%        13%        14%        15% 
+##  0.6404326  0.6878530  0.7189855  0.7462980  0.7818819 
+##        16%        17%        18%        19%        20% 
+##  0.8295770  0.8680542  0.8940529  0.9330740  1.0047968 
+##        21%        22%        23%        24%        25% 
+##  1.0409628  1.0665422  1.1130583  1.1273613  1.1532943 
+##        26%        27%        28%        29%        30% 
+##  1.2023376  1.2355544  1.2772728  1.3269468  1.3588561 
+##        31%        32%        33%        34%        35% 
+##  1.3941211  1.4427103  1.4819285  1.5576309  1.5949898 
+##        36%        37%        38%        39%        40% 
+##  1.6297941  1.6889973  1.7124889  1.7398306  1.7938059 
+##        41%        42%        43%        44%        45% 
+##  1.8256715  1.8728107  1.9163207  1.9665492  2.0031778 
+##        46%        47%        48%        49%        50% 
+##  2.0625862  2.1199066  2.1526677  2.1912193  2.2786697 
+##        51%        52%        53%        54%        55% 
+##  2.3320911  2.4130411  2.4579327  2.5159667  2.5613524 
+##        56%        57%        58%        59%        60% 
+##  2.5897074  2.6387313  2.7280400  2.7876022  2.8342263 
+##        61%        62%        63%        64%        65% 
+##  2.8846644  2.9336702  3.0152145  3.0910659  3.1670278 
+##        66%        67%        68%        69%        70% 
+##  3.2450418  3.2918724  3.3759725  3.5050887  3.6207920 
+##        71%        72%        73%        74%        75% 
+##  3.6741820  3.7257395  3.7659571  3.8551267  3.9645487 
+##        76%        77%        78%        79%        80% 
+##  4.0863511  4.2134104  4.3291969  4.4202438  4.5192168 
+##        81%        82%        83%        84%        85% 
+##  4.6189681  4.7680550  4.9111852  5.0011717  5.1591628 
+##        86%        87%        88%        89%        90% 
+##  5.3389092  5.5011542  5.6902761  5.9214739  6.0825511 
+##        91%        92%        93%        94%        95% 
+##  6.2802515  6.5564405  6.8705032  7.1849648  7.5339572 
+##        96%        97%        98%        99%       100% 
+##  8.2358876  8.7383615  9.7053818 11.5814721 17.9256583</code></pre>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="introR.html#cb36-1"></a>a1&lt;-<span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">20</span>,<span class="dv">4</span>,<span class="dv">5</span>)</span>
 <span id="cb36-2"><a href="introR.html#cb36-2"></a>I&lt;-<span class="kw">diag</span>(<span class="kw">rep</span>(<span class="dv">1</span>,<span class="dv">5</span>))</span>
 <span id="cb36-3"><a href="introR.html#cb36-3"></a>b1&lt;-<span class="kw">t</span>(a1)<span class="op">%*%</span>a1</span>
@@ -387,18 +371,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [4] -5.964175e-14 -1.744794e-13
 ## 
 ## $vectors
-##             [,1]        [,2]        [,3]
-## [1,] -0.09654784  0.76855612  0.00000000
-## [2,] -0.24551564  0.48961420  0.08358281
-## [3,] -0.39448345  0.21067228  0.29202311
-## [4,] -0.54345125 -0.06826963 -0.83479466
-## [5,] -0.69241905 -0.34721155  0.45918874
-##             [,4]          [,5]
-## [1,]  0.00000000  6.324555e-01
-## [2,]  0.54130760 -6.324555e-01
-## [3,] -0.78404241 -3.162278e-01
-## [4,] -0.05583796  1.609823e-15
-## [5,]  0.29857278  3.162278e-01</code></pre>
+##             [,1]        [,2]        [,3]        [,4]
+## [1,] -0.09654784  0.76855612  0.00000000  0.00000000
+## [2,] -0.24551564  0.48961420  0.08358281  0.54130760
+## [3,] -0.39448345  0.21067228  0.29202311 -0.78404241
+## [4,] -0.54345125 -0.06826963 -0.83479466 -0.05583796
+## [5,] -0.69241905 -0.34721155  0.45918874  0.29857278
+##               [,5]
+## [1,]  6.324555e-01
+## [2,] -6.324555e-01
+## [3,] -3.162278e-01
+## [4,]  1.609823e-15
+## [5,]  3.162278e-01</code></pre>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="introR.html#cb42-1"></a><span class="kw">dim</span>(b1)</span></code></pre></div>
 <pre><code>## [1] 5 5</code></pre>
 <div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="introR.html#cb44-1"></a><span class="co">#indexaci?n</span></span>
@@ -410,23 +394,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="introR.html#cb48-1"></a>v3&lt;-<span class="dv">1</span><span class="op">:</span><span class="dv">20</span></span>
 <span id="cb48-2"><a href="introR.html#cb48-2"></a>v3&lt;-v3<span class="op">/</span><span class="dv">10</span></span>
 <span id="cb48-3"><a href="introR.html#cb48-3"></a>v3</span></code></pre></div>
-<pre><code>##  [1] 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0
-## [11] 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8 1.9 2.0</code></pre>
+<pre><code>##  [1] 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0 1.1 1.2
+## [13] 1.3 1.4 1.5 1.6 1.7 1.8 1.9 2.0</code></pre>
 <div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="introR.html#cb50-1"></a>v3[<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">19</span>)]</span></code></pre></div>
 <pre><code>## [1] 0.3 1.9</code></pre>
 <div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="introR.html#cb52-1"></a>v3[v3<span class="op">&gt;</span><span class="fl">0.5</span>]</span></code></pre></div>
-<pre><code>##  [1] 0.6 0.7 0.8 0.9 1.0 1.1 1.2 1.3 1.4 1.5
-## [11] 1.6 1.7 1.8 1.9 2.0</code></pre>
+<pre><code>##  [1] 0.6 0.7 0.8 0.9 1.0 1.1 1.2 1.3 1.4 1.5 1.6 1.7
+## [13] 1.8 1.9 2.0</code></pre>
 <div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="introR.html#cb54-1"></a>v3[v3<span class="op">==</span><span class="dv">1</span>]</span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
 <div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="introR.html#cb56-1"></a>v3[v3<span class="op">!=</span><span class="fl">0.9</span>]</span></code></pre></div>
-<pre><code>##  [1] 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 1.0 1.1
-## [11] 1.2 1.3 1.4 1.5 1.6 1.7 1.8 1.9 2.0</code></pre>
+<pre><code>##  [1] 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 1.0 1.1 1.2 1.3
+## [13] 1.4 1.5 1.6 1.7 1.8 1.9 2.0</code></pre>
 <div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="introR.html#cb58-1"></a>v3[v3<span class="op">&gt;</span><span class="fl">0.5</span> <span class="op">&amp;</span><span class="st"> </span>v3<span class="op">&lt;</span><span class="dv">1</span>]</span></code></pre></div>
 <pre><code>## [1] 0.6 0.7 0.8 0.9</code></pre>
 <div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="introR.html#cb60-1"></a>v3[v3<span class="op">&gt;</span><span class="fl">0.5</span> <span class="op">||</span><span class="st"> </span>v3<span class="op">&lt;</span><span class="dv">1</span>]</span></code></pre></div>
-<pre><code>##  [1] 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0
-## [11] 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8 1.9 2.0</code></pre>
+<pre><code>##  [1] 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0 1.1 1.2
+## [13] 1.3 1.4 1.5 1.6 1.7 1.8 1.9 2.0</code></pre>
 <div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="introR.html#cb62-1"></a>a1</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4] [,5]
 ## [1,]    1    5    9   13   17
@@ -481,40 +465,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>##   V1   V2   V3   V4   V5 
 ##  2.5  6.5 10.5 14.5 18.5</code></pre>
 <div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="introR.html#cb90-1"></a><span class="kw">summary</span>(a2)</span></code></pre></div>
-<pre><code>##        V1             V2      
-##  Min.   :1.00   Min.   :5.00  
-##  1st Qu.:1.75   1st Qu.:5.75  
-##  Median :2.50   Median :6.50  
-##  Mean   :2.50   Mean   :6.50  
-##  3rd Qu.:3.25   3rd Qu.:7.25  
-##  Max.   :4.00   Max.   :8.00  
-##        V3              V4       
-##  Min.   : 9.00   Min.   :13.00  
-##  1st Qu.: 9.75   1st Qu.:13.75  
-##  Median :10.50   Median :14.50  
-##  Mean   :10.50   Mean   :14.50  
-##  3rd Qu.:11.25   3rd Qu.:15.25  
-##  Max.   :12.00   Max.   :16.00  
-##        V5       
-##  Min.   :17.00  
-##  1st Qu.:17.75  
-##  Median :18.50  
-##  Mean   :18.50  
-##  3rd Qu.:19.25  
-##  Max.   :20.00</code></pre>
+<pre><code>##        V1             V2             V3       
+##  Min.   :1.00   Min.   :5.00   Min.   : 9.00  
+##  1st Qu.:1.75   1st Qu.:5.75   1st Qu.: 9.75  
+##  Median :2.50   Median :6.50   Median :10.50  
+##  Mean   :2.50   Mean   :6.50   Mean   :10.50  
+##  3rd Qu.:3.25   3rd Qu.:7.25   3rd Qu.:11.25  
+##  Max.   :4.00   Max.   :8.00   Max.   :12.00  
+##        V4              V5       
+##  Min.   :13.00   Min.   :17.00  
+##  1st Qu.:13.75   1st Qu.:17.75  
+##  Median :14.50   Median :18.50  
+##  Mean   :14.50   Mean   :18.50  
+##  3rd Qu.:15.25   3rd Qu.:19.25  
+##  Max.   :16.00   Max.   :20.00</code></pre>
 <div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="introR.html#cb92-1"></a><span class="kw">cov</span>(a2)</span></code></pre></div>
-<pre><code>##          V1       V2       V3       V4
-## V1 1.666667 1.666667 1.666667 1.666667
-## V2 1.666667 1.666667 1.666667 1.666667
-## V3 1.666667 1.666667 1.666667 1.666667
-## V4 1.666667 1.666667 1.666667 1.666667
-## V5 1.666667 1.666667 1.666667 1.666667
-##          V5
-## V1 1.666667
-## V2 1.666667
-## V3 1.666667
-## V4 1.666667
-## V5 1.666667</code></pre>
+<pre><code>##          V1       V2       V3       V4       V5
+## V1 1.666667 1.666667 1.666667 1.666667 1.666667
+## V2 1.666667 1.666667 1.666667 1.666667 1.666667
+## V3 1.666667 1.666667 1.666667 1.666667 1.666667
+## V4 1.666667 1.666667 1.666667 1.666667 1.666667
+## V5 1.666667 1.666667 1.666667 1.666667 1.666667</code></pre>
 <div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="introR.html#cb94-1"></a><span class="kw">cor</span>(a2)</span></code></pre></div>
 <pre><code>##    V1 V2 V3 V4 V5
 ## V1  1  1  1  1  1

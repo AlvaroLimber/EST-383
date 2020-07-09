@@ -24,7 +24,7 @@
 <meta name="author" content="Alvaro Chirino Gutierrez" />
 
 
-<meta name="date" content="2020-07-07" />
+<meta name="date" content="2020-07-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -399,51 +399,129 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb141-2"><a href="r-y-spark.html#cb141-2"></a><span class="kw">db_drop_table</span>(sc,<span class="st">&quot;importaciones2&quot;</span>)</span>
 <span id="cb141-3"><a href="r-y-spark.html#cb141-3"></a><span class="kw">db_drop_table</span>(sc,<span class="st">&quot;m1&quot;</span>)</span>
 <span id="cb141-4"><a href="r-y-spark.html#cb141-4"></a><span class="kw">spark_disconnect</span>(sc)</span></code></pre></div>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="r-y-spark.html#cb142-1"></a><span class="kw">load</span>(<span class="st">&quot;C:</span><span class="ch">\\</span><span class="st">Users</span><span class="ch">\\</span><span class="st">ALVARO</span><span class="ch">\\</span><span class="st">Documents</span><span class="ch">\\</span><span class="st">GitHub</span><span class="ch">\\</span><span class="st">EST-383</span><span class="ch">\\</span><span class="st">data</span><span class="ch">\\</span><span class="st">oct20.RData&quot;</span>)</span>
-<span id="cb142-2"><a href="r-y-spark.html#cb142-2"></a><span class="kw">head</span>(computo)</span>
-<span id="cb142-3"><a href="r-y-spark.html#cb142-3"></a><span class="co">#filtrado</span></span>
-<span id="cb142-4"><a href="r-y-spark.html#cb142-4"></a>aux&lt;-computo[computo<span class="op">$</span>País<span class="op">==</span><span class="st">&quot;Bolivia&quot;</span>,] <span class="co">#en R</span></span>
-<span id="cb142-5"><a href="r-y-spark.html#cb142-5"></a>aux2&lt;-computo <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(País<span class="op">==</span><span class="st">&quot;Bolivia&quot;</span>) </span></code></pre></div>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="r-y-spark.html#cb143-1"></a><span class="co">#spark SQL</span></span>
-<span id="cb143-2"><a href="r-y-spark.html#cb143-2"></a><span class="kw">library</span>(DBI)</span>
-<span id="cb143-3"><a href="r-y-spark.html#cb143-3"></a>top10 &lt;-<span class="st"> </span><span class="kw">dbGetQuery</span>(sc, <span class="st">&quot;Select * from importaciones limit 10&quot;</span>)</span>
-<span id="cb143-4"><a href="r-y-spark.html#cb143-4"></a>top10</span>
-<span id="cb143-5"><a href="r-y-spark.html#cb143-5"></a><span class="kw">library</span>(dplyr)</span>
-<span id="cb143-6"><a href="r-y-spark.html#cb143-6"></a>sp_importaciones <span class="op">%&gt;%</span><span class="st"> </span>tally</span>
-<span id="cb143-7"><a href="r-y-spark.html#cb143-7"></a>sp_covid2 <span class="op">%&gt;%</span><span class="st"> </span>tally</span>
-<span id="cb143-8"><a href="r-y-spark.html#cb143-8"></a>oct20 <span class="op">%&gt;%</span><span class="st"> </span>tally</span>
-<span id="cb143-9"><a href="r-y-spark.html#cb143-9"></a>covid_cache &lt;-<span class="st"> </span>sp_covid2 <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb143-10"><a href="r-y-spark.html#cb143-10"></a><span class="st">    </span><span class="kw">compute</span>(<span class="st">&quot;covid_ch&quot;</span>)</span>
-<span id="cb143-11"><a href="r-y-spark.html#cb143-11"></a>covid_cache <span class="op">%&gt;%</span><span class="st"> </span>tally</span></code></pre></div>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="r-y-spark.html#cb144-1"></a><span class="co">#importaciones</span></span>
-<span id="cb144-2"><a href="r-y-spark.html#cb144-2"></a><span class="kw">dimnames</span>(sp_importaciones)</span>
-<span id="cb144-3"><a href="r-y-spark.html#cb144-3"></a></span>
-<span id="cb144-4"><a href="r-y-spark.html#cb144-4"></a>sp_t1&lt;-sp_importaciones <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>(GESTION) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">compute</span>(<span class="st">&quot;t1&quot;</span>)</span>
-<span id="cb144-5"><a href="r-y-spark.html#cb144-5"></a></span>
-<span id="cb144-6"><a href="r-y-spark.html#cb144-6"></a>aa&lt;-sp_importaciones <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>(GESTION) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">collect</span>()</span>
-<span id="cb144-7"><a href="r-y-spark.html#cb144-7"></a>aa&lt;-sp_importaciones <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>(GESTION,DESDEPTO) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">collect</span>()</span>
-<span id="cb144-8"><a href="r-y-spark.html#cb144-8"></a>sp_covid2 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>(SEXO,NEUMONIA)</span>
-<span id="cb144-9"><a href="r-y-spark.html#cb144-9"></a>sp_covid2 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(SEXO) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="kw">mean</span>(EDAD),<span class="dt">na.rm=</span>T)</span>
-<span id="cb144-10"><a href="r-y-spark.html#cb144-10"></a></span>
-<span id="cb144-11"><a href="r-y-spark.html#cb144-11"></a>ww&lt;-sp_importaciones <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(GESTION,DESDEPTO,NANDINA) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">total=</span><span class="kw">sum</span>(FOB,<span class="dt">na.rm=</span>T)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">collect</span>()</span>
-<span id="cb144-12"><a href="r-y-spark.html#cb144-12"></a>sp_importaciones <span class="op">%&gt;%</span><span class="st">  </span><span class="kw">tbl</span>(GESTION)</span>
-<span id="cb144-13"><a href="r-y-spark.html#cb144-13"></a></span>
-<span id="cb144-14"><a href="r-y-spark.html#cb144-14"></a>oct20 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(MAS__IPSP,CC)<span class="op">%&gt;%</span><span class="st">  </span><span class="kw">summarise_all</span>(mean)</span>
-<span id="cb144-15"><a href="r-y-spark.html#cb144-15"></a>oct20 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(MAS__IPSP,CC)<span class="op">%&gt;%</span><span class="st">  </span><span class="kw">summarise_all</span>(mean) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">show_query</span>()</span>
-<span id="cb144-16"><a href="r-y-spark.html#cb144-16"></a>oct20 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">qq=</span><span class="kw">quantile</span>(CC,<span class="dt">probs=</span><span class="fl">0.5</span>))</span>
-<span id="cb144-17"><a href="r-y-spark.html#cb144-17"></a>oct20 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(MAS__IPSP,CC) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ml_corr</span>()</span>
-<span id="cb144-18"><a href="r-y-spark.html#cb144-18"></a></span>
-<span id="cb144-19"><a href="r-y-spark.html#cb144-19"></a><span class="co">#figuras</span></span>
-<span id="cb144-20"><a href="r-y-spark.html#cb144-20"></a>oct20 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(CC) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">hist</span>()</span>
-<span id="cb144-21"><a href="r-y-spark.html#cb144-21"></a></span>
-<span id="cb144-22"><a href="r-y-spark.html#cb144-22"></a><span class="kw">library</span>(dbplot)</span>
-<span id="cb144-23"><a href="r-y-spark.html#cb144-23"></a>oct20 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbplot_histogram</span>(CC,<span class="dt">binwidth =</span> <span class="dv">3</span>)</span>
-<span id="cb144-24"><a href="r-y-spark.html#cb144-24"></a>sp_importaciones <span class="op">%&gt;%</span><span class="st">  </span><span class="kw">dbplot_bar</span>(GESTION)</span>
-<span id="cb144-25"><a href="r-y-spark.html#cb144-25"></a>oct20 <span class="op">%&gt;%</span><span class="st">  </span><span class="kw">dbplot_raster</span>(CC,MAS__IPSP)</span>
-<span id="cb144-26"><a href="r-y-spark.html#cb144-26"></a></span>
-<span id="cb144-27"><a href="r-y-spark.html#cb144-27"></a>oct20 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(PaAs<span class="op">==</span><span class="st">&quot;Bolivia&quot;</span>)<span class="op">%&gt;%</span><span class="st">  </span><span class="kw">group_by</span>(Departamento) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">voto=</span><span class="kw">mean</span>(CC)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Departamento,voto))<span class="op">+</span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>)</span>
-<span id="cb144-28"><a href="r-y-spark.html#cb144-28"></a></span>
-<span id="cb144-29"><a href="r-y-spark.html#cb144-29"></a><span class="kw">ggplot</span>(oct20,<span class="kw">aes</span>(CC,MAS__IPSP))<span class="op">+</span><span class="kw">geom_point</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="r-y-spark.html#cb142-1"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb142-2"><a href="r-y-spark.html#cb142-2"></a><span class="kw">load</span>(<span class="kw">url</span>(<span class="st">&quot;https://github.com/AlvaroLimber/EST-383/raw/master/data/oct20.RData&quot;</span>))</span>
+<span id="cb142-3"><a href="r-y-spark.html#cb142-3"></a><span class="kw">names</span>(computo)[<span class="dv">1</span>]&lt;-<span class="st">&quot;pais&quot;</span></span>
+<span id="cb142-4"><a href="r-y-spark.html#cb142-4"></a><span class="co">##############################</span></span>
+<span id="cb142-5"><a href="r-y-spark.html#cb142-5"></a><span class="co">### Columnas -&gt; variables</span></span>
+<span id="cb142-6"><a href="r-y-spark.html#cb142-6"></a><span class="co">##############################</span></span>
+<span id="cb142-7"><a href="r-y-spark.html#cb142-7"></a><span class="co">#cambio de nombre de las variables</span></span>
+<span id="cb142-8"><a href="r-y-spark.html#cb142-8"></a>computo&lt;-computo <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">rename</span>(<span class="dt">mas=</span><span class="st">`</span><span class="dt">MAS - IPSP</span><span class="st">`</span>,<span class="dt">cc=</span>CC)</span>
+<span id="cb142-9"><a href="r-y-spark.html#cb142-9"></a>computo&lt;-computo <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">rename</span>(<span class="dt">idep=</span><span class="st">`</span><span class="dt">Número departamento</span><span class="st">`</span>,<span class="dt">imun=</span><span class="dv">5</span>)</span>
+<span id="cb142-10"><a href="r-y-spark.html#cb142-10"></a><span class="kw">names</span>(computo)</span>
+<span id="cb142-11"><a href="r-y-spark.html#cb142-11"></a><span class="co"># Selección de variables</span></span>
+<span id="cb142-12"><a href="r-y-spark.html#cb142-12"></a>bd1&lt;-computo <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(pais,cc,mas)</span>
+<span id="cb142-13"><a href="r-y-spark.html#cb142-13"></a><span class="kw">head</span>(bd1)</span>
+<span id="cb142-14"><a href="r-y-spark.html#cb142-14"></a><span class="co"># Crear nuevas variables</span></span>
+<span id="cb142-15"><a href="r-y-spark.html#cb142-15"></a>bd1&lt;-bd1 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">a=</span><span class="dv">1</span>,<span class="dt">s_mas_cc=</span>cc<span class="op">+</span>mas,<span class="dt">raiz_mas=</span><span class="kw">sqrt</span>(mas),<span class="dt">lcc=</span><span class="kw">log</span>(cc))</span>
+<span id="cb142-16"><a href="r-y-spark.html#cb142-16"></a>bd1&lt;-bd1 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">mas100=</span>mas<span class="op">&gt;</span><span class="dv">100</span>,<span class="dt">mean_mas=</span>mas<span class="op">&gt;</span><span class="kw">mean</span>(mas))</span>
+<span id="cb142-17"><a href="r-y-spark.html#cb142-17"></a><span class="co"># ordenando las variables  </span></span>
+<span id="cb142-18"><a href="r-y-spark.html#cb142-18"></a>bd1&lt;-bd1 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">relocate</span>(lcc<span class="op">:</span>mas,<span class="dt">before=</span>a)<span class="co">#pendiente</span></span>
+<span id="cb142-19"><a href="r-y-spark.html#cb142-19"></a>bd1[,<span class="kw">c</span>(<span class="st">&quot;cc&quot;</span>,<span class="st">&quot;pais&quot;</span>,<span class="st">&quot;a&quot;</span>)]</span>
+<span id="cb142-20"><a href="r-y-spark.html#cb142-20"></a><span class="co">##############################</span></span>
+<span id="cb142-21"><a href="r-y-spark.html#cb142-21"></a><span class="co">### Filas-&gt; Observaciones</span></span>
+<span id="cb142-22"><a href="r-y-spark.html#cb142-22"></a><span class="co">##############################</span></span>
+<span id="cb142-23"><a href="r-y-spark.html#cb142-23"></a><span class="co">#filtrado</span></span>
+<span id="cb142-24"><a href="r-y-spark.html#cb142-24"></a><span class="co"># elección presidencial solo Bolivia </span></span>
+<span id="cb142-25"><a href="r-y-spark.html#cb142-25"></a>pv&lt;-computo <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Elección==<span class="st">&quot;Presidente y Vicepresidente&quot;</span>)</span>
+<span id="cb142-26"><a href="r-y-spark.html#cb142-26"></a>pvbol&lt;-computo <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Elección==<span class="st">&quot;Presidente y Vicepresidente&quot;</span> <span class="op">&amp;</span><span class="st"> </span>pais<span class="op">==</span><span class="st">&quot;Bolivia&quot;</span>)</span>
+<span id="cb142-27"><a href="r-y-spark.html#cb142-27"></a><span class="co">##############################</span></span>
+<span id="cb142-28"><a href="r-y-spark.html#cb142-28"></a><span class="co">### Resumen estadístico</span></span>
+<span id="cb142-29"><a href="r-y-spark.html#cb142-29"></a><span class="co">##############################</span></span>
+<span id="cb142-30"><a href="r-y-spark.html#cb142-30"></a><span class="co"># summarise</span></span>
+<span id="cb142-31"><a href="r-y-spark.html#cb142-31"></a>pvbol <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">media_mas=</span><span class="kw">mean</span>(mas),<span class="dt">media_cc=</span><span class="kw">mean</span>(cc),<span class="dt">max_mas=</span><span class="kw">max</span>(mas),<span class="dt">max_cc=</span><span class="kw">max</span>(cc))</span>
+<span id="cb142-32"><a href="r-y-spark.html#cb142-32"></a>pvbol <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">p100mas=</span><span class="kw">mean</span>(mas<span class="op">&gt;</span><span class="dv">100</span>)<span class="op">*</span><span class="dv">100</span>,<span class="dt">p100cc=</span><span class="kw">mean</span>(cc<span class="op">&gt;</span><span class="dv">100</span>)<span class="op">*</span><span class="dv">100</span>)</span>
+<span id="cb142-33"><a href="r-y-spark.html#cb142-33"></a><span class="co"># group_by</span></span>
+<span id="cb142-34"><a href="r-y-spark.html#cb142-34"></a>pvbol <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(Departamento) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">p100mas=</span><span class="kw">mean</span>(mas<span class="op">&gt;</span><span class="dv">100</span>)<span class="op">*</span><span class="dv">100</span>,<span class="dt">p100cc=</span><span class="kw">mean</span>(cc<span class="op">&gt;</span><span class="dv">100</span>)<span class="op">*</span><span class="dv">100</span>)</span>
+<span id="cb142-35"><a href="r-y-spark.html#cb142-35"></a></span>
+<span id="cb142-36"><a href="r-y-spark.html#cb142-36"></a>pvbol <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(Departamento,Provincia) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">p100mas=</span><span class="kw">mean</span>(mas<span class="op">&gt;</span><span class="dv">100</span>)<span class="op">*</span><span class="dv">100</span>,<span class="dt">p100cc=</span><span class="kw">mean</span>(cc<span class="op">&gt;</span><span class="dv">100</span>)<span class="op">*</span><span class="dv">100</span>)</span>
+<span id="cb142-37"><a href="r-y-spark.html#cb142-37"></a><span class="co">#count tally</span></span>
+<span id="cb142-38"><a href="r-y-spark.html#cb142-38"></a>pvbol <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(Departamento,Provincia) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>()</span>
+<span id="cb142-39"><a href="r-y-spark.html#cb142-39"></a>pvbol <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(Departamento,Provincia) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">tally</span>()</span>
+<span id="cb142-40"><a href="r-y-spark.html#cb142-40"></a><span class="co"># encadenamiento masivo</span></span>
+<span id="cb142-41"><a href="r-y-spark.html#cb142-41"></a>pvbol <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Departamento<span class="op">==</span><span class="st">&quot;Beni&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(mas,cc) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">plot</span>()</span>
+<span id="cb142-42"><a href="r-y-spark.html#cb142-42"></a>pvbol <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Departamento<span class="op">==</span><span class="st">&quot;Beni&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(mas,cc) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">cor</span>()</span></code></pre></div>
+<p>DPLYR en Spark</p>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="r-y-spark.html#cb143-1"></a><span class="kw">library</span>(sparklyr)</span>
+<span id="cb143-2"><a href="r-y-spark.html#cb143-2"></a>sc &lt;-<span class="st"> </span><span class="kw">spark_connect</span>(<span class="dt">master =</span> <span class="st">&quot;local&quot;</span>, <span class="dt">version =</span> <span class="st">&quot;2.4.3&quot;</span>)</span>
+<span id="cb143-3"><a href="r-y-spark.html#cb143-3"></a><span class="kw">spark_web</span>(sc)</span>
+<span id="cb143-4"><a href="r-y-spark.html#cb143-4"></a><span class="co"># cargar el pvbol</span></span>
+<span id="cb143-5"><a href="r-y-spark.html#cb143-5"></a>sp_pvbol&lt;-<span class="kw">copy_to</span>(sc,pvbol,<span class="dt">name=</span><span class="st">&quot;elecciones&quot;</span>)</span>
+<span id="cb143-6"><a href="r-y-spark.html#cb143-6"></a><span class="kw">rm</span>(pvbol)</span>
+<span id="cb143-7"><a href="r-y-spark.html#cb143-7"></a><span class="co"># interactuar con la base en spark</span></span>
+<span id="cb143-8"><a href="r-y-spark.html#cb143-8"></a>sp_pvbol <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>()</span>
+<span id="cb143-9"><a href="r-y-spark.html#cb143-9"></a>t0&lt;-sp_pvbol <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(Departamento) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>()</span>
+<span id="cb143-10"><a href="r-y-spark.html#cb143-10"></a><span class="co">#collect es para guardar la salida en la memoria de R</span></span>
+<span id="cb143-11"><a href="r-y-spark.html#cb143-11"></a>t1&lt;-sp_pvbol <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(Departamento) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">collect</span>()</span>
+<span id="cb143-12"><a href="r-y-spark.html#cb143-12"></a><span class="co"># compute es para guardar la salida en la memoria de spark</span></span>
+<span id="cb143-13"><a href="r-y-spark.html#cb143-13"></a>sp_t2&lt;-sp_pvbol <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(Departamento) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">compute</span>(<span class="st">&quot;t2&quot;</span>)</span>
+<span id="cb143-14"><a href="r-y-spark.html#cb143-14"></a><span class="co"># consultas a spark</span></span>
+<span id="cb143-15"><a href="r-y-spark.html#cb143-15"></a></span>
+<span id="cb143-16"><a href="r-y-spark.html#cb143-16"></a>sp_pvbol <span class="op">%&gt;%</span><span class="st">  </span><span class="kw">group_by</span>(Departamento,Provincia) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">media_mas=</span><span class="kw">mean</span>(mas),<span class="dt">media_cc=</span><span class="kw">mean</span>(cc),<span class="kw">sd</span>(mas))</span>
+<span id="cb143-17"><a href="r-y-spark.html#cb143-17"></a></span>
+<span id="cb143-18"><a href="r-y-spark.html#cb143-18"></a><span class="co"># SQL show_query</span></span>
+<span id="cb143-19"><a href="r-y-spark.html#cb143-19"></a>sp_pvbol <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(Departamento) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">show_query</span>()</span>
+<span id="cb143-20"><a href="r-y-spark.html#cb143-20"></a></span>
+<span id="cb143-21"><a href="r-y-spark.html#cb143-21"></a>sp_pvbol <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(Departamento) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(mas,cc) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise_all</span>(mean) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">show_query</span>()</span>
+<span id="cb143-22"><a href="r-y-spark.html#cb143-22"></a></span>
+<span id="cb143-23"><a href="r-y-spark.html#cb143-23"></a><span class="co"># spark SQL</span></span>
+<span id="cb143-24"><a href="r-y-spark.html#cb143-24"></a><span class="kw">library</span>(DBI)</span>
+<span id="cb143-25"><a href="r-y-spark.html#cb143-25"></a>e10&lt;-<span class="kw">dbGetQuery</span>(sc,<span class="st">&quot;Select * from elecciones limit 10&quot;</span>)</span>
+<span id="cb143-26"><a href="r-y-spark.html#cb143-26"></a></span>
+<span id="cb143-27"><a href="r-y-spark.html#cb143-27"></a><span class="co"># figuras </span></span>
+<span id="cb143-28"><a href="r-y-spark.html#cb143-28"></a>sp_pvbol <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(cc) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">hist</span>()</span>
+<span id="cb143-29"><a href="r-y-spark.html#cb143-29"></a></span>
+<span id="cb143-30"><a href="r-y-spark.html#cb143-30"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb143-31"><a href="r-y-spark.html#cb143-31"></a><span class="kw">ggplot</span>(sp_pvbol,<span class="kw">aes</span>(cc))<span class="op">+</span><span class="kw">geom_histogram</span>()</span>
+<span id="cb143-32"><a href="r-y-spark.html#cb143-32"></a><span class="kw">ggplot</span>(sp_pvbol,<span class="kw">aes</span>(cc,mas))<span class="op">+</span><span class="kw">geom_point</span>()</span>
+<span id="cb143-33"><a href="r-y-spark.html#cb143-33"></a></span>
+<span id="cb143-34"><a href="r-y-spark.html#cb143-34"></a><span class="co"># recomendación ml</span></span></code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="r-y-spark.html#cb144-1"></a><span class="kw">load</span>(<span class="st">&quot;C:</span><span class="ch">\\</span><span class="st">Users</span><span class="ch">\\</span><span class="st">ALVARO</span><span class="ch">\\</span><span class="st">Documents</span><span class="ch">\\</span><span class="st">GitHub</span><span class="ch">\\</span><span class="st">EST-383</span><span class="ch">\\</span><span class="st">data</span><span class="ch">\\</span><span class="st">oct20.RData&quot;</span>)</span>
+<span id="cb144-2"><a href="r-y-spark.html#cb144-2"></a><span class="kw">head</span>(computo)</span>
+<span id="cb144-3"><a href="r-y-spark.html#cb144-3"></a><span class="co">#filtrado</span></span>
+<span id="cb144-4"><a href="r-y-spark.html#cb144-4"></a>aux&lt;-computo[computo<span class="op">$</span>País<span class="op">==</span><span class="st">&quot;Bolivia&quot;</span>,] <span class="co">#en R</span></span>
+<span id="cb144-5"><a href="r-y-spark.html#cb144-5"></a>aux2&lt;-computo <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(País<span class="op">==</span><span class="st">&quot;Bolivia&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="r-y-spark.html#cb145-1"></a><span class="co">#spark SQL</span></span>
+<span id="cb145-2"><a href="r-y-spark.html#cb145-2"></a><span class="kw">library</span>(DBI)</span>
+<span id="cb145-3"><a href="r-y-spark.html#cb145-3"></a>top10 &lt;-<span class="st"> </span><span class="kw">dbGetQuery</span>(sc, <span class="st">&quot;Select * from importaciones limit 10&quot;</span>)</span>
+<span id="cb145-4"><a href="r-y-spark.html#cb145-4"></a>top10</span>
+<span id="cb145-5"><a href="r-y-spark.html#cb145-5"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb145-6"><a href="r-y-spark.html#cb145-6"></a>sp_importaciones <span class="op">%&gt;%</span><span class="st"> </span>tally</span>
+<span id="cb145-7"><a href="r-y-spark.html#cb145-7"></a>sp_covid2 <span class="op">%&gt;%</span><span class="st"> </span>tally</span>
+<span id="cb145-8"><a href="r-y-spark.html#cb145-8"></a>oct20 <span class="op">%&gt;%</span><span class="st"> </span>tally</span>
+<span id="cb145-9"><a href="r-y-spark.html#cb145-9"></a>covid_cache &lt;-<span class="st"> </span>sp_covid2 <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb145-10"><a href="r-y-spark.html#cb145-10"></a><span class="st">    </span><span class="kw">compute</span>(<span class="st">&quot;covid_ch&quot;</span>)</span>
+<span id="cb145-11"><a href="r-y-spark.html#cb145-11"></a>covid_cache <span class="op">%&gt;%</span><span class="st"> </span>tally</span></code></pre></div>
+<p>Para correr con las bases de la parte de importaciones</p>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="r-y-spark.html#cb146-1"></a><span class="co">#importaciones</span></span>
+<span id="cb146-2"><a href="r-y-spark.html#cb146-2"></a><span class="kw">dimnames</span>(sp_importaciones)</span>
+<span id="cb146-3"><a href="r-y-spark.html#cb146-3"></a></span>
+<span id="cb146-4"><a href="r-y-spark.html#cb146-4"></a>sp_t1&lt;-sp_importaciones <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>(GESTION) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">compute</span>(<span class="st">&quot;t1&quot;</span>)</span>
+<span id="cb146-5"><a href="r-y-spark.html#cb146-5"></a></span>
+<span id="cb146-6"><a href="r-y-spark.html#cb146-6"></a>aa&lt;-sp_importaciones <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>(GESTION) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">collect</span>()</span>
+<span id="cb146-7"><a href="r-y-spark.html#cb146-7"></a>aa&lt;-sp_importaciones <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>(GESTION,DESDEPTO) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">collect</span>()</span>
+<span id="cb146-8"><a href="r-y-spark.html#cb146-8"></a>sp_covid2 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>(SEXO,NEUMONIA)</span>
+<span id="cb146-9"><a href="r-y-spark.html#cb146-9"></a>sp_covid2 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(SEXO) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="kw">mean</span>(EDAD),<span class="dt">na.rm=</span>T)</span>
+<span id="cb146-10"><a href="r-y-spark.html#cb146-10"></a></span>
+<span id="cb146-11"><a href="r-y-spark.html#cb146-11"></a>ww&lt;-sp_importaciones <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(GESTION,DESDEPTO,NANDINA) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">total=</span><span class="kw">sum</span>(FOB,<span class="dt">na.rm=</span>T)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">collect</span>()</span>
+<span id="cb146-12"><a href="r-y-spark.html#cb146-12"></a>sp_importaciones <span class="op">%&gt;%</span><span class="st">  </span><span class="kw">tbl</span>(GESTION)</span>
+<span id="cb146-13"><a href="r-y-spark.html#cb146-13"></a></span>
+<span id="cb146-14"><a href="r-y-spark.html#cb146-14"></a>oct20 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(MAS__IPSP,CC)<span class="op">%&gt;%</span><span class="st">  </span><span class="kw">summarise_all</span>(mean)</span>
+<span id="cb146-15"><a href="r-y-spark.html#cb146-15"></a>oct20 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(MAS__IPSP,CC)<span class="op">%&gt;%</span><span class="st">  </span><span class="kw">summarise_all</span>(mean) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">show_query</span>()</span>
+<span id="cb146-16"><a href="r-y-spark.html#cb146-16"></a>oct20 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">qq=</span><span class="kw">quantile</span>(CC,<span class="dt">probs=</span><span class="fl">0.5</span>))</span>
+<span id="cb146-17"><a href="r-y-spark.html#cb146-17"></a>oct20 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(MAS__IPSP,CC) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ml_corr</span>()</span>
+<span id="cb146-18"><a href="r-y-spark.html#cb146-18"></a></span>
+<span id="cb146-19"><a href="r-y-spark.html#cb146-19"></a><span class="co">#figuras</span></span>
+<span id="cb146-20"><a href="r-y-spark.html#cb146-20"></a>oct20 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(CC) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">hist</span>()</span>
+<span id="cb146-21"><a href="r-y-spark.html#cb146-21"></a></span>
+<span id="cb146-22"><a href="r-y-spark.html#cb146-22"></a><span class="kw">library</span>(dbplot)</span>
+<span id="cb146-23"><a href="r-y-spark.html#cb146-23"></a>oct20 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbplot_histogram</span>(CC,<span class="dt">binwidth =</span> <span class="dv">3</span>)</span>
+<span id="cb146-24"><a href="r-y-spark.html#cb146-24"></a>sp_importaciones <span class="op">%&gt;%</span><span class="st">  </span><span class="kw">dbplot_bar</span>(GESTION)</span>
+<span id="cb146-25"><a href="r-y-spark.html#cb146-25"></a>oct20 <span class="op">%&gt;%</span><span class="st">  </span><span class="kw">dbplot_raster</span>(CC,MAS__IPSP)</span>
+<span id="cb146-26"><a href="r-y-spark.html#cb146-26"></a></span>
+<span id="cb146-27"><a href="r-y-spark.html#cb146-27"></a>oct20 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(PaAs<span class="op">==</span><span class="st">&quot;Bolivia&quot;</span>)<span class="op">%&gt;%</span><span class="st">  </span><span class="kw">group_by</span>(Departamento) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">voto=</span><span class="kw">mean</span>(CC)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Departamento,voto))<span class="op">+</span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>)</span>
+<span id="cb146-28"><a href="r-y-spark.html#cb146-28"></a></span>
+<span id="cb146-29"><a href="r-y-spark.html#cb146-29"></a><span class="kw">ggplot</span>(oct20,<span class="kw">aes</span>(CC,MAS__IPSP))<span class="op">+</span><span class="kw">geom_point</span>()</span></code></pre></div>
 
 <div id="refs" class="references">
 <div>
