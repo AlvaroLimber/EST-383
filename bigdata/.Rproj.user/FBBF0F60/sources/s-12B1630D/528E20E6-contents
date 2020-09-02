@@ -1,0 +1,237 @@
+<style>
+.section .reveal .state-background{
+   background: brown;
+}
+</style>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML-full" type="text/javascript">
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { scale: 100}
+  });
+</script>
+
+
+Modulo 3: Muestreo
+========================================================
+author: Alvaro Chirino
+date: Junio 2016
+transition: fade
+css: pres6.css
+
+Tema 3: Muestreo Aleatorio Simple
+========================================================
+type: section 
+
+Diseño de muestra
+========================================================
+
+$$
+p(.)=f(U, Y, X)
+$$
+
+$$
+\hat{t}=\sum_s\frac{y_k}{\pi_k}
+$$
+
+$$
+V(\hat{t})=\sum\sum_U{(\pi_{kl}-\pi_k*\pi_l)\frac{y_k*y_l}{\pi_k*\pi_l}}
+$$
+
+$$
+\hat{V}(\hat{t})=\sum\sum_s{(1-\frac{\pi_k*\pi_l}{\pi_{kl}})\frac{y_k*y_l}{\pi_k*\pi_l}}
+$$
+
+Características 
+===============================
+
+- Todas las unidades del universo (marco muestral) tienen la misma probabilidad de selección
+- Se aplica a unidades elementales
+- El tamaño de muestra es fijo
+- Es el muestreo mas básico de todos
+
+
+Probabilidades de selección
+==========================================
+
+Imaginemos una poblacion de $N=5$ con las característica $X={100,200,300,400,500}$, seleccionamos una muestra sin reposición de $n=3$.
+
+```{r,echo=F}
+N<-5
+u<-1:N
+x<-seq(100,500,100)
+n<-3
+```
+Las muestras posibles son ${N \choose n}$
+
+<font size="6">
+```{r,echo=F}
+#choose(N,n)
+s<-combn(x,n)
+s
+```
+</font>
+¿Cuál es la probabilidad de que la unidad $u_1$ este en la muestra?
+
+Probabilidades de selección (2/2)
+========================
+
+$$P(u_1 \in s)=P(u_1 \in S(1))+P(u_1 \notin S(1))P(u_1 \in S(2))+P(u_1 \notin S(1))P(u_1 \notin S(2))P(u_1 \in S(3))$$
+
+$$P(u_i \in s)= \pi_i=\frac{{N-1 \choose n-1}}{{N \choose n}}= \frac{n}{N}$$
+
+
+Estimadores mas usado (media, total)
+==============================================
+type: sub-section
+
+Media 
+
+$$\bar{x}=\frac{\sum_s{x_i}}{n}$$
+
+Total
+
+$$\hat{t}_x=N*\frac{\sum_s{x_i}}{n}=N*\bar{x}$$
+
+Estimadores mas usado (proporción, total clase)
+==============================================
+type: sub-section
+
+Proporción
+
+$$\hat{P}_k=\frac{\sum_s{I(u_i \in k)_i}}{n}=\frac{a}{n}$$
+
+Total
+
+$$\hat{A}_k=N*\hat{P}$$
+
+Varianza de la media
+============================================
+
+$$V(\bar{x})=(1-\frac{n}{N})*\frac{S^2}{n}$$
+
+$$\hat{V}(\bar{x})=(1-\frac{n}{N})*\frac{\hat{S}^2}{n}$$
+
+donde,
+
+$$S^2=\frac{\sum_U{(x_i-\mu)^2}}{N-1}$$
+$$\hat{S}^2=\frac{\sum_s{(x_i-\bar{x})^2}}{n-1}$$
+
+Varianza del total
+============================================
+
+$$V(\hat{t}_x)=V(N*\bar{x})=N^2*V(\bar{x})$$
+
+$$\hat{V}(\hat{t}_x)=\hat{V}(N*\bar{x})=N^2*\hat{V}(\bar{x})$$
+
+En ambos estimadores (media y total), si $N$ es muy grande se puede considerar $(1-f)\propto 1$
+
+Varianza de la proporción y el total clase 
+============================================
+
+Considere que para la proporción la variable $x$ es dicotómica y que la proporcion es homologa al estimador de la media, tal como el total con el total clase.
+
+$$S^2=\frac{\sum_U{(x_i-\mu)^2}}{N-1}=\frac{N*P*(1-P)}{N-1}$$
+
+$$\hat{S}^2=\frac{\sum_s{(x_i-\bar{x})^2}}{n-1}=\frac{n*\hat{P}*(1-\hat{P})}{n-1}$$
+
+
+Indicadores de rendimiento
+============================================
+
+Intervalo de confianza: 
+$$\hat{\theta} \pm Z_{1-\alpha /2}*\sqrt{\hat{V}(\hat{\theta})}$$
+
+Error del estimador: 
+$$\sqrt{\hat{V}(\hat{\theta})}$$
+
+Error relativo del estimador: 
+$$\frac{\sqrt{\hat{V}(\hat{\theta})}}{\hat{\theta}}$$
+
+Indicadores de rendimiento
+============================================
+
+Margen de error del estimador: 
+$$Z_{1-\alpha/2}*\sqrt{\hat{V}(\hat{\theta})}$$
+
+Margen de error relativo del estimador: $$Z_{1-\alpha/2}*\frac{\sqrt{\hat{V}(\hat{\theta})}}{\hat{\theta}}$$
+
+Un ejemplo
+========================================================
+Sea nuestro universo compuesto por 20 unidades y la variable de interes $Y$
+
+```{r,echo=FALSE}
+r1<-1:20
+r2<-seq(10,1000,length.out=20)
+bd<-round(t(matrix(c(r1,r2),20,2)))
+rownames(bd)<-c("U","Y")
+colnames(bd)<-paste(rep("u",20),1:20,sep="")
+bd[,1:10]
+bd[,11:20]
+```
+
+
+Y nuestro indicador, el promedio de $Y$ $\theta=\frac{\sum_{i=1}^{20}{Y_i}}{N}$
+```{r,echo=FALSE}
+mean(bd[2,])
+```
+
+Muestras posibles
+========================================================
+$$N\mathbb{C}n \Rightarrow 20\mathbb{C}4$$
+```{r,echo=FALSE}
+choose(20,4)
+```
+10 muestras de ejemplo
+<font size="7">
+```{r,echo=FALSE}
+c<-combn(bd[1,],4)
+set.seed(9999)
+o<-round(runif(10)*4845)
+s<-c[,o]
+rownames(s)<-c("u1","u2","u3","u4")
+colnames(s)<-paste(rep("s",10),1:10,sep="")
+s
+```
+</font>
+
+Proceso de inferencia Muestral
+========================================================
+<font size="5.5">
+```{r,echo=FALSE}
+c<-combn(bd[2,],4)
+y<-c[,o]
+rownames(y)<-c("u1","u2","u3","u4")
+colnames(y)<-paste(rep("s",10),1:10,sep="")
+y
+y<-as.data.frame(y)
+cat("Media muestral")
+me<-apply(y,2,mean)
+round(apply(y,2,mean),2)
+cat("Error muestral")
+f<-(1-(4/20))*(1/4)
+sdy<-apply(y,2,sd)*sqrt(f)
+round(apply(y,2,sd)*sqrt(f),2)
+cat("CV muestral")
+round(sdy/me,2)
+cat("Intervalos de Confianza 95%")
+li<-round(me-qnorm(0.05/2,lower.tail=F)*sdy,2)
+ls<-round(me+qnorm(0.05/2,lower.tail=F)*sdy,2)
+rbind(li,ls)
+```
+</font>
+
+De manera Gráfica
+========================================================
+```{r,echo=FALSE}
+hist(colMeans(c),xlab="Muestras S",ylab="Frecuencia",main="Distribución de las Medias muestrales")
+abline(v=me,col="red")
+text(me,100,names(me),cex=0.8,col="blue")
+abline(v=mean(bd[2,]),col="brown",lty=2,lwd=2)
+```
+
+```{r,echo=FALSE}
+options(rpubs.upload.method = "internal")
+options(RCurlOptions = list(verbose = FALSE, capath = system.file("CurlSSL", "cacert.pem", package = "RCurl"), ssl.verifypeer = FALSE))
+```

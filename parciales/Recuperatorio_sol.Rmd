@@ -1,0 +1,180 @@
+---
+title: "Solucionario: Recuperatorio (30pts)"
+subtitle: "Programacion Estadística I"
+author: "Lic. Alvaro Chirino Gutierrez"
+date: "Julio, 2020"
+output: html_document
+runtime: shiny
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+\vspace{0.3cm}
+\hrule
+\vspace{0.3cm}
+
+# PRIMER PARCIAL
+
+# Pregunta 1 (15 puntos)
+
+Usando la información de www.worldometers.com sobre el COVID con la librería rvest, para los datos mas actuales, generar en un documento R markdown:
+
+* Tabla de países por continente (separadas o juntas)
+  + Top 5 casos por millón
+  + Top 5 test por millón
+
+```{r}
+rm(list=ls())
+library(rvest)
+library(dplyr)
+covid<-read_html("https://www.worldometers.info/coronavirus/")
+aux<-html_table(covid)
+t<-aux[[1]]
+names(t)[1]<-"id"
+t<-t[!is.na(t$id),]
+names(t)[11]<-"casoM"
+names(t)[14]<-"testM"
+names(t)[12]<-"muerteM"
+names(t)[7]<-"recup"
+
+t$casoM<-as.numeric(gsub(",","",t$casoM))
+t$testM<-as.numeric(gsub(",","",t$testM))
+t$muerteM<-as.numeric(gsub(",","",t$muerteM))
+t$recup<-as.numeric(gsub(",","",t$recup))
+t <- t %>% filter(16 !="")
+#casos
+tt1<-t %>% mutate(nn=1) %>% arrange(desc(casoM)) %>% group_by(Continent)  %>% mutate(nn=cumsum(nn)) %>% filter(nn<=5) %>% select(`Country,Other`,casoM,nn)
+tt1<-tt1 %>% arrange(Continent)
+knitr::kable(tt1,caption = "Top 5 casos por Millon por país y continente")
+#test
+tt2<-t %>% mutate(nn=1) %>% arrange(desc(testM)) %>% group_by(Continent)  %>% mutate(nn=cumsum(nn)) %>% filter(nn<=5) %>% select(`Country,Other`,testM,nn)
+tt2<-tt2 %>% arrange(Continent)
+knitr::kable(tt2,caption = "Top 5 test por Millon por país y continente")
+```
+
+* Gráficos de países por continente (incluir en el gráfico los nombres de los países.)
+  + Casos por millón vs Test por millón
+  + Muertes por millón vs logaritmo de los recuperados
+  
+```{r}
+library(ggplot2)
+#Casos por millón vs Test por millón
+ggplot(t,aes(casoM,testM,label=`Country,Other`))+geom_text(size=2)+facet_wrap(~Continent)
+#Muertes por millón vs logaritmo de los recuperados
+ggplot(t,aes(muerteM,log(recup),label=`Country,Other`))+geom_text(size=2)+facet_wrap(~Continent)
+```
+
+
+# Pregunta 2 (15 puntos)
+
+Realice una función en Shiny empleando la base de datos para la ENDSA que permita ver por departamento y año:
+
+  * Tabla que muestre la relación entre sexo y años de educación
+  * Gráfico que muestre la relación entre "edad a la primera relación sexual" vs "Total de niños nacidos"
+
+```{r,echo=FALSE,warning =F}
+load("C:\\Users\\ALVARO\\Documents\\GitHub\\EST-383\\data\\endsa.RData")
+ldep<-unique(endsa$depto)
+lyear<-unique(endsa$year)
+inputPanel(
+  selectInput("dep", label = "Departamento:",
+              choices = ldep, selected = 1),
+  selectInput("year", label = "Periodo:",
+              choices = lyear, selected = 1)
+)
+renderTable({
+  bd<-endsa %>% filter(depto==input$dep & year==input$year)
+  table(bd$ae03,bd$sexo)
+})
+renderPlot({
+  bd<-endsa %>% filter(depto==input$dep & year==input$year)
+  plot(bd[,25],bd[,27])
+})
+```
+
+\vspace{0.3cm}
+\hrule
+\vspace{0.3cm}
+
+\clearpage
+
+\vspace{0.3cm}
+\hrule
+\vspace{0.3cm}
+
+# SEGUNDO PARCIAL
+
+# Pregunta 1 (15 puntos)
+
+Usando la encuesta de hogares 2018 defina una base de datos que contenga las siguientes variables para jefes de hogar mujeres:
+
+  + Edad
+  + Ingreso laboral
+  + Ingreso no laboral
+  + Ingreso personal
+  + Departamento 
+  + Años de educación
+  + Área
+  + Tipo de hogar
+  + Número de miembros en el hogar
+  + Personas de 5 años o menos en el hogar
+  + Personas de 60 años o más en el hogar
+  + Hogar con electricidad
+  + Acceso a internet en el hogar
+  + Piso de tierra en la vivienda
+  
+```{r}
+rm(list=ls())
+load(url("https://github.com/AlvaroLimber/EST-384/raw/master/data/eh18.Rdata"))
+# Usando la encuesta de hogares 2018 defina una base de datos que contenga las siguientes variables para jefes de hogar mujeres:
+
+#filtro  y variables resumen del hogar
+nn<-eh18p %>% mutate(miembros=1,p60=s02a_03>=60,p5=s02a_03<=5) %>% group_by(folio) %>% summarise(miembros=sum(miembros),p5=sum(p5),p60=sum(p60))
+#base jefe
+jefe<-eh18p %>% filter(s02a_05==unique(eh18p$s02a_05)[1]) %>% select(folio,s02a_02,s02a_03,p0,depto,aestudio,area,tipohogar,ylab,ynolab,yper)
+#variables en la vivienda
+vv<-eh18v %>% mutate(electrico=s01a_19=="1. Si",tierra=s01a_09=="1.TIERRA",internet=s01a_31=="1. Si") %>% select(folio,electrico,tierra,internet)
+#base consolidada
+jefe<-merge(jefe,nn)
+jefe<-merge(jefe,vv)
+#seleccion de los hogares con jefes mujeres
+jefe<-jefe %>% filter(s02a_02=="2.Mujer")
+head(jefe)
+```
+
+
+# Pregunta 2 (15 puntos)
+
+Para la base alojada en R y la base alojada en Spark (del ejercicio anterior), genere lo siguiente: 
+
+  + Promedio de años de educación e ingreso personal por departamento, área y acceso a internet 
+  + Proporción de jefas del hogar con un ingreso personal superior a 3000 Bs. Por departamento y tipo de hogar
+  + Promedio de personas de 5 años o menos y personas de 60 años o más, por tipo de hogar, área y piso de tierra.
+  + Gráfico sobre el acceso al internet por tipo de hogar (ggplot)
+
+```{r}
+library(sparklyr)
+sc<-spark_connect(master="local")
+sp_jefe<-copy_to(sc,jefe,"eh18")
+# Promedio de años de educación e ingreso personal por departamento, área y acceso a internet 
+jefe %>% group_by(depto,area,internet) %>% summarise(mean(aestudio,na.rm=T),mean(yper,na.rm=T))
+sp_jefe %>% group_by(depto,area,internet) %>% summarise(mean(aestudio,na.rm=T),mean(yper,na.rm=T))
+# Proporción de jefas del hogar con un ingreso personal superior a 3000 Bs. Por departamento y tipo de hogar
+jefe %>% mutate(var=yper>3000) %>% group_by(depto,tipohogar) %>% summarise(mean(var))
+sp_jefe %>% mutate(var=ifelse(yper>3000,1,0)) %>% group_by(depto,tipohogar) %>% summarise(mean(var))
+# Promedio de personas de 5 años o menos y personas de 60 años o más, por tipo de hogar, área y piso de tierra.
+jefe %>% group_by(tipohogar,area,tierra) %>% summarise(mean(p5),mean(p60))
+sp_jefe %>% group_by(tipohogar,area,tierra) %>% summarise(mean(p5),mean(p60))
+# Gráfico sobre el acceso al internet por tipo de hogar (ggplot)
+ggplot(jefe,aes(internet))+geom_bar()+facet_wrap(~tipohogar)
+ggplot(sp_jefe,aes(internet))+geom_bar()+facet_wrap(~tipohogar)
+spark_disconnect(sc)
+```
+
+\vspace{0.3cm}
+\hrule
+\vspace{0.3cm}

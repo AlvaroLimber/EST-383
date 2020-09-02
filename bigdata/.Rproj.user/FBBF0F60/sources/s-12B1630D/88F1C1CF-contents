@@ -1,0 +1,494 @@
+<style>
+.section .reveal .state-background{
+   background: brown;
+}
+</style>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML-full" type="text/javascript">
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { scale: 100}
+  });
+</script>
+
+
+Eje temático 4: Implementación de una Evaluación de Impacto
+========================================================
+author: Alvaro Chirino
+date: Enero 2015
+transition: fade
+css: pres6.css
+
+Acerca del Curso
+========================================================
+~~Duración~~ 7.5 horas presenciales en aula y 4.5 horas virtuales
+
+~~Fechas~~ 23, 26 y 27 de enero de 2015
+
+~~Horarios~~ 19:00 a 21:30; (break 20:00)
+
+~~Lugar~~ Edificio Multicentro, piso 7, en aulas de la EGPP
+
+
+CONTENIDO
+========================================================
+1. Elección de un método de evaluación
+2. Elección de datos para realizar una Evaluación de Impacto
+3. Estrategias de muestreo
+4. Recolección de datos
+5. Producción y divulgación de resultados
+
+***
+
+![](3ie.png)
+
+EVALUACIÓN
+========================================================
+type: exclaim
+
+- Asistencia, 10 Pts.
+- Participación, 20 Pts
+- Prueba escrita, 70 Pts.
+
+INTRODUCCIÓN
+========================================================
+type: prompt 
+<small>
+*Ronald Fisher*
+
+>"El estadístico no puede excusarse de la obligación de tener la cabeza clara en los principios de la inferencia científica, pero igualmente, ningún otro hombre pensante puede evitar una obligación similar."
+
+*Lesli Kish*
+>"El diseño estadístico siempre involucra el compromiso entre lo deseable y lo posible"
+
+***
+*Andrew Gelman*
+
+>"La inferencia estadística es usada para aprender de lo incompleto y lo imperfecto"
+
+*Willian Cochran*
+
+>"La contribución de la estadística en la experimentación es la técnica llamada ***prueba de significación***"
+
+
+</small>
+
+Un Sistema
+========================================================
+
+![](pienso2.jpg)
+
+El Sistema de implementación de la EI
+========================================================
+![](diagrama.png)
+
+1. Diseño de Evaluación
+========================================================
+type: sub-section 
+
+``Es el proceso en el que se define todos los aspectos relacionados a la evaluación de impacto''
+
+<small>
+- Input: Pregunta de investigación, motivación
+- Process: Teoría del cambio y la cadena de resultados
+- Output: Diseño de evaluación
+- Outcome: Método de Evaluación
+</small>
+
+¿Impacto?
+========================================================
+![](impacto.png)
+
+
+Repaso de los métodos (1/2)
+========================================================
+
+| Tipos de evaluación | Principio | Mayor problema | Mayor virtud |
+| --------- | ------ | -----| -------|
+|Experimentales | Probabilístico puro y aleatorio | A veces: conflicto ético | Impacto exacto |
+|Cuasi-experimentales | Seudo-Probabilisitico y aleatorio | Sesgo de selección | Impacto aproximado |
+|No experimentales | No probabilístico | Teóricamente invalido |    Ninguna |
+
+Repaso de los metodos (2/2)
+========================================================
+* Experimental
+  + Efectos fijos y aleatorios
+  + Bloques, etc. 
+* Cuasi-experimental 
+  + PSM
+  + DD
+  + RD
+  + IV
+
+Algunas fuentes contra la validez
+========================================================
+1. Historia
+2. Maduración
+3. Administracion del tratamiento
+4. Instrumentación
+5. Mortalidad experimental
+
+Algunos diseños
+========================================================
+![](t2.png)
+  
+¿Aleatoriedad de qué?
+========================================================
+
+
+Diseño Temático
+========================================================
+type: sub-section 
+
+``Es el proceso que convierte la pregunta de investigación en algo tangible y medible, además, proporciona la base teórica del proyecto''
+
+Indicadores
+========================================================
+
+Indicadores, 
+$$\theta=f(x,y,z)$$
+
+Variables, 
+$$x, y=f(p1, p2, ...), z$$
+
+Preguntas, 
+$$p1, p2, \ldots$$
+
+Estructura Temática
+========================================================
+- Área temática
+  > ¿Qué se quiere saber?
+- Grupo
+  > ¿Qué mide lo que quiero saber?
+- Variables
+  > ¿Qué necesito para saberlo?
+
+![](cuadro.png)
+
+4 clases de variables
+========================================================
+
+- Variables explicativas: Son el objeto del diseño de investigación
+- Variables de control: Variables ajenas al diseño que pueden ser controladas
+- Variables de disturbio: Variables ajenas al diseño que no pueden ser controladas
+- Variables aleatorias: Variables ajenas al dise~no que son errores aleatorios (idiosincrasia)
+
+Estrategia de muestreo
+========================================================
+type: sub-section 
+
+``Es el proceso que genera un modelo matemático-estadístico que define los criterios de construcción y selección de la muestra. Valida de manera científica el proceso de inferencia''
+
+
+Estrategia de muestreo
+========================================================
+
+Estrategia de muestreo $=$ Indicadores $+$ Diseño Muestral
+
+![](myi.png)
+
+
+
+Principio de Muestreo
+========================================================
+$$ U=\left\{1,\ldots,k,\ldots,N\right\} $$
+
+Sea $y$ la variable de interés, $y_k$ el valor de la variable de interés en el individuo $k$, 
+$$
+t=\sum_U {y_k}
+$$
+
+Sea $s$ una muestra (sub población de U), y $\hat{t}$ un estimador que trata de aproximarse a $t$
+
+$$
+s=\left\{1, \ldots,n_s \right\}
+$$
+
+Conceptos importantes
+========================================================
+- Marco muestral
+- Estimador, parámetro
+- Unidades elementales y agregadas
+- Muestreo aleatorio, no aleatorio
+- Muestreo probabilístico, no probabilístico
+- Diseños medibles y no medibles
+
+
+Diseño de muestra
+========================================================
+
+$$
+p(.)=f(U, Y, X)
+$$
+
+$$
+\hat{t}=\sum_s\frac{y_k}{\pi_k}
+$$
+
+$$
+V(\hat{t})=\sum\sum_U{(\pi_{kl}-\pi_k*\pi_l)\frac{y_k*y_l}{\pi_k*\pi_l}}
+$$
+
+$$
+\hat{V}(\hat{t})=\sum\sum_s{(1-\frac{\pi_k*\pi_l}{\pi_{kl}})\frac{y_k*y_l}{\pi_k*\pi_l}}
+$$
+
+Técnicas de muestreo
+========================================================
+<small>
+- **Por estructura de $U$**
+ * Muestreo aleatorio simple
+ * Muestreo Estratificado
+ * Muestreo por conglomerado
+ * Muestreo por etapas
+ * Muestreo por fases
+ 
+***
+
+- **Por acceso en $X$**
+ * PPS y $\pi$ PS 
+ * Muestreo por regresión
+- **Otros, condicionando $\pi$**
+ * Bola de nieve 
+ * Cuotas
+ * Intencionado
+</small>
+
+Un ejemplo
+========================================================
+Sea nuestro universo compuesto por 20 unidades y la variable de interes $Y$
+
+```{r,echo=FALSE}
+r1<-1:20
+r2<-seq(10,1000,length.out=20)
+bd<-round(t(matrix(c(r1,r2),20,2)))
+rownames(bd)<-c("U","Y")
+colnames(bd)<-paste(rep("u",20),1:20,sep="")
+bd[,1:10]
+bd[,11:20]
+```
+
+
+Y nuestro indicador, el promedio de $Y$ $\theta=\frac{\sum_{i=1}^{20}{Y_i}}{N}$
+```{r,echo=FALSE}
+mean(bd[2,])
+```
+
+Muestras posibles
+========================================================
+$$N\mathbb{C}n \Rightarrow 20\mathbb{C}4$$
+```{r,echo=FALSE}
+choose(20,4)
+```
+10 muestras de ejemplo
+<font size="4">
+```{r,echo=FALSE}
+c<-combn(bd[1,],4)
+set.seed(9999)
+o<-round(runif(10)*4845)
+s<-c[,o]
+rownames(s)<-c("u1","u2","u3","u4")
+colnames(s)<-paste(rep("s",10),1:10,sep="")
+s
+```
+</font>
+
+Proceso de inferencia Muestral
+========================================================
+<font size="5.5">
+```{r,echo=FALSE}
+c<-combn(bd[2,],4)
+y<-c[,o]
+rownames(y)<-c("u1","u2","u3","u4")
+colnames(y)<-paste(rep("s",10),1:10,sep="")
+y
+y<-as.data.frame(y)
+cat("Media muestral")
+me<-apply(y,2,mean)
+round(apply(y,2,mean),2)
+cat("Error muestral")
+f<-(1-(4/20))*(1/4)
+sdy<-apply(y,2,sd)*sqrt(f)
+round(apply(y,2,sd)*sqrt(f),2)
+cat("CV muestral")
+round(sdy/me,2)
+cat("Intervalos de Confianza 95%")
+li<-round(me-qnorm(0.05/2,lower.tail=F)*sdy,2)
+ls<-round(me+qnorm(0.05/2,lower.tail=F)*sdy,2)
+rbind(li,ls)
+```
+</font>
+
+De manera Gráfica
+========================================================
+```{r,echo=FALSE}
+hist(colMeans(c),xlab="Muestras S",ylab="Frecuencia",main="Distribución de las Medias muestrales")
+abline(v=me,col="red")
+text(me,100,names(me),cex=0.8,col="blue")
+abline(v=mean(bd[2,]),col="brown",lty=2,lwd=2)
+```
+
+Diseño Logístico
+========================================================
+type: sub-section 
+
+``Es el proceso que define los procedimientos para la recolección de la información. Busca minimizar los errores ajenos al muestreo provenientes del Operativo de Campo''
+
+Procesamiento
+========================================================
+type: sub-section 
+
+``Es el proceso que transforma la información en una Base de Datos. Busca minimizar los errores ajenos al muestreo provenientes del procesamiento''
+
+Diagnóstico
+========================================================
+type: sub-section 
+
+``Es el proceso que evalua la calidad del proceso y la información''
+<small>
+- Contenido: Pertinencia de las preguntas y adaptabilidad del cuestionario
+- Muestra: Errores muestrales
+- Logistica: Errores no muestrales 
+- Procesamiento: Errores no muestrales
+</small>
+
+Calidad de los resultados
+========================================================
+- Implicaciones
+- Alcances 
+- Rendimiento efectivo
+- Representatividad (validez)
+
+
+Muestreo en evaluaciones de impacto
+========================================================
+type:prompt 
+
+Inferencia Causal
+
+El problema fundamental
+========================================================
+Tratamiento,
+
+$$
+T_i =
+\left\{ \begin{array}{ll}
+ 1 & \text{Si i recibe tratamiento}, \\
+ 0 & \text{Si i no recibe tratamiento}.
+\end{array} \right.
+$$
+
+Impacto individual, 
+$$\alpha=y_i^1-y_i^0$$
+
+El modelo, 
+$$y_i=\beta_0+\alpha*T_i+\epsilon_i$$
+
+
+Poder
+========================================================
+Hipotesis,
+
+$$H_0: E[y_i^1]=E[y_i^0]$$
+
+Posibles resultados, 
+
+| Real - Desición $\rightarrow$   | A $H_0$ |  R $H_0$  |
+| --------- | ------ | -----| -------|
+| $H_0$ V | Confiabilidad ($1-\alpha)$| Error de tipo I   ($\alpha$) |
+| $H_0$ F | Error de tipo II  ($\beta$)     | Poder ($1-\beta$)|
+
+Valores comunes,
+$$\alpha=0.05$$
+$$\beta=0.20$$
+
+Poder (3ie)
+========================================================
+"El poder de un diseño de evaluación de impacto es la probabilidad que las diferencias detectadas entre el tratamiento y el control en realidad existan"
+
+"El calculo del poder indica que tan pequeña debe ser el tamaño de muestra requerido para el diseño de evaluación permita detectar una diferencia significativa en los resultados del grupo tratamiento y control"
+
+Como determinar el tamaño de muestra
+========================================================
+Muestreo Aleatorio simple
+
+$$n=(\frac{z_{1-\alpha/2}+z_{1-\beta}}{MDE})^2*2\sigma^2$$
+
+$\sigma^2:$ Varianza de la variable de interés
+
+$n:$ El tamaño de muestra para cada grupo
+
+$MDE:$ Efecto minimo detectable ($MDE=|u_t-u_c|$)
+
+$z_{1-\alpha/2}:$ Valor asociado al error de tipo I
+
+$z_{1-\beta}:$ Valor asociado al error de tipo II
+
+Ejemplo
+========================================================
+- 42% de tasa de desempleo juvenil (TDJ)
+- Programa de vales, con el fin de reducir a 20% la TDJ
+- 4000 jovenes son elegibles
+- $z_{1-\alpha/2|\alpha=0.05}=1.96$, $z_{1-\beta|\beta=0.2}=0.84$, $\sigma^2=P(1-P)$, $MDE=0.22$
+```{r}
+n<-(((1.96+0.84)/0.22)^2)*2*(0.42*(1-0.42))
+print(n)
+```
+
+Producción y divulgación de Resultados
+========================================================
+type:prompt 
+
+``Esta etapa comprende las siguientes actividades: analizar los datos, elaborar  informes y presentaciones de los resultados y divulgarlos''
+
+¿En qué consiste? 
+
+Analizar los datos
+========================================================
+ - Asegurar la imparcialidad y el manejo ético de la información.
+ - Tener en cuenta que los resultados de la evaluación deben ser válidos, confiables, comprensibles  y útiles para la toma de decisiones.
+ 
+ 
+Elaborar informes
+========================================================
+ - Evitar un lenguaje técnico solo para especialistas. Los usuarios de la información no siempre son expertos en evaluación de impacto.
+ - Asegurar que se ofrezcan bases sólidas y fundamentadas para la toma de decisiones.
+ - Demostrar que la evaluación se basa en informaciones válidas.
+
+Divulgar los resultados
+========================================================
+ - Implementar  un plan de difusión  de los resultados para los interlocutores sociales
+ - La información de la evaluación es crucial para la toma de decisiones. Una evaluación que no se utiliza es un gasto inútil.
+ 
+ 1. Policy Brief 
+ 2. Brochure 
+ 3. Concept Notes
+ 4. Working Papers
+ 
+ 
+Plataformas abiertas (Open Data) 
+========================================================
+- Paginas Web
+- Consultas interactivas
+- Apps
+
+(CAPI)
+
+ 1. http://www.visualizing.org/
+ 2. http://dataviva.info/
+ 3. http://www.junar.com/
+ 4. http://www.cepal.org/redatam/
+ 
+Dataviva
+========================================================
+![](dataviva.png)
+ 
+Redatam
+========================================================
+![](cbms.png)
+ 
+```{r,echo=FALSE}
+options(rpubs.upload.method = "internal")
+options(RCurlOptions = list(verbose = FALSE, capath = system.file("CurlSSL", "cacert.pem", package = "RCurl"), ssl.verifypeer = FALSE))
+```

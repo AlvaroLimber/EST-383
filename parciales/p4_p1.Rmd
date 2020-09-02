@@ -1,0 +1,90 @@
+---
+title: ""
+author: "Alvaro Chirino Gutierrez"
+output: html_document
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Pregunta 4 (10 pts) 
+Realice una función en Shiny empleando la base de datos electoral del $20o$ que permita ver los resultados por municipio de las elecciones presidenciales, la aplicación debe permitir seleccionar el departamento y también el municipio de interés y ver los resultados en una tabla y un gráfico a elección. 
+
+```{r}
+#Preparando la base de datos
+load(url("https://github.com/AlvaroLimber/EST-383/raw/master/data/oct20.RData"))
+computo<-computo[computo$País=="Bolivia" & computo$Elección=="Presidente y Vicepresidente",]
+mun<-aggregate(computo[,13:25],by=computo[,c(3,5,6)],sum)
+#ldep<-names(table(mun$Departamento))
+ldep<-c("Beni"=1,"Chuquisaca"=2,"Cochabamba"=3,"La Paz"=4,"Oruro"=5,"Pando"=6,"Potosí"=7,"Santa Cruz"=8,"Tarija"=9)
+lmun<-list()
+for(i in 1:9){
+lmun[[i]]<-names(table(mun$Municipio[mun$Departamento==names(ldep[i])]))  
+}
+
+```
+
+
+```{r, echo=T}
+inputPanel(
+  selectInput("dep", label = "Departamento:",
+              choices = ldep, selected = 1),
+  conditionalPanel(
+  condition = "input.dep == '1'",
+  selectInput("depm1", label="Municipio",choices = lmun[[1]])
+  ),
+  conditionalPanel(
+  condition = "input.dep == '2'",
+  selectInput("depm2", label="Municipio",choices = lmun[[2]])
+  ),
+  conditionalPanel(
+  condition = "input.dep == '3'",
+  selectInput("depm3", label="Municipio",choices = lmun[[3]])
+  ),
+  conditionalPanel(
+  condition = "input.dep == '4'",
+  selectInput("depm4", label="Municipio",choices = lmun[[4]])
+  ),
+  conditionalPanel(
+  condition = "input.dep == '5'",
+  selectInput("depm5", label="Municipio",choices = lmun[[5]])
+  ),
+  conditionalPanel(
+  condition = "input.dep == '6'",
+  selectInput("depm6", label="Municipio",choices = lmun[[6]])
+  ),
+  conditionalPanel(
+  condition = "input.dep == '7'",
+  selectInput("depm7", label="Municipio",choices = lmun[[7]])
+  ),
+  conditionalPanel(
+  condition = "input.dep == '8'",
+  selectInput("depm8", label="Municipio",choices = lmun[[8]])
+  ),
+  conditionalPanel(
+  condition = "input.dep == '9'",
+  selectInput("depm9", label="Municipio",choices = lmun[[9]])
+  )
+)
+renderPrint({
+  print(input$dep)
+  print(names(input$dep))
+  eval(parse(text=paste0("zz<-","input$depm",input$dep)))
+  print(zz)
+  print(names(ldep[input$dep]))
+})
+renderTable({
+  aux<-names(ldep[as.numeric(input$dep)])
+  eval(parse(text=paste0("zz<-","input$depm",input$dep)))
+  mun[mun$Departamento==aux & mun$Municipio==zz,]
+})
+renderPlot({
+  aux<-names(ldep[as.numeric(input$dep)])
+  eval(parse(text=paste0("zz<-","input$depm",input$dep)))
+  bb<-mun[mun$Departamento==aux & mun$Municipio==zz,]
+  bb<-data.frame(tv=rownames(t(bb[,c(5:13,15,16)])),vv=t(bb[,c(5:13,15,16)]))
+  barplot(bb[,2],names.arg = bb$tv,horiz = T,las=1,cex.names = 0.6)
+})
+```
