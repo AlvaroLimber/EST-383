@@ -85,8 +85,8 @@ v2 <- c("hola","cómo","estás","adios")
 v3<- c(4,2,6,7,12,"hola")
 v4<-(v1 > 5)
 v5<-c(-9,pi,3/7)
-class(v5)
-typeof(v5)
+class(v3)
+typeof(v3)
 typeof(v1)
 ### Matriz
 

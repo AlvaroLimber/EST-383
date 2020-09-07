@@ -1,25 +1,25 @@
 {
-    "id": "80267101",
-    "path": "~/GitHub/EST-383/code_II2020/clase_31ago.R",
+    "id": "740AFE7A",
+    "path": "~/GitHub/EST-383/code_II2020/clase_2sep.R",
     "project_path": null,
     "type": "r_source",
-    "hash": "4192768072",
+    "hash": "3223827729",
     "contents": "",
     "dirty": false,
-    "created": 1598906230754.0,
+    "created": 1599077857024.0,
     "source_on_save": false,
-    "relative_order": 1,
+    "relative_order": 4,
     "properties": {
         "tempName": "Untitled1",
-        "cursorPosition": "88,10",
-        "scrollLine": "74"
+        "cursorPosition": "135,0",
+        "scrollLine": "127"
     },
     "folds": "",
-    "lastKnownWriteTime": 1599077852,
+    "lastKnownWriteTime": 1599083689,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1599077852624,
+    "last_content_update": 1599083689405,
     "read_only": false,
     "read_only_alternatives": []
 }
