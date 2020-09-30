@@ -117,12 +117,8 @@ str(bd_21f)
 # excel
 # spss
 # stata
-
 # json ...
 # xml ...
-
-
-
 
 
 
