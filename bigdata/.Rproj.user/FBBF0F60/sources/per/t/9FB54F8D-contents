@@ -108,7 +108,6 @@ axis(2,seq(0,50,5))
 arrows(0,45,15,35,col="green") #1 crear los gráficos
 dev.off()
 
-
 jpeg("g4.jpg")
 par(mfrow=c(2,2))
 plot(0,xlim=c(0,20),ylim=c(0,50),xlab="Eje X",ylab="Eje Y",axes = F,ann = F,type="n")

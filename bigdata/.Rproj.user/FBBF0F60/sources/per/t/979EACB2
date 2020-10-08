@@ -1,24 +1,25 @@
 {
-    "id": "D0D443FD",
-    "path": "~/GitHub/EST-383/bigdata/index.Rmd",
-    "project_path": "index.Rmd",
+    "id": "979EACB2",
+    "path": "~/GitHub/EST-383/code_II2020/clase_7oct.Rmd",
+    "project_path": null,
     "type": "r_markdown",
-    "hash": "3823983226",
+    "hash": "2020086168",
     "contents": "",
     "dirty": false,
-    "created": 1599008158605.0,
+    "created": 1602102697332.0,
     "source_on_save": false,
     "relative_order": 3,
     "properties": {
-        "cursorPosition": "54,62",
+        "tempName": "Untitled1",
+        "cursorPosition": "80,2",
         "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1599008204,
+    "lastKnownWriteTime": 1602106582,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1599008204786,
+    "last_content_update": 1602106582155,
     "read_only": false,
     "read_only_alternatives": []
 }
