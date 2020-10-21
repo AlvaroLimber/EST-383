@@ -1,41 +1,85 @@
 ---
-title: "Untitled"
+title: "Mi primer Dashboard"
 output: 
   flexdashboard::flex_dashboard:
-    orientation: columns
-    vertical_layout: fill
----
+    theme: journal
+    logo: logo1.jpg
+    social: ["menu"]
+--- 
 
 ```{r setup, include=FALSE}
 library(flexdashboard)
 ```
 
-Column {data-width=650}
------------------------------------------------------------------------
-
-### Chart A
-
 ```{r}
-
+load(url("https://github.com/AlvaroLimber/EST-384/raw/master/data/eh19.RData"))
 ```
 
-Column {data-width=350}
------------------------------------------------------------------------
+# Gráficos  {data-orientation=rows}
 
-### Chart B
-
-```{r}
-
-```
-
-### Chart C
+### Gráfico 1 {data-height=500}
 
 ```{r}
-
+barplot(table(eh19p$area))
 ```
 
-### Chart D
+> Fuente: INE 2019
+
+### Gráfico 2 {data-height=250}
 
 ```{r}
-
+plot(density(eh19p$ylab,na.rm=T))
 ```
+
+
+### Gráfico 3 {data-height=250}
+
+```{r}
+library(ggplot2)
+ggplot(eh19p,aes(x=ylab,y=depto))+geom_boxplot()
+```
+
+
+# Tablas {data-orientation=columns}
+
+### Tabla 1 
+
+```{r}
+library(knitr)
+kable(table(eh19p$depto,eh19p$area))
+```
+
+
+### Tabla 2
+
+
+
+### Tabla 3
+
+
+
+# Tema X 
+
+Column {data-width=250}
+--------------------------------------------
+
+### Ficha técnica del estudios
+
+Los indicadores tienen la formula:
+
+$$t_y=\sum_U y_k$$
+![](fig1.jpg)
+![](fig1.jpg)
+![](fig1.jpg)
+
+
+Column {.tabset}
+--------------------------------------------
+
+### Indicador 1
+
+
+
+### Indicador 2
+
+### Indicador 3

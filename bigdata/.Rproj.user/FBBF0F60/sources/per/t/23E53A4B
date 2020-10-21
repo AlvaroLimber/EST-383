@@ -1,0 +1,25 @@
+{
+    "id": "23E53A4B",
+    "path": null,
+    "project_path": null,
+    "type": "object_explorer",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1603138731667.0,
+    "source_on_save": false,
+    "relative_order": 2,
+    "properties": {
+        "id": "046b5ffd278643b7adb473fd121476ed",
+        "name": "tbs",
+        "title": "tbs"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1602712694,
+    "encoding": "",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1603138731667,
+    "read_only": false,
+    "read_only_alternatives": []
+}
