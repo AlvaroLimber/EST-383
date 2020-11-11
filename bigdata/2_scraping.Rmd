@@ -188,7 +188,7 @@ El ejemplo presenta el proceso del scraping para 8 grupo de productos:
 * Dulces
 
 
-Se emplea la libreria *rvest*, que es un paquete diseña para para facilitar la descarga y la manipulación de HTML y XML. También se utiliza la extensión Selector Gadget https://selectorgadget.com, este permite la identificación de las estructuras de las páginas web.
+Se emplea la librería *rvest*, que es un paquete diseña para para facilitar la descarga y la manipulación de HTML y XML. También se utiliza la extensión Selector Gadget https://selectorgadget.com, este permite la identificación de las estructuras de las páginas web.
 
 El objetivo del raspado es obtener el nombre del producto, su código, y el precio. Utilizando el selector gadget se identifica que en $.product-name$ se guardan los nombres, en $.price.product-price$ el precio del producto y en $data-id-product$ el identificador del producto. En R el código es:
 
@@ -287,10 +287,10 @@ tabla[[2]]
 
 ## APIs
 
-Conocida también por la sigla API,"application programming interface", es un conjunto de subrutinas, funciones y procedimientos (o métodos, en la programación orientada a objetos) que ofrece cierta biblioteca para ser utilizado por otro software. Ofrece una entrada a los datos que distribuye el API.
+Conocida también por la sigla API,"application programming interface", es un conjunto de sub rutinas, funciones y procedimientos (o métodos, en la programación orientada a objetos) que ofrece cierta biblioteca para ser utilizado por otro software. Ofrece una entrada a los datos que distribuye el API.
 
 ### API Banco Mundial
-La API ofrece acceso a las estadísticas que genera el Banco Mundial, existe un set extenso de estadisticas de la mayoria de los paises. La API ofrece mas de 16000 indicadores de series de tiempo, muchos de los indicadores tienen una cobertura de 50 años. La API incluye el acceso a 45 bases de datos, incluyendo:
+La API ofrece acceso a las estadísticas que genera el Banco Mundial, existe un set extenso de estadísticas de la mayoría de los países. La API ofrece mas de 16000 indicadores de series de tiempo, muchos de los indicadores tienen una cobertura de 50 años. La API incluye el acceso a 45 bases de datos, incluyendo:
 
 * World Development Indicators
 * International Debt Statistcs
@@ -299,19 +299,30 @@ La API ofrece acceso a las estadísticas que genera el Banco Mundial, existe un 
 * Subnational Poverty
 * Y otros, [ver](https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation)
 
-En R s epuede acceder mediante la libreria wbstats.
+En R se puede acceder mediante la librería wbstats.
 
 ```{r,eval=F}
-install.packages("wbstats")
+#install.packages("wbstats")
+
+#paso 1, instalar el rtools: https://cran.r-project.org/bin/windows/Rtools/
+#paso 2, instalar devtools
+install.packages("devtools")
+#paso 3, cargar el devtools
+library(devtools)
+#paso4, instalar wbstats
+install_github("nset-ornl/wbstats")
+
 library(wbstats)
+
 #acceso a todos los indicadores disponibles
-wbindicators("es")
+wbindex<-wbindicators("es")
 #acceso al catalogo de datos
-wbdatacatalog()
+wbcat<-wbdatacatalog()
 #búsqueda de indicador
-wbsearch(pattern = "education")
+index_edu<-wbsearch(pattern = "education")
+index_sal<-wbsearch(pattern = "health")
 # ver los países y sus códigos 
-wbcountries()             
+wbpais<-wbcountries()             
 #Comando para extraer los indicadores
 wb(country = "BOL",indicator = "NY.GDP.MKTP.CD", startdate = 2000, enddate = 2016)
 ```
@@ -319,15 +330,29 @@ wb(country = "BOL",indicator = "NY.GDP.MKTP.CD", startdate = 2000, enddate = 201
 
 ### API Google trends
 
-La librari gtrendsR permite acceder a la API de [google trends](https://trends.google.es/trends/?geo=ES), esta permite acceder a las tendencias de busqueda que se realizan mediante el motor de busqueda de Google.
+La libraría gtrendsR permite acceder a la API de [google trends](https://trends.google.es/trends/?geo=ES), esta permite acceder a las tendencias de búsqueda que se realizan mediante el motor de búsqueda de Google.
 
 ```{r,eval=F}
-#install.packages("gtrendsR")
+install.packages("gtrendsR")
 library(gtrendsR)
-library(knitr)
+aux<-countries
 res <- gtrends("Coronavirus", geo = c("BO"))
+
+bd_cov<-res$interest_over_time
+
+library(ggplot2)
+
+bd_cov$hits<-as.numeric(gsub("<","",bd_cov$hits))
+
+ggplot(bd_cov,aes(date,hits))+geom_line()
 plot(res)
 
+eleccion2020<-gtrends(c("Luis Arce","Carlos Mesa","Fernando Camacho"), geo = c("BO"),time="today 3-m")
+
+plot(eleccion2020)
+
+
+library(knitr)
 kable(head(res$interest_over_time,10))
 ```
 
