@@ -141,7 +141,7 @@ Esto permite mejorar la cobertura (append), ampliar las temáticas de estudio (m
 
 ### Bases de datos
 
-Una vez que los datos fueron recolectados y enlazados entre diferentes fuentes, es necesario guardar la información. Ahora se siscute las alternativas para guardar la información. 
+Una vez que los datos fueron recolectados y enlazados entre diferentes fuentes, es necesario guardar la información. Ahora se discute las alternativas para guardar la información. 
 
   * DBMS (databasemanagement systems) Sistema de gestión de base de datos: Decidir que herramienta usar segun la dimensión de los archivos.
   
@@ -167,14 +167,14 @@ Una vez que los datos fueron recolectados y enlazados entre diferentes fuentes, 
 
 **¿Machine learning = Statistics?**
 
-Veran que muchos métodos discutidos a lo largo de su formación como estadisticos aparecen dentro del matching learning y que son llamados con otros nombres. 
+Verán que muchos métodos discutidos a lo largo de su formación como estadísticos aparecen dentro del maching learning y que son llamados con otros nombres. 
 
 Al pensar en machine learning debemos asociarlo directamente con procesos computacionales, muchos otros conceptos giran al rededor de esta idea como la inteligencia artificial. Proceso de machine learning hoy:
 
-  * Permiten manejar autos de forma autonoma
+  * Permiten manejar autos de forma autónoma
   * Puede recomendar libros, amistades, música, etc
-  * Identificar drogas, proteinas y ciertos genes
-  * Se usa para detectar ciertos tipos de cancer y otras enfermedades médicas
+  * Identificar drogas, proteínas y ciertos génes
+  * Se usa para detectar ciertos tipos de cáncer y otras enfermedades médicas
   * Ayudan a conocer que estudiantes necesitan un apoyo adicional 
   * Ayudan a persuadir por que candidato votar en las elecciones.
 

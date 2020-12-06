@@ -41,6 +41,7 @@ Google Cloud Platform.
 ### Transformacion y agregación de datos con la librería ff y ffbase 
 
 ```{r,eval=F}
+rm(list=ls())
 install.packages("ff")
 install.packages("ffbase")
 #install.packages("ffbase2") / github
@@ -50,53 +51,62 @@ install.packages("ffbase")
 library(ff)
 library(ffbase)
 setwd("C:\\Users\\ALVARO\\Desktop\\db_bolivia\\bigdata")
-bd1<-read.csv("200614COVID19MEXICO.csv",sep=",",header=T)
-object.size(bd1)
+bd1<-read.csv("200613COVID19MEXICO.csv",sep=",",header=T)
+
+object.size(bd1)/1000000
 head(bd1)
+
 #paso 1: tener un directorio para archivos temporales de ff
 system("mkdir ffdf")
 #paso 2: definir la carpeta temporal
 options(fftempdir="C:\\Users\\ALVARO\\Desktop\\db_bolivia\\bigdata\\ffdf")
 #paso 3: Cargar la base de datos
+
 bd2<-read.csv.ffdf(file="200614COVID19MEXICO.csv",sep=",",header=T,
                    next.rows=100000,colClasses=NA,VERBOSE=F)
 bd3<-read.csv.ffdf(file="200614COVID19MEXICO.csv",sep=",",header=T,
                    first.rows=-1,colClasses=NA,VERBOSE=T)
 bd4<-read.csv.ffdf(file="200614COVID19MEXICO.csv",sep=",",header=T,
-                   next.rows=1000,colClasses=NA,VERBOSE=T)
+                   next.rows=10000,colClasses=NA,VERBOSE=T)
 
 object.size(bd1)/1000000 # CSV DE R
 object.size(bd2)/1000000 # CSV.FFDF 100000
 object.size(bd3)/1000000 # CSV.FFDF TODO
 object.size(bd4)/1000000 # CSV.FFDF 1000
 
+str(bd2)
 #USO DE LAS FFDF
+
 table(bd2$SEXO)
-barplot(table(bd2$SEXO))
+barplot(table(bd4$SEXO))
+
+install.packages("tictoc")
 library(tictoc)
 tic("R")
-table(bd1$SEXO)
+table(bd1$EDAD,bd1$SEXO)
 toc()
 
 tic("ffdf")
-table(bd2$SEXO)
+table(bd2$EDAD,bd2$SEXO)
 toc()
 
 tic("ffdf table")
-table.ff(bd2$SEXO)
+table.ff(bd2$EDAD,bd2$SEXO)
 toc()
 
 #R: 1 G -> 
 #FFDF: 200 M -> 
 class(bd1)
 class(bd2)
-bd5<-as.data.frame.ffdf(bd2)
-library(Hmisc)
-describe(bd1)
-describe(bd5)
-object.size(bd5)
-object.size(bd1)
-object.size(bd2)
+#bd5<-as.data.frame.ffdf(bd2)
+
+#apropos("as.data.frame")
+#library(Hmisc)
+#describe(bd1)
+#describe(bd5)
+#object.size(bd5)
+#object.size(bd1)
+#object.size(bd2)
 ```
 
 Funciones para objetos ff
@@ -106,16 +116,12 @@ Funciones para objetos ff
 library(doBy)
 library(dplyr)
 
-res0<-bd1 %>% group_by(PAIS_NACIONALIDAD,SEXO) %>% summarise(mean(EDAD))
-
-bd2df<-as.data.frame.ffdf(bd2)
-object.size(bd2df)
-
-bd2df %>% group_by(PAIS_NACIONALIDAD,SEXO) %>% summarise(mean(EDAD))
-
-summaryBy(EDAD~PAIS_NACIONALIDAD+SEXO,FUN=mean,data=bd1)
-
-summaryBy(EDAD~PAIS_NACIONALIDAD+SEXO,FUN=mean,data=bd2df)
+#res0<-bd1 %>% group_by(PAIS_NACIONALIDAD,SEXO) %>% #summarise(mean(EDAD))
+#bd2df<-as.data.frame.ffdf(bd2)
+#object.size(bd2df)
+#bd2df %>% group_by(PAIS_NACIONALIDAD,SEXO) %>% summarise(mean(EDAD))
+#summaryBy(EDAD~PAIS_NACIONALIDAD+SEXO,FUN=mean,data=bd1)
+#summaryBy(EDAD~PAIS_NACIONALIDAD+SEXO,FUN=mean,data=bd2df)
 
 tapply(bd1$EDAD, bd1$PAIS_NACIONALIDAD, mean)
 
@@ -130,12 +136,12 @@ object.size(res)
 
 
 ss1<-subset(bd1,EDAD>60)
+
 ss2<-subset(bd2,EDAD>60)
+
+
 ss3<-subset.ffdf(bd2,EDAD>60)
 
-aaa<-bd1
-bbb<-bd1
-rm(aaa,bbb)
 #memoria en R
 object.size("a")
 memory.size()
@@ -159,18 +165,34 @@ i <- sapply(bd1, is.character)
 bd1[,i] <- lapply(bd1[,i], as.factor)
 str(bd1)
 dd<-as.ffdf(bd1)
+
+mx0<-read.csv("201115COVID19MEXICO.csv",sep=",",header=T)
+object.size(mx0)/10^6
+mx1<-read.csv.ffdf(file="201115COVID19MEXICO.csv",sep=",",header=T,
+                   first.rows=-1,colClasses=NA,VERBOSE=T)
+
+object.size(mx0)/10^6
+object.size(mx1)/10^6
+
+table(mx0$SEXO)
+table(mx1$SEXO)
 ```
 
 
 ### Modelos GLM con la las librerias ff y ffbase
 
 ```{r,eval=F}
-#install.packages("biglm")
+install.packages("biglm")
+library(ff)
+library(ffbase)
 library(biglm)
 
 model1<-lm(EDAD~UCI,data = bd1)
+
 model2<-lm(EDAD~UCI,data = bd2)
-model3<-bigglm.ffdf(EDAD~UCI,data = bd2)
+
+model3<-bigglm.ffdf(EDAD~SEXO,data = dd)
+
 summary(model1)
 summary(model2)
 summary(model3)
@@ -190,11 +212,13 @@ object.size(bd1)/10^6
 
 bd2<-as.big.matrix(as.matrix(bd1))
 
-object.size(bd1)
-object.size(bd2)
+object.size(bd1)/10^6
+object.size(bd2)/10^6
 
 object.size(bd1)/object.size(bd2)
 
+class(bd2)
+class(bd1)
 #xx<-read.big.matrix(".csv",sep=",")
 #alternativamente read.big.matrix
 dim(bd2)
@@ -226,7 +250,7 @@ class(bd2)
 
 
 ## Parallel R
-Esta seccion se enfoca en los métodos de computación paralelo, de tal forma que se pueda controlara la paralelizacion en una sola maquina.
+Esta sección se enfoca en los métodos de computación paralelo, de tal forma que se pueda controlara la paralelizacion en una sola maquina.
 
 El objetivo es poder aprovechar los cores que tiene disponible los PC en la actualidad, R por defecto solo trabaja en una.
 

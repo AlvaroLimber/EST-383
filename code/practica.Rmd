@@ -1,0 +1,33 @@
+---
+title: "Práctica. EST.383"
+author: "Alvaro Chirino Gutierrez"
+date: "29/11/2020"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+*Fecha de entrega:* 9 de Diciembre
+
+## Ejercicio 1 (pts. 4)
+
+Usando la EH 2018, determine el porcentaje de personas que sufrieron un Atraco (Robo a personas) en la vía pública en los últimos 12 meses.
+
+## Ejercicio 2 (pts. 4)
+
+Usar la información de worldometers y generar un gráfico de contagios por millon de los distintos paises.
+
+## Ejercicio 3 (pts. 4)
+
+  * Explorar los métodos cuasi-experimentales que existen
+  * Buscar información respecto a: los matriculados en educación regular y universidad por año y departamento en Bolivia, cargar la información en R y generar un gráfico resumen
+
+## Ejercicio 4 (pts. 4)
+
+Usando la librería dplyr y la EH-2019 genere un cuadro por departamento y área, filtrando a los jefes de hogar, muestre: (1) el promedio de edad (2) el promedio de años de educación (3) el porcentaje de jefes con un ingreso laboral superior al salario mínimo.
+
+## Ejercicio 5 (pts. 4)
+
+Usando spark cargue al menos 3 años de las importaciones y obtenga el total de ventas por punto fronterizo y año
