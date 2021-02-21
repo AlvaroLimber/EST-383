@@ -400,6 +400,7 @@ x<-runif(100,10,20)
 mean(x)
 x
 z<-round(x,10)
+View(z)
 y<-rnorm(100000,10,5)
 hist(y)
 ```
