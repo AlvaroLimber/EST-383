@@ -1,0 +1,27 @@
+{
+    "id": "EB605BFD",
+    "path": "~/GitHub/EST-383/bigdata/1_introR.Rmd",
+    "project_path": "1_introR.Rmd",
+    "type": "r_markdown",
+    "hash": "2995116186",
+    "contents": "",
+    "dirty": false,
+    "created": 1614103324352.0,
+    "source_on_save": false,
+    "relative_order": 1,
+    "properties": {
+        "cursorPosition": "1147,42",
+        "scrollLine": "1070",
+        "docOutlineVisible": "1",
+        "chunk_output_type": "console",
+        "docOutlineSize": "269"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1616108565,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1616108565235,
+    "read_only": false,
+    "read_only_alternatives": []
+}

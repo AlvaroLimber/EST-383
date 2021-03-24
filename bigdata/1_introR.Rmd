@@ -235,7 +235,7 @@ Advertencia:
 
 Comando para pedir ayuda
 
-```{r}
+```{r,eval=F}
 ?mean # comando para pedir ayuda
 ?lm
 ```
@@ -407,37 +407,114 @@ hist(y)
 * Matrices
 
 ```{r}
-
+A<-matrix(c(1,2,3,4),2,2)
+matrix(c(1,2,3,4),2,2,byrow=T)
+B<-A>=2
+B
+matrix(c("Hola","como", "estan","chau"),2,2)
+matrix(c("Hola",1,2,3),2,2)
+matrix(1:10,2,5)
+matrix(1:10,5,2)
+matrix(1:10,5,5)
+# funciones para crear otras matrices
+diag(1,5,5)
+diag(1:5,5,5)
+# Matriz inversa
+C<-matrix(c(2,5,3,7),2,2)
+solve(C)
+det(C)
 # operaciones con matrices
-
+A+C
+A-C
+A*C # elemento a elemento
+A %*% C # Multiplicación matricial
+t(C)# transpuesta
+D<-C %*% t(C)     # Simétrica
+C %*% solve(C) # Inversa
+# Desc. Matriz
+eigen(D)
+svd(D)
+qr(D)
+dim(D)
 ```
 
-* Arrays
+* Arrays (Generalización)
 
 ```{r}
-
+array(1:27,c(3,3,3))
+array(1:81,c(3,3,3,3))
 ```
 
 
 ### Heterogéneas
 
-* Dataframes
-```{r}
+Estas estructuras permiten el uso de diferentes tipos de clases u objetos.
 
+* Dataframes (Bases de datos)
+
+Tiene una estructura similar a una matriz, donde se define que las filas corresponden a observaciones/sujetos y las columnas son variables.
+
+```{r}
+#encuesta en la sala de clases
+id<-1:8
+name<-c("adriana","anahi","miguel","rayner","rebeca","sergio","vania","yoselin")
+mujer<-c(1,1,0,0,1,0,1,1)
+bd<-data.frame(id,name,mujer)
+bd
+dim(bd)
+str(bd)# estructura del objeto
+# incorporando variables
+bd$edad<-round(runif(8,19,25),0)
+bd
 ```
 
 * Listas
+Las listas en R son de los objetos más poderosos que tiene, ya que permite almacenar todo.
+
 ```{r}
+w1<-list(bd,bd,C,1:10000,"Hola",1:10^6)
+w1
+str(w1)
+object.size(w1)/10^6
 
+w2<-list(w1,w1,list(w1,C),C,1:1000) # R puede encapsular objetos de tipo
+str(w2)
+object.size(w2)/10^6
 ```
-
 
 ## Indexación
+Es el proceso de manejar los elementos dentro de los objetos.
 
 ```{r}
+#VECTORES
+x<-1:100
+x[c(1,5,7)]
+x[-c(1,5,7)]
+o<-(x %% 2)==0
+x[o]
+x2<-c(2,3,7,4)
+x2[c(T,T,F,F)]
+#matrices
+A<-matrix(1:30,5,6)
+A[ 3, 4]
+A[3, ]
+A[c(1,4), ]
 
+A[,1:2 ]
+A[,-c(1:2) ]
+A[3:4,c(1,3)]
+A[c(T,T,F,T,T),c(T,F,T,T,T,F)]
+#data frame
+bd[1:3,2:3]
+# también es posible usar el nombre de las variables 
+bd[1:6,c("name","id")]
+bd[,-c(3)]
+bd$mujer
+mean(bd$mujer)
+bd[c(2,6,8),]
+bd[bd$edad<=21 & bd$mujer==1,]
+#bd %>% filter(mujer==1 & edad<=21)
 ```
-
 
 ## Loops y condiciones
 
@@ -492,6 +569,14 @@ for(i in 1:5){
     }
   }
 }
+
+for(i in 1:50){
+  print(i)
+  if(i==20){
+    break()
+  }
+}
+
 #while
 z<-1
 k<-1
@@ -500,10 +585,83 @@ while(z>0.0001){
   z<-1/k
   k<-k+1
 }
+z==0.0001
 ```
 
+## Crear funciones en R.
 
-## Funciones
+Una función en R tiene la misma idea de lo que realiza una función en cálculo $f(x)=y$, $f(x)=x^2=y$, $f(x,y)=.()$.
+
+Estructura básica de una función en R.
+  
+  * El nombre de la función ($f$)
+  * Los argumentos $X,Y,\ldots$
+  * Los procedimientos dentro de la función
+  * Las salidas $y$
+  
+```{r,eval=F}
+nombrefuncion<-function(x){
+  print("Hola")#procedimiento 1
+  y<-x^2 #procedimiento 2
+  return(y)
+}
+nombrefuncion(x=2)
+nombrefuncion(x=2:10)
+
+x2<-nombrefuncion(x=1:100)
+x2
+x3<-nombrefuncion(2:5)
+x3
+###### funciones matemáticas
+ff<-function(x){
+  y<-x^2
+  return(y)
+}
+gg<-function(x){
+  y<-log(x)
+  return(y)
+}
+hh<-function(x){
+  y<-exp(-x^2)
+  return(y)
+}
+curve(ff,xlim=c(-10,10))
+curve(gg,xlim=c(0,100))
+curve(hh,xlim=c(-10,10))
+```
+
+Ejemplo, desarrolle una función que dado un vector numérico de valores enteros, devuelva;
+
+  * La suma de los números pares
+  * La suma del vector
+  * Coeficiente de variación del vector
+  
+```{r,eval=F}
+tarea1<-function(x){
+  s1<-sum(x[x %% 2 ==0])
+  s2<-sum(x)
+  s3<-sd(x)/mean(x)
+  return(list(suma_pares=s1,suma=s2,cv=s3))
+}
+tarea1(1:10)
+####################################################
+tarea1_alt<-function(x){
+  return(list(suma_pares=sum(x[x %% 2 ==0]),suma=sum(x),cv=sd(x)/mean(x)))
+}
+tarea1_alt(1:10)
+tarea1(rnorm(100))
+
+x<-1:10
+sum(1:10)
+cumsum(1:10)
+tail(cumsum(1:10),1)
+
+# el comando scan permite leer los datos directamente por la consola
+xx<-scan()
+tarea1(xx)
+```
+
+Otros ejemplos,  
 
 ```{r,eval=F}
 fx<-function(x){
@@ -514,7 +672,7 @@ fx(5)
 fx(1:10)
 curve(fx,xlim = c(-20,20),ylim=c(0,1000))
 plot(fx)
-##comando de estadisticas de tendencia central
+##comando de estadísticas de tendencia central
 tendencia<-function(x){
   n<-length(x)
   cat("media:",fill = T)
@@ -541,8 +699,6 @@ tendencia<-function(x){
   mg<-prod(x)**(1/n)
   print(mg)
 }
-xx<-scan()
-a<-tendencia(xx)
 
 tendencia2<-function(x){
   n<-length(x)
@@ -570,35 +726,54 @@ tendenciaF<-function(x,f){
 }
 ```
 
+## Importación de datos
 
-## Importacion de datos
+  * Definir el directorio de trabajo
+  * Identificar el formato de la base de datos que se va a importar
+  * Usar el comando adecuado para la importación
 
 ```{r,eval=F}
-#importando bases de datos
-getwd()
-setwd("C:\\Users\\PC18\\Documents\\R\\est383\\data\\eh18\\SPSS")
-dir()
-##SPSS
-## activar o instalar librerias
-library(foreign)
-eh18d<-read.spss("EH2018_Discriminacion.sav",
-          to.data.frame = T,use.value.labels=F)
-names(eh18d)
-table(eh18d$s10a_01a)
-attributes(eh18d)$variable.labels[5]
-head(eh18d)
-##CSV
-setwd("C:\\Users\\PC18\\Documents\\R\\est383\\data\\eh18\\CSV")
-dir()
-eh18d2<-read.csv2("EH2018_Discriminacion.csv")
-aux<-read.csv("EH2018_Discriminacion.csv",sep=";")
-table(eh18d2$s10a_01a)
-daux<-c("Sexo","O. Sexual","Edad","piel","Pertenencia",
-        "idioma","vestimente","procedencia","discapacidad",
-        "religion","clase","otro")
-for(i in 5:16){
-barplot(prop.table(table(eh18d2[,i]))*100,main=daux[i-4])
-}
+#gestión de directorios del R
+getwd() # indica el directorio de trabajo actual
+dir() # lista los archivos en el directorio de trabajo
+setwd("C:/Users\\ALVARO\\Desktop\\ejemplo") # cambiar el directorio de trabajo
+# Cargar la base de datos, depende del formato de la base de datos
+mun15<-read.csv("municipales2015.csv")
+#trabajar con librerías
+library(foreign) #habilitar una librería
+bd12pv<-read.dta("DBvivienda2012vf_9.dta")
+```
+
+## Exportar la base de datos
+
+```{r,eval=F}
+write.csv(bd12pv,"bd12pv.csv") # a otros formatos
+save(mun15,bd12pv,file="bases.RData") # al formato .RData
+```
+
+Para abrir un objeto RData
+
+```{r,eval=F}
+rm(list=ls())
+load("bases.RData")
+load(url("https://github.com/AlvaroLimber/EST-383/raw/master/data/eh19.RData"))
+```
+
+Actividad Martes.
+  * Indagar el github
+  * Crearse una cuenta
+  * Crear un repositorio para sus proyectos
+  * Crear un repositorio para sus ejercicios
+  * Instalar el github desktop
+  * Interactuar con sus repositorios
+  * Poner en el tablón del classroom su nombre de usuario del classroom o enlace
+
+> Instalando librerías en R
+
+```{r,eval=F}
+#install.packages("dplyr")
+#install.packages("rlang")
+library(dplyr) #gramática de manejo de bases de datos 
 ```
 
 
@@ -606,263 +781,207 @@ barplot(prop.table(table(eh18d2[,i]))*100,main=daux[i-4])
 
 ```{r,eval=F}
 rm(list=ls())
-setwd("C:\\Users\\PC18\\Documents\\R\\est383\\data\\eh18\\SPSS")
-library(foreign)
-dir()
-eh18<-read.spss("EH2018_Persona.sav",
-          to.data.frame = T,use.value.labels=F)
-#################################################
-names(eh18)#nombres de las variable
-str(eh18)
-class(eh18)
-##renombrando variables
-names(eh18)[c(5,6)]<-c("sexo","edad")
-names(eh18)
-##crear variable (mujer 1=mujer, 0 eoc)
-eh18$mujer<-eh18$sexo==2
-sum(eh18$mujer)
-mean(eh18$mujer)
-#exportación ("write")
-write.dta(eh18,"eh18p.dta")
-getwd()
-#excel
-library(readxl)
-install.packages("writexl")
-library(writexl)
-library(help=writexl)
-write_xlsx(eh18,"eh18p.xlsx")
-apropos("read")
-apropos("write")
-install.packages("haven")
-library(haven)
+#encuestas a hogares 2019
+load(url("https://github.com/AlvaroLimber/EST-383/raw/master/data/eh19.RData"))
+#computo La Paz 2021, 9 marzo
+setwd("C:\\Users\\ALVARO\\Desktop\\_data\\bigdata")
+bd<-read.csv("lp_2021.csv",sep="|",header = T)
+# exploración
+names(bd)
+names(eh19v)
 
-eh18$s03a_02e<-substr(as.character(eh18$s03a_02e),1,120)
-eh18$s03a_02e<-gsub("  "," ",as.character(eh18$s03a_02e))
+attributes(bd)
+ehvat<-attributes(eh19v)
 
-gsub("a","7","hola")
-gsub("`","'","`s04a_04e`, `s04a_07ge`, `s04b_15e`, `s04b_16e`, `s04b_17e`, `s04b_18e`, `s04e_30c`, `s04f_35e`, `s05a_04`, `s05c_13_e`, `s05d_21e`, `s05d_22_e`, `s06a_06e`, `s06a_09e`, `s06a_10e`, `s06b_11a`, `s06b_11b`, `s06b_12a`, `s06b_12b`, `s06b_13`, `s06b_20e`, `s06e_34e`, `s06f_40a`, `s06f_40b`, `s06h_54e`, `s06h_55e`, `s06h_56e`, `s07a_01e1e`, `s07a_01e2e`, `s07a_02ce`, `s07b_05de`, `s07b_05ee`, `s07c_08e`, `s07c_09e`")
-nchar(eh18$s03a_02e)
+head(bd)
+tail(bd)
+View(bd)
 
-vv<-c('s04a_04e', 's04a_07ge', 's04b_15e', 's04b_16e', 's04b_17e', 's04b_18e', 's04e_30c', 's04f_35e', 's05a_04', 's05c_13_e', 's05d_21e', 's05d_22_e', 's06a_06e', 's06a_09e', 's06a_10e', 's06b_11a', 's06b_11b', 's06b_12a', 's06b_12b', 's06b_13', 's06b_20e', 's06e_34e', 's06f_40a', 's06f_40b', 's06h_54e', 's06h_55e', 's06h_56e', 's07a_01e1e', 's07a_01e2e', 's07a_02ce', 's07b_05de', 's07b_05ee', 's07c_08e', 's07c_09e')
-for(i in vv){
-  eh18[,i]<-gsub("  "," ",as.character(eh18[,i]))
-  eh18[,i]<-substr(eh18[,i],1,120)
-} 
-write_sav(eh18,"eh18p.sav")
-save(eh18,vv,file="eh18p.RData")
+View(eh19p)
+# Renombrando variables
+# R base
+names(eh19p)[5]<-"sexo"
+# dplyr "anidar acciones" pipeline %>% 
+eh19p<-eh19p %>% rename(edad=s02a_03) 
+
+# Filtrar bases de datos (filas)
+## filtrar por tipo de elección en bd
+aux<-unique(bd$DESCRIPCION)
+bdgob<-bd[bd$DESCRIPCION=="GOBERNADOR(A)" , ] # R base
+bdast<-subset(bd,DESCRIPCION=="ASAMBLEISTA TERRITORIO") # R base
+
+bdasp<-bd %>% filter(DESCRIPCION=="ASAMBLEISTA POBLACION") # dplyr
+bdalc<-bd %>% filter(DESCRIPCION==aux[4])
+bdcon<-bd %>% filter(DESCRIPCION==aux[5])
+## filtrar solo a jefes/as del hogar eh19
+#tarea ...
+ 
+# Seleccionar variables (columnas)
+## R base
+aux2<-eh19p[,c("edad","sexo")]
+aux3<-subset(eh19p,select = c("edad","sexo") )
+aux4<-eh19p[,-c(4:50,100)]
+## dplyr
+aux5<-eh19p %>% select(edad,sexo)
+aux6<-eh19p %>% select(-edad,-sexo)
+```
+
+Otros comandos útiles son los que permiten añadir información
+
+  * Añadir filas: rbind (R base) bind_rows, tratar de garantizar que las bases de datos tengan los mismos nombres de variables
+  
+```{r,eval=F}
+bdmun<-rbind(bdalc,bdcon)
+bdmun2<-bind_rows(bdalc,bdcon)
+```
+
+  * Añadir columnas (variables): merge (R base) bind_cols (dplyr), asegurarse que ambas bases de datos tengan una variables de unión (key)
+  
+```{r,eval=F}
+bdpv<-merge(eh19p[,c("edad","folio","sexo")],eh19v[,c("folio","s01a_10")],"folio")
+View(bdpv)
+```
+
+Tarea: Para la encuesta a hogares 2019, generar una base de datos de jefas/jefas que incluya:
+
+  * Información demográfica (edad, sexo, estado civil, lugar de nacimiento)
+  * Información geográfica (departamento, área)
+  * Educación  (Nivel educativo, años de educación)
+  * Condiciones de su vivienda (techo, piso, pared, agua, alcantarillado)
+  * Pobreza moderada y extrema
+  
+Generar un reporte por departamento y sexo del jefe del hogar respecto su condición de pobreza extrema.
+
+```{r}
 rm(list=ls())
-getwd()
-load("eh18p.RData")
-set.seed(123456)####semilla
-a<-matrix(rnorm(20),5,4)
-
-apply(a, 1, sum)
-apply(a, 2, mean)
-apply(a, 1, sd)
-mc<-function(x){
-  n<-length(x)
-  aux<-sqrt(sum(x^2)/n)
-  return(aux)
-}
-apply(a, 1, mc)
-apply(a, 2, mc)
-
-tapply(eh18$mujer,eh18$depto,mean)
-tapply(eh18$mujer,list(eh18$depto,eh18$area),mean)
-tapply(eh18$edad,list(eh18$depto,eh18$area),mean)
-tapply(eh18$edad>60,list(eh18$depto,eh18$area),mean)
-tapply(eh18$edad<5,list(eh18$depto,eh18$area),mean)
-
-tapply(eh18$p0,list(eh18$depto,eh18$area),mean,na.rm=T)
-aux<-tapply(eh18$p0,list(eh18$depto,eh18$area,eh18$niv_ed_g),mean,na.rm=T)
-
-as.data.frame(aux)
-
-lapply()
-mapply()
-sapply()
-
-
-
+library(dplyr)
+load(url("https://github.com/AlvaroLimber/EST-383/raw/master/data/eh19.RData"))
+#jefe/jefa
+aux<-unique(eh19p$s02a_05)
+bdj<-eh19p %>% filter(s02a_05==aux[1])
+#selección de variables para el/la jefa/jefa 
+bdj<-bdj %>% select(folio,depto,area,s02a_02,s02a_03,s02a_10,p0, pext0, niv_ed, niv_ed_g, aestudio)
+#selección de variables para la vivienda
+bdv<-eh19v %>% select(folio,s01a_06,s01a_08,s01a_09,s01a_10,s01a_15,s01a_16)
+# unir las bases de datos, 
+bdj<-merge(bdj,bdv,"folio")
 ```
 
 
 ## Estadística descriptiva
 
 ```{r,eval= F}
-#Estadística descriptiva
-rm(list=ls())
-setwd("C:\\Users\\PC18\\Documents\\R\\est383\\data\\eh18\\SPSS")
-#encuesta a hogares 2018
-load("eh18p.RData")
-data()#muestra las bases de datos disponibles en R
-ChickWeight
-View(ChickWeight)
-help("ChickWeight")
-##Porcentajes y tablas de fracuencias
-t1<-table(eh18$sexo)#tabla de frcuencias
-t2<-table(eh18$depto)
-t3<-table(eh18$edad)
+##tablas de frecuencias y Porcentajes
+t1<-table(bdj$depto)# frecuencias
+t2<-prop.table(t1)*100
+t3<-cumsum(t1)
 
-barplot(t1,col=c("blue","darkgreen"))#diagramas de barra
-barplot(t3,horiz = T)
-barplot(t3,col="red")
-ldep<-c("CH","LP","CB","OR","PT","TJ","SC","BN","PD")
-barplot(t2,col="black",names.arg = ldep)
-#llevando a %
-t2p<-prop.table(t2)*100
-barplot(t2p,col="black",names.arg = ldep,ylab="%")
-pie(t2p)
-
-t3<-as.data.frame(t3)
-t3$F<-cumsum(t3$Freq)
-t3$r<-prop.table(t3$Freq)
-t3$R<-cumsum(t3$r)
-head(t3)
-
-table(ChickWeight$Time)
-table(ChickWeight$Diet)
-
-dim(table(ChickWeight$Chick))
+tabla1<-cbind(t1,t3,t2)
+tabla1
+barplot(t1)
+pie(t2)
 #tabla de contingencia
-aux<-table(ChickWeight$Chick,ChickWeight$Diet)
-aux[aux!=0]<-1
-apply(aux,2,sum)
-table(ChickWeight$Time)
-table(ChickWeight$Diet[ChickWeight$Time==0])
+t4<-table(bdj$depto,bdj$s02a_02)
+t5<-prop.table(t4)#celda
+sum(t5)
+t6<-prop.table(t4,1)*100#fila
+t7<-prop.table(t4,2)*100#columna
+t8<-addmargins(t4)
+addmargins(t4,1)
+addmargins(t4,2)
+colnames(t8)[3]<-"Total"
+row.names(t8)[10]<-"Total"
+install.packages("xtable")
+library(xtable)
+xtable(t8)
+library(knitr)
+kable(t8)
+
+table(bdj$depto,bdj$area,bdj$s02a_02)
+
+chisq.test(t4)# tarea: recordar
+chisq.test(table(bdj$niv_ed_g,bdj$s02a_02))
 ##medidas de tendencia central
-mean(eh18$edad)
-median(eh18$edad)
+mean(bdj$s02a_03)
+median(bdj$s02a_03)
+#media y mediana de edad por departamento y sexo
+bdj %>% group_by(Departamento=depto,sexo=s02a_02) %>% summarise(media=mean(s02a_03),Me=median(s02a_03))
 
-mean(eh18$ylab,na.rm = T)
-median(eh18$ylab,na.rm = T)
-hist(eh18$ylab)
-plot(density(eh18$ylab,na.rm = T))
-locator(1)
-summary(eh18$ylab)
-#medidas de dispersion
-var(eh18$ylab,na.rm = T)
-sd(eh18$ylab,na.rm = T)
-max(eh18$ylab,na.rm = T)-min(eh18$ylab,na.rm = T)
-sd(eh18$ylab,na.rm = T)/mean(eh18$ylab,na.rm = T)
+#tip ctr+shift+m %>% 
+
+#medidas de dispersión
+var(bdj$s02a_03) 
+sd(bdj$s02a_03)
+range(bdj$s02a_03)
+min(bdj$s02a_03)
+max(bdj$s02a_03)
+bdj %>% group_by(Departamento=depto,sexo=s02a_02) %>% summarise(media=mean(s02a_03),Me=median(s02a_03),sd_media=sd(s02a_03))
+boxplot(bdj$s02a_03)
 #medidas de forma
-quantile(eh18$ylab,c(0.1,0.44,0.99),na.rm=T)
-hist(eh18$edad)
-#Coeficiente de asimetría
-#EDAD
-x<-eh18$edad
-N<-length(x)
-as<-(sum((x-mean(x))^3)/N)/sd(x)^3
-as
-#iNGRESO LABORAL
-x<-eh18$ylab
-x<-x[is.na(x)==F]
-x<-x[complete.cases(x)]
-N<-length(x)
-as<-(sum((x-mean(x))^3)/N)/sd(x)^3
-as
+quantile(bdj$s02a_03)
+quantile(bdj$s02a_03,c(0.15,0.45,0.99))
+quantile(bdj$s02a_03,seq(0,1,0.01))
+quantile(bdj$s02a_03,seq(0,1,0.2))
+#Coeficiente de asimetría-> averiguar
 #kurtosis...
-plot(density(rnorm(1000,sd=40)),ylim=c(0,0.08))
-points(density(rnorm(1000,sd=10)),type="l",col="red")
-points(density(rnorm(1000,sd=5)),type = "l",col="blue")
+hist(bdj$s02a_03)
+plot(density(bdj$s02a_03))
 
-lm(ylab~edad,data=eh18,weights = f)
-lm(ylab~-1+edad,data=eh18)
-summary(lm(ylab~edad,data=eh18))
+plot(density(rnorm(10000,0,3)),ylim=c(0,0.25))
+points(density(rnorm(10000,0,1.5)),col="red",type="l")
+points(density(rnorm(10000,0,6)),col="green",type="l")
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+summary(bdj$s02a_03)
+bdj$edadg<-cut(bdj$s02a_03,c(15,25,50,98))
+table(bdj$edadg)
+mean(bdj$s02a_03)
 ```
 
+## Inferencia en R
 
-## Muestreo e inferencia
+Esta orientada a generar el análisis a partir de una muestra probabilística, reconociendo los insumos básicos para esto. Recordar al estimador de Horvitz Thompson para el parámetro del total:
+
+$$\hat{t}_y=\sum_s \frac{ y_k}{\pi_k}=\sum_s y_k*\frac{1}{\pi_k}=\sum_s y_k*w_k$$
+
+Donde $\pi_k$ es la probabilidad de selección del individuo $k$ y $w_k=\pi_k^{-1}$ se conoce como el factor de expansión.
+
+$$\bar{y}_s=\frac{\hat{t_y}}{N}$$
+
+Todo estimador tiene su varianza teórica $V(\hat{\theta})$ y su estimación de la varianza ($\hat{V}(\hat{\theta})$). Estas varianza depende del método de muestreo empleado, las características mas importantes para construir (aproximar) la varianza en muestreos complejos; la conglomeración y estratificación de la primera etapa.
+
 
 ```{r,eval=F}
-rm(list=ls())
-N<-15;n<-6
-choose(N,n)
-set.seed(123)
-y1<-rnorm(N,10,5)
-set.seed(234)
-y2<-rexp(N,3)
-set.seed(345)
-y3<-runif(N,500,3000)
-#par?metros
-theta1<-mean(y1)
-theta2<-sum(y2)
-# sum(y3>1500)/N
-# mean(y3>1500)
-theta3<-mean(y3>1500)
-#pr?ctica (real) solo se tiene acceso a una
-#muestra
-U<-1:10
-set.seed(888)
-s<-sample(U,n)
-s
-y1
-#estimaciones
-mean(y1[s]);theta1
-mean(y2[s])*N ; theta2
-mean(y3[s]>1500) ; theta3
-
-combn(U,3)
-combn(y1,3)
-
-combn(y1,3,mean)
-#theta1
-t1s<-apply(combn(y1,n),2,mean)
-mean(t1s)
-theta1
-hist(t1s)
-plot(density(t1s))
-shapiro.test(t1s)
-#theta2
-t2s<-apply(combn(y2,n),2,mean)*N
-mean(t2s);theta2
-hist(t2s)
-plot(density(t2s))
-shapiro.test(t2s)
-#theta3
-t3s<-apply(combn(y3,n)>1500,2,mean)
-mean(t3s);theta3
-hist(t3s)
-plot(density(t3s))
-shapiro.test(t3s)
 ####Inferencia a partir de una muestra
-#libreria survey
+#librería survey
 install.packages("survey")
+install.packages("srvyr")#trabaja con dplyr
 library(survey)
-bd<-data.frame(y1,y2,y3=y3>1500)
-set.seed(123)
-s<-sample(1:15,7)
-bds<-bd[s,]
-bds$w<-15/7
-bds$pk<-7/15
-bds
-dm1<-svydesign(ids=~0,probs = ~pk,data=bds)
-svymean(~y1,design = dm1)
-svytotal(~y2,design = dm1)
-library(help=survey)
-```
+load(url("https://github.com/AlvaroLimber/EST-383/raw/master/data/eh19.RData"))
 
+mean(eh19p$s02a_03) # media a nivel de la muestra
+#definir el diseño muestral
+sd1<-svydesign(ids= ~upm ,strata = ~estrato,weights = ~factor,data=eh19p)
+r1<-svymean(~s02a_03,design = sd1,deff=T)
+r1
+confint(r1)
+cv(r1)
+deff(r1)
+#pobreza
+prop.table(table(eh19p$p0))*100
+svymean(~p0,design = sd1,deff=T,na.rm=T)*100
+```
+nota: los valores perdidos en R se denotan por $NA$
+
+```{r,eval=F}
+x<-c(23,45,64,22,NA,NA,78,54)
+mean(x,na.rm=T)
+mean(na.omit(x))
+
+table(is.na(eh19p$p0))
+#modelos lineales
+lm(ylab~aestudio,data=eh19p)
+svyglm(ylab~aestudio,design = sd1)
+```
 
 ## Gráficos de origen
 
@@ -878,83 +997,64 @@ plot(x,y,type="p")
 
 plot(x,y,type="h")
 plot(x,y,type="l")
+x[order(x)]
+
 plot(x[order(x)],y[order(x)],type="l")
 plot(x,y,type = "b")
 plot(x,y,type = "o")
-
+#ventanas multiples
 par(mfrow=c(2,2))
-plot(x,y,xlim=c(0,10),ylim=c(0,10),main="c/PUNTOS")
-plot(x,y,type="n",xlim=c(0,10),ylim=c(0,10),main = "S/puntos")
-plot(x,y,type="n",xlim=c(0,10),ylim=c(0,10),
-     axes = F,main="sin ejes")
-plot(x,y,type="n",xlim=c(0,10),ylim=c(0,10),
-     axes = F,ann = F,main = "blanco")
-par(mfrow=c(1,1))
+plot(0,0,type = "n")
+plot(x,y,type="p")
+plot(x,y,type="h")
+plot(x,y,type = "b")
+dev.off()#desactivando el par
 
-plot(x,y,type="n",xlim=c(0,10),ylim=c(0,10),
-     axes = F,ann = F)
-points(x,y,cex=c(1,2,3,4)+1)     
-points(x,y,cex=c(1,2,3,4)+1,pch=15)     
-points(x,y,cex=c(1,2,3,4)+1,pch=15,col="blue")     
-points(x,y,cex=c(1,2,3,4)+1,pch=0:3,
-       col=c("red","darkblue","pink","darkgreen"))
-#points(x,y,cex=2)     
-pdf("figura1.pdf",width = 15,height = 5)
-plot(x,y,type="n",xlim=c(0,20),ylim=c(0,20),
-     axes = F,ann = F)
-points(seq(2,10,2),seq(2,10,2),type="p",lwd=4,
-       col="blue",lty=4)
-text(seq(2,10,2),seq(2,10,2),
-     labels = c("p1","p2","p3","p4","p5"),pos=3,
-     cex=1:5,col="brown")
-axis(1,seq(0,20,10),lwd=3)
-axis(2,seq(0,20,5),lwd=2)
-axis(4,seq(0,20,5),seq(0,400,100),lwd=2)
-axis(3,seq(0,20,10),c("A","B","C"),lwd=2)
-title(main="Plot en R",col.main="darkred",
-      cex.main=3)
-title(xlab = "Eje X",ylab="Eje Y",cex.lab=2,
-      col.lab="gray")
-legend("topright",legend = c("a","b","c"),
-       lwd=c(1,2,3),col=c("darkred","black","gray"))
+#limites para el plot
+plot(x,y,xlim=c(0,10),ylim=c(0,10))
+#título
+plot(x,y,xlim=c(0,10),ylim=c(0,10),main="Nombre de la figura")
+#sin ejes
+plot(x,y,xlim=c(0,10),ylim=c(0,10),main="Nombre de la figura",axes=F)
+#sin ejes y etiquetas de los ejes
+plot(x,y,xlim=c(0,10),ylim=c(0,10),axes=F,ann=F)
+#tipo de la salida del punto
+plot(x,y,xlim=c(0,10),ylim=c(0,10),axes=F,ann=F,pch=15)
+#tamaño de los puntos
+plot(x,y,xlim=c(0,10),ylim=c(0,10),axes=F,ann=F,pch=15,cex=4)
+#Color de los puntos
+plot(x,y,xlim=c(0,10),ylim=c(0,10),axes=F,ann=F,pch=15,cex=4,col="darkgreen")
+#definir, formas, tamaños y colores para cada punto.
+plot(x,y,xlim=c(0,10),ylim=c(0,10),axes=F,ann=F,pch=c(4,5,15,6),cex=c(1,2,3,4),col=c("red","gray","green","blue"))
+#con lwd se puede dar mayor grosor a las líneas
+
+pdf("f1.pdf",height = 5,width = 10)
+plot(x,y,xlim=c(0,10),ylim=c(0,10),axes=F,ann=F,pch=c(4,5,15,6),cex=c(1,2,3,4),col=c("red","gray","green","blue"),lwd=4,type = "p")
+points(x,y,type="h")
+points(2,8,col="red",pch=14)
+text(5,7,"Hola")
+axis(1,c(0,5,10))
+axis(2,c(0,5,10),c("A","B","C"))
 dev.off()
-getwd()
-
-png("figura1.png")
-plot(x,y,type="n",xlim=c(0,20),ylim=c(0,20),
-     axes = F,ann = F)
-points(seq(2,10,2),seq(2,10,2),type="p",lwd=4,
-       col="blue",lty=4)
-dev.off()
-
-pdf("sec.pdf")
-for(i in 1:10){
-  plot(i,0,xlim=c(0,10))
-}
-dev.off()
-
-
-abline(h=c(2,3,4),lty=2)
-abline(v=c(2,3,4))
-
-bd<-as.data.frame(state.x77)
-bd$name<-row.names(bd)
-head(bd)
-
+#png
+#jpeg
 ```
-
-
 
 ## ggplot
 
+The grammar of graphics is an answer to a question: what is a statistical graphic? 
+
+  + base graphics 1983
+  + grid 2000
+  + lattice 1993
+  + ggplot 2005
+  + ggvis 2014
+  + plotly 
+
+### Datos, estetica y geometria (layers)
+
 ```{r,eval=F}
-#######################################
-# Clase: gráficos en R, ggplot
-# Materia: Programación Estadística I
-# Fecha: 9 de Marzo
-#######################################
 rm(list=ls())
-#######################################
 #install.packages("ggplot2")
 #install.packages("dplyr")
 #install.packages("maps")
@@ -965,171 +1065,63 @@ library(maps)
 library(ggvis)
 library(readxl)
 #######################################
-urlfile<-url('https://raw.githubusercontent.com/AlvaroLimber/EST-383/master/data/oct20.RData')
-load(urlfile)
-names(computo)[18]<-"MAS"
-#######################################
-#The grammar of graphics is an answer to a question: what is a statistical graphic? 
+load(url("https://github.com/AlvaroLimber/EST-383/raw/master/data/eh19.RData"))
+set.seed(1424)
+s<-sample(1:39605,2000)
+bd<-eh19p[s,]
 
-#base graphics 1983
-#grid 2000
-#lattice 1993
-#ggplot 2005
-#ggvis 2014
+# una variable
+ggplot(bd,aes(s02a_03))+geom_histogram()
+ggplot(bd,aes(s02a_03))+geom_boxplot()
+ggplot(bd,aes(s02a_03))+geom_density()
 
-## Datos, estetica y geometria (layers)
+#2 variables cuantitativas
+ggplot(bd,aes(s02a_03,ylab))+geom_point()
+# 3 variables
+ggplot(bd,aes(s02a_03,log(ylab),shape=s02a_02))+geom_point()
+ggplot(bd,aes(aestudio,log(ylab),shape=s02a_02))+geom_point()
+#4variables
+ggplot(bd,aes(s02a_03,log(ylab),shape=s02a_02,colour=area))+geom_point()
+#5variables
+ggplot(bd,aes(s02a_03,log(ylab),shape=s02a_02,colour=area,size=ynolab))+geom_point()+geom_smooth()
 
-library(ggplot2)
-mpg
+ggplot(bd,aes(s02a_03,log(ylab)))+geom_point()+geom_smooth(method = "lm")#introducir un ajuste lineal
+#6variables
+ggplot(bd,aes(s02a_03,log(ylab),shape=s02a_02,colour=area,size=ynolab))+geom_point()+facet_wrap(~depto)
+#7 variables
+ggplot(bd,aes(s02a_03,log(ylab),shape=s02a_02,colour=area,size=ynolab))+geom_point()+facet_wrap(~depto+p0)
+
+#2 variables 1 cuanti cuali
+ggplot(bd,aes(ylab,area))+geom_boxplot()
+ggplot(bd,aes(area,ylab))+geom_boxplot()
+ggplot(bd,aes(area,ylab))+geom_violin()
+ggplot(bd,aes(area,ylab))+geom_violin()+facet_wrap(~depto)
+ggplot(bd,aes(depto,log(ylab)))+geom_violin()+facet_wrap(~area)
+ggplot(bd,aes(area,ylab))+geom_jitter()
+
 
 ggplot(mpg, aes(x = displ, y = hwy)) + 
   geom_area()
 
-ggplot(computo,aes(MAS,CC))+geom_point()
+# 1 variable cualitativa
+ggplot(bd,aes(depto))+geom_bar(colour="blue",fill="red",alpha=0.1)
+#Etiquetas
+g1<-ggplot(bd,aes(depto))+geom_bar(colour="blue",fill="red",alpha=0.1)+ggtitle("Departamentos")+xlab("Departamento")
 
-ggplot(mpg, aes(displ, hwy)) +
-  geom_line()
+g1+ylab("Frecuencia")+ylim(0,1000)
 
-ggplot(mpg, aes(displ)) +
-  geom_histogram()
-
-#Color tamaño y forma
-ggplot(mpg, aes(displ, hwy,colour = class)) +
-  geom_point()
-
-ggplot(mpg, aes(displ, hwy,shape = drv)) +
-  geom_point()
-
-ggplot(mpg, aes(displ, hwy,size = cyl)) +
-  geom_point()
-
-ggplot(mpg, aes(displ, hwy)) + geom_point(aes(colour = "blue"))
-
-ggplot(mpg, aes(displ, hwy)) + geom_point(colour = "blue")
-
-ggplot(mpg, aes(displ, hwy)) + 
-  geom_point() + 
-  facet_wrap(~class)
-
-ggplot(mpg, aes(displ, hwy)) + 
-  geom_point() + 
-  facet_wrap(~class+drv)
-
-#geoms
-geom_smooth() # ajuste y en x
-geom_boxplot()
-geom_histogram()
-geom_freqpoly()
-geom_bar()
-geom_path()
-geom_line()
-
-#ajuste de un modelo
-ggplot(mpg, aes(displ, hwy)) + 
-  geom_point() + 
-  geom_smooth()
-
-ggplot(mpg, aes(displ, hwy)) + 
-  geom_point() + 
-geom_smooth(method = "lm")
-
-ggplot(mpg, aes(drv, hwy)) + 
-  geom_point()
-
-ggplot(mpg, aes(drv, hwy)) + geom_jitter()
-ggplot(mpg, aes(drv, hwy)) + geom_boxplot()
-ggplot(mpg, aes(drv, hwy)) + geom_violin()
-
-ggplot(mpg, aes(hwy)) + geom_histogram()
-#> `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-ggplot(mpg, aes(hwy)) + geom_freqpoly()
-#> `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-
-ggplot(mpg, aes(hwy)) + 
-  geom_freqpoly(binwidth = 2.5)
-
-ggplot(mpg, aes(hwy)) + 
-  geom_freqpoly(binwidth = 1)
-
-ggplot(mpg, aes(hwy)) + 
-  geom_density()
-
-ggplot(mpg, aes(displ, colour = drv)) + 
-  geom_freqpoly(binwidth = 0.5)
-
-ggplot(mpg, aes(displ, fill = drv)) + 
-  geom_histogram(binwidth = 0.5) 
-
-ggplot(mpg, aes(displ, fill = drv)) + 
-  geom_histogram(binwidth = 0.5) + 
-    facet_wrap(~drv, ncol = 1)
-
-ggplot(mpg, aes(manufacturer)) + 
-  geom_bar()
-
-aa<-as.data.frame(table(mpg$class))
-aa
-ggplot(aa,aes(Var1,Freq))+ 
-  geom_bar()
-
-ggplot(aa,aes(Var1,Freq)) + geom_bar(stat = "identity")
-ggplot(drugs, aes(drug, effect)) + geom_point()
-
-ggplot(mpg, aes(cty, hwy)) +
-  geom_point(alpha = 1 / 3)
-
-ggplot(mpg, aes(cty, hwy)) +
-  geom_point(alpha = 1 / 3) + 
-  xlab("city driving (mpg)") + 
-  ylab("highway driving (mpg)")
-
-# Remove the axis labels with NULL
-ggplot(mpg, aes(cty, hwy)) +
-  geom_point(alpha = 1 / 3) + 
-  xlab(NULL) + 
-  ylab(NULL)
-
-ggplot(mpg, aes(drv, hwy)) +
-  geom_jitter(width = 0.25)
-
-ggplot(mpg, aes(drv, hwy)) +
-  geom_jitter(width = 0.25) + 
-  xlim("f", "r") + 
-  ylim(20, 30)
-#> Warning: Removed 137 rows containing missing values (geom_point).
-
-# For continuous scales, use NA to set only one limit
-ggplot(mpg, aes(drv, hwy)) +
-  geom_jitter(width = 0.25, na.rm = TRUE) + 
-  ylim(NA, 30)
-
-
-#output
-p <- ggplot(mpg, aes(displ, hwy, colour = factor(cyl))) +
-  geom_point()
-
-# Save png to disk
-
-
-ggsave("plot.png", p, width = 5, height = 5)
-
-saveRDS(p, "plot.rds")
-q <- readRDS("plot.rds")
-
-ggplot(faithfuld, aes(eruptions, waiting)) + 
-  geom_contour(aes(z = density, colour = ..level..))
-
-mi_counties <- map_data("world") %>% 
-  select(lon = long, lat, group, id = subregion)
-
-ggplot(mi_counties, aes(lon, lat)) + 
-  geom_point(size = .25, show.legend = FALSE) +
-  coord_quickmap()
-
-ggplot(mi_counties, aes(lon, lat, group = group)) +
-  geom_polygon(fill = "white", colour = "grey50") + 
-  coord_quickmap()
-
+#guardar 
+pdf("g1.pdf")
+g1+ylab("Frecuencia")+ylim(0,1000)
+dev.off()
+#temas 
+ggplot(bd,aes(depto))+geom_bar()+theme_gray()
+ggplot(bd,aes(depto))+geom_bar()+theme_bw()
+ggplot(bd,aes(depto))+geom_bar()+theme_dark()
+ggplot(bd,aes(depto))+geom_bar()+theme_minimal()
+ggplot(bd,aes(depto))+geom_bar()+theme_light()
+ggplot(bd,aes(depto))+geom_bar()+theme_void()
+ggplot(bd,aes(depto))+geom_bar()+theme_classic()
 #temas
 theme_bw()
 theme_grey()
@@ -1141,8 +1133,14 @@ theme_classic()
 theme_void()
 ```
 
+## Flexdashboard
 
+Es una librería de R que permite crear tableros de datos (dashboard), la salida final esta diseñada para un entorno web (html). 
 
+```{r,eval=F}
+install.packages("flexdashboard")
+library(flexdashboard)
+```
 
 ## Shiny 
 

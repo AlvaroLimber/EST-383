@@ -1,0 +1,115 @@
+---
+title: "Mi primer dashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    vertical_layout: fill
+    theme: simplex
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+```
+
+```{r}
+library(ggplot2)
+```
+
+# Página 1
+
+Row {data-height=700}
+----------------------------------------
+
+### Figura 1
+
+```{r}
+
+```
+
+Row {data-height=300}
+----------------------------------------
+
+### Figura 2
+
+```{r}
+
+```
+
+### Figura 3
+
+```{r}
+
+```
+
+# Página 2
+
+Column {.tabset}
+----------------------------------------
+
+### Figura 3
+
+  * cosmo
+  * bootstrap
+  * cerulean
+  * journal
+  * flatly
+  * readable
+  * spacelab
+  * united
+  * lumen
+  * paper
+  * sandstone
+  * simplex
+  * yeti
+
+
+### Figura 4
+
+$$f(x)=\int_{Rx} g(x)dx$$
+
+### Figura 5
+
+```{r}
+
+```
+
+### Figura 6
+
+```{r}
+
+```
+
+Column
+----------------------------------------
+
+### Figura 7
+
+```{r}
+
+```
+
+# Página 3
+
+Row
+-----------------------------------------
+
+### Value box
+
+```{r}
+valueBox(35,icon="fa-area-chart")
+```
+
+### Value box 2
+
+```{r}
+valueBox(56,icon="fa-pencil")
+```
+
+
+### Gauge
+
+```{r}
+gauge(45,min=0,max=100)
+```
