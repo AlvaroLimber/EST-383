@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Big Data en R</title>
+  <meta name="description" content="Este libro esta destinado a la materia de Programación Estadística I de la carrera de Estadística de la Universidad Mayor de San Andres." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Big Data en R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Este libro esta destinado a la materia de Programación Estadística I de la carrera de Estadística de la Universidad Mayor de San Andres." />
+  <meta name="github-repo" content="alvarolimber/EST-383" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Big Data en R" />
+  
+  <meta name="twitter:description" content="Este libro esta destinado a la materia de Programación Estadística I de la carrera de Estadística de la Universidad Mayor de San Andres." />
+  
+
+<meta name="author" content="Alvaro Chirino Gutierrez" />
+
+
+<meta name="date" content="2021-03-23" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="introR.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prefacio</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#audiencia"><i class="fa fa-check"></i>Audiencia</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#estructura-del-libro"><i class="fa fa-check"></i>Estructura del libro</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#software-y-acuerdos"><i class="fa fa-check"></i>Software y acuerdos</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#bases-de-datos"><i class="fa fa-check"></i>Bases de datos</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#agradecimiento"><i class="fa fa-check"></i>Agradecimiento</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="introR.html"><a href="introR.html"><i class="fa fa-check"></i><b>1</b> Introducción a R</a><ul>
+<li class="chapter" data-level="1.1" data-path="introR.html"><a href="introR.html#qué-es-r"><i class="fa fa-check"></i><b>1.1</b> ¿Qué es R?</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="introR.html"><a href="introR.html#acerca-de-r"><i class="fa fa-check"></i><b>1.1.1</b> Acerca de R</a></li>
+<li class="chapter" data-level="1.1.2" data-path="introR.html"><a href="introR.html#qué-es-r-1"><i class="fa fa-check"></i><b>1.1.2</b> ¿Qué es R?</a></li>
+<li class="chapter" data-level="1.1.3" data-path="introR.html"><a href="introR.html#algunas-referencias"><i class="fa fa-check"></i><b>1.1.3</b> Algunas referencias</a></li>
+<li class="chapter" data-level="1.1.4" data-path="introR.html"><a href="introR.html#rstudio"><i class="fa fa-check"></i><b>1.1.4</b> RStudio</a></li>
+<li class="chapter" data-level="1.1.5" data-path="introR.html"><a href="introR.html#instalación"><i class="fa fa-check"></i><b>1.1.5</b> Instalación</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="introR.html"><a href="introR.html#r-markdown"><i class="fa fa-check"></i><b>1.2</b> R Markdown</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="introR.html"><a href="introR.html#instalación-1"><i class="fa fa-check"></i><b>1.2.1</b> Instalación</a></li>
+<li class="chapter" data-level="1.2.2" data-path="introR.html"><a href="introR.html#yaml-header"><i class="fa fa-check"></i><b>1.2.2</b> YAML Header</a></li>
+<li class="chapter" data-level="1.2.3" data-path="introR.html"><a href="introR.html#sintaxis-básica"><i class="fa fa-check"></i><b>1.2.3</b> Sintaxis básica</a></li>
+<li class="chapter" data-level="1.2.4" data-path="introR.html"><a href="introR.html#tipos-de-documentos"><i class="fa fa-check"></i><b>1.2.4</b> Tipos de documentos</a></li>
+<li class="chapter" data-level="1.2.5" data-path="introR.html"><a href="introR.html#chunks"><i class="fa fa-check"></i><b>1.2.5</b> Chunks</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="introR.html"><a href="introR.html#r-básico"><i class="fa fa-check"></i><b>1.3</b> R básico</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="introR.html"><a href="introR.html#lógica-de-los-comandos-en-r"><i class="fa fa-check"></i><b>1.3.1</b> Lógica de los comandos en R</a></li>
+<li class="chapter" data-level="1.3.2" data-path="introR.html"><a href="introR.html#palabras-reservadas-y-simbolos-especiales-de-r"><i class="fa fa-check"></i><b>1.3.2</b> Palabras reservadas y simbolos especiales de R</a></li>
+<li class="chapter" data-level="1.3.3" data-path="introR.html"><a href="introR.html#símbolos-lógicos"><i class="fa fa-check"></i><b>1.3.3</b> Símbolos Lógicos</a></li>
+<li class="chapter" data-level="1.3.4" data-path="introR.html"><a href="introR.html#asignación-o-creación-de-objetos-estructuras-variables"><i class="fa fa-check"></i><b>1.3.4</b> Asignación o creación de objetos (estructuras, variables)</a></li>
+<li class="chapter" data-level="1.3.5" data-path="introR.html"><a href="introR.html#clases-en-r"><i class="fa fa-check"></i><b>1.3.5</b> Clases en R</a></li>
+<li class="chapter" data-level="1.3.6" data-path="introR.html"><a href="introR.html#algunas-comandos-adicionales"><i class="fa fa-check"></i><b>1.3.6</b> Algunas comandos adicionales</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="introR.html"><a href="introR.html#tipos-de-estructuras"><i class="fa fa-check"></i><b>1.4</b> Tipos de estructuras</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="introR.html"><a href="introR.html#homogéneas"><i class="fa fa-check"></i><b>1.4.1</b> Homogéneas</a></li>
+<li class="chapter" data-level="1.4.2" data-path="introR.html"><a href="introR.html#heterogéneas"><i class="fa fa-check"></i><b>1.4.2</b> Heterogéneas</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="introR.html"><a href="introR.html#indexación"><i class="fa fa-check"></i><b>1.5</b> Indexación</a></li>
+<li class="chapter" data-level="1.6" data-path="introR.html"><a href="introR.html#loops-y-condiciones"><i class="fa fa-check"></i><b>1.6</b> Loops y condiciones</a></li>
+<li class="chapter" data-level="1.7" data-path="introR.html"><a href="introR.html#crear-funciones-en-r."><i class="fa fa-check"></i><b>1.7</b> Crear funciones en R.</a></li>
+<li class="chapter" data-level="1.8" data-path="introR.html"><a href="introR.html#importación-de-datos"><i class="fa fa-check"></i><b>1.8</b> Importación de datos</a></li>
+<li class="chapter" data-level="1.9" data-path="introR.html"><a href="introR.html#exportar-la-base-de-datos"><i class="fa fa-check"></i><b>1.9</b> Exportar la base de datos</a></li>
+<li class="chapter" data-level="1.10" data-path="introR.html"><a href="introR.html#dataframe-y-exploración"><i class="fa fa-check"></i><b>1.10</b> Dataframe y exploración</a></li>
+<li class="chapter" data-level="1.11" data-path="introR.html"><a href="introR.html#estadística-descriptiva"><i class="fa fa-check"></i><b>1.11</b> Estadística descriptiva</a></li>
+<li class="chapter" data-level="1.12" data-path="introR.html"><a href="introR.html#inferencia-en-r"><i class="fa fa-check"></i><b>1.12</b> Inferencia en R</a></li>
+<li class="chapter" data-level="1.13" data-path="introR.html"><a href="introR.html#gráficos-de-origen"><i class="fa fa-check"></i><b>1.13</b> Gráficos de origen</a></li>
+<li class="chapter" data-level="1.14" data-path="introR.html"><a href="introR.html#ggplot"><i class="fa fa-check"></i><b>1.14</b> ggplot</a><ul>
+<li class="chapter" data-level="1.14.1" data-path="introR.html"><a href="introR.html#datos-estetica-y-geometria-layers"><i class="fa fa-check"></i><b>1.14.1</b> Datos, estetica y geometria (layers)</a></li>
+</ul></li>
+<li class="chapter" data-level="1.15" data-path="introR.html"><a href="introR.html#flexdashboard"><i class="fa fa-check"></i><b>1.15</b> Flexdashboard</a></li>
+<li class="chapter" data-level="1.16" data-path="introR.html"><a href="introR.html#shiny"><i class="fa fa-check"></i><b>1.16</b> Shiny</a><ul>
+<li class="chapter" data-level="1.16.1" data-path="introR.html"><a href="introR.html#ui"><i class="fa fa-check"></i><b>1.16.1</b> UI</a></li>
+<li class="chapter" data-level="1.16.2" data-path="introR.html"><a href="introR.html#server"><i class="fa fa-check"></i><b>1.16.2</b> Server</a></li>
+</ul></li>
+<li class="chapter" data-level="1.17" data-path="introR.html"><a href="introR.html#ejercicios-propuestos"><i class="fa fa-check"></i><b>1.17</b> Ejercicios Propuestos</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html"><i class="fa fa-check"></i><b>2</b> Introducción al Big Data</a><ul>
+<li class="chapter" data-level="2.1" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#definiendo-al-big-data"><i class="fa fa-check"></i><b>2.1</b> Definiendo al Big Data</a></li>
+<li class="chapter" data-level="2.2" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#las-5-v-en-el-big-data"><i class="fa fa-check"></i><b>2.2</b> Las 5 V en el Big Data</a></li>
+<li class="chapter" data-level="2.3" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#ciclo-de-vida-de-un-proyecto-de-análisis-de-datos"><i class="fa fa-check"></i><b>2.3</b> Ciclo de vida de un proyecto de análisis de datos</a></li>
+<li class="chapter" data-level="2.4" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#inferencia-y-big-data"><i class="fa fa-check"></i><b>2.4</b> Inferencia y Big Data</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#descriptivo"><i class="fa fa-check"></i><b>2.4.1</b> Descriptivo</a></li>
+<li class="chapter" data-level="2.4.2" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#causal"><i class="fa fa-check"></i><b>2.4.2</b> Causal</a></li>
+<li class="chapter" data-level="2.4.3" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#predictivo"><i class="fa fa-check"></i><b>2.4.3</b> Predictivo</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#calidad-de-dato-y-big-data"><i class="fa fa-check"></i><b>2.5</b> Calidad de dato y Big Data</a></li>
+<li class="chapter" data-level="2.6" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#captura-y-preservación"><i class="fa fa-check"></i><b>2.6</b> Captura y preservación</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#fuentes-convencionales"><i class="fa fa-check"></i><b>2.6.1</b> Fuentes convencionales</a></li>
+<li class="chapter" data-level="2.6.2" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#datos-web-y-apis"><i class="fa fa-check"></i><b>2.6.2</b> Datos web y APIs</a></li>
+<li class="chapter" data-level="2.6.3" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#record-linkage"><i class="fa fa-check"></i><b>2.6.3</b> Record Linkage</a></li>
+<li class="chapter" data-level="2.6.4" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#bases-de-datos-1"><i class="fa fa-check"></i><b>2.6.4</b> Bases de datos</a></li>
+<li class="chapter" data-level="2.6.5" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#programando-con-big-data"><i class="fa fa-check"></i><b>2.6.5</b> Programando con Big Data</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#análisis-y-modelado"><i class="fa fa-check"></i><b>2.7</b> Análisis y modelado</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#machine-learning"><i class="fa fa-check"></i><b>2.7.1</b> Machine learning</a></li>
+<li class="chapter" data-level="2.7.2" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#análisis-de-texto-entendiendo-lo-que-la-gente-escribe"><i class="fa fa-check"></i><b>2.7.2</b> Análisis de texto: Entendiendo lo que la gente escribe</a></li>
+<li class="chapter" data-level="2.7.3" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#networks"><i class="fa fa-check"></i><b>2.7.3</b> Networks</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#inferencia-y-ética"><i class="fa fa-check"></i><b>2.8</b> Inferencia y ética</a><ul>
+<li class="chapter" data-level="2.8.1" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#información-y-visualización"><i class="fa fa-check"></i><b>2.8.1</b> Información y visualización</a></li>
+<li class="chapter" data-level="2.8.2" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#error-e-inferencia"><i class="fa fa-check"></i><b>2.8.2</b> Error e inferencia</a></li>
+<li class="chapter" data-level="2.8.3" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#privacidad-y-confidencialidad"><i class="fa fa-check"></i><b>2.8.3</b> Privacidad y confidencialidad</a></li>
+<li class="chapter" data-level="2.8.4" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#workbooks"><i class="fa fa-check"></i><b>2.8.4</b> Workbooks</a></li>
+</ul></li>
+<li class="chapter" data-level="2.9" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#ejercicios-propuestos-1"><i class="fa fa-check"></i><b>2.9</b> Ejercicios Propuestos</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Big Data en R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Big Data en R</h1>
+<h2 class="subtitle"><em>EST-383</em></h2>
+<p class="author"><em>Alvaro Chirino Gutierrez</em></p>
+<p class="date"><em>2021-03-23</em></p>
+</div>
+<div id="prefacio" class="section level1 unnumbered">
+<h1>Prefacio</h1>
+<p><a href="https://www.crcpress.com/product/isbn/9781138700109" target="_blank"><img src="images/cover.png" style="display: block; margin: auto;" /></a></p>
+<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />Este documento de <a href="https://twiiter/alvarochirinog">Alvaro Chirino</a> esta bajo la licencia de <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.</p>
+<div id="audiencia" class="section level2 unnumbered">
+<h2>Audiencia</h2>
+<p>El libro fue diseñado originalmente para los estudiantes de la materia de Programación Estadística I, una materia optativa del pregrado de la carrera de Estadística de la Universidad Mayor de San Andres.</p>
+<p>Este documento representa un primer acercamiento a los estudiantes de estadistica al software R y al mundo del Big Data.</p>
+</div>
+<div id="estructura-del-libro" class="section level2 unnumbered">
+<h2>Estructura del libro</h2>
+<p>El libro inluye 5 capitulos, estos son:</p>
+<ol style="list-style-type: decimal">
+<li>Introducción a R</li>
+<li>Scraping Web en R</li>
+<li>Introducción al Big Data</li>
+<li>Big Data en R</li>
+<li>R y Spark</li>
+</ol>
+</div>
+<div id="software-y-acuerdos" class="section level2 unnumbered">
+<h2>Software y acuerdos</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1"></a><span class="kw">sessionInfo</span>()</span></code></pre></div>
+<pre><code>## R version 4.0.4 (2021-02-15)
+## Platform: x86_64-w64-mingw32/x64 (64-bit)
+## Running under: Windows 10 x64 (build 19042)
+## 
+## Matrix products: default
+## 
+## locale:
+## [1] LC_COLLATE=Spanish_Bolivia.1252 
+## [2] LC_CTYPE=Spanish_Bolivia.1252   
+## [3] LC_MONETARY=Spanish_Bolivia.1252
+## [4] LC_NUMERIC=C                    
+## [5] LC_TIME=Spanish_Bolivia.1252    
+## 
+## attached base packages:
+## [1] stats     graphics  grDevices utils    
+## [5] datasets  methods   base     
+## 
+## loaded via a namespace (and not attached):
+##  [1] compiler_4.0.4    magrittr_2.0.1   
+##  [3] bookdown_0.21     htmltools_0.5.1.1
+##  [5] tools_4.0.4       rstudioapi_0.13  
+##  [7] yaml_2.2.1        stringi_1.5.3    
+##  [9] rmarkdown_2.6     highr_0.8        
+## [11] knitr_1.31        stringr_1.4.0    
+## [13] xfun_0.19         digest_0.6.27    
+## [15] packrat_0.5.0     rlang_0.4.10     
+## [17] evaluate_0.14</code></pre>
+</div>
+<div id="bases-de-datos" class="section level2 unnumbered">
+<h2>Bases de datos</h2>
+<p>En este documento se emplearan 4 bases de datos del contecto Boliviano:</p>
+<ol style="list-style-type: decimal">
+<li>Encuesta a Hogares 2019 y 2019. Vivienda y Personas</li>
+<li>Encuesta de Demografía y Salud 1989 - 2008</li>
+<li>Encuesta de Niños, niñas y adolescentes 2016</li>
+<li>Computo oficial de las elecciones del 20 de Octubre de 2019</li>
+<li>Bases de datos de contagios, muertes y recuperados del COVID-19 del Johns Hopkins Institute.</li>
+</ol>
+<p>Estas bases de datos se encuentran disponibles en formato <span class="math inline">\(.RData\)</span> en el repositorio de Github del texto.</p>
+</div>
+<div id="agradecimiento" class="section level2 unnumbered">
+<h2>Agradecimiento</h2>
+<p>Eponine…</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="introR.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
