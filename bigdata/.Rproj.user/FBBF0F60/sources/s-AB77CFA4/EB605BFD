@@ -3,7 +3,7 @@
     "path": "~/GitHub/EST-383/bigdata/1_introR.Rmd",
     "project_path": "1_introR.Rmd",
     "type": "r_markdown",
-    "hash": "2995116186",
+    "hash": "0",
     "contents": "",
     "dirty": false,
     "created": 1614103324352.0,
@@ -11,7 +11,7 @@
     "relative_order": 1,
     "properties": {
         "cursorPosition": "1147,42",
-        "scrollLine": "1003",
+        "scrollLine": "989",
         "docOutlineVisible": "1",
         "chunk_output_type": "console",
         "docOutlineSize": "269"
