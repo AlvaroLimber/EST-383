@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Scraping Web (Raspado web) | Big Data en R</title>
+  <meta name="description" content="Este libro esta destinado a la materia de Programación Estadística I de la carrera de Estadística de la Universidad Mayor de San Andres." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Scraping Web (Raspado web) | Big Data en R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Este libro esta destinado a la materia de Programación Estadística I de la carrera de Estadística de la Universidad Mayor de San Andres." />
+  <meta name="github-repo" content="alvarolimber/EST-383" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Scraping Web (Raspado web) | Big Data en R" />
+  
+  <meta name="twitter:description" content="Este libro esta destinado a la materia de Programación Estadística I de la carrera de Estadística de la Universidad Mayor de San Andres." />
+  
+
+<meta name="author" content="Alvaro Chirino Gutierrez" />
+
+
+<meta name="date" content="2021-04-13" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="introducción-al-big-data.html"/>
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prefacio</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#audiencia"><i class="fa fa-check"></i>Audiencia</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#estructura-del-libro"><i class="fa fa-check"></i>Estructura del libro</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#software-y-acuerdos"><i class="fa fa-check"></i>Software y acuerdos</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#bases-de-datos"><i class="fa fa-check"></i>Bases de datos</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#agradecimiento"><i class="fa fa-check"></i>Agradecimiento</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="introR.html"><a href="introR.html"><i class="fa fa-check"></i><b>1</b> Introducción a R</a><ul>
+<li class="chapter" data-level="1.1" data-path="introR.html"><a href="introR.html#qué-es-r"><i class="fa fa-check"></i><b>1.1</b> ¿Qué es R?</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="introR.html"><a href="introR.html#acerca-de-r"><i class="fa fa-check"></i><b>1.1.1</b> Acerca de R</a></li>
+<li class="chapter" data-level="1.1.2" data-path="introR.html"><a href="introR.html#qué-es-r-1"><i class="fa fa-check"></i><b>1.1.2</b> ¿Qué es R?</a></li>
+<li class="chapter" data-level="1.1.3" data-path="introR.html"><a href="introR.html#algunas-referencias"><i class="fa fa-check"></i><b>1.1.3</b> Algunas referencias</a></li>
+<li class="chapter" data-level="1.1.4" data-path="introR.html"><a href="introR.html#rstudio"><i class="fa fa-check"></i><b>1.1.4</b> RStudio</a></li>
+<li class="chapter" data-level="1.1.5" data-path="introR.html"><a href="introR.html#instalación"><i class="fa fa-check"></i><b>1.1.5</b> Instalación</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="introR.html"><a href="introR.html#r-markdown"><i class="fa fa-check"></i><b>1.2</b> R Markdown</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="introR.html"><a href="introR.html#instalación-1"><i class="fa fa-check"></i><b>1.2.1</b> Instalación</a></li>
+<li class="chapter" data-level="1.2.2" data-path="introR.html"><a href="introR.html#yaml-header"><i class="fa fa-check"></i><b>1.2.2</b> YAML Header</a></li>
+<li class="chapter" data-level="1.2.3" data-path="introR.html"><a href="introR.html#sintaxis-básica"><i class="fa fa-check"></i><b>1.2.3</b> Sintaxis básica</a></li>
+<li class="chapter" data-level="1.2.4" data-path="introR.html"><a href="introR.html#tipos-de-documentos"><i class="fa fa-check"></i><b>1.2.4</b> Tipos de documentos</a></li>
+<li class="chapter" data-level="1.2.5" data-path="introR.html"><a href="introR.html#chunks"><i class="fa fa-check"></i><b>1.2.5</b> Chunks</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="introR.html"><a href="introR.html#r-básico"><i class="fa fa-check"></i><b>1.3</b> R básico</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="introR.html"><a href="introR.html#lógica-de-los-comandos-en-r"><i class="fa fa-check"></i><b>1.3.1</b> Lógica de los comandos en R</a></li>
+<li class="chapter" data-level="1.3.2" data-path="introR.html"><a href="introR.html#palabras-reservadas-y-simbolos-especiales-de-r"><i class="fa fa-check"></i><b>1.3.2</b> Palabras reservadas y simbolos especiales de R</a></li>
+<li class="chapter" data-level="1.3.3" data-path="introR.html"><a href="introR.html#símbolos-lógicos"><i class="fa fa-check"></i><b>1.3.3</b> Símbolos Lógicos</a></li>
+<li class="chapter" data-level="1.3.4" data-path="introR.html"><a href="introR.html#asignación-o-creación-de-objetos-estructuras-variables"><i class="fa fa-check"></i><b>1.3.4</b> Asignación o creación de objetos (estructuras, variables)</a></li>
+<li class="chapter" data-level="1.3.5" data-path="introR.html"><a href="introR.html#clases-en-r"><i class="fa fa-check"></i><b>1.3.5</b> Clases en R</a></li>
+<li class="chapter" data-level="1.3.6" data-path="introR.html"><a href="introR.html#algunas-comandos-adicionales"><i class="fa fa-check"></i><b>1.3.6</b> Algunas comandos adicionales</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="introR.html"><a href="introR.html#tipos-de-estructuras"><i class="fa fa-check"></i><b>1.4</b> Tipos de estructuras</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="introR.html"><a href="introR.html#homogéneas"><i class="fa fa-check"></i><b>1.4.1</b> Homogéneas</a></li>
+<li class="chapter" data-level="1.4.2" data-path="introR.html"><a href="introR.html#heterogéneas"><i class="fa fa-check"></i><b>1.4.2</b> Heterogéneas</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="introR.html"><a href="introR.html#indexación"><i class="fa fa-check"></i><b>1.5</b> Indexación</a></li>
+<li class="chapter" data-level="1.6" data-path="introR.html"><a href="introR.html#loops-y-condiciones"><i class="fa fa-check"></i><b>1.6</b> Loops y condiciones</a></li>
+<li class="chapter" data-level="1.7" data-path="introR.html"><a href="introR.html#crear-funciones-en-r."><i class="fa fa-check"></i><b>1.7</b> Crear funciones en R.</a></li>
+<li class="chapter" data-level="1.8" data-path="introR.html"><a href="introR.html#importación-de-datos"><i class="fa fa-check"></i><b>1.8</b> Importación de datos</a></li>
+<li class="chapter" data-level="1.9" data-path="introR.html"><a href="introR.html#exportar-la-base-de-datos"><i class="fa fa-check"></i><b>1.9</b> Exportar la base de datos</a></li>
+<li class="chapter" data-level="1.10" data-path="introR.html"><a href="introR.html#dataframe-y-exploración"><i class="fa fa-check"></i><b>1.10</b> Dataframe y exploración</a></li>
+<li class="chapter" data-level="1.11" data-path="introR.html"><a href="introR.html#estadística-descriptiva"><i class="fa fa-check"></i><b>1.11</b> Estadística descriptiva</a></li>
+<li class="chapter" data-level="1.12" data-path="introR.html"><a href="introR.html#inferencia-en-r"><i class="fa fa-check"></i><b>1.12</b> Inferencia en R</a></li>
+<li class="chapter" data-level="1.13" data-path="introR.html"><a href="introR.html#gráficos-de-origen"><i class="fa fa-check"></i><b>1.13</b> Gráficos de origen</a></li>
+<li class="chapter" data-level="1.14" data-path="introR.html"><a href="introR.html#ggplot"><i class="fa fa-check"></i><b>1.14</b> ggplot</a><ul>
+<li class="chapter" data-level="1.14.1" data-path="introR.html"><a href="introR.html#datos-estetica-y-geometria-layers"><i class="fa fa-check"></i><b>1.14.1</b> Datos, estetica y geometria (layers)</a></li>
+</ul></li>
+<li class="chapter" data-level="1.15" data-path="introR.html"><a href="introR.html#flexdashboard"><i class="fa fa-check"></i><b>1.15</b> Flexdashboard</a></li>
+<li class="chapter" data-level="1.16" data-path="introR.html"><a href="introR.html#shiny"><i class="fa fa-check"></i><b>1.16</b> Shiny</a><ul>
+<li class="chapter" data-level="1.16.1" data-path="introR.html"><a href="introR.html#ui"><i class="fa fa-check"></i><b>1.16.1</b> UI</a></li>
+<li class="chapter" data-level="1.16.2" data-path="introR.html"><a href="introR.html#server"><i class="fa fa-check"></i><b>1.16.2</b> Server</a></li>
+</ul></li>
+<li class="chapter" data-level="1.17" data-path="introR.html"><a href="introR.html#ejercicios-propuestos"><i class="fa fa-check"></i><b>1.17</b> Ejercicios Propuestos</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html"><i class="fa fa-check"></i><b>2</b> Introducción al Big Data</a><ul>
+<li class="chapter" data-level="2.1" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#definiendo-al-big-data"><i class="fa fa-check"></i><b>2.1</b> Definiendo al Big Data</a></li>
+<li class="chapter" data-level="2.2" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#las-5-v-en-el-big-data"><i class="fa fa-check"></i><b>2.2</b> Las 5 V en el Big Data</a></li>
+<li class="chapter" data-level="2.3" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#ciclo-de-vida-de-un-proyecto-de-análisis-de-datos"><i class="fa fa-check"></i><b>2.3</b> Ciclo de vida de un proyecto de análisis de datos</a></li>
+<li class="chapter" data-level="2.4" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#inferencia-y-big-data"><i class="fa fa-check"></i><b>2.4</b> Inferencia y Big Data</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#descriptivo"><i class="fa fa-check"></i><b>2.4.1</b> Descriptivo</a></li>
+<li class="chapter" data-level="2.4.2" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#causal"><i class="fa fa-check"></i><b>2.4.2</b> Causal</a></li>
+<li class="chapter" data-level="2.4.3" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#predictivo"><i class="fa fa-check"></i><b>2.4.3</b> Predictivo</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#calidad-de-dato-y-big-data"><i class="fa fa-check"></i><b>2.5</b> Calidad de dato y Big Data</a></li>
+<li class="chapter" data-level="2.6" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#captura-y-preservación"><i class="fa fa-check"></i><b>2.6</b> Captura y preservación</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#fuentes-convencionales"><i class="fa fa-check"></i><b>2.6.1</b> Fuentes convencionales</a></li>
+<li class="chapter" data-level="2.6.2" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#datos-web-y-apis"><i class="fa fa-check"></i><b>2.6.2</b> Datos web y APIs</a></li>
+<li class="chapter" data-level="2.6.3" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#record-linkage"><i class="fa fa-check"></i><b>2.6.3</b> Record Linkage</a></li>
+<li class="chapter" data-level="2.6.4" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#bases-de-datos-1"><i class="fa fa-check"></i><b>2.6.4</b> Bases de datos</a></li>
+<li class="chapter" data-level="2.6.5" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#programando-con-big-data"><i class="fa fa-check"></i><b>2.6.5</b> Programando con Big Data</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#análisis-y-modelado"><i class="fa fa-check"></i><b>2.7</b> Análisis y modelado</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#machine-learning"><i class="fa fa-check"></i><b>2.7.1</b> Machine learning</a></li>
+<li class="chapter" data-level="2.7.2" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#análisis-de-texto-entendiendo-lo-que-la-gente-escribe"><i class="fa fa-check"></i><b>2.7.2</b> Análisis de texto: Entendiendo lo que la gente escribe</a></li>
+<li class="chapter" data-level="2.7.3" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#networks"><i class="fa fa-check"></i><b>2.7.3</b> Networks</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#inferencia-y-ética"><i class="fa fa-check"></i><b>2.8</b> Inferencia y ética</a><ul>
+<li class="chapter" data-level="2.8.1" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#información-y-visualización"><i class="fa fa-check"></i><b>2.8.1</b> Información y visualización</a></li>
+<li class="chapter" data-level="2.8.2" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#error-e-inferencia"><i class="fa fa-check"></i><b>2.8.2</b> Error e inferencia</a></li>
+<li class="chapter" data-level="2.8.3" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#privacidad-y-confidencialidad"><i class="fa fa-check"></i><b>2.8.3</b> Privacidad y confidencialidad</a></li>
+<li class="chapter" data-level="2.8.4" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#workbooks"><i class="fa fa-check"></i><b>2.8.4</b> Workbooks</a></li>
+</ul></li>
+<li class="chapter" data-level="2.9" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#ejercicios-propuestos-1"><i class="fa fa-check"></i><b>2.9</b> Ejercicios Propuestos</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html"><i class="fa fa-check"></i><b>3</b> Scraping Web (Raspado web)</a><ul>
+<li class="chapter" data-level="3.1" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#pasos-para-la-recopilación-de-información"><i class="fa fa-check"></i><b>3.1</b> Pasos para la recopilación de información</a></li>
+<li class="chapter" data-level="3.2" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#tecnologías-de-diseminación-extracción-y-almacenamiento-web"><i class="fa fa-check"></i><b>3.2</b> Tecnologías de diseminación, extracción y almacenamiento Web</a></li>
+<li class="chapter" data-level="3.3" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#librerías-en-r"><i class="fa fa-check"></i><b>3.3</b> Librerías en R</a></li>
+<li class="chapter" data-level="3.4" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#librería-rvest"><i class="fa fa-check"></i><b>3.4</b> Librería rvest</a></li>
+<li class="chapter" data-level="3.5" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#ejemplo-infocasas-ventas-la-paz"><i class="fa fa-check"></i><b>3.5</b> Ejemplo: Infocasas, ventas La Paz</a></li>
+<li class="chapter" data-level="3.6" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#ejemplo-titulares-de-la-razon"><i class="fa fa-check"></i><b>3.6</b> Ejemplo: Titulares de La Razon</a></li>
+<li class="chapter" data-level="3.7" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#ejemplo-covid-en-el-mundo-worldometers"><i class="fa fa-check"></i><b>3.7</b> Ejemplo: COVID en el mundo, Worldometers</a></li>
+<li class="chapter" data-level="3.8" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#ejemplo-covid-bolivia-segura-worldometers"><i class="fa fa-check"></i><b>3.8</b> Ejemplo: COVID, Bolivia segura, Worldometers</a></li>
+<li class="chapter" data-level="3.9" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#ejemplo-ultracasas"><i class="fa fa-check"></i><b>3.9</b> Ejemplo: Ultracasas</a></li>
+<li class="chapter" data-level="3.10" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#ejemplo-ketal"><i class="fa fa-check"></i><b>3.10</b> Ejemplo: Ketal</a></li>
+<li class="chapter" data-level="3.11" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#ejemplo-ministerio-de-educación"><i class="fa fa-check"></i><b>3.11</b> Ejemplo: Ministerio de Educación</a></li>
+<li class="chapter" data-level="3.12" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#ejemplo-informacion-covid-19-en-bolivia"><i class="fa fa-check"></i><b>3.12</b> Ejemplo, informacion COVID-19 en Bolivia</a></li>
+<li class="chapter" data-level="3.13" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#apis"><i class="fa fa-check"></i><b>3.13</b> APIs</a><ul>
+<li class="chapter" data-level="3.13.1" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#api-banco-mundial"><i class="fa fa-check"></i><b>3.13.1</b> API Banco Mundial</a></li>
+<li class="chapter" data-level="3.13.2" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#api-google-trends"><i class="fa fa-check"></i><b>3.13.2</b> API Google trends</a></li>
+<li class="chapter" data-level="3.13.3" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#api-google-maps"><i class="fa fa-check"></i><b>3.13.3</b> API Google Maps</a></li>
+</ul></li>
+<li class="chapter" data-level="3.14" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#ejercicios-propuestos-2"><i class="fa fa-check"></i><b>3.14</b> Ejercicios Propuestos</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Big Data en R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="scraping-web-raspado-web" class="section level1">
+<h1><span class="header-section-number">Chapter 3</span> Scraping Web (Raspado web)</h1>
+<p>La definición del scraping web que se toma en este documento proviene de <span class="citation">(<span class="citeproc-not-found" data-reference-id="Mitchell2015"><strong>???</strong></span>)</span> que expresa:</p>
+<p><strong>
+El Web Scraping es la recolección automática de información de los sitios web. (obviamente no a través de un humano usando un navegador web).
+</strong></p>
+<p>Un tema dentro del scraping web son las denominadas APIs (Application Programming Interface), <em>estas son entradas a las páginas web diseñadas por los administradores de la página web</em>, <strong>por lo mismo no siempre contienen toda la información que se desea</strong>. Aunque las API no son tan <em>ubicuas</em> como deberían, puede encontrar API para muchos tipos de información. Interesado en la música? Hay algunas API diferentes que pueden darle canciones, artistas, álbumes e incluso información sobre estilos musicales y artistas relacionados. ¿Necesitas datos deportivos? ESPN proporciona API para información de atletas, puntajes de juegos y más. Google tiene docenas de API en su sección de Desarrolladores para traducciones de idiomas, análisis, geolocalización y más.</p>
+<div id="pasos-para-la-recopilación-de-información" class="section level2">
+<h2><span class="header-section-number">3.1</span> Pasos para la recopilación de información</h2>
+<p>Siguiendo a <span class="citation">(<span class="citeproc-not-found" data-reference-id="Iacus2015"><strong>???</strong></span>)</span> que establece cinco pasos al momento de decidir recopilar información mediante el scraping web, estos pasos son:</p>
+<ol style="list-style-type: decimal">
+<li><em>Asegúrese de saber exactamente qué tipo de información necesita</em>. Esto puede ser específico (<code>el producto interno bruto de todos los países de la OCDE durante los últimos 10 años'') o vago (</code>opinión de la gente sobre el teléfono de la empresa X’‘, ``colaboración entre miembros del Senado de los Estados Unidos’’).</li>
+<li>Averigüe si hay fuentes de datos en la Web que puedan proporcionar información directa o indirecta sobre su problema. Si está buscando hechos concretos, esto probablemente sea fácil. Si está interesado en conceptos bastante vagos, esto es más difícil.</li>
+</ol>
+<p><strong>La página de inicio de la embajada de un país podría ser una fuente valiosa para la acción de política exterior que a menudo se oculta detrás del telón de la diplomacia. Los tweets pueden contener tendencias de opinión sobre casi todo, las plataformas comerciales pueden informar sobre la satisfacción de los clientes con los productos, las tarifas de alquiler en los sitios web de propiedades pueden contener información sobre el atractivo actual de los barrios de la ciudad …
+</strong></p>
+<ol start="3" style="list-style-type: decimal">
+<li>Desarrolle una teoría del proceso de generación de datos cuando busque fuentes potenciales. ¿Cuándo se generaron los datos, cuándo se cargaron en la Web y quién lo hizo? ¿Existen áreas potenciales que no están cubiertas, son consistentes o precisas, y puede identificarlas y corregirlas?</li>
+<li>Equilibrar las ventajas y desventajas de las posibles fuentes de datos. Los aspectos relevantes pueden ser la disponibilidad (¡y la legalidad!), los costos de recolección, la compatibilidad de nuevas fuentes con la investigación existente, pero también factores muy subjetivos como la aceptación de la fuente de datos por parte de otros. También piense en posibles formas de validar la calidad de sus datos. ¿Existen otras fuentes independientes que brinden información similar para que sean posibles verificaciones cruzadas aleatorias? En caso de datos secundarios, ¿puede identificar la fuente original y verificar los errores de transferencia?</li>
+<li>¡Toma una decisión! Elija la fuente de datos que le parezca más adecuada, documente los motivos de la decisión y comience con los preparativos para la recopilación. Si es factible, recopile datos de varias fuentes para validar las fuentes de datos. Muchos problemas y beneficios de varias estrategias de recopilación de datos salen a la luz solo después de la recopilación real.</li>
+</ol>
+</div>
+<div id="tecnologías-de-diseminación-extracción-y-almacenamiento-web" class="section level2">
+<h2><span class="header-section-number">3.2</span> Tecnologías de diseminación, extracción y almacenamiento Web</h2>
+<p>Una vez elegida la fuente de datos (página web) y al menos con la intuición de lo que se quiere obtener, el siguiente paso es decidir el mecanismos para el scraping (raspado), esto esta relacionado al tipo de pagina web, ver si esta ofrece una entrada API y conocer sus limitaciones puede ser un punto de partida. Esto se denomina <em>Technologies for disseminating, extracting, and storing web data Collecting</em>, en el marco del uso de R la figura  muestra las interacciones entre ellas.</p>
+<p><img src="images/scrap1.png" /></p>
+<p><em>Tecnologías para difundir, extraer y almacenar datos web (considerando el entorno de R)</em></p>
+</div>
+<div id="librerías-en-r" class="section level2">
+<h2><span class="header-section-number">3.3</span> Librerías en R</h2>
+<p>El siguiente cuadro presenta las librerías en R relacionadas al web Scraping, incluyendo los servicios API, que a la fecha del proyecto alcanza a 761 librerías, esto representa el <span class="math inline">\(5.02\)</span>% de las librerías en en R.</p>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="scraping-web-raspado-web.html#cb238-1"></a><span class="kw">library</span>(knitr)</span>
+<span id="cb238-2"><a href="scraping-web-raspado-web.html#cb238-2"></a><span class="kw">library</span>(packagefinder)</span>
+<span id="cb238-3"><a href="scraping-web-raspado-web.html#cb238-3"></a><span class="kw">library</span>(xtable)</span>
+<span id="cb238-4"><a href="scraping-web-raspado-web.html#cb238-4"></a><span class="kw">findPackage</span>(<span class="kw">c</span>(<span class="st">&quot;API&quot;</span>,<span class="st">&quot;scrape&quot;</span>),<span class="dt">limit.results=</span><span class="op">-</span><span class="dv">1</span>)</span></code></pre></div>
+<p>Ejemplo de clase.
+Siguiendo los 5 pasos mencionados anteriormente, defina un tema de interés.</p>
+<ol style="list-style-type: decimal">
+<li>Definir el tema:</li>
+<li>Identificar fuentes (web):</li>
+<li>Calidad de las fuentes:</li>
+<li>Ventajas y desventajas:</li>
+<li>Elegir la fuente:</li>
+</ol>
+<p>Tiempo: 10 minutos.</p>
+</div>
+<div id="librería-rvest" class="section level2">
+<h2><span class="header-section-number">3.4</span> Librería rvest</h2>
+<p>Rvest es parte del universo <strong>tidyverse</strong> y esta orientada al scrape de páginas web. La instalación es usual:</p>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="scraping-web-raspado-web.html#cb239-1"></a><span class="co">#desde CRAN</span></span>
+<span id="cb239-2"><a href="scraping-web-raspado-web.html#cb239-2"></a><span class="kw">install.packages</span>(<span class="st">&quot;rvest&quot;</span>)</span>
+<span id="cb239-3"><a href="scraping-web-raspado-web.html#cb239-3"></a><span class="co">#la versión en desarrollo desde github</span></span>
+<span id="cb239-4"><a href="scraping-web-raspado-web.html#cb239-4"></a>devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;tidyverse/rvest&quot;</span>)</span></code></pre></div>
+<p>Existe la herramienta selectorgadget disponible en <a href="http://selectorgadget.com/" class="uri">http://selectorgadget.com/</a>, esta permite interactuar con las páginas web para seleccionar partes del documento usando un CSS selector. Las funciones mas importantes dentro de rvest son:</p>
+<ul>
+<li>read_html para cargar la estructura de la página</li>
+<li>html_nodes para extraer información de la página según el CSS selector</li>
+<li>html_text para extraer texto de un html_nodes</li>
+<li>html_table para extraer tablas y ponerlas en data frame</li>
+</ul>
+</div>
+<div id="ejemplo-infocasas-ventas-la-paz" class="section level2">
+<h2><span class="header-section-number">3.5</span> Ejemplo: Infocasas, ventas La Paz</h2>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="scraping-web-raspado-web.html#cb240-1"></a><span class="kw">library</span>(rvest)</span>
+<span id="cb240-2"><a href="scraping-web-raspado-web.html#cb240-2"></a><span class="co">#test</span></span>
+<span id="cb240-3"><a href="scraping-web-raspado-web.html#cb240-3"></a>infocasa&lt;-<span class="kw">read_html</span>(<span class="st">&quot;https://www.infocasas.com.bo/venta/inmuebles/la-paz/pagina1&quot;</span>)</span>
+<span id="cb240-4"><a href="scraping-web-raspado-web.html#cb240-4"></a>node&lt;-<span class="kw">html_nodes</span>(infocasa,<span class="st">&quot;strong&quot;</span>)</span>
+<span id="cb240-5"><a href="scraping-web-raspado-web.html#cb240-5"></a>price&lt;-<span class="kw">html_text</span>(node)</span>
+<span id="cb240-6"><a href="scraping-web-raspado-web.html#cb240-6"></a>price[<span class="dv">3</span><span class="op">:</span><span class="dv">23</span>]</span>
+<span id="cb240-7"><a href="scraping-web-raspado-web.html#cb240-7"></a><span class="co">#colección de todos los precios</span></span>
+<span id="cb240-8"><a href="scraping-web-raspado-web.html#cb240-8"></a>price&lt;-<span class="ot">NULL</span></span>
+<span id="cb240-9"><a href="scraping-web-raspado-web.html#cb240-9"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">16</span>){</span>
+<span id="cb240-10"><a href="scraping-web-raspado-web.html#cb240-10"></a>  <span class="kw">print</span>(i)</span>
+<span id="cb240-11"><a href="scraping-web-raspado-web.html#cb240-11"></a>  url&lt;-<span class="kw">paste0</span>(<span class="st">&quot;https://www.infocasas.com.bo/venta/inmuebles/la-paz/pagina&quot;</span>,i)</span>
+<span id="cb240-12"><a href="scraping-web-raspado-web.html#cb240-12"></a>  infocasa&lt;-<span class="kw">read_html</span>(url)</span>
+<span id="cb240-13"><a href="scraping-web-raspado-web.html#cb240-13"></a>  node&lt;-<span class="kw">html_nodes</span>(infocasa,<span class="st">&quot;strong&quot;</span>)</span>
+<span id="cb240-14"><a href="scraping-web-raspado-web.html#cb240-14"></a>  aux&lt;-<span class="kw">html_text</span>(node)</span>
+<span id="cb240-15"><a href="scraping-web-raspado-web.html#cb240-15"></a>  price&lt;-<span class="kw">c</span>(price,aux[<span class="dv">3</span><span class="op">:</span><span class="dv">23</span>])</span>
+<span id="cb240-16"><a href="scraping-web-raspado-web.html#cb240-16"></a>}</span>
+<span id="cb240-17"><a href="scraping-web-raspado-web.html#cb240-17"></a>price&lt;-price[<span class="dv">1</span><span class="op">:</span><span class="dv">328</span>]</span>
+<span id="cb240-18"><a href="scraping-web-raspado-web.html#cb240-18"></a>price&lt;-<span class="kw">gsub</span>(<span class="st">&quot;U$S &quot;</span>,<span class="st">&quot;&quot;</span>,price,<span class="dt">fixed =</span> T)</span>
+<span id="cb240-19"><a href="scraping-web-raspado-web.html#cb240-19"></a>price&lt;-<span class="kw">gsub</span>(<span class="st">&quot;,&quot;</span>,<span class="st">&quot;&quot;</span>,price,<span class="dt">fixed =</span> T)</span>
+<span id="cb240-20"><a href="scraping-web-raspado-web.html#cb240-20"></a><span class="kw">class</span>(price)</span>
+<span id="cb240-21"><a href="scraping-web-raspado-web.html#cb240-21"></a>price&lt;-<span class="kw">as.numeric</span>(price)</span>
+<span id="cb240-22"><a href="scraping-web-raspado-web.html#cb240-22"></a>price&lt;-<span class="kw">na.omit</span>(price)</span>
+<span id="cb240-23"><a href="scraping-web-raspado-web.html#cb240-23"></a>price&lt;-price[price<span class="op">&gt;</span><span class="dv">1000</span> <span class="op">&amp;</span><span class="st"> </span>price<span class="op">&lt;</span><span class="dv">10000000</span>]</span>
+<span id="cb240-24"><a href="scraping-web-raspado-web.html#cb240-24"></a><span class="kw">summary</span>(price)</span></code></pre></div>
+</div>
+<div id="ejemplo-titulares-de-la-razon" class="section level2">
+<h2><span class="header-section-number">3.6</span> Ejemplo: Titulares de La Razon</h2>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="scraping-web-raspado-web.html#cb241-1"></a>lr&lt;-<span class="kw">read_html</span>(<span class="st">&quot;https://www.la-razon.com/&quot;</span>)</span>
+<span id="cb241-2"><a href="scraping-web-raspado-web.html#cb241-2"></a>node&lt;-<span class="kw">html_nodes</span>(lr,<span class="st">&quot;.title&quot;</span>)</span>
+<span id="cb241-3"><a href="scraping-web-raspado-web.html#cb241-3"></a><span class="kw">html_text</span>(node)</span></code></pre></div>
+</div>
+<div id="ejemplo-covid-en-el-mundo-worldometers" class="section level2">
+<h2><span class="header-section-number">3.7</span> Ejemplo: COVID en el mundo, Worldometers</h2>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="scraping-web-raspado-web.html#cb242-1"></a><span class="kw">library</span>(rvest)</span>
+<span id="cb242-2"><a href="scraping-web-raspado-web.html#cb242-2"></a>covid&lt;-<span class="kw">read_html</span>(<span class="st">&quot;https://www.worldometers.info/coronavirus/&quot;</span>)</span>
+<span id="cb242-3"><a href="scraping-web-raspado-web.html#cb242-3"></a>tab&lt;-<span class="kw">html_table</span>(covid)</span>
+<span id="cb242-4"><a href="scraping-web-raspado-web.html#cb242-4"></a>bd&lt;-tab[[<span class="dv">1</span>]]<span class="co">#hoy</span></span>
+<span id="cb242-5"><a href="scraping-web-raspado-web.html#cb242-5"></a>tab[[<span class="dv">2</span>]]<span class="co">#ayer</span></span>
+<span id="cb242-6"><a href="scraping-web-raspado-web.html#cb242-6"></a>tab[[<span class="dv">3</span>]]<span class="co">#2 días</span></span></code></pre></div>
+<p>Ejercicio: mostrar un gráfico para las muertes por país en base a la información del COVID-19 y también mostrar un ranking de los países con más avance en la vacunación al día de hoy (13/4).</p>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="scraping-web-raspado-web.html#cb243-1"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb243-2"><a href="scraping-web-raspado-web.html#cb243-2"></a><span class="kw">names</span>(bd)[<span class="dv">1</span>]&lt;-<span class="st">&quot;id&quot;</span></span>
+<span id="cb243-3"><a href="scraping-web-raspado-web.html#cb243-3"></a><span class="kw">names</span>(bd)[<span class="dv">12</span>]&lt;-<span class="st">&quot;muertesM&quot;</span></span>
+<span id="cb243-4"><a href="scraping-web-raspado-web.html#cb243-4"></a><span class="kw">names</span>(bd)[<span class="dv">2</span>]&lt;-<span class="st">&quot;pais&quot;</span></span>
+<span id="cb243-5"><a href="scraping-web-raspado-web.html#cb243-5"></a>t1&lt;-bd <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(<span class="kw">is.na</span>(id)<span class="op">==</span>F) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(pais,muertesM) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">muertesM=</span><span class="kw">as.numeric</span>(<span class="kw">gsub</span>(<span class="st">&quot;,&quot;</span>,<span class="st">&quot;&quot;</span>,muertesM)))</span>
+<span id="cb243-6"><a href="scraping-web-raspado-web.html#cb243-6"></a>t1&lt;-<span class="kw">na.omit</span>(t1)</span>
+<span id="cb243-7"><a href="scraping-web-raspado-web.html#cb243-7"></a>t1&lt;-t1[<span class="kw">order</span>(t1<span class="op">$</span>muertesM),]</span>
+<span id="cb243-8"><a href="scraping-web-raspado-web.html#cb243-8"></a><span class="kw">plot</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">204</span>,t1<span class="op">$</span>muertesM,<span class="dt">type=</span><span class="st">&quot;h&quot;</span>)</span>
+<span id="cb243-9"><a href="scraping-web-raspado-web.html#cb243-9"></a><span class="co">#vacunas</span></span>
+<span id="cb243-10"><a href="scraping-web-raspado-web.html#cb243-10"></a>vc&lt;-<span class="kw">read.csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/vaccinations/vaccinations.csv&quot;</span>)</span>
+<span id="cb243-11"><a href="scraping-web-raspado-web.html#cb243-11"></a><span class="kw">head</span>(vc)</span>
+<span id="cb243-12"><a href="scraping-web-raspado-web.html#cb243-12"></a><span class="kw">str</span>(vc)</span>
+<span id="cb243-13"><a href="scraping-web-raspado-web.html#cb243-13"></a><span class="kw">library</span>(lubridate)</span>
+<span id="cb243-14"><a href="scraping-web-raspado-web.html#cb243-14"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb243-15"><a href="scraping-web-raspado-web.html#cb243-15"></a>vc<span class="op">$</span>date&lt;-<span class="kw">ymd</span>(vc<span class="op">$</span>date)</span>
+<span id="cb243-16"><a href="scraping-web-raspado-web.html#cb243-16"></a><span class="kw">ggplot</span>(vc <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(iso_code<span class="op">==</span><span class="st">&quot;BOL&quot;</span>),<span class="kw">aes</span>(date,daily_vaccinations))<span class="op">+</span><span class="kw">geom_line</span>()</span>
+<span id="cb243-17"><a href="scraping-web-raspado-web.html#cb243-17"></a></span>
+<span id="cb243-18"><a href="scraping-web-raspado-web.html#cb243-18"></a>vc <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(iso_code<span class="op">==</span><span class="st">&quot;CHL&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(date,daily_vaccinations) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">plot</span>(<span class="dt">type=</span><span class="st">&quot;b&quot;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+</div>
+<div id="ejemplo-covid-bolivia-segura-worldometers" class="section level2">
+<h2><span class="header-section-number">3.8</span> Ejemplo: COVID, Bolivia segura, Worldometers</h2>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="scraping-web-raspado-web.html#cb244-1"></a><span class="kw">library</span>(rvest)</span>
+<span id="cb244-2"><a href="scraping-web-raspado-web.html#cb244-2"></a>bs1&lt;-<span class="kw">read_html</span>(<span class="st">&quot;https://www.boliviasegura.gob.bo/index.php&quot;</span>)</span>
+<span id="cb244-3"><a href="scraping-web-raspado-web.html#cb244-3"></a>bs2&lt;-<span class="kw">read_html</span>(<span class="st">&quot;https://www.boliviasegura.gob.bo/datos.php&quot;</span>)</span>
+<span id="cb244-4"><a href="scraping-web-raspado-web.html#cb244-4"></a></span>
+<span id="cb244-5"><a href="scraping-web-raspado-web.html#cb244-5"></a>aux&lt;-<span class="kw">html_nodes</span>(bs1,<span class="st">&quot;.casos&quot;</span>)</span>
+<span id="cb244-6"><a href="scraping-web-raspado-web.html#cb244-6"></a>casos&lt;-<span class="kw">html_text</span>(aux)</span>
+<span id="cb244-7"><a href="scraping-web-raspado-web.html#cb244-7"></a></span>
+<span id="cb244-8"><a href="scraping-web-raspado-web.html#cb244-8"></a>aux&lt;-<span class="kw">html_nodes</span>(bs1,<span class="st">&quot;.recuperados&quot;</span>)</span>
+<span id="cb244-9"><a href="scraping-web-raspado-web.html#cb244-9"></a>recup&lt;-<span class="kw">html_text</span>(aux)</span>
+<span id="cb244-10"><a href="scraping-web-raspado-web.html#cb244-10"></a></span>
+<span id="cb244-11"><a href="scraping-web-raspado-web.html#cb244-11"></a>aux&lt;-<span class="kw">html_nodes</span>(bs1,<span class="st">&quot;.decesos&quot;</span>)</span>
+<span id="cb244-12"><a href="scraping-web-raspado-web.html#cb244-12"></a>muerte&lt;-<span class="kw">html_text</span>(aux)</span>
+<span id="cb244-13"><a href="scraping-web-raspado-web.html#cb244-13"></a></span>
+<span id="cb244-14"><a href="scraping-web-raspado-web.html#cb244-14"></a><span class="kw">html_text</span>(<span class="kw">html_nodes</span>(bs1,<span class="st">&quot;.card-text&quot;</span>))</span>
+<span id="cb244-15"><a href="scraping-web-raspado-web.html#cb244-15"></a></span>
+<span id="cb244-16"><a href="scraping-web-raspado-web.html#cb244-16"></a>tbs&lt;-<span class="kw">html_table</span>(bs2,<span class="dt">fill =</span> T)</span>
+<span id="cb244-17"><a href="scraping-web-raspado-web.html#cb244-17"></a><span class="kw">View</span>(tbs)</span>
+<span id="cb244-18"><a href="scraping-web-raspado-web.html#cb244-18"></a></span>
+<span id="cb244-19"><a href="scraping-web-raspado-web.html#cb244-19"></a>mun&lt;-tbs[[<span class="dv">12</span>]]</span>
+<span id="cb244-20"><a href="scraping-web-raspado-web.html#cb244-20"></a><span class="kw">table</span>(mun<span class="op">$</span><span class="st">`</span><span class="dt">Nivel Anterior</span><span class="st">`</span>,mun<span class="op">$</span><span class="st">`</span><span class="dt">Nivel Actual</span><span class="st">`</span>)</span>
+<span id="cb244-21"><a href="scraping-web-raspado-web.html#cb244-21"></a></span>
+<span id="cb244-22"><a href="scraping-web-raspado-web.html#cb244-22"></a>t1&lt;-tbs[[<span class="dv">2</span>]]</span>
+<span id="cb244-23"><a href="scraping-web-raspado-web.html#cb244-23"></a>global&lt;-<span class="kw">c</span>(casos, recup,muerte)</span>
+<span id="cb244-24"><a href="scraping-web-raspado-web.html#cb244-24"></a></span>
+<span id="cb244-25"><a href="scraping-web-raspado-web.html#cb244-25"></a><span class="kw">str</span>(t1)</span>
+<span id="cb244-26"><a href="scraping-web-raspado-web.html#cb244-26"></a></span>
+<span id="cb244-27"><a href="scraping-web-raspado-web.html#cb244-27"></a><span class="co">#herramientas para trabajar con texto</span></span>
+<span id="cb244-28"><a href="scraping-web-raspado-web.html#cb244-28"></a></span>
+<span id="cb244-29"><a href="scraping-web-raspado-web.html#cb244-29"></a>t1<span class="op">$</span>Acumulado</span>
+<span id="cb244-30"><a href="scraping-web-raspado-web.html#cb244-30"></a></span>
+<span id="cb244-31"><a href="scraping-web-raspado-web.html#cb244-31"></a><span class="kw">nchar</span>(t1<span class="op">$</span>Acumulado)</span>
+<span id="cb244-32"><a href="scraping-web-raspado-web.html#cb244-32"></a><span class="kw">substr</span>(t1<span class="op">$</span>Acumulado,<span class="dv">1</span>,<span class="dv">3</span>)</span>
+<span id="cb244-33"><a href="scraping-web-raspado-web.html#cb244-33"></a><span class="kw">grep</span>(<span class="st">&quot;53&quot;</span>,t1<span class="op">$</span>Acumulado)</span>
+<span id="cb244-34"><a href="scraping-web-raspado-web.html#cb244-34"></a><span class="kw">gsub</span>(<span class="st">&quot;53&quot;</span>,<span class="st">&quot;XX&quot;</span>,t1<span class="op">$</span>Acumulado)</span>
+<span id="cb244-35"><a href="scraping-web-raspado-web.html#cb244-35"></a></span>
+<span id="cb244-36"><a href="scraping-web-raspado-web.html#cb244-36"></a>t1<span class="op">$</span>Acumulado&lt;-<span class="kw">as.numeric</span>(<span class="kw">gsub</span>(<span class="st">&quot;,&quot;</span>,<span class="st">&quot;&quot;</span>,t1<span class="op">$</span>Acumulado))</span>
+<span id="cb244-37"><a href="scraping-web-raspado-web.html#cb244-37"></a>t1<span class="op">$</span>Decesos&lt;-<span class="kw">as.numeric</span>(<span class="kw">gsub</span>(<span class="st">&quot;,&quot;</span>,<span class="st">&quot;&quot;</span>,t1<span class="op">$</span>Decesos))</span>
+<span id="cb244-38"><a href="scraping-web-raspado-web.html#cb244-38"></a>t1<span class="op">$</span>Recuperados&lt;-<span class="kw">as.numeric</span>(<span class="kw">gsub</span>(<span class="st">&quot;,&quot;</span>,<span class="st">&quot;&quot;</span>,t1<span class="op">$</span>Recuperados))</span>
+<span id="cb244-39"><a href="scraping-web-raspado-web.html#cb244-39"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb244-40"><a href="scraping-web-raspado-web.html#cb244-40"></a></span>
+<span id="cb244-41"><a href="scraping-web-raspado-web.html#cb244-41"></a><span class="kw">ggplot</span>(t1,<span class="kw">aes</span>(Acumulado,Decesos))<span class="op">+</span><span class="kw">geom_point</span>()</span>
+<span id="cb244-42"><a href="scraping-web-raspado-web.html#cb244-42"></a></span>
+<span id="cb244-43"><a href="scraping-web-raspado-web.html#cb244-43"></a><span class="co">### worldometers</span></span>
+<span id="cb244-44"><a href="scraping-web-raspado-web.html#cb244-44"></a>wm&lt;-<span class="kw">read_html</span>(<span class="st">&quot;https://www.worldometers.info/coronavirus/&quot;</span>)</span>
+<span id="cb244-45"><a href="scraping-web-raspado-web.html#cb244-45"></a>tabla&lt;-<span class="kw">html_table</span>(wm)</span>
+<span id="cb244-46"><a href="scraping-web-raspado-web.html#cb244-46"></a></span>
+<span id="cb244-47"><a href="scraping-web-raspado-web.html#cb244-47"></a>t2&lt;-tabla[[<span class="dv">1</span>]]</span>
+<span id="cb244-48"><a href="scraping-web-raspado-web.html#cb244-48"></a><span class="kw">str</span>(t2)</span>
+<span id="cb244-49"><a href="scraping-web-raspado-web.html#cb244-49"></a></span>
+<span id="cb244-50"><a href="scraping-web-raspado-web.html#cb244-50"></a>aux&lt;-<span class="kw">is.na</span>(t2<span class="op">$</span><span class="st">`</span><span class="dt">#</span><span class="st">`</span>)</span>
+<span id="cb244-51"><a href="scraping-web-raspado-web.html#cb244-51"></a></span>
+<span id="cb244-52"><a href="scraping-web-raspado-web.html#cb244-52"></a>t2&lt;-t2[<span class="op">!</span>aux,]</span>
+<span id="cb244-53"><a href="scraping-web-raspado-web.html#cb244-53"></a></span>
+<span id="cb244-54"><a href="scraping-web-raspado-web.html#cb244-54"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="kw">c</span>(<span class="dv">3</span><span class="op">:</span><span class="dv">15</span>,<span class="dv">17</span><span class="op">:</span><span class="dv">19</span>)){</span>
+<span id="cb244-55"><a href="scraping-web-raspado-web.html#cb244-55"></a>  <span class="kw">print</span>(i)</span>
+<span id="cb244-56"><a href="scraping-web-raspado-web.html#cb244-56"></a>  t2[,i]&lt;-<span class="kw">gsub</span>(<span class="st">&quot;+&quot;</span>,<span class="st">&quot;&quot;</span>,t2[,i])</span>
+<span id="cb244-57"><a href="scraping-web-raspado-web.html#cb244-57"></a>  t2[,i]&lt;-<span class="kw">as.numeric</span>(<span class="kw">gsub</span>(<span class="st">&quot;,&quot;</span>,<span class="st">&quot;&quot;</span>,t2[,i]))</span>
+<span id="cb244-58"><a href="scraping-web-raspado-web.html#cb244-58"></a>}</span>
+<span id="cb244-59"><a href="scraping-web-raspado-web.html#cb244-59"></a>t2<span class="op">$</span><span class="st">`</span><span class="dt">Tests/1M pop</span><span class="st">`</span></span>
+<span id="cb244-60"><a href="scraping-web-raspado-web.html#cb244-60"></a><span class="kw">ggplot</span>(t2, <span class="kw">aes</span>(<span class="st">`</span><span class="dt">Tot Cases/1M pop</span><span class="st">`</span>,<span class="st">`</span><span class="dt">Tests/1M pop</span><span class="st">`</span>,))<span class="op">+</span><span class="kw">geom_point</span>()<span class="op">+</span><span class="kw">facet_wrap</span>(<span class="op">~</span>Continent)</span></code></pre></div>
+</div>
+<div id="ejemplo-ultracasas" class="section level2">
+<h2><span class="header-section-number">3.9</span> Ejemplo: Ultracasas</h2>
+<ul>
+<li>Motivación: Explorar el mercado de casas en Bolivia</li>
+</ul>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="scraping-web-raspado-web.html#cb245-1"></a>ultra&lt;-<span class="kw">read_html</span>(<span class="st">&quot;https://www.ultracasas.com/buscar/casa-en-venta--en--la-paz---la-paz?page=1&quot;</span>)</span>
+<span id="cb245-2"><a href="scraping-web-raspado-web.html#cb245-2"></a><span class="co">#titulo</span></span>
+<span id="cb245-3"><a href="scraping-web-raspado-web.html#cb245-3"></a>aux1&lt;-<span class="kw">html_text</span>(<span class="kw">html_nodes</span>(ultra,<span class="st">&quot;.line-height-30px&quot;</span>))[<span class="op">-</span><span class="dv">1</span>] <span class="co">#zona</span></span>
+<span id="cb245-4"><a href="scraping-web-raspado-web.html#cb245-4"></a>aux2&lt;-<span class="kw">html_text</span>(<span class="kw">html_nodes</span>(ultra,<span class="st">&quot;.text-ellipsis&quot;</span>))[<span class="op">-</span><span class="dv">1</span>][<span class="kw">seq</span>(<span class="dv">2</span>,<span class="dv">24</span>,<span class="dv">2</span>)]</span>
+<span id="cb245-5"><a href="scraping-web-raspado-web.html#cb245-5"></a><span class="co">#precio</span></span>
+<span id="cb245-6"><a href="scraping-web-raspado-web.html#cb245-6"></a>aux3&lt;-<span class="kw">html_text</span>(<span class="kw">html_nodes</span>(ultra,<span class="st">&quot;h4&quot;</span>))[<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>,<span class="dv">15</span><span class="op">:</span><span class="dv">17</span>)]</span>
+<span id="cb245-7"><a href="scraping-web-raspado-web.html#cb245-7"></a><span class="co">#metros, dormitorios, baños</span></span>
+<span id="cb245-8"><a href="scraping-web-raspado-web.html#cb245-8"></a>aux&lt;-<span class="kw">html_text</span>(<span class="kw">html_nodes</span>(ultra,<span class="st">&quot;.icon-default-color&quot;</span>))</span>
+<span id="cb245-9"><a href="scraping-web-raspado-web.html#cb245-9"></a>aux4&lt;-aux[<span class="kw">seq</span>(<span class="dv">1</span>,<span class="dv">36</span>,<span class="dv">3</span>)]<span class="co">#dormitorios</span></span>
+<span id="cb245-10"><a href="scraping-web-raspado-web.html#cb245-10"></a>aux5&lt;-aux[<span class="kw">seq</span>(<span class="dv">2</span>,<span class="dv">36</span>,<span class="dv">3</span>)]<span class="co">#baños/duchas</span></span>
+<span id="cb245-11"><a href="scraping-web-raspado-web.html#cb245-11"></a>aux6&lt;-aux[<span class="kw">seq</span>(<span class="dv">3</span>,<span class="dv">36</span>,<span class="dv">3</span>)]<span class="co">#metros2</span></span>
+<span id="cb245-12"><a href="scraping-web-raspado-web.html#cb245-12"></a><span class="co">#base inicial</span></span>
+<span id="cb245-13"><a href="scraping-web-raspado-web.html#cb245-13"></a>bd0&lt;-<span class="kw">data.frame</span>(<span class="dt">titulo=</span>aux1,<span class="dt">zona=</span>aux2,<span class="dt">precio=</span>aux3,<span class="dt">bed=</span>aux4,<span class="dt">bath=</span>aux5,<span class="dt">m2=</span>aux6)</span>
+<span id="cb245-14"><a href="scraping-web-raspado-web.html#cb245-14"></a></span>
+<span id="cb245-15"><a href="scraping-web-raspado-web.html#cb245-15"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span><span class="dv">26</span>){</span>
+<span id="cb245-16"><a href="scraping-web-raspado-web.html#cb245-16"></a>  <span class="kw">print</span>(i)</span>
+<span id="cb245-17"><a href="scraping-web-raspado-web.html#cb245-17"></a>  www&lt;-<span class="kw">paste0</span>(<span class="st">&quot;https://www.ultracasas.com/buscar/casa-en-venta--en--la-paz---la-paz?page=&quot;</span>,i)</span>
+<span id="cb245-18"><a href="scraping-web-raspado-web.html#cb245-18"></a>  ultra&lt;-<span class="kw">read_html</span>(www)</span>
+<span id="cb245-19"><a href="scraping-web-raspado-web.html#cb245-19"></a><span class="co">#titulo</span></span>
+<span id="cb245-20"><a href="scraping-web-raspado-web.html#cb245-20"></a>aux1&lt;-<span class="kw">html_text</span>(<span class="kw">html_nodes</span>(ultra,<span class="st">&quot;.line-height-30px&quot;</span>))[<span class="op">-</span><span class="dv">1</span>] <span class="co">#zona</span></span>
+<span id="cb245-21"><a href="scraping-web-raspado-web.html#cb245-21"></a>aux2&lt;-<span class="kw">html_text</span>(<span class="kw">html_nodes</span>(ultra,<span class="st">&quot;.text-ellipsis&quot;</span>))[<span class="op">-</span><span class="dv">1</span>][<span class="kw">seq</span>(<span class="dv">2</span>,<span class="dv">24</span>,<span class="dv">2</span>)]</span>
+<span id="cb245-22"><a href="scraping-web-raspado-web.html#cb245-22"></a><span class="co">#precio</span></span>
+<span id="cb245-23"><a href="scraping-web-raspado-web.html#cb245-23"></a>aux3&lt;-<span class="kw">html_text</span>(<span class="kw">html_nodes</span>(ultra,<span class="st">&quot;h4&quot;</span>))[<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>,<span class="dv">15</span><span class="op">:</span><span class="dv">17</span>)]</span>
+<span id="cb245-24"><a href="scraping-web-raspado-web.html#cb245-24"></a><span class="co">#metros, dormitorios, baños</span></span>
+<span id="cb245-25"><a href="scraping-web-raspado-web.html#cb245-25"></a>aux&lt;-<span class="kw">html_text</span>(<span class="kw">html_nodes</span>(ultra,<span class="st">&quot;.icon-default-color&quot;</span>))</span>
+<span id="cb245-26"><a href="scraping-web-raspado-web.html#cb245-26"></a>aux4&lt;-aux[<span class="kw">seq</span>(<span class="dv">1</span>,<span class="dv">36</span>,<span class="dv">3</span>)]<span class="co">#dormitorios</span></span>
+<span id="cb245-27"><a href="scraping-web-raspado-web.html#cb245-27"></a>aux5&lt;-aux[<span class="kw">seq</span>(<span class="dv">2</span>,<span class="dv">36</span>,<span class="dv">3</span>)]<span class="co">#baños/duchas</span></span>
+<span id="cb245-28"><a href="scraping-web-raspado-web.html#cb245-28"></a>aux6&lt;-aux[<span class="kw">seq</span>(<span class="dv">3</span>,<span class="dv">36</span>,<span class="dv">3</span>)]<span class="co">#metros2</span></span>
+<span id="cb245-29"><a href="scraping-web-raspado-web.html#cb245-29"></a><span class="co">#base inicial</span></span>
+<span id="cb245-30"><a href="scraping-web-raspado-web.html#cb245-30"></a>bd1&lt;-<span class="kw">data.frame</span>(<span class="dt">titulo=</span>aux1,<span class="dt">zona=</span>aux2,<span class="dt">precio=</span>aux3,<span class="dt">bed=</span>aux4,<span class="dt">bath=</span>aux5,<span class="dt">m2=</span>aux6)</span>
+<span id="cb245-31"><a href="scraping-web-raspado-web.html#cb245-31"></a>bd0&lt;-<span class="kw">rbind</span>(bd0,bd1)</span>
+<span id="cb245-32"><a href="scraping-web-raspado-web.html#cb245-32"></a>}</span></code></pre></div>
+</div>
+<div id="ejemplo-ketal" class="section level2">
+<h2><span class="header-section-number">3.10</span> Ejemplo: Ketal</h2>
+<p>Una de las potencialidades del scraping es poder rescatar información contenida en páginas web, según la estructura de esta, en esta sección se presenta un ejemplo del código y la recolección de información que puede realizarse. Para esto se eligió la página de supermercados Ketal que es abierta y publica los precios de sus distintos productos de forma categorizada por tipo de productos.</p>
+<p>El estudio de esta pagina tiene el principal objetivo de mostrar el proceso de extracción, el uso potencial de la información esta relacionada a tener la variación de los precios y para futuros estudios se podría completar el ejercicio incluyendo la parte de la demanda mediante la encuesta de presupuestos familiares y poder así pronosticar la inflación dentro de este sector y para la población potencial que acude a supermercados.</p>
+<p>El ejemplo presenta el proceso del scraping para 8 grupo de productos:</p>
+<ul>
+<li>Carne de aves</li>
+<li>Carne de cerdo</li>
+<li>Carne de res</li>
+<li>Pescado</li>
+<li>Leches</li>
+<li>Aceites</li>
+<li>Frutas y verduras</li>
+<li>Dulces</li>
+</ul>
+<p>Se emplea la librería <em>rvest</em>, que es un paquete diseña para para facilitar la descarga y la manipulación de HTML y XML. También se utiliza la extensión Selector Gadget <a href="https://selectorgadget.com" class="uri">https://selectorgadget.com</a>, este permite la identificación de las estructuras de las páginas web.</p>
+<p>El objetivo del raspado es obtener el nombre del producto, su código, y el precio. Utilizando el selector gadget se identifica que en <span class="math inline">\(.product-name\)</span> se guardan los nombres, en <span class="math inline">\(.price.product-price\)</span> el precio del producto y en <span class="math inline">\(data-id-product\)</span> el identificador del producto. En R el código es:</p>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="scraping-web-raspado-web.html#cb246-1"></a><span class="co">#librerías para el raspado</span></span>
+<span id="cb246-2"><a href="scraping-web-raspado-web.html#cb246-2"></a><span class="kw">library</span>(rvest)</span>
+<span id="cb246-3"><a href="scraping-web-raspado-web.html#cb246-3"></a><span class="co">#Enlaces de los grupos de productos</span></span>
+<span id="cb246-4"><a href="scraping-web-raspado-web.html#cb246-4"></a>ave &lt;-<span class="st"> </span><span class="kw">read_html</span>(<span class="st">&quot;https://www.ketal.com.bo/209-aves&quot;</span>)</span>
+<span id="cb246-5"><a href="scraping-web-raspado-web.html#cb246-5"></a>cerdo&lt;-<span class="kw">read_html</span>(<span class="st">&quot;https://www.ketal.com.bo/208-cerdo&quot;</span>)</span>
+<span id="cb246-6"><a href="scraping-web-raspado-web.html#cb246-6"></a>res&lt;-<span class="kw">read_html</span>(<span class="st">&quot;https://www.ketal.com.bo/210-res&quot;</span>)</span>
+<span id="cb246-7"><a href="scraping-web-raspado-web.html#cb246-7"></a>fish&lt;-<span class="kw">read_html</span>(<span class="st">&quot;https://www.ketal.com.bo/17060162-pescados&quot;</span>)</span>
+<span id="cb246-8"><a href="scraping-web-raspado-web.html#cb246-8"></a>leches&lt;-<span class="kw">read_html</span>(<span class="st">&quot;https://www.ketal.com.bo/53-leches-liquidas&quot;</span>)</span>
+<span id="cb246-9"><a href="scraping-web-raspado-web.html#cb246-9"></a>aceites&lt;-<span class="kw">read_html</span>(<span class="st">&quot;https://www.ketal.com.bo/272-aceites-y-vinagres&quot;</span>)</span>
+<span id="cb246-10"><a href="scraping-web-raspado-web.html#cb246-10"></a>frutaver&lt;-<span class="kw">read_html</span>(</span>
+<span id="cb246-11"><a href="scraping-web-raspado-web.html#cb246-11"></a>  <span class="st">&quot;https://www.ketal.com.bo/50-frutas-y-verduras?id_category=50&amp;n=150&quot;</span>)</span>
+<span id="cb246-12"><a href="scraping-web-raspado-web.html#cb246-12"></a>dulce&lt;-<span class="kw">read_html</span>(</span>
+<span id="cb246-13"><a href="scraping-web-raspado-web.html#cb246-13"></a>  <span class="st">&quot;https://www.ketal.com.bo/15-chocolates-y-golosinas?id_category=15&amp;n=150&quot;</span>)</span>
+<span id="cb246-14"><a href="scraping-web-raspado-web.html#cb246-14"></a><span class="co">#definición de la base de datos que guarda la información</span></span>
+<span id="cb246-15"><a href="scraping-web-raspado-web.html#cb246-15"></a>bd&lt;-<span class="ot">NULL</span></span>
+<span id="cb246-16"><a href="scraping-web-raspado-web.html#cb246-16"></a><span class="co">#Algoritmo del raspado de los 8 productos</span></span>
+<span id="cb246-17"><a href="scraping-web-raspado-web.html#cb246-17"></a>k&lt;-<span class="dv">1</span></span>
+<span id="cb246-18"><a href="scraping-web-raspado-web.html#cb246-18"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="kw">list</span>(ave,cerdo,res,fish,leches,aceites,frutaver,dulce)){</span>
+<span id="cb246-19"><a href="scraping-web-raspado-web.html#cb246-19"></a>  <span class="kw">print</span>(k)</span>
+<span id="cb246-20"><a href="scraping-web-raspado-web.html#cb246-20"></a>  name&lt;-<span class="kw">html_attr</span>(<span class="kw">html_nodes</span>(i,<span class="st">&quot;.product-name&quot;</span>),<span class="st">&quot;title&quot;</span>)[<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb246-21"><a href="scraping-web-raspado-web.html#cb246-21"></a>  precio&lt;-<span class="kw">html_text</span>(</span>
+<span id="cb246-22"><a href="scraping-web-raspado-web.html#cb246-22"></a>    <span class="kw">html_nodes</span>(i,<span class="st">&quot;.price.product-price&quot;</span>),<span class="dt">trim=</span>T)[<span class="kw">seq</span>(<span class="dv">1</span>,<span class="kw">length</span>(name)<span class="op">*</span><span class="dv">2</span>,<span class="dv">2</span>)]</span>
+<span id="cb246-23"><a href="scraping-web-raspado-web.html#cb246-23"></a>  code&lt;-<span class="kw">html_attr</span>(<span class="kw">html_nodes</span>(i,<span class="st">&quot;.add_to_compare&quot;</span>),<span class="st">&quot;data-id-product&quot;</span>)</span>
+<span id="cb246-24"><a href="scraping-web-raspado-web.html#cb246-24"></a>  bd&lt;-<span class="kw">rbind</span>(bd,<span class="kw">data.frame</span>(name,precio,code))</span>
+<span id="cb246-25"><a href="scraping-web-raspado-web.html#cb246-25"></a>  k&lt;-k<span class="op">+</span><span class="dv">1</span></span>
+<span id="cb246-26"><a href="scraping-web-raspado-web.html#cb246-26"></a>}</span>
+<span id="cb246-27"><a href="scraping-web-raspado-web.html#cb246-27"></a><span class="co">#se identifica el día</span></span>
+<span id="cb246-28"><a href="scraping-web-raspado-web.html#cb246-28"></a>day&lt;-<span class="kw">substr</span>(<span class="kw">Sys.time</span>(),<span class="dv">1</span>,<span class="dv">10</span>)</span>
+<span id="cb246-29"><a href="scraping-web-raspado-web.html#cb246-29"></a><span class="co">#se guarda la informacion en base al dia del raspado</span></span>
+<span id="cb246-30"><a href="scraping-web-raspado-web.html#cb246-30"></a>bd<span class="op">$</span>day&lt;-day</span>
+<span id="cb246-31"><a href="scraping-web-raspado-web.html#cb246-31"></a><span class="kw">save</span>(bd,<span class="dt">file =</span> <span class="kw">paste0</span>(day,<span class="st">&quot;.RData&quot;</span>))</span></code></pre></div>
+</div>
+<div id="ejemplo-ministerio-de-educación" class="section level2">
+<h2><span class="header-section-number">3.11</span> Ejemplo: Ministerio de Educación</h2>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="scraping-web-raspado-web.html#cb247-1"></a><span class="kw">library</span>(rvest)</span>
+<span id="cb247-2"><a href="scraping-web-raspado-web.html#cb247-2"></a><span class="kw">library</span>(foreign)</span>
+<span id="cb247-3"><a href="scraping-web-raspado-web.html#cb247-3"></a><span class="kw">library</span>(xlsx)</span>
+<span id="cb247-4"><a href="scraping-web-raspado-web.html#cb247-4"></a><span class="co">########################</span></span>
+<span id="cb247-5"><a href="scraping-web-raspado-web.html#cb247-5"></a>bd&lt;-<span class="kw">read.dta</span>(<span class="st">&quot;mmUE.dta&quot;</span>)</span>
+<span id="cb247-6"><a href="scraping-web-raspado-web.html#cb247-6"></a>rue&lt;-bd<span class="op">$</span>cod_ue_det</span>
+<span id="cb247-7"><a href="scraping-web-raspado-web.html#cb247-7"></a>rue&lt;-<span class="kw">unlist</span>(<span class="kw">strsplit</span>(rue,<span class="st">&quot;;&quot;</span>))</span>
+<span id="cb247-8"><a href="scraping-web-raspado-web.html#cb247-8"></a>bd&lt;-<span class="kw">data.frame</span>(<span class="kw">matrix</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">78</span>))</span>
+<span id="cb247-9"><a href="scraping-web-raspado-web.html#cb247-9"></a>k&lt;-<span class="dv">1</span></span>
+<span id="cb247-10"><a href="scraping-web-raspado-web.html#cb247-10"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">325</span><span class="op">:</span><span class="kw">length</span>(rue)){</span>
+<span id="cb247-11"><a href="scraping-web-raspado-web.html#cb247-11"></a> <span class="kw">print</span>(i)</span>
+<span id="cb247-12"><a href="scraping-web-raspado-web.html#cb247-12"></a>urlmin&lt;-<span class="kw">paste0</span>(<span class="st">&quot;http://seie.minedu.gob.bo/reportes/mapas_unidades_educativas/ficha/ver/&quot;</span>,rue[i])</span>
+<span id="cb247-13"><a href="scraping-web-raspado-web.html#cb247-13"></a> ue &lt;-<span class="st"> </span><span class="kw">read_html</span>(urlmin,<span class="dt">encoding =</span> <span class="st">&quot;UTF-8&quot;</span>)</span>
+<span id="cb247-14"><a href="scraping-web-raspado-web.html#cb247-14"></a></span>
+<span id="cb247-15"><a href="scraping-web-raspado-web.html#cb247-15"></a>jj&lt;-<span class="kw">grepl</span>(<span class="st">&quot;Error was&quot;</span>,<span class="kw">unlist</span>(<span class="kw">strsplit</span>(<span class="kw">html_text</span>(<span class="kw">html_nodes</span>(ue,<span class="st">&quot;strong&quot;</span>))[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>],<span class="st">&quot;:&quot;</span>))[<span class="kw">c</span>(<span class="dv">2</span>)])</span>
+<span id="cb247-16"><a href="scraping-web-raspado-web.html#cb247-16"></a><span class="cf">if</span>(jj<span class="op">==</span>T){</span>
+<span id="cb247-17"><a href="scraping-web-raspado-web.html#cb247-17"></a>  <span class="cf">next</span>()</span>
+<span id="cb247-18"><a href="scraping-web-raspado-web.html#cb247-18"></a>}</span>
+<span id="cb247-19"><a href="scraping-web-raspado-web.html#cb247-19"></a><span class="co">#nombre id (2)</span></span>
+<span id="cb247-20"><a href="scraping-web-raspado-web.html#cb247-20"></a>bd[k,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]&lt;-<span class="kw">unlist</span>(<span class="kw">strsplit</span>(<span class="kw">html_text</span>(<span class="kw">html_nodes</span>(ue,<span class="st">&quot;strong&quot;</span>))[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>],<span class="st">&quot;:&quot;</span>))[<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">4</span>)]</span>
+<span id="cb247-21"><a href="scraping-web-raspado-web.html#cb247-21"></a><span class="co">#Informacion administrativa (12)</span></span>
+<span id="cb247-22"><a href="scraping-web-raspado-web.html#cb247-22"></a>bd[k,<span class="dv">3</span><span class="op">:</span><span class="dv">14</span>]&lt;-<span class="kw">html_text</span>(<span class="kw">html_nodes</span>(ue,<span class="st">&quot;dd&quot;</span>))</span>
+<span id="cb247-23"><a href="scraping-web-raspado-web.html#cb247-23"></a><span class="co">#matricula #promovidos #reprobacion #abandono # (60)</span></span>
+<span id="cb247-24"><a href="scraping-web-raspado-web.html#cb247-24"></a><span class="co">#matricula</span></span>
+<span id="cb247-25"><a href="scraping-web-raspado-web.html#cb247-25"></a><span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>){</span>
+<span id="cb247-26"><a href="scraping-web-raspado-web.html#cb247-26"></a>bd[k,(<span class="dv">15</span><span class="op">*</span>j)<span class="op">:</span>(<span class="dv">14</span><span class="op">+</span><span class="dv">15</span><span class="op">*</span>j)]&lt;-<span class="kw">as.integer</span>(<span class="kw">unlist</span>(<span class="kw">html_table</span>(ue)[j])[<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)])</span>
+<span id="cb247-27"><a href="scraping-web-raspado-web.html#cb247-27"></a>}</span>
+<span id="cb247-28"><a href="scraping-web-raspado-web.html#cb247-28"></a><span class="co">#servicios (4)</span></span>
+<span id="cb247-29"><a href="scraping-web-raspado-web.html#cb247-29"></a>bd[k,<span class="dv">75</span><span class="op">:</span><span class="dv">78</span>]&lt;-<span class="kw">html_text</span>(<span class="kw">html_nodes</span>(ue,<span class="st">&quot;strong&quot;</span>))[<span class="dv">18</span><span class="op">:</span><span class="dv">21</span>]</span>
+<span id="cb247-30"><a href="scraping-web-raspado-web.html#cb247-30"></a>k&lt;-k<span class="op">+</span><span class="dv">1</span></span>
+<span id="cb247-31"><a href="scraping-web-raspado-web.html#cb247-31"></a>}</span>
+<span id="cb247-32"><a href="scraping-web-raspado-web.html#cb247-32"></a><span class="kw">write.xlsx</span>(bd,<span class="st">&quot;ue2017.xlsx&quot;</span>,<span class="dt">row.names =</span> F)</span></code></pre></div>
+</div>
+<div id="ejemplo-informacion-covid-19-en-bolivia" class="section level2">
+<h2><span class="header-section-number">3.12</span> Ejemplo, informacion COVID-19 en Bolivia</h2>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="scraping-web-raspado-web.html#cb248-1"></a><span class="kw">library</span>(rvest)</span>
+<span id="cb248-2"><a href="scraping-web-raspado-web.html#cb248-2"></a><span class="co">#paso 0: Estadísticas del covid-19 en Bolivia</span></span>
+<span id="cb248-3"><a href="scraping-web-raspado-web.html#cb248-3"></a><span class="co">#paso 1: cargar la www de interés</span></span>
+<span id="cb248-4"><a href="scraping-web-raspado-web.html#cb248-4"></a>bs&lt;-<span class="kw">read_html</span>(<span class="st">&quot;https://www.boliviasegura.gob.bo/&quot;</span>)</span>
+<span id="cb248-5"><a href="scraping-web-raspado-web.html#cb248-5"></a>ww&lt;-<span class="kw">read_html</span>(<span class="st">&quot;https://www.worldometers.info/coronavirus/&quot;</span>)</span>
+<span id="cb248-6"><a href="scraping-web-raspado-web.html#cb248-6"></a><span class="co">#paso 2: Raspar la información de interés</span></span>
+<span id="cb248-7"><a href="scraping-web-raspado-web.html#cb248-7"></a>node0&lt;-<span class="kw">html_nodes</span>(bs,<span class="st">&quot;h1&quot;</span>)</span>
+<span id="cb248-8"><a href="scraping-web-raspado-web.html#cb248-8"></a>node1&lt;-<span class="kw">html_text</span>(node0)</span>
+<span id="cb248-9"><a href="scraping-web-raspado-web.html#cb248-9"></a>node2&lt;-<span class="kw">as.numeric</span>(node1) </span>
+<span id="cb248-10"><a href="scraping-web-raspado-web.html#cb248-10"></a><span class="kw">barplot</span>(node2,<span class="dt">legend.text =</span> <span class="kw">c</span>(<span class="st">&quot;Confirmados&quot;</span>,<span class="st">&quot;Recuperados&quot;</span>,<span class="st">&quot;Muertes&quot;</span>))</span>
+<span id="cb248-11"><a href="scraping-web-raspado-web.html#cb248-11"></a></span>
+<span id="cb248-12"><a href="scraping-web-raspado-web.html#cb248-12"></a>aux&lt;-<span class="kw">html_nodes</span>(bs,<span class="st">&quot;.mapanuevos&quot;</span>)</span>
+<span id="cb248-13"><a href="scraping-web-raspado-web.html#cb248-13"></a><span class="co">#paso 3: trabajando con tablas</span></span>
+<span id="cb248-14"><a href="scraping-web-raspado-web.html#cb248-14"></a>tabla&lt;-<span class="kw">html_table</span>(bs,<span class="dt">fill =</span> T)</span>
+<span id="cb248-15"><a href="scraping-web-raspado-web.html#cb248-15"></a>tabla[[<span class="dv">2</span>]]</span>
+<span id="cb248-16"><a href="scraping-web-raspado-web.html#cb248-16"></a><span class="co">#paso 4: limpieza</span></span>
+<span id="cb248-17"><a href="scraping-web-raspado-web.html#cb248-17"></a><span class="co">#paso 5: Análisis</span></span></code></pre></div>
+</div>
+<div id="apis" class="section level2">
+<h2><span class="header-section-number">3.13</span> APIs</h2>
+<p>Conocida también por la sigla API,“application programming interface”, es un conjunto de sub rutinas, funciones y procedimientos (o métodos, en la programación orientada a objetos) que ofrece cierta biblioteca para ser utilizado por otro software. Ofrece una entrada a los datos que distribuye el API.</p>
+<div id="api-banco-mundial" class="section level3">
+<h3><span class="header-section-number">3.13.1</span> API Banco Mundial</h3>
+<p>La API ofrece acceso a las estadísticas que genera el Banco Mundial, existe un set extenso de estadísticas de la mayoría de los países. La API ofrece mas de 16000 indicadores de series de tiempo, muchos de los indicadores tienen una cobertura de 50 años. La API incluye el acceso a 45 bases de datos, incluyendo:</p>
+<ul>
+<li>World Development Indicators</li>
+<li>International Debt Statistcs</li>
+<li>Doing Business</li>
+<li>Human Capital Index</li>
+<li>Subnational Poverty</li>
+<li>Y otros, <a href="https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation">ver</a></li>
+</ul>
+<p>En R se puede acceder mediante la librería wbstats.</p>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="scraping-web-raspado-web.html#cb249-1"></a><span class="co">#install.packages(&quot;wbstats&quot;)</span></span>
+<span id="cb249-2"><a href="scraping-web-raspado-web.html#cb249-2"></a></span>
+<span id="cb249-3"><a href="scraping-web-raspado-web.html#cb249-3"></a><span class="co">#paso 1, instalar el rtools: https://cran.r-project.org/bin/windows/Rtools/</span></span>
+<span id="cb249-4"><a href="scraping-web-raspado-web.html#cb249-4"></a><span class="co">#paso 2, instalar devtools</span></span>
+<span id="cb249-5"><a href="scraping-web-raspado-web.html#cb249-5"></a><span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</span>
+<span id="cb249-6"><a href="scraping-web-raspado-web.html#cb249-6"></a><span class="co">#paso 3, cargar el devtools</span></span>
+<span id="cb249-7"><a href="scraping-web-raspado-web.html#cb249-7"></a><span class="kw">library</span>(devtools)</span>
+<span id="cb249-8"><a href="scraping-web-raspado-web.html#cb249-8"></a><span class="co">#paso4, instalar wbstats</span></span>
+<span id="cb249-9"><a href="scraping-web-raspado-web.html#cb249-9"></a><span class="kw">install_github</span>(<span class="st">&quot;nset-ornl/wbstats&quot;</span>)</span>
+<span id="cb249-10"><a href="scraping-web-raspado-web.html#cb249-10"></a></span>
+<span id="cb249-11"><a href="scraping-web-raspado-web.html#cb249-11"></a><span class="kw">library</span>(wbstats)</span>
+<span id="cb249-12"><a href="scraping-web-raspado-web.html#cb249-12"></a></span>
+<span id="cb249-13"><a href="scraping-web-raspado-web.html#cb249-13"></a><span class="co">#acceso a todos los indicadores disponibles</span></span>
+<span id="cb249-14"><a href="scraping-web-raspado-web.html#cb249-14"></a>wbindex&lt;-<span class="kw">wbindicators</span>(<span class="st">&quot;es&quot;</span>)</span>
+<span id="cb249-15"><a href="scraping-web-raspado-web.html#cb249-15"></a><span class="co">#acceso al catalogo de datos</span></span>
+<span id="cb249-16"><a href="scraping-web-raspado-web.html#cb249-16"></a>wbcat&lt;-<span class="kw">wbdatacatalog</span>()</span>
+<span id="cb249-17"><a href="scraping-web-raspado-web.html#cb249-17"></a><span class="co">#búsqueda de indicador</span></span>
+<span id="cb249-18"><a href="scraping-web-raspado-web.html#cb249-18"></a>index_edu&lt;-<span class="kw">wbsearch</span>(<span class="dt">pattern =</span> <span class="st">&quot;education&quot;</span>)</span>
+<span id="cb249-19"><a href="scraping-web-raspado-web.html#cb249-19"></a>index_sal&lt;-<span class="kw">wbsearch</span>(<span class="dt">pattern =</span> <span class="st">&quot;health&quot;</span>)</span>
+<span id="cb249-20"><a href="scraping-web-raspado-web.html#cb249-20"></a><span class="co"># ver los países y sus códigos </span></span>
+<span id="cb249-21"><a href="scraping-web-raspado-web.html#cb249-21"></a>wbpais&lt;-<span class="kw">wbcountries</span>()             </span>
+<span id="cb249-22"><a href="scraping-web-raspado-web.html#cb249-22"></a><span class="co">#Comando para extraer los indicadores</span></span>
+<span id="cb249-23"><a href="scraping-web-raspado-web.html#cb249-23"></a><span class="kw">wb</span>(<span class="dt">country =</span> <span class="st">&quot;BOL&quot;</span>,<span class="dt">indicator =</span> <span class="st">&quot;NY.GDP.MKTP.CD&quot;</span>, <span class="dt">startdate =</span> <span class="dv">2000</span>, <span class="dt">enddate =</span> <span class="dv">2016</span>)</span></code></pre></div>
+</div>
+<div id="api-google-trends" class="section level3">
+<h3><span class="header-section-number">3.13.2</span> API Google trends</h3>
+<p>La libraría gtrendsR permite acceder a la API de <a href="https://trends.google.es/trends/?geo=ES">google trends</a>, esta permite acceder a las tendencias de búsqueda que se realizan mediante el motor de búsqueda de Google.</p>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="scraping-web-raspado-web.html#cb250-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;gtrendsR&quot;</span>)</span>
+<span id="cb250-2"><a href="scraping-web-raspado-web.html#cb250-2"></a><span class="kw">library</span>(gtrendsR)</span>
+<span id="cb250-3"><a href="scraping-web-raspado-web.html#cb250-3"></a>aux&lt;-countries</span>
+<span id="cb250-4"><a href="scraping-web-raspado-web.html#cb250-4"></a>res &lt;-<span class="st"> </span><span class="kw">gtrends</span>(<span class="st">&quot;Coronavirus&quot;</span>, <span class="dt">geo =</span> <span class="kw">c</span>(<span class="st">&quot;BO&quot;</span>))</span>
+<span id="cb250-5"><a href="scraping-web-raspado-web.html#cb250-5"></a></span>
+<span id="cb250-6"><a href="scraping-web-raspado-web.html#cb250-6"></a>bd_cov&lt;-res<span class="op">$</span>interest_over_time</span>
+<span id="cb250-7"><a href="scraping-web-raspado-web.html#cb250-7"></a></span>
+<span id="cb250-8"><a href="scraping-web-raspado-web.html#cb250-8"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb250-9"><a href="scraping-web-raspado-web.html#cb250-9"></a></span>
+<span id="cb250-10"><a href="scraping-web-raspado-web.html#cb250-10"></a>bd_cov<span class="op">$</span>hits&lt;-<span class="kw">as.numeric</span>(<span class="kw">gsub</span>(<span class="st">&quot;&lt;&quot;</span>,<span class="st">&quot;&quot;</span>,bd_cov<span class="op">$</span>hits))</span>
+<span id="cb250-11"><a href="scraping-web-raspado-web.html#cb250-11"></a></span>
+<span id="cb250-12"><a href="scraping-web-raspado-web.html#cb250-12"></a><span class="kw">ggplot</span>(bd_cov,<span class="kw">aes</span>(date,hits))<span class="op">+</span><span class="kw">geom_line</span>()</span>
+<span id="cb250-13"><a href="scraping-web-raspado-web.html#cb250-13"></a><span class="kw">plot</span>(res)</span>
+<span id="cb250-14"><a href="scraping-web-raspado-web.html#cb250-14"></a></span>
+<span id="cb250-15"><a href="scraping-web-raspado-web.html#cb250-15"></a>eleccion2020&lt;-<span class="kw">gtrends</span>(<span class="kw">c</span>(<span class="st">&quot;Luis Arce&quot;</span>,<span class="st">&quot;Carlos Mesa&quot;</span>,<span class="st">&quot;Fernando Camacho&quot;</span>), <span class="dt">geo =</span> <span class="kw">c</span>(<span class="st">&quot;BO&quot;</span>),<span class="dt">time=</span><span class="st">&quot;today 3-m&quot;</span>)</span>
+<span id="cb250-16"><a href="scraping-web-raspado-web.html#cb250-16"></a></span>
+<span id="cb250-17"><a href="scraping-web-raspado-web.html#cb250-17"></a><span class="kw">plot</span>(eleccion2020)</span>
+<span id="cb250-18"><a href="scraping-web-raspado-web.html#cb250-18"></a></span>
+<span id="cb250-19"><a href="scraping-web-raspado-web.html#cb250-19"></a></span>
+<span id="cb250-20"><a href="scraping-web-raspado-web.html#cb250-20"></a><span class="kw">library</span>(knitr)</span>
+<span id="cb250-21"><a href="scraping-web-raspado-web.html#cb250-21"></a><span class="kw">kable</span>(<span class="kw">head</span>(res<span class="op">$</span>interest_over_time,<span class="dv">10</span>))</span></code></pre></div>
+</div>
+<div id="api-google-maps" class="section level3">
+<h3><span class="header-section-number">3.13.3</span> API Google Maps</h3>
+<p>R tiene la librari googleway que permite tener acceso a la API de google maps, es necesario una llave de autentificación.</p>
+<p>Para la llave seguir los pasos en el <a href="https://developers.google.com/maps/documentation/javascript/get-api-key?hl=es-419">enlace</a></p>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="scraping-web-raspado-web.html#cb251-1"></a><span class="co">#install.packages(&quot;googleway&quot;)</span></span>
+<span id="cb251-2"><a href="scraping-web-raspado-web.html#cb251-2"></a><span class="kw">library</span>(googleway)</span>
+<span id="cb251-3"><a href="scraping-web-raspado-web.html#cb251-3"></a>map_key &lt;-<span class="st"> &#39;xxx&#39;</span></span>
+<span id="cb251-4"><a href="scraping-web-raspado-web.html#cb251-4"></a><span class="kw">google_map</span>(<span class="dt">key =</span> map_key,<span class="dt">location =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">16.5030161</span>,<span class="op">-</span><span class="fl">68.1292566</span>),<span class="dt">zoom =</span> <span class="dv">8</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">add_traffic</span>()</span></code></pre></div>
+</div>
+</div>
+<div id="ejercicios-propuestos-2" class="section level2">
+<h2><span class="header-section-number">3.14</span> Ejercicios Propuestos</h2>
+<ol style="list-style-type: decimal">
+<li>Extraer la fecha, y el precio de compra y venta del dolar de la página <a href="https://www.bcb.gob.bo" class="uri">https://www.bcb.gob.bo</a></li>
+<li>Usando la página <a href="https://www.trabajopolis.bo/" class="uri">https://www.trabajopolis.bo/</a> seleccionar un departamento y armar una base de dato de ofertas laborales</li>
+<li>Armar una base de datos en base a la página <a href="https://www.infocasas.com.bo" class="uri">https://www.infocasas.com.bo</a></li>
+<li>Explorar librarias API con acceso a Youtube y encontrar los 10 videos con más visualizaciones que incluyan a Bolivia en su titulo.</li>
+<li>Explorar la libraria gtrendsR y explorar en que meses en Bolivia es mas frecuente la búsqueda de</li>
+<li>Usar la informacion de worldometers y generar un gráfico de contagios por millon de los distintos paises.</li>
+</ol>
+
+<div id="refs" class="references">
+<div>
+<p>Allaire, JJ, Yihui Xie, Jonathan McPherson, Javier Luraschi, Kevin Ushey, Aron Atkins, Hadley Wickham, Joe Cheng, Winston Chang, and Richard Iannone. 2020. <em>Rmarkdown: Dynamic Documents for R</em>. <a href="https://CRAN.R-project.org/package=rmarkdown">https://CRAN.R-project.org/package=rmarkdown</a>.</p>
+</div>
+<div>
+<p>R Core Team. 2019. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>.</p>
+</div>
+<div>
+<p>Xie, Yihui. 2019. <em>Knitr: A General-Purpose Package for Dynamic Report Generation in R</em>. <a href="https://CRAN.R-project.org/package=knitr">https://CRAN.R-project.org/package=knitr</a>.</p>
+</div>
+<div>
+<p>———. 2020. <em>Bookdown: Authoring Books and Technical Documents with R Markdown</em>. <a href="https://CRAN.R-project.org/package=bookdown">https://CRAN.R-project.org/package=bookdown</a>.</p>
+</div>
+<div>
+<p>Xie, Yihui, J. J. Allaire, and Garrett Grolemund. 2018. “How to Read This Book.” <em>Transforming Climate Finance and Green Investment with Blockchains</em>, 1. <a href="https://doi.org/10.1016/b978-0-12-814447-3.00041-0">https://doi.org/10.1016/b978-0-12-814447-3.00041-0</a>.</p>
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introducción-al-big-data.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
