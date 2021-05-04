@@ -1,0 +1,31 @@
+h1:introducción-al-big-data Introducción al Big Data
+h2:definiendo-al-big-data Definiendo al Big Data
+h2:las-5-v-en-el-big-data Las 5 V en el Big Data
+h2:ciclo-de-vida-de-un-proyecto-de-análisis-de-datos Ciclo de vida de un proyecto de análisis de datos
+h2:inferencia-y-big-data Inferencia y Big Data
+h3:descriptivo Descriptivo
+h3:causal Causal
+h3:predictivo Predictivo
+h2:calidad-de-dato-y-big-data Calidad de dato y Big Data
+h2:captura-y-preservación Captura y preservación
+h3:fuentes-convencionales Fuentes convencionales
+h3:datos-web-y-apis Datos web y APIs
+h3:record-linkage Record Linkage
+h3:bases-de-datos Bases de datos
+h3:programando-con-big-data Programando con Big Data
+h2:análisis-y-modelado Análisis y modelado
+h3:machine-learning Machine learning
+h4:el-proceso-del-machine-learning El proceso del machine learning
+h4:formulación-del-problema Formulación del problema
+h3:análisis-de-texto-entendiendo-lo-que-la-gente-escribe Análisis de texto: Entendiendo lo que la gente escribe
+h3:networks Networks
+h2:inferencia-y-ética Inferencia y ética
+h3:información-y-visualización Información y visualización
+h4:dashboards Dashboards
+h4:elementos Elementos
+h4:datos-espaciales Datos espaciales
+h3:error-e-inferencia Error e inferencia
+h3:privacidad-y-confidencialidad Privacidad y confidencialidad
+h3:workbooks Workbooks
+h2:ejercicios-propuestos Ejercicios Propuestos
+

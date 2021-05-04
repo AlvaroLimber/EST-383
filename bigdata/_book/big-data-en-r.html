@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Big Data en R | Big Data en R</title>
+  <meta name="description" content="Este libro esta destinado a la materia de Programación Estadística I de la carrera de Estadística de la Universidad Mayor de San Andres." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Big Data en R | Big Data en R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Este libro esta destinado a la materia de Programación Estadística I de la carrera de Estadística de la Universidad Mayor de San Andres." />
+  <meta name="github-repo" content="alvarolimber/EST-383" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Big Data en R | Big Data en R" />
+  
+  <meta name="twitter:description" content="Este libro esta destinado a la materia de Programación Estadística I de la carrera de Estadística de la Universidad Mayor de San Andres." />
+  
+
+<meta name="author" content="Alvaro Chirino Gutierrez" />
+
+
+<meta name="date" content="2021-05-04" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="scraping-web-raspado-web.html"/>
+<link rel="next" href="r-y-spark.html"/>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prefacio</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#audiencia"><i class="fa fa-check"></i>Audiencia</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#estructura-del-libro"><i class="fa fa-check"></i>Estructura del libro</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#software-y-acuerdos"><i class="fa fa-check"></i>Software y acuerdos</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#bases-de-datos"><i class="fa fa-check"></i>Bases de datos</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#agradecimiento"><i class="fa fa-check"></i>Agradecimiento</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="introR.html"><a href="introR.html"><i class="fa fa-check"></i><b>1</b> Introducción a R</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introR.html"><a href="introR.html#qué-es-r"><i class="fa fa-check"></i><b>1.1</b> ¿Qué es R?</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="introR.html"><a href="introR.html#acerca-de-r"><i class="fa fa-check"></i><b>1.1.1</b> Acerca de R</a></li>
+<li class="chapter" data-level="1.1.2" data-path="introR.html"><a href="introR.html#qué-es-r-1"><i class="fa fa-check"></i><b>1.1.2</b> ¿Qué es R?</a></li>
+<li class="chapter" data-level="1.1.3" data-path="introR.html"><a href="introR.html#algunas-referencias"><i class="fa fa-check"></i><b>1.1.3</b> Algunas referencias</a></li>
+<li class="chapter" data-level="1.1.4" data-path="introR.html"><a href="introR.html#rstudio"><i class="fa fa-check"></i><b>1.1.4</b> RStudio</a></li>
+<li class="chapter" data-level="1.1.5" data-path="introR.html"><a href="introR.html#instalación"><i class="fa fa-check"></i><b>1.1.5</b> Instalación</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="introR.html"><a href="introR.html#r-markdown"><i class="fa fa-check"></i><b>1.2</b> R Markdown</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="introR.html"><a href="introR.html#instalación-1"><i class="fa fa-check"></i><b>1.2.1</b> Instalación</a></li>
+<li class="chapter" data-level="1.2.2" data-path="introR.html"><a href="introR.html#yaml-header"><i class="fa fa-check"></i><b>1.2.2</b> YAML Header</a></li>
+<li class="chapter" data-level="1.2.3" data-path="introR.html"><a href="introR.html#sintaxis-básica"><i class="fa fa-check"></i><b>1.2.3</b> Sintaxis básica</a></li>
+<li class="chapter" data-level="1.2.4" data-path="introR.html"><a href="introR.html#tipos-de-documentos"><i class="fa fa-check"></i><b>1.2.4</b> Tipos de documentos</a></li>
+<li class="chapter" data-level="1.2.5" data-path="introR.html"><a href="introR.html#chunks"><i class="fa fa-check"></i><b>1.2.5</b> Chunks</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="introR.html"><a href="introR.html#r-básico"><i class="fa fa-check"></i><b>1.3</b> R básico</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="introR.html"><a href="introR.html#lógica-de-los-comandos-en-r"><i class="fa fa-check"></i><b>1.3.1</b> Lógica de los comandos en R</a></li>
+<li class="chapter" data-level="1.3.2" data-path="introR.html"><a href="introR.html#palabras-reservadas-y-simbolos-especiales-de-r"><i class="fa fa-check"></i><b>1.3.2</b> Palabras reservadas y simbolos especiales de R</a></li>
+<li class="chapter" data-level="1.3.3" data-path="introR.html"><a href="introR.html#símbolos-lógicos"><i class="fa fa-check"></i><b>1.3.3</b> Símbolos Lógicos</a></li>
+<li class="chapter" data-level="1.3.4" data-path="introR.html"><a href="introR.html#asignación-o-creación-de-objetos-estructuras-variables"><i class="fa fa-check"></i><b>1.3.4</b> Asignación o creación de objetos (estructuras, variables)</a></li>
+<li class="chapter" data-level="1.3.5" data-path="introR.html"><a href="introR.html#clases-en-r"><i class="fa fa-check"></i><b>1.3.5</b> Clases en R</a></li>
+<li class="chapter" data-level="1.3.6" data-path="introR.html"><a href="introR.html#algunas-comandos-adicionales"><i class="fa fa-check"></i><b>1.3.6</b> Algunas comandos adicionales</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="introR.html"><a href="introR.html#tipos-de-estructuras"><i class="fa fa-check"></i><b>1.4</b> Tipos de estructuras</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="introR.html"><a href="introR.html#homogéneas"><i class="fa fa-check"></i><b>1.4.1</b> Homogéneas</a></li>
+<li class="chapter" data-level="1.4.2" data-path="introR.html"><a href="introR.html#heterogéneas"><i class="fa fa-check"></i><b>1.4.2</b> Heterogéneas</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="introR.html"><a href="introR.html#indexación"><i class="fa fa-check"></i><b>1.5</b> Indexación</a></li>
+<li class="chapter" data-level="1.6" data-path="introR.html"><a href="introR.html#loops-y-condiciones"><i class="fa fa-check"></i><b>1.6</b> Loops y condiciones</a></li>
+<li class="chapter" data-level="1.7" data-path="introR.html"><a href="introR.html#crear-funciones-en-r."><i class="fa fa-check"></i><b>1.7</b> Crear funciones en R.</a></li>
+<li class="chapter" data-level="1.8" data-path="introR.html"><a href="introR.html#importación-de-datos"><i class="fa fa-check"></i><b>1.8</b> Importación de datos</a></li>
+<li class="chapter" data-level="1.9" data-path="introR.html"><a href="introR.html#exportar-la-base-de-datos"><i class="fa fa-check"></i><b>1.9</b> Exportar la base de datos</a></li>
+<li class="chapter" data-level="1.10" data-path="introR.html"><a href="introR.html#dataframe-y-exploración"><i class="fa fa-check"></i><b>1.10</b> Dataframe y exploración</a></li>
+<li class="chapter" data-level="1.11" data-path="introR.html"><a href="introR.html#estadística-descriptiva"><i class="fa fa-check"></i><b>1.11</b> Estadística descriptiva</a></li>
+<li class="chapter" data-level="1.12" data-path="introR.html"><a href="introR.html#inferencia-en-r"><i class="fa fa-check"></i><b>1.12</b> Inferencia en R</a></li>
+<li class="chapter" data-level="1.13" data-path="introR.html"><a href="introR.html#gráficos-de-origen"><i class="fa fa-check"></i><b>1.13</b> Gráficos de origen</a></li>
+<li class="chapter" data-level="1.14" data-path="introR.html"><a href="introR.html#ggplot"><i class="fa fa-check"></i><b>1.14</b> ggplot</a>
+<ul>
+<li class="chapter" data-level="1.14.1" data-path="introR.html"><a href="introR.html#datos-estetica-y-geometria-layers"><i class="fa fa-check"></i><b>1.14.1</b> Datos, estetica y geometria (layers)</a></li>
+</ul></li>
+<li class="chapter" data-level="1.15" data-path="introR.html"><a href="introR.html#flexdashboard"><i class="fa fa-check"></i><b>1.15</b> Flexdashboard</a></li>
+<li class="chapter" data-level="1.16" data-path="introR.html"><a href="introR.html#shiny"><i class="fa fa-check"></i><b>1.16</b> Shiny</a>
+<ul>
+<li class="chapter" data-level="1.16.1" data-path="introR.html"><a href="introR.html#ui"><i class="fa fa-check"></i><b>1.16.1</b> UI</a></li>
+<li class="chapter" data-level="1.16.2" data-path="introR.html"><a href="introR.html#server"><i class="fa fa-check"></i><b>1.16.2</b> Server</a></li>
+</ul></li>
+<li class="chapter" data-level="1.17" data-path="introR.html"><a href="introR.html#ejercicios-propuestos"><i class="fa fa-check"></i><b>1.17</b> Ejercicios Propuestos</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html"><i class="fa fa-check"></i><b>2</b> Introducción al Big Data</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#definiendo-al-big-data"><i class="fa fa-check"></i><b>2.1</b> Definiendo al Big Data</a></li>
+<li class="chapter" data-level="2.2" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#las-5-v-en-el-big-data"><i class="fa fa-check"></i><b>2.2</b> Las 5 V en el Big Data</a></li>
+<li class="chapter" data-level="2.3" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#ciclo-de-vida-de-un-proyecto-de-análisis-de-datos"><i class="fa fa-check"></i><b>2.3</b> Ciclo de vida de un proyecto de análisis de datos</a></li>
+<li class="chapter" data-level="2.4" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#inferencia-y-big-data"><i class="fa fa-check"></i><b>2.4</b> Inferencia y Big Data</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#descriptivo"><i class="fa fa-check"></i><b>2.4.1</b> Descriptivo</a></li>
+<li class="chapter" data-level="2.4.2" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#causal"><i class="fa fa-check"></i><b>2.4.2</b> Causal</a></li>
+<li class="chapter" data-level="2.4.3" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#predictivo"><i class="fa fa-check"></i><b>2.4.3</b> Predictivo</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#calidad-de-dato-y-big-data"><i class="fa fa-check"></i><b>2.5</b> Calidad de dato y Big Data</a></li>
+<li class="chapter" data-level="2.6" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#captura-y-preservación"><i class="fa fa-check"></i><b>2.6</b> Captura y preservación</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#fuentes-convencionales"><i class="fa fa-check"></i><b>2.6.1</b> Fuentes convencionales</a></li>
+<li class="chapter" data-level="2.6.2" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#datos-web-y-apis"><i class="fa fa-check"></i><b>2.6.2</b> Datos web y APIs</a></li>
+<li class="chapter" data-level="2.6.3" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#record-linkage"><i class="fa fa-check"></i><b>2.6.3</b> Record Linkage</a></li>
+<li class="chapter" data-level="2.6.4" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#bases-de-datos-1"><i class="fa fa-check"></i><b>2.6.4</b> Bases de datos</a></li>
+<li class="chapter" data-level="2.6.5" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#programando-con-big-data"><i class="fa fa-check"></i><b>2.6.5</b> Programando con Big Data</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#análisis-y-modelado"><i class="fa fa-check"></i><b>2.7</b> Análisis y modelado</a>
+<ul>
+<li class="chapter" data-level="2.7.1" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#machine-learning"><i class="fa fa-check"></i><b>2.7.1</b> Machine learning</a></li>
+<li class="chapter" data-level="2.7.2" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#análisis-de-texto-entendiendo-lo-que-la-gente-escribe"><i class="fa fa-check"></i><b>2.7.2</b> Análisis de texto: Entendiendo lo que la gente escribe</a></li>
+<li class="chapter" data-level="2.7.3" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#networks"><i class="fa fa-check"></i><b>2.7.3</b> Networks</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#inferencia-y-ética"><i class="fa fa-check"></i><b>2.8</b> Inferencia y ética</a>
+<ul>
+<li class="chapter" data-level="2.8.1" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#información-y-visualización"><i class="fa fa-check"></i><b>2.8.1</b> Información y visualización</a></li>
+<li class="chapter" data-level="2.8.2" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#error-e-inferencia"><i class="fa fa-check"></i><b>2.8.2</b> Error e inferencia</a></li>
+<li class="chapter" data-level="2.8.3" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#privacidad-y-confidencialidad"><i class="fa fa-check"></i><b>2.8.3</b> Privacidad y confidencialidad</a></li>
+<li class="chapter" data-level="2.8.4" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#workbooks"><i class="fa fa-check"></i><b>2.8.4</b> Workbooks</a></li>
+</ul></li>
+<li class="chapter" data-level="2.9" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#ejercicios-propuestos-1"><i class="fa fa-check"></i><b>2.9</b> Ejercicios Propuestos</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html"><i class="fa fa-check"></i><b>3</b> Scraping Web (Raspado web)</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#pasos-para-la-recopilación-de-información"><i class="fa fa-check"></i><b>3.1</b> Pasos para la recopilación de información</a></li>
+<li class="chapter" data-level="3.2" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#tecnologías-de-diseminación-extracción-y-almacenamiento-web"><i class="fa fa-check"></i><b>3.2</b> Tecnologías de diseminación, extracción y almacenamiento Web</a></li>
+<li class="chapter" data-level="3.3" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#librerías-en-r"><i class="fa fa-check"></i><b>3.3</b> Librerías en R</a></li>
+<li class="chapter" data-level="3.4" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#librería-rvest"><i class="fa fa-check"></i><b>3.4</b> Librería rvest</a></li>
+<li class="chapter" data-level="3.5" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#ejemplo-infocasas-ventas-la-paz"><i class="fa fa-check"></i><b>3.5</b> Ejemplo: Infocasas, ventas La Paz</a></li>
+<li class="chapter" data-level="3.6" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#ejemplo-titulares-de-la-razon"><i class="fa fa-check"></i><b>3.6</b> Ejemplo: Titulares de La Razon</a></li>
+<li class="chapter" data-level="3.7" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#ejemplo-covid-en-el-mundo-worldometers"><i class="fa fa-check"></i><b>3.7</b> Ejemplo: COVID en el mundo, Worldometers</a></li>
+<li class="chapter" data-level="3.8" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#ejemplo-con-unidades-educativas-del-min-edu"><i class="fa fa-check"></i><b>3.8</b> Ejemplo con unidades educativas del MIN-EDU</a></li>
+<li class="chapter" data-level="3.9" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#ejemplo-covid-bolivia-segura-worldometers"><i class="fa fa-check"></i><b>3.9</b> Ejemplo: COVID, Bolivia segura, Worldometers</a></li>
+<li class="chapter" data-level="3.10" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#ejemplo-ultracasas"><i class="fa fa-check"></i><b>3.10</b> Ejemplo: Ultracasas</a></li>
+<li class="chapter" data-level="3.11" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#ejemplo-ketal"><i class="fa fa-check"></i><b>3.11</b> Ejemplo: Ketal</a></li>
+<li class="chapter" data-level="3.12" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#ejemplo-ministerio-de-educación"><i class="fa fa-check"></i><b>3.12</b> Ejemplo: Ministerio de Educación</a></li>
+<li class="chapter" data-level="3.13" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#ejemplo-informacion-covid-19-en-bolivia"><i class="fa fa-check"></i><b>3.13</b> Ejemplo, informacion COVID-19 en Bolivia</a></li>
+<li class="chapter" data-level="3.14" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#apis"><i class="fa fa-check"></i><b>3.14</b> APIs</a>
+<ul>
+<li class="chapter" data-level="3.14.1" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#api-banco-mundial"><i class="fa fa-check"></i><b>3.14.1</b> API Banco Mundial</a></li>
+<li class="chapter" data-level="3.14.2" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#api-google-trends"><i class="fa fa-check"></i><b>3.14.2</b> API Google trends</a></li>
+<li class="chapter" data-level="3.14.3" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#api-twitter"><i class="fa fa-check"></i><b>3.14.3</b> API Twitter</a></li>
+<li class="chapter" data-level="3.14.4" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#api-google-maps"><i class="fa fa-check"></i><b>3.14.4</b> API Google Maps</a></li>
+</ul></li>
+<li class="chapter" data-level="3.15" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#ejercicios-propuestos-2"><i class="fa fa-check"></i><b>3.15</b> Ejercicios Propuestos</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="big-data-en-r.html"><a href="big-data-en-r.html"><i class="fa fa-check"></i><b>4</b> Big Data en R</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="big-data-en-r.html"><a href="big-data-en-r.html#limitaciones-en-r"><i class="fa fa-check"></i><b>4.1</b> Limitaciones en R</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="big-data-en-r.html"><a href="big-data-en-r.html#memoria"><i class="fa fa-check"></i><b>4.1.1</b> Memoria</a></li>
+<li class="chapter" data-level="4.1.2" data-path="big-data-en-r.html"><a href="big-data-en-r.html#velocidad-de-procesamiento"><i class="fa fa-check"></i><b>4.1.2</b> Velocidad de procesamiento</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="big-data-en-r.html"><a href="big-data-en-r.html#a-los-límites-de-la-memoria-y-más-allá"><i class="fa fa-check"></i><b>4.2</b> A los límites de la memoria y más allá</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="big-data-en-r.html"><a href="big-data-en-r.html#transformacion-y-agregación-de-datos-con-la-librería-ff-y-ffbase"><i class="fa fa-check"></i><b>4.2.1</b> Transformacion y agregación de datos con la librería ff y ffbase</a></li>
+<li class="chapter" data-level="4.2.2" data-path="big-data-en-r.html"><a href="big-data-en-r.html#modelos-glm-con-la-las-librerias-ff-y-ffbase"><i class="fa fa-check"></i><b>4.2.2</b> Modelos GLM con la las librerias ff y ffbase</a></li>
+<li class="chapter" data-level="4.2.3" data-path="big-data-en-r.html"><a href="big-data-en-r.html#expandiendo-la-memoria-con-la-libreria-bigmemory"><i class="fa fa-check"></i><b>4.2.3</b> Expandiendo la memoria con la libreria bigmemory</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="big-data-en-r.html"><a href="big-data-en-r.html#parallel-r"><i class="fa fa-check"></i><b>4.3</b> Parallel R</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="big-data-en-r.html"><a href="big-data-en-r.html#libreria-parallel"><i class="fa fa-check"></i><b>4.3.1</b> Libreria parallel</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="r-y-spark.html"><a href="r-y-spark.html"><i class="fa fa-check"></i><b>5</b> R y Spark</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="r-y-spark.html"><a href="r-y-spark.html#introducción"><i class="fa fa-check"></i><b>5.1</b> Introducción</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="r-y-spark.html"><a href="r-y-spark.html#hadoop"><i class="fa fa-check"></i><b>5.1.1</b> Hadoop</a></li>
+<li class="chapter" data-level="5.1.2" data-path="r-y-spark.html"><a href="r-y-spark.html#spark"><i class="fa fa-check"></i><b>5.1.2</b> Spark</a></li>
+<li class="chapter" data-level="5.1.3" data-path="r-y-spark.html"><a href="r-y-spark.html#sparklyr"><i class="fa fa-check"></i><b>5.1.3</b> Sparklyr</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="r-y-spark.html"><a href="r-y-spark.html#librería-dplyr"><i class="fa fa-check"></i><b>5.2</b> Librería dplyr</a></li>
+<li class="chapter" data-level="5.3" data-path="r-y-spark.html"><a href="r-y-spark.html#arrancando-spark"><i class="fa fa-check"></i><b>5.3</b> Arrancando Spark</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="r-y-spark.html"><a href="r-y-spark.html#prerequisitos"><i class="fa fa-check"></i><b>5.3.1</b> Prerequisitos</a></li>
+<li class="chapter" data-level="5.3.2" data-path="r-y-spark.html"><a href="r-y-spark.html#instalación-2"><i class="fa fa-check"></i><b>5.3.2</b> Instalación</a></li>
+<li class="chapter" data-level="5.3.3" data-path="r-y-spark.html"><a href="r-y-spark.html#soluciones-a-problemas-de-instalación"><i class="fa fa-check"></i><b>5.3.3</b> Soluciones a problemas de instalación</a></li>
+<li class="chapter" data-level="5.3.4" data-path="r-y-spark.html"><a href="r-y-spark.html#creando-una-sesión-en-spark"><i class="fa fa-check"></i><b>5.3.4</b> Creando una sesión en Spark</a></li>
+<li class="chapter" data-level="5.3.5" data-path="r-y-spark.html"><a href="r-y-spark.html#interface-web"><i class="fa fa-check"></i><b>5.3.5</b> Interface web</a></li>
+<li class="chapter" data-level="5.3.6" data-path="r-y-spark.html"><a href="r-y-spark.html#configuración"><i class="fa fa-check"></i><b>5.3.6</b> Configuración</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="r-y-spark.html"><a href="r-y-spark.html#análisis-con-spark"><i class="fa fa-check"></i><b>5.4</b> Análisis con Spark</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="r-y-spark.html"><a href="r-y-spark.html#importando-los-datos"><i class="fa fa-check"></i><b>5.4.1</b> Importando los datos</a></li>
+<li class="chapter" data-level="5.4.2" data-path="r-y-spark.html"><a href="r-y-spark.html#librería-dplyr-gramática-de-manipulación-de-datos"><i class="fa fa-check"></i><b>5.4.2</b> Librería DPLYR (Gramática de manipulación de datos)</a></li>
+<li class="chapter" data-level="5.4.3" data-path="r-y-spark.html"><a href="r-y-spark.html#dplyr-en-spark"><i class="fa fa-check"></i><b>5.4.3</b> DPLYR en Spark</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Big Data en R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="big-data-en-r" class="section level1" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Big Data en R</h1>
+<p>R en un software que se adapta perfectamente con las fases del ciclo de vida de los proyectos de datos, ofreciendo herramientas para cada una de ellas; Entre las mas interesantes, R Markdown, Shiny, sweave, etc.</p>
+<p>Adicionalmente existen múltiples librerías que permite trabajar con otros software, principalmente los asociados a bases de datos.</p>
+<p><img src="images/r1.png" /></p>
+<p>En el capitulo 1 se enfatiza el uso de R para el manejo, procesamiento y análisis de bases de datos, sumado a esto el conocimiento de distintas estadísticas en base a los cursos de formación, en este capitulo se buscar unir ambos tópicos y explicar como usar el poder del modelado matemático y de datos en R, considerando bases de datos <strong>grandes</strong>, esto sin necesidad de recurrir a otros equipos.</p>
+<p>Lo que se espera a partir de este capitulo es:</p>
+<ul>
+<li>Conocer las limitaciones de R para el Big Data y como ellas pueden resolverse</li>
+<li>El uso de las librerías ff, ffbase, ffbase2, y bigmemory, para el manejo de la memoria del equipo</li>
+<li>El uso de métodos estadísticos para objetos grandes en R, a través de las librerías bigglm y ffbase</li>
+<li>Mejorar la velocidad del procesamiento de datos con librerías que permiten la computación paralela (parallel computing)</li>
+<li>Manipulación de datos más rápidos con el uso de la librería data.table</li>
+</ul>
+<div id="limitaciones-en-r" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Limitaciones en R</h2>
+<p>A manera que uno va aprendiendo mas del R en la universidad o en el trabajo se valora cada vez mas la flexibilidad de R, su constante crecimiento, la ventaja de ser de código abierto, etc. Sin embargo, es importante tener en cuenta las limitaciones de R:</p>
+<ul>
+<li>Los datos se ajustan a la RAM</li>
+<li>R es generalmente muy lento comparado con otros lenguajes</li>
+</ul>
+<div id="memoria" class="section level3" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> Memoria</h3>
+<ul>
+<li>R permite trabajar con bases de datos que no superen el 50-60% de la RAM de la computadora</li>
+<li>Existen soluciones en R sin tener que recurrir aun a plataformas como; Microsoft Azure, Amazon EC2, or Google Cloud Platform.</li>
+<li>Existe también la opción de trabajar con RStudio-Cloud, <a href="https://rstudio.cloud/plans/free" class="uri">https://rstudio.cloud/plans/free</a></li>
+</ul>
+</div>
+<div id="velocidad-de-procesamiento" class="section level3" number="4.1.2">
+<h3><span class="header-section-number">4.1.2</span> Velocidad de procesamiento</h3>
+<ol style="list-style-type: decimal">
+<li>R se considera un lenguaje interpretado y, como tal, su ejecución de código más lenta viene por definición.</li>
+<li>Procesos linea por linea</li>
+<li>El bajo rendimiento del código R puede deberse al hecho de que el lenguaje no está formalmente definido</li>
+</ol>
+</div>
+</div>
+<div id="a-los-límites-de-la-memoria-y-más-allá" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> A los límites de la memoria y más allá</h2>
+<div id="transformacion-y-agregación-de-datos-con-la-librería-ff-y-ffbase" class="section level3" number="4.2.1">
+<h3><span class="header-section-number">4.2.1</span> Transformacion y agregación de datos con la librería ff y ffbase</h3>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="big-data-en-r.html#cb253-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
+<span id="cb253-2"><a href="big-data-en-r.html#cb253-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;ff&quot;</span>)</span>
+<span id="cb253-3"><a href="big-data-en-r.html#cb253-3" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;ffbase&quot;</span>)</span>
+<span id="cb253-4"><a href="big-data-en-r.html#cb253-4" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages(&quot;ffbase2&quot;) / github</span></span></code></pre></div>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="big-data-en-r.html#cb254-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ff)</span>
+<span id="cb254-2"><a href="big-data-en-r.html#cb254-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ffbase)</span>
+<span id="cb254-3"><a href="big-data-en-r.html#cb254-3" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">Users</span><span class="sc">\\</span><span class="st">ALVARO</span><span class="sc">\\</span><span class="st">Desktop</span><span class="sc">\\</span><span class="st">_data</span><span class="sc">\\</span><span class="st">bigdata&quot;</span>)</span>
+<span id="cb254-4"><a href="big-data-en-r.html#cb254-4" aria-hidden="true" tabindex="-1"></a>bd1<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">&quot;200613COVID19MEXICO.csv&quot;</span>,<span class="at">sep=</span><span class="st">&quot;,&quot;</span>,<span class="at">header=</span>T)</span>
+<span id="cb254-5"><a href="big-data-en-r.html#cb254-5" aria-hidden="true" tabindex="-1"></a><span class="fu">object.size</span>(bd1)<span class="sc">/</span><span class="dv">1000000</span></span>
+<span id="cb254-6"><a href="big-data-en-r.html#cb254-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb254-7"><a href="big-data-en-r.html#cb254-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb254-8"><a href="big-data-en-r.html#cb254-8" aria-hidden="true" tabindex="-1"></a><span class="co">#paso 1: tener un directorio para archivos temporales de ff</span></span>
+<span id="cb254-9"><a href="big-data-en-r.html#cb254-9" aria-hidden="true" tabindex="-1"></a><span class="fu">system</span>(<span class="st">&quot;mkdir ffdf&quot;</span>)</span>
+<span id="cb254-10"><a href="big-data-en-r.html#cb254-10" aria-hidden="true" tabindex="-1"></a><span class="co">#paso 2: definir la carpeta temporal</span></span>
+<span id="cb254-11"><a href="big-data-en-r.html#cb254-11" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">fftempdir=</span><span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">Users</span><span class="sc">\\</span><span class="st">ALVARO</span><span class="sc">\\</span><span class="st">Desktop</span><span class="sc">\\</span><span class="st">_data</span><span class="sc">\\</span><span class="st">bigdata</span><span class="sc">\\</span><span class="st">ffdf&quot;</span>)</span>
+<span id="cb254-12"><a href="big-data-en-r.html#cb254-12" aria-hidden="true" tabindex="-1"></a><span class="co">#paso 3: Cargar la base de datos</span></span>
+<span id="cb254-13"><a href="big-data-en-r.html#cb254-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb254-14"><a href="big-data-en-r.html#cb254-14" aria-hidden="true" tabindex="-1"></a>bd2<span class="ot">&lt;-</span><span class="fu">read.csv.ffdf</span>(<span class="at">file=</span><span class="st">&quot;200614COVID19MEXICO.csv&quot;</span>,<span class="at">sep=</span><span class="st">&quot;,&quot;</span>,<span class="at">header=</span>T,</span>
+<span id="cb254-15"><a href="big-data-en-r.html#cb254-15" aria-hidden="true" tabindex="-1"></a>                   <span class="at">next.rows=</span><span class="dv">100000</span>,<span class="at">colClasses=</span><span class="cn">NA</span>,<span class="at">VERBOSE=</span>F)</span>
+<span id="cb254-16"><a href="big-data-en-r.html#cb254-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb254-17"><a href="big-data-en-r.html#cb254-17" aria-hidden="true" tabindex="-1"></a>bd3<span class="ot">&lt;-</span><span class="fu">read.csv.ffdf</span>(<span class="at">file=</span><span class="st">&quot;200614COVID19MEXICO.csv&quot;</span>,<span class="at">sep=</span><span class="st">&quot;,&quot;</span>,<span class="at">header=</span>T,</span>
+<span id="cb254-18"><a href="big-data-en-r.html#cb254-18" aria-hidden="true" tabindex="-1"></a>                   <span class="at">first.rows=</span><span class="sc">-</span><span class="dv">1</span>,<span class="at">colClasses=</span><span class="cn">NA</span>,<span class="at">VERBOSE=</span>T)</span>
+<span id="cb254-19"><a href="big-data-en-r.html#cb254-19" aria-hidden="true" tabindex="-1"></a>bd4<span class="ot">&lt;-</span><span class="fu">read.csv.ffdf</span>(<span class="at">file=</span><span class="st">&quot;200614COVID19MEXICO.csv&quot;</span>,<span class="at">sep=</span><span class="st">&quot;,&quot;</span>,<span class="at">header=</span>T,</span>
+<span id="cb254-20"><a href="big-data-en-r.html#cb254-20" aria-hidden="true" tabindex="-1"></a>                   <span class="at">next.rows=</span><span class="dv">10000</span>,<span class="at">colClasses=</span><span class="cn">NA</span>,<span class="at">VERBOSE=</span>T)</span>
+<span id="cb254-21"><a href="big-data-en-r.html#cb254-21" aria-hidden="true" tabindex="-1"></a>bd5<span class="ot">&lt;-</span><span class="fu">read.csv.ffdf</span>(<span class="at">file=</span><span class="st">&quot;201115COVID19MEXICO.csv&quot;</span>,<span class="at">sep=</span><span class="st">&quot;,&quot;</span>,<span class="at">header=</span>T,</span>
+<span id="cb254-22"><a href="big-data-en-r.html#cb254-22" aria-hidden="true" tabindex="-1"></a>                   <span class="at">next.rows=</span><span class="dv">100000</span>,<span class="at">colClasses=</span><span class="cn">NA</span>,<span class="at">VERBOSE=</span>F)</span>
+<span id="cb254-23"><a href="big-data-en-r.html#cb254-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb254-24"><a href="big-data-en-r.html#cb254-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb254-25"><a href="big-data-en-r.html#cb254-25" aria-hidden="true" tabindex="-1"></a><span class="fu">object.size</span>(bd1)<span class="sc">/</span><span class="dv">1000000</span> <span class="co"># CSV DE R</span></span>
+<span id="cb254-26"><a href="big-data-en-r.html#cb254-26" aria-hidden="true" tabindex="-1"></a><span class="fu">object.size</span>(bd2)<span class="sc">/</span><span class="dv">1000000</span> <span class="co"># CSV.FFDF 100000</span></span>
+<span id="cb254-27"><a href="big-data-en-r.html#cb254-27" aria-hidden="true" tabindex="-1"></a><span class="fu">object.size</span>(bd3)<span class="sc">/</span><span class="dv">1000000</span> <span class="co"># CSV.FFDF </span><span class="al">TODO</span></span>
+<span id="cb254-28"><a href="big-data-en-r.html#cb254-28" aria-hidden="true" tabindex="-1"></a><span class="fu">object.size</span>(bd4)<span class="sc">/</span><span class="dv">1000000</span> <span class="co"># CSV.FFDF 1000</span></span>
+<span id="cb254-29"><a href="big-data-en-r.html#cb254-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb254-30"><a href="big-data-en-r.html#cb254-30" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(bd2)</span>
+<span id="cb254-31"><a href="big-data-en-r.html#cb254-31" aria-hidden="true" tabindex="-1"></a><span class="co">#USO DE LAS FFDF</span></span>
+<span id="cb254-32"><a href="big-data-en-r.html#cb254-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb254-33"><a href="big-data-en-r.html#cb254-33" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(bd2<span class="sc">$</span>SEXO)</span>
+<span id="cb254-34"><a href="big-data-en-r.html#cb254-34" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(bd5<span class="sc">$</span>SEXO)</span>
+<span id="cb254-35"><a href="big-data-en-r.html#cb254-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb254-36"><a href="big-data-en-r.html#cb254-36" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tictoc&quot;</span>)</span>
+<span id="cb254-37"><a href="big-data-en-r.html#cb254-37" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tictoc)</span>
+<span id="cb254-38"><a href="big-data-en-r.html#cb254-38" aria-hidden="true" tabindex="-1"></a><span class="fu">tic</span>(<span class="st">&quot;R&quot;</span>)</span>
+<span id="cb254-39"><a href="big-data-en-r.html#cb254-39" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(bd1<span class="sc">$</span>EDAD,bd1<span class="sc">$</span>SEXO)</span>
+<span id="cb254-40"><a href="big-data-en-r.html#cb254-40" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>()</span>
+<span id="cb254-41"><a href="big-data-en-r.html#cb254-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb254-42"><a href="big-data-en-r.html#cb254-42" aria-hidden="true" tabindex="-1"></a><span class="fu">tic</span>(<span class="st">&quot;ffdf&quot;</span>)</span>
+<span id="cb254-43"><a href="big-data-en-r.html#cb254-43" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(bd2<span class="sc">$</span>EDAD,bd2<span class="sc">$</span>SEXO)</span>
+<span id="cb254-44"><a href="big-data-en-r.html#cb254-44" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>()</span>
+<span id="cb254-45"><a href="big-data-en-r.html#cb254-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb254-46"><a href="big-data-en-r.html#cb254-46" aria-hidden="true" tabindex="-1"></a><span class="fu">tic</span>(<span class="st">&quot;ffdf bd5&quot;</span>)</span>
+<span id="cb254-47"><a href="big-data-en-r.html#cb254-47" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(bd5<span class="sc">$</span>EDAD,bd5<span class="sc">$</span>SEXO)</span>
+<span id="cb254-48"><a href="big-data-en-r.html#cb254-48" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>()</span>
+<span id="cb254-49"><a href="big-data-en-r.html#cb254-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb254-50"><a href="big-data-en-r.html#cb254-50" aria-hidden="true" tabindex="-1"></a><span class="fu">tic</span>(<span class="st">&quot;ffdf table&quot;</span>)</span>
+<span id="cb254-51"><a href="big-data-en-r.html#cb254-51" aria-hidden="true" tabindex="-1"></a><span class="fu">table.ff</span>(bd2<span class="sc">$</span>EDAD,bd2<span class="sc">$</span>SEXO)</span>
+<span id="cb254-52"><a href="big-data-en-r.html#cb254-52" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>()</span></code></pre></div>
+<p>Funciones para objetos ff</p>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="big-data-en-r.html#cb255-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(bd1<span class="sc">$</span>EDAD)</span>
+<span id="cb255-2"><a href="big-data-en-r.html#cb255-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(bd2<span class="sc">$</span>EDAD)</span>
+<span id="cb255-3"><a href="big-data-en-r.html#cb255-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(bd5<span class="sc">$</span>EDAD)</span>
+<span id="cb255-4"><a href="big-data-en-r.html#cb255-4" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(bd2<span class="sc">$</span>EDAD)</span>
+<span id="cb255-5"><a href="big-data-en-r.html#cb255-5" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(bd1<span class="sc">$</span>EDAD)</span>
+<span id="cb255-6"><a href="big-data-en-r.html#cb255-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb255-7"><a href="big-data-en-r.html#cb255-7" aria-hidden="true" tabindex="-1"></a><span class="co">#sobre la bd2</span></span>
+<span id="cb255-8"><a href="big-data-en-r.html#cb255-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(doBy)</span>
+<span id="cb255-9"><a href="big-data-en-r.html#cb255-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb255-10"><a href="big-data-en-r.html#cb255-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb255-11"><a href="big-data-en-r.html#cb255-11" aria-hidden="true" tabindex="-1"></a>res0<span class="ot">&lt;-</span>bd1 <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(PAIS_NACIONALIDAD,SEXO) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="fu">mean</span>(EDAD))</span>
+<span id="cb255-12"><a href="big-data-en-r.html#cb255-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb255-13"><a href="big-data-en-r.html#cb255-13" aria-hidden="true" tabindex="-1"></a>bd2df<span class="ot">&lt;-</span><span class="fu">as.data.frame</span>(bd2)</span>
+<span id="cb255-14"><a href="big-data-en-r.html#cb255-14" aria-hidden="true" tabindex="-1"></a>bd5df<span class="ot">&lt;-</span><span class="fu">as.data.frame</span>(bd5)</span>
+<span id="cb255-15"><a href="big-data-en-r.html#cb255-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb255-16"><a href="big-data-en-r.html#cb255-16" aria-hidden="true" tabindex="-1"></a><span class="fu">object.size</span>(bd2df)<span class="sc">/</span><span class="dv">10</span><span class="sc">^</span><span class="dv">6</span></span>
+<span id="cb255-17"><a href="big-data-en-r.html#cb255-17" aria-hidden="true" tabindex="-1"></a><span class="fu">object.size</span>(bd5df)<span class="sc">/</span><span class="dv">10</span><span class="sc">^</span><span class="dv">6</span></span>
+<span id="cb255-18"><a href="big-data-en-r.html#cb255-18" aria-hidden="true" tabindex="-1"></a>bd2df <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(PAIS_NACIONALIDAD,SEXO) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="fu">mean</span>(EDAD))</span>
+<span id="cb255-19"><a href="big-data-en-r.html#cb255-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb255-20"><a href="big-data-en-r.html#cb255-20" aria-hidden="true" tabindex="-1"></a><span class="co">#bd2 %&gt;% group_by(PAIS_NACIONALIDAD,SEXO) %&gt;% summarise(mean(EDAD))</span></span>
+<span id="cb255-21"><a href="big-data-en-r.html#cb255-21" aria-hidden="true" tabindex="-1"></a><span class="fu">summaryBy</span>(EDAD<span class="sc">~</span>PAIS_NACIONALIDAD<span class="sc">+</span>SEXO,<span class="at">FUN=</span>mean,<span class="at">data=</span>bd1)</span>
+<span id="cb255-22"><a href="big-data-en-r.html#cb255-22" aria-hidden="true" tabindex="-1"></a><span class="fu">summaryBy</span>(EDAD<span class="sc">~</span>PAIS_NACIONALIDAD<span class="sc">+</span>SEXO,<span class="at">FUN=</span>mean,<span class="at">data=</span>bd2df)</span>
+<span id="cb255-23"><a href="big-data-en-r.html#cb255-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb255-24"><a href="big-data-en-r.html#cb255-24" aria-hidden="true" tabindex="-1"></a><span class="fu">tapply</span>(bd1<span class="sc">$</span>EDAD, bd1<span class="sc">$</span>PAIS_NACIONALIDAD, mean)</span>
+<span id="cb255-25"><a href="big-data-en-r.html#cb255-25" aria-hidden="true" tabindex="-1"></a><span class="fu">tapply</span>(bd2df<span class="sc">$</span>EDAD, bd2df<span class="sc">$</span>PAIS_NACIONALIDAD, mean)</span>
+<span id="cb255-26"><a href="big-data-en-r.html#cb255-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb255-27"><a href="big-data-en-r.html#cb255-27" aria-hidden="true" tabindex="-1"></a>res<span class="ot">&lt;-</span><span class="fu">ffdfdply</span>(bd2,<span class="at">split=</span>bd2<span class="sc">$</span>SEXO,<span class="at">FUN=</span><span class="cf">function</span>(x){</span>
+<span id="cb255-28"><a href="big-data-en-r.html#cb255-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summaryBy</span>(EDAD<span class="sc">~</span>PAIS_NACIONALIDAD<span class="sc">+</span>SEXO,<span class="at">FUN=</span>mean,<span class="at">data=</span>x)</span>
+<span id="cb255-29"><a href="big-data-en-r.html#cb255-29" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb255-30"><a href="big-data-en-r.html#cb255-30" aria-hidden="true" tabindex="-1"></a><span class="fu">as.data.frame</span>(res)</span>
+<span id="cb255-31"><a href="big-data-en-r.html#cb255-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb255-32"><a href="big-data-en-r.html#cb255-32" aria-hidden="true" tabindex="-1"></a>ss1<span class="ot">&lt;-</span><span class="fu">subset</span>(bd1,EDAD<span class="sc">&gt;</span><span class="dv">60</span>)</span>
+<span id="cb255-33"><a href="big-data-en-r.html#cb255-33" aria-hidden="true" tabindex="-1"></a>ss2<span class="ot">&lt;-</span><span class="fu">subset</span>(bd2,EDAD<span class="sc">&gt;</span><span class="dv">60</span>)</span>
+<span id="cb255-34"><a href="big-data-en-r.html#cb255-34" aria-hidden="true" tabindex="-1"></a>ss3<span class="ot">&lt;-</span><span class="fu">subset.ffdf</span>(bd2,EDAD<span class="sc">&gt;</span><span class="dv">60</span>)</span>
+<span id="cb255-35"><a href="big-data-en-r.html#cb255-35" aria-hidden="true" tabindex="-1"></a>ss4<span class="ot">&lt;-</span><span class="fu">subset</span>(bd5,EDAD<span class="sc">&gt;</span><span class="dv">60</span>)</span>
+<span id="cb255-36"><a href="big-data-en-r.html#cb255-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb255-37"><a href="big-data-en-r.html#cb255-37" aria-hidden="true" tabindex="-1"></a><span class="co">#memoria en R</span></span>
+<span id="cb255-38"><a href="big-data-en-r.html#cb255-38" aria-hidden="true" tabindex="-1"></a><span class="co">#object.size(&quot;a&quot;)</span></span>
+<span id="cb255-39"><a href="big-data-en-r.html#cb255-39" aria-hidden="true" tabindex="-1"></a><span class="co">#memory.size()</span></span>
+<span id="cb255-40"><a href="big-data-en-r.html#cb255-40" aria-hidden="true" tabindex="-1"></a><span class="co">#memory.limit()</span></span>
+<span id="cb255-41"><a href="big-data-en-r.html#cb255-41" aria-hidden="true" tabindex="-1"></a><span class="co">#(memory.size()/memory.limit())*100</span></span>
+<span id="cb255-42"><a href="big-data-en-r.html#cb255-42" aria-hidden="true" tabindex="-1"></a><span class="co">#memory.profile()</span></span>
+<span id="cb255-43"><a href="big-data-en-r.html#cb255-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb255-44"><a href="big-data-en-r.html#cb255-44" aria-hidden="true" tabindex="-1"></a><span class="co">#guardar objetos ffdf</span></span>
+<span id="cb255-45"><a href="big-data-en-r.html#cb255-45" aria-hidden="true" tabindex="-1"></a><span class="fu">save.ffdf</span>(res)</span>
+<span id="cb255-46"><a href="big-data-en-r.html#cb255-46" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(res)</span>
+<span id="cb255-47"><a href="big-data-en-r.html#cb255-47" aria-hidden="true" tabindex="-1"></a><span class="fu">load.ffdf</span>(<span class="st">&quot;ffdb&quot;</span>)</span>
+<span id="cb255-48"><a href="big-data-en-r.html#cb255-48" aria-hidden="true" tabindex="-1"></a><span class="co">#convirtiendo a ff</span></span>
+<span id="cb255-49"><a href="big-data-en-r.html#cb255-49" aria-hidden="true" tabindex="-1"></a>dd<span class="ot">&lt;-</span><span class="fu">as.ffdf</span>(bd1)</span>
+<span id="cb255-50"><a href="big-data-en-r.html#cb255-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb255-51"><a href="big-data-en-r.html#cb255-51" aria-hidden="true" tabindex="-1"></a><span class="co">#forma lenta</span></span>
+<span id="cb255-52"><a href="big-data-en-r.html#cb255-52" aria-hidden="true" tabindex="-1"></a>bd1<span class="sc">$</span>FECHA_ACTUALIZACION<span class="ot">&lt;-</span><span class="fu">as.factor</span>(bd1<span class="sc">$</span>FECHA_ACTUALIZACION)</span>
+<span id="cb255-53"><a href="big-data-en-r.html#cb255-53" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(bd1)</span>
+<span id="cb255-54"><a href="big-data-en-r.html#cb255-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb255-55"><a href="big-data-en-r.html#cb255-55" aria-hidden="true" tabindex="-1"></a><span class="co">#forma rápida</span></span>
+<span id="cb255-56"><a href="big-data-en-r.html#cb255-56" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="fu">sapply</span>(bd1, is.character)</span>
+<span id="cb255-57"><a href="big-data-en-r.html#cb255-57" aria-hidden="true" tabindex="-1"></a>bd1[,i] <span class="ot">&lt;-</span> <span class="fu">lapply</span>(bd1[,i], as.factor)</span>
+<span id="cb255-58"><a href="big-data-en-r.html#cb255-58" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(bd1)</span>
+<span id="cb255-59"><a href="big-data-en-r.html#cb255-59" aria-hidden="true" tabindex="-1"></a>dd<span class="ot">&lt;-</span><span class="fu">as.ffdf</span>(bd1)</span></code></pre></div>
+</div>
+<div id="modelos-glm-con-la-las-librerias-ff-y-ffbase" class="section level3" number="4.2.2">
+<h3><span class="header-section-number">4.2.2</span> Modelos GLM con la las librerias ff y ffbase</h3>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="big-data-en-r.html#cb256-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;biglm&quot;</span>)</span>
+<span id="cb256-2"><a href="big-data-en-r.html#cb256-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ff)</span>
+<span id="cb256-3"><a href="big-data-en-r.html#cb256-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ffbase)</span>
+<span id="cb256-4"><a href="big-data-en-r.html#cb256-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(biglm)</span>
+<span id="cb256-5"><a href="big-data-en-r.html#cb256-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb256-6"><a href="big-data-en-r.html#cb256-6" aria-hidden="true" tabindex="-1"></a>model1<span class="ot">&lt;-</span><span class="fu">lm</span>(EDAD<span class="sc">~</span>UCI,<span class="at">data =</span> bd1)</span>
+<span id="cb256-7"><a href="big-data-en-r.html#cb256-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb256-8"><a href="big-data-en-r.html#cb256-8" aria-hidden="true" tabindex="-1"></a>model2<span class="ot">&lt;-</span><span class="fu">lm</span>(EDAD<span class="sc">~</span>UCI,<span class="at">data =</span> bd2)</span>
+<span id="cb256-9"><a href="big-data-en-r.html#cb256-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb256-10"><a href="big-data-en-r.html#cb256-10" aria-hidden="true" tabindex="-1"></a>model3<span class="ot">&lt;-</span><span class="fu">bigglm.ffdf</span>(EDAD<span class="sc">~</span>SEXO,<span class="at">data =</span> dd)</span>
+<span id="cb256-11"><a href="big-data-en-r.html#cb256-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb256-12"><a href="big-data-en-r.html#cb256-12" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1)</span>
+<span id="cb256-13"><a href="big-data-en-r.html#cb256-13" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model2)</span>
+<span id="cb256-14"><a href="big-data-en-r.html#cb256-14" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model3)</span></code></pre></div>
+</div>
+<div id="expandiendo-la-memoria-con-la-libreria-bigmemory" class="section level3" number="4.2.3">
+<h3><span class="header-section-number">4.2.3</span> Expandiendo la memoria con la libreria bigmemory</h3>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="big-data-en-r.html#cb257-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
+<span id="cb257-2"><a href="big-data-en-r.html#cb257-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bigmemory)</span>
+<span id="cb257-3"><a href="big-data-en-r.html#cb257-3" aria-hidden="true" tabindex="-1"></a><span class="co">#limitación de bigmemory, todos los variables de la base de datos de interés deben ser numéricas.</span></span>
+<span id="cb257-4"><a href="big-data-en-r.html#cb257-4" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">Users</span><span class="sc">\\</span><span class="st">ALVARO</span><span class="sc">\\</span><span class="st">Documents</span><span class="sc">\\</span><span class="st">GitHub</span><span class="sc">\\</span><span class="st">EST-383</span><span class="sc">\\</span><span class="st">data</span><span class="sc">\\</span><span class="st">oct20.RData&quot;</span>)</span>
+<span id="cb257-5"><a href="big-data-en-r.html#cb257-5" aria-hidden="true" tabindex="-1"></a>bd1<span class="ot">&lt;-</span>computo[,<span class="dv">13</span><span class="sc">:</span><span class="dv">25</span>]</span>
+<span id="cb257-6"><a href="big-data-en-r.html#cb257-6" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(bd1)</span>
+<span id="cb257-7"><a href="big-data-en-r.html#cb257-7" aria-hidden="true" tabindex="-1"></a><span class="fu">object.size</span>(bd1)<span class="sc">/</span><span class="dv">10</span><span class="sc">^</span><span class="dv">6</span></span>
+<span id="cb257-8"><a href="big-data-en-r.html#cb257-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb257-9"><a href="big-data-en-r.html#cb257-9" aria-hidden="true" tabindex="-1"></a>bd2<span class="ot">&lt;-</span><span class="fu">as.big.matrix</span>(<span class="fu">as.matrix</span>(bd1))</span>
+<span id="cb257-10"><a href="big-data-en-r.html#cb257-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb257-11"><a href="big-data-en-r.html#cb257-11" aria-hidden="true" tabindex="-1"></a><span class="fu">object.size</span>(bd1)<span class="sc">/</span><span class="dv">10</span><span class="sc">^</span><span class="dv">6</span></span>
+<span id="cb257-12"><a href="big-data-en-r.html#cb257-12" aria-hidden="true" tabindex="-1"></a><span class="fu">object.size</span>(bd2)<span class="sc">/</span><span class="dv">10</span><span class="sc">^</span><span class="dv">6</span></span>
+<span id="cb257-13"><a href="big-data-en-r.html#cb257-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb257-14"><a href="big-data-en-r.html#cb257-14" aria-hidden="true" tabindex="-1"></a><span class="fu">object.size</span>(bd1)<span class="sc">/</span><span class="fu">object.size</span>(bd2)</span>
+<span id="cb257-15"><a href="big-data-en-r.html#cb257-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb257-16"><a href="big-data-en-r.html#cb257-16" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(bd2)</span>
+<span id="cb257-17"><a href="big-data-en-r.html#cb257-17" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(bd1)</span>
+<span id="cb257-18"><a href="big-data-en-r.html#cb257-18" aria-hidden="true" tabindex="-1"></a><span class="co">#xx&lt;-read.big.matrix(&quot;.csv&quot;,sep=&quot;,&quot;)</span></span>
+<span id="cb257-19"><a href="big-data-en-r.html#cb257-19" aria-hidden="true" tabindex="-1"></a><span class="co">#alternativamente read.big.matrix</span></span>
+<span id="cb257-20"><a href="big-data-en-r.html#cb257-20" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(bd2)</span>
+<span id="cb257-21"><a href="big-data-en-r.html#cb257-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb257-22"><a href="big-data-en-r.html#cb257-22" aria-hidden="true" tabindex="-1"></a><span class="fu">dimnames</span>(bd2)</span>
+<span id="cb257-23"><a href="big-data-en-r.html#cb257-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb257-24"><a href="big-data-en-r.html#cb257-24" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(bd2)</span>
+<span id="cb257-25"><a href="big-data-en-r.html#cb257-25" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(bd1)</span>
+<span id="cb257-26"><a href="big-data-en-r.html#cb257-26" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(bd2)</span>
+<span id="cb257-27"><a href="big-data-en-r.html#cb257-27" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(bd2[,<span class="dv">1</span>])</span>
+<span id="cb257-28"><a href="big-data-en-r.html#cb257-28" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(bd2[,<span class="dv">2</span>])</span>
+<span id="cb257-29"><a href="big-data-en-r.html#cb257-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb257-30"><a href="big-data-en-r.html#cb257-30" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(bd2)</span>
+<span id="cb257-31"><a href="big-data-en-r.html#cb257-31" aria-hidden="true" tabindex="-1"></a><span class="fu">dimnames</span>(bd2)</span>
+<span id="cb257-32"><a href="big-data-en-r.html#cb257-32" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(CC<span class="sc">~</span>MNR,<span class="at">data=</span>bd2)</span>
+<span id="cb257-33"><a href="big-data-en-r.html#cb257-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb257-34"><a href="big-data-en-r.html#cb257-34" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bigtabulate)</span>
+<span id="cb257-35"><a href="big-data-en-r.html#cb257-35" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(biganalytics)</span>
+<span id="cb257-36"><a href="big-data-en-r.html#cb257-36" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(biglm)</span>
+<span id="cb257-37"><a href="big-data-en-r.html#cb257-37" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bigstatsr)</span>
+<span id="cb257-38"><a href="big-data-en-r.html#cb257-38" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bigalgebra) <span class="co"># salio de R el 2020</span></span>
+<span id="cb257-39"><a href="big-data-en-r.html#cb257-39" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bigpca)<span class="co"># salio el 2018 de R</span></span>
+<span id="cb257-40"><a href="big-data-en-r.html#cb257-40" aria-hidden="true" tabindex="-1"></a>reg0<span class="ot">&lt;-</span><span class="fu">bigglm.big.matrix</span>(CC<span class="sc">~</span>MNR,<span class="at">data=</span>bd2)</span>
+<span id="cb257-41"><a href="big-data-en-r.html#cb257-41" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg0)</span>
+<span id="cb257-42"><a href="big-data-en-r.html#cb257-42" aria-hidden="true" tabindex="-1"></a>reg<span class="ot">&lt;-</span><span class="fu">bigglm.big.matrix</span>(CC<span class="sc">~</span>FPV,<span class="at">data=</span>bd2)</span>
+<span id="cb257-43"><a href="big-data-en-r.html#cb257-43" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg)</span>
+<span id="cb257-44"><a href="big-data-en-r.html#cb257-44" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(bd2)</span></code></pre></div>
+</div>
+</div>
+<div id="parallel-r" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> Parallel R</h2>
+<p>Esta sección se enfoca en los métodos de computación paralelo, de tal forma que se pueda controlara la paralelizacion en una sola maquina.</p>
+<p>El objetivo es poder aprovechar los cores que tiene disponible los PC en la actualidad, R por defecto solo trabaja en una.</p>
+<ul>
+<li><a href="https://cran.r-project.org/web/views/HighPerformanceComputing.html">Recursos online En R</a></li>
+<li>Un libro acerca del tema <a href="https://www.oreilly.com/library/view/parallel-r/9781449317850/">(aquí)</a></li>
+</ul>
+<p>Antes una función para calcular el tiempo de procesamiento.</p>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="big-data-en-r.html#cb258-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
+<span id="cb258-2"><a href="big-data-en-r.html#cb258-2" aria-hidden="true" tabindex="-1"></a>teval<span class="ot">&lt;-</span><span class="cf">function</span>(...){</span>
+<span id="cb258-3"><a href="big-data-en-r.html#cb258-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gc</span>()</span>
+<span id="cb258-4"><a href="big-data-en-r.html#cb258-4" aria-hidden="true" tabindex="-1"></a>  start<span class="ot">&lt;-</span><span class="fu">proc.time</span>()</span>
+<span id="cb258-5"><a href="big-data-en-r.html#cb258-5" aria-hidden="true" tabindex="-1"></a>  result<span class="ot">&lt;-</span><span class="fu">eval</span>(...)</span>
+<span id="cb258-6"><a href="big-data-en-r.html#cb258-6" aria-hidden="true" tabindex="-1"></a>  finish<span class="ot">&lt;-</span><span class="fu">proc.time</span>()</span>
+<span id="cb258-7"><a href="big-data-en-r.html#cb258-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">Duration=</span>finish<span class="sc">-</span>start,<span class="at">Result=</span>result))</span>
+<span id="cb258-8"><a href="big-data-en-r.html#cb258-8" aria-hidden="true" tabindex="-1"></a>  }</span></code></pre></div>
+<p>Veamos el rendimiento de lo visto antes.</p>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="big-data-en-r.html#cb259-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ff)</span>
+<span id="cb259-2"><a href="big-data-en-r.html#cb259-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ffbase)</span>
+<span id="cb259-3"><a href="big-data-en-r.html#cb259-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bigmemory)</span>
+<span id="cb259-4"><a href="big-data-en-r.html#cb259-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(biganalytics)</span>
+<span id="cb259-5"><a href="big-data-en-r.html#cb259-5" aria-hidden="true" tabindex="-1"></a>mr<span class="ot">&lt;-</span><span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">10000000</span><span class="sc">*</span><span class="dv">10</span>),<span class="at">nrow =</span> <span class="dv">10000000</span>,<span class="at">ncol=</span><span class="dv">10</span>)</span>
+<span id="cb259-6"><a href="big-data-en-r.html#cb259-6" aria-hidden="true" tabindex="-1"></a>mr<span class="ot">&lt;-</span><span class="fu">cbind</span>(mr,<span class="at">binom=</span><span class="fu">rbinom</span>(<span class="dv">10000000</span>,<span class="dv">5</span>,<span class="fl">0.7</span>))</span>
+<span id="cb259-7"><a href="big-data-en-r.html#cb259-7" aria-hidden="true" tabindex="-1"></a>mbm<span class="ot">&lt;-</span><span class="fu">as.big.matrix</span>(mr)</span>
+<span id="cb259-8"><a href="big-data-en-r.html#cb259-8" aria-hidden="true" tabindex="-1"></a>mff<span class="ot">&lt;-</span><span class="fu">as.ffdf</span>(<span class="fu">as.data.frame</span>(mr))</span>
+<span id="cb259-9"><a href="big-data-en-r.html#cb259-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb259-10"><a href="big-data-en-r.html#cb259-10" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mr)</span>
+<span id="cb259-11"><a href="big-data-en-r.html#cb259-11" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mbm)</span>
+<span id="cb259-12"><a href="big-data-en-r.html#cb259-12" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mff)</span>
+<span id="cb259-13"><a href="big-data-en-r.html#cb259-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb259-14"><a href="big-data-en-r.html#cb259-14" aria-hidden="true" tabindex="-1"></a><span class="fu">object.size</span>(mr)<span class="sc">/</span><span class="dv">10</span><span class="sc">^</span><span class="dv">6</span></span>
+<span id="cb259-15"><a href="big-data-en-r.html#cb259-15" aria-hidden="true" tabindex="-1"></a><span class="fu">object.size</span>(mbm)<span class="sc">/</span><span class="dv">10</span><span class="sc">^</span><span class="dv">6</span></span>
+<span id="cb259-16"><a href="big-data-en-r.html#cb259-16" aria-hidden="true" tabindex="-1"></a><span class="fu">object.size</span>(mff)<span class="sc">/</span><span class="dv">10</span><span class="sc">^</span><span class="dv">6</span></span>
+<span id="cb259-17"><a href="big-data-en-r.html#cb259-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb259-18"><a href="big-data-en-r.html#cb259-18" aria-hidden="true" tabindex="-1"></a><span class="fu">teval</span>(<span class="fu">colMeans</span>(mr))</span>
+<span id="cb259-19"><a href="big-data-en-r.html#cb259-19" aria-hidden="true" tabindex="-1"></a><span class="fu">teval</span>(<span class="fu">colmean</span>(mbm))</span>
+<span id="cb259-20"><a href="big-data-en-r.html#cb259-20" aria-hidden="true" tabindex="-1"></a><span class="co">#teval(colMeans(mff))</span></span>
+<span id="cb259-21"><a href="big-data-en-r.html#cb259-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb259-22"><a href="big-data-en-r.html#cb259-22" aria-hidden="true" tabindex="-1"></a><span class="fu">teval</span>(<span class="fu">apply</span>(mr,<span class="dv">2</span>,mean))</span>
+<span id="cb259-23"><a href="big-data-en-r.html#cb259-23" aria-hidden="true" tabindex="-1"></a><span class="fu">teval</span>(<span class="fu">apply</span>(mbm,<span class="dv">2</span>,mean))</span>
+<span id="cb259-24"><a href="big-data-en-r.html#cb259-24" aria-hidden="true" tabindex="-1"></a><span class="fu">teval</span>(<span class="fu">apply</span>(mff,<span class="dv">2</span>,mean))</span>
+<span id="cb259-25"><a href="big-data-en-r.html#cb259-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb259-26"><a href="big-data-en-r.html#cb259-26" aria-hidden="true" tabindex="-1"></a>resul<span class="ot">&lt;-</span><span class="fu">list</span>()</span>
+<span id="cb259-27"><a href="big-data-en-r.html#cb259-27" aria-hidden="true" tabindex="-1"></a><span class="fu">teval</span>(</span>
+<span id="cb259-28"><a href="big-data-en-r.html#cb259-28" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(mff)){</span>
+<span id="cb259-29"><a href="big-data-en-r.html#cb259-29" aria-hidden="true" tabindex="-1"></a> resul[[i]]<span class="ot">&lt;-</span><span class="fu">mean.ff</span>(mff[[i]]) </span>
+<span id="cb259-30"><a href="big-data-en-r.html#cb259-30" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb259-31"><a href="big-data-en-r.html#cb259-31" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb259-32"><a href="big-data-en-r.html#cb259-32" aria-hidden="true" tabindex="-1"></a><span class="fu">teval</span>(<span class="fu">sapply</span>(mff,mean))</span>
+<span id="cb259-33"><a href="big-data-en-r.html#cb259-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb259-34"><a href="big-data-en-r.html#cb259-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb259-35"><a href="big-data-en-r.html#cb259-35" aria-hidden="true" tabindex="-1"></a><span class="fu">teval</span>(<span class="fu">tapply</span>(mr[,<span class="dv">1</span>], mr[,<span class="dv">11</span>], mean))</span>
+<span id="cb259-36"><a href="big-data-en-r.html#cb259-36" aria-hidden="true" tabindex="-1"></a><span class="fu">teval</span>(<span class="fu">tapply</span>(mbm[,<span class="dv">1</span>], mbm[,<span class="dv">11</span>], mean))</span>
+<span id="cb259-37"><a href="big-data-en-r.html#cb259-37" aria-hidden="true" tabindex="-1"></a><span class="fu">teval</span>(<span class="fu">tapply</span>(mff[[<span class="dv">1</span>]], mff[[<span class="dv">11</span>]], mean.ff))</span>
+<span id="cb259-38"><a href="big-data-en-r.html#cb259-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb259-39"><a href="big-data-en-r.html#cb259-39" aria-hidden="true" tabindex="-1"></a>aux<span class="ot">&lt;-</span><span class="fu">matrix</span>(<span class="cn">NA</span>,<span class="dv">6</span>,<span class="dv">10</span>)</span>
+<span id="cb259-40"><a href="big-data-en-r.html#cb259-40" aria-hidden="true" tabindex="-1"></a><span class="fu">teval</span>(</span>
+<span id="cb259-41"><a href="big-data-en-r.html#cb259-41" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>){</span>
+<span id="cb259-42"><a href="big-data-en-r.html#cb259-42" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(j <span class="cf">in</span> <span class="fu">unique</span>(mff[,<span class="dv">11</span>])){</span>
+<span id="cb259-43"><a href="big-data-en-r.html#cb259-43" aria-hidden="true" tabindex="-1"></a>    aux[j<span class="sc">+</span><span class="dv">1</span>,i]<span class="ot">&lt;-</span><span class="fu">mean</span>(mff[mff[,<span class="dv">11</span>]<span class="sc">==</span>j,i])  </span>
+<span id="cb259-44"><a href="big-data-en-r.html#cb259-44" aria-hidden="true" tabindex="-1"></a>  }  </span>
+<span id="cb259-45"><a href="big-data-en-r.html#cb259-45" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb259-46"><a href="big-data-en-r.html#cb259-46" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div id="libreria-parallel" class="section level3" number="4.3.1">
+<h3><span class="header-section-number">4.3.1</span> Libreria parallel</h3>
+<p>Ahora sí, veamos la librería parallel y snow.</p>
+<ul>
+<li>Disponible desde la versión 2.14.0</li>
+<li>Existen otras populares; multicore, snow (Simple Network of
+Workstations). La primera descontinuada y la segunda limitada.</li>
+<li>El manual <a href="https://stat.ethz.ch/R-manual/R-devel/library/parallel/doc/parallel.pdf" class="uri">https://stat.ethz.ch/R-manual/R-devel/library/parallel/doc/parallel.pdf</a></li>
+</ul>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="big-data-en-r.html#cb260-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(parallel)</span>
+<span id="cb260-2"><a href="big-data-en-r.html#cb260-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(snow)</span>
+<span id="cb260-3"><a href="big-data-en-r.html#cb260-3" aria-hidden="true" tabindex="-1"></a><span class="co">#funciones propias </span></span>
+<span id="cb260-4"><a href="big-data-en-r.html#cb260-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mclapply</span>()<span class="co">#no funciona completamente en windows</span></span>
+<span id="cb260-5"><a href="big-data-en-r.html#cb260-5" aria-hidden="true" tabindex="-1"></a><span class="fu">parLapply</span>()</span>
+<span id="cb260-6"><a href="big-data-en-r.html#cb260-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="at">help=</span>parallel)</span>
+<span id="cb260-7"><a href="big-data-en-r.html#cb260-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="at">help=</span>snow)</span>
+<span id="cb260-8"><a href="big-data-en-r.html#cb260-8" aria-hidden="true" tabindex="-1"></a><span class="co">#viendo los cores disponibles</span></span>
+<span id="cb260-9"><a href="big-data-en-r.html#cb260-9" aria-hidden="true" tabindex="-1"></a><span class="fu">detectCores</span>()</span>
+<span id="cb260-10"><a href="big-data-en-r.html#cb260-10" aria-hidden="true" tabindex="-1"></a><span class="co">#definiendo un cluster de trabajo</span></span>
+<span id="cb260-11"><a href="big-data-en-r.html#cb260-11" aria-hidden="true" tabindex="-1"></a><span class="co">#SOCK usa Rscript para lanzar más copias de R (en el mismo host u opcionalmente en otro lugar)</span></span>
+<span id="cb260-12"><a href="big-data-en-r.html#cb260-12" aria-hidden="true" tabindex="-1"></a><span class="co">#FORK makeForkCluster bifurca a los trabajadores en el host actual (que hereda el entorno de la sesión actual)  (NO WINDOWS)</span></span>
+<span id="cb260-13"><a href="big-data-en-r.html#cb260-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb260-14"><a href="big-data-en-r.html#cb260-14" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">&lt;-</span> <span class="fu">makeCluster</span>(<span class="dv">3</span>, <span class="at">type =</span> <span class="st">&quot;SOCK&quot;</span>)</span>
+<span id="cb260-15"><a href="big-data-en-r.html#cb260-15" aria-hidden="true" tabindex="-1"></a><span class="fu">stopCluster</span>(cl)</span>
+<span id="cb260-16"><a href="big-data-en-r.html#cb260-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb260-17"><a href="big-data-en-r.html#cb260-17" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">&lt;-</span> <span class="fu">makeCluster</span>(<span class="dv">2</span>, <span class="at">type =</span> <span class="st">&quot;SOCK&quot;</span>)</span>
+<span id="cb260-18"><a href="big-data-en-r.html#cb260-18" aria-hidden="true" tabindex="-1"></a><span class="fu">teval</span>(<span class="fu">parApply</span>(cl,mr,<span class="dv">2</span>,mean))</span>
+<span id="cb260-19"><a href="big-data-en-r.html#cb260-19" aria-hidden="true" tabindex="-1"></a><span class="fu">stopCluster</span>(cl)</span>
+<span id="cb260-20"><a href="big-data-en-r.html#cb260-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb260-21"><a href="big-data-en-r.html#cb260-21" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">&lt;-</span> <span class="fu">makeCluster</span>(<span class="dv">3</span>, <span class="at">type =</span> <span class="st">&quot;SOCK&quot;</span>)</span>
+<span id="cb260-22"><a href="big-data-en-r.html#cb260-22" aria-hidden="true" tabindex="-1"></a><span class="fu">teval</span>(<span class="fu">parApply</span>(cl,mr,<span class="dv">2</span>,mean))</span>
+<span id="cb260-23"><a href="big-data-en-r.html#cb260-23" aria-hidden="true" tabindex="-1"></a><span class="fu">stopCluster</span>(cl)</span>
+<span id="cb260-24"><a href="big-data-en-r.html#cb260-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb260-25"><a href="big-data-en-r.html#cb260-25" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">&lt;-</span> <span class="fu">makeCluster</span>(<span class="dv">4</span>, <span class="at">type =</span> <span class="st">&quot;SOCK&quot;</span>)</span>
+<span id="cb260-26"><a href="big-data-en-r.html#cb260-26" aria-hidden="true" tabindex="-1"></a><span class="fu">teval</span>(<span class="fu">parApply</span>(cl,mr,<span class="dv">2</span>,mean))</span>
+<span id="cb260-27"><a href="big-data-en-r.html#cb260-27" aria-hidden="true" tabindex="-1"></a><span class="fu">stopCluster</span>(cl)</span>
+<span id="cb260-28"><a href="big-data-en-r.html#cb260-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb260-29"><a href="big-data-en-r.html#cb260-29" aria-hidden="true" tabindex="-1"></a><span class="co">#parApply(cl,mff[[1]],1,mean)</span></span>
+<span id="cb260-30"><a href="big-data-en-r.html#cb260-30" aria-hidden="true" tabindex="-1"></a><span class="co">#parApply(cl,mbm,2,mean)</span></span>
+<span id="cb260-31"><a href="big-data-en-r.html#cb260-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb260-32"><a href="big-data-en-r.html#cb260-32" aria-hidden="true" tabindex="-1"></a>A<span class="ot">&lt;-</span><span class="fu">matrix</span>(<span class="dv">10</span><span class="sc">^</span><span class="dv">6</span>,<span class="dv">10</span>)</span>
+<span id="cb260-33"><a href="big-data-en-r.html#cb260-33" aria-hidden="true" tabindex="-1"></a>B<span class="ot">&lt;-</span><span class="fu">matrix</span>(<span class="dv">10</span><span class="sc">^</span><span class="dv">6</span>,<span class="dv">10</span>)</span>
+<span id="cb260-34"><a href="big-data-en-r.html#cb260-34" aria-hidden="true" tabindex="-1"></a>C<span class="ot">&lt;-</span><span class="fu">matrix</span>(<span class="dv">10</span><span class="sc">^</span><span class="dv">6</span>,<span class="dv">10</span>)</span>
+<span id="cb260-35"><a href="big-data-en-r.html#cb260-35" aria-hidden="true" tabindex="-1"></a><span class="fu">mclapply</span>(<span class="at">X=</span><span class="fu">list</span>(A,B,C),<span class="at">FUN=</span>mean,<span class="at">mc.preschedule =</span> F,<span class="at">affinity.list =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb260-36"><a href="big-data-en-r.html#cb260-36" aria-hidden="true" tabindex="-1"></a><span class="fu">mclapply</span>(<span class="at">X=</span><span class="fu">list</span>(A,B,C),<span class="at">FUN=</span>mean)</span></code></pre></div>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="scraping-web-raspado-web.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="r-y-spark.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

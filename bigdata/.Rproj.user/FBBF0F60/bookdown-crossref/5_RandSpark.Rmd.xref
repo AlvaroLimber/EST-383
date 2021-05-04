@@ -1,0 +1,18 @@
+h1:r-y-spark R y Spark
+h2:introducción Introducción
+h3:hadoop Hadoop
+h3:spark Spark
+h3:sparklyr Sparklyr
+h2:librería-dplyr Librería dplyr
+h2:arrancando-spark Arrancando Spark
+h3:prerequisitos Prerequisitos
+h3:instalación Instalación
+h3:soluciones-a-problemas-de-instalación Soluciones a problemas de instalación
+h3:creando-una-sesión-en-spark Creando una sesión en Spark
+h3:interface-web Interface web
+h3:configuración Configuración
+h2:análisis-con-spark Análisis con Spark
+h3:importando-los-datos Importando los datos
+h3:librería-dplyr-gramática-de-manipulación-de-datos Librería DPLYR (Gramática de manipulación de datos)
+h3:dplyr-en-spark DPLYR en Spark
+

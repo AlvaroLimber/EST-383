@@ -1,10 +1,10 @@
 ----------------------------------------------------------------
-Wed Dec 02 17:41:32 BOT 2020:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-0176-2567-4033-0000087f2698 
-on database directory memory:C:\Users\ALVARO\Documents\GitHub\EST-383\bigdata\databaseName=metastore_db with class loader org.apache.spark.sql.hive.client.IsolatedClientLoader$$anon$1@1b407381 
-Loaded from file:/C:/Users/ALVARO/AppData/Local/spark/spark-2.4.3-bin-hadoop2.7/jars/derby-10.12.1.1.jar
+Tue Apr 27 14:48:30 BOT 2021:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-0179-14a9-4871-00000989b538 
+on database directory memory:C:\Users\ALVARO\Documents\GitHub\EST-383\bigdata\databaseName=metastore_db with class loader org.apache.spark.sql.hive.client.IsolatedClientLoader$$anon$1@4f3b0a9e 
+Loaded from file:/C:/Users/ALVARO/AppData/Local/spark/spark-3.0.0-bin-hadoop2.7/jars/derby-10.12.1.1.jar
 java.vendor=Oracle Corporation
-java.runtime.version=1.8.0_271-b09
+java.runtime.version=1.8.0_281-b09
 user.dir=C:\Users\ALVARO\Documents\GitHub\EST-383\bigdata
 os.name=Windows 10
 os.arch=amd64

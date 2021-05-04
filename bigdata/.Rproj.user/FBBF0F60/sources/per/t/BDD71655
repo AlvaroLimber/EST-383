@@ -3,7 +3,7 @@
     "path": "~/GitHub/EST-383/bigdata/3_scraping.Rmd",
     "project_path": "3_scraping.Rmd",
     "type": "r_markdown",
-    "hash": "29213811",
+    "hash": "2087203170",
     "contents": "",
     "dirty": false,
     "created": 1617732353123.0,
@@ -11,15 +11,17 @@
     "relative_order": 4,
     "properties": {
         "chunk_output_type": "console",
-        "cursorPosition": "210,13",
-        "scrollLine": "204"
+        "cursorPosition": "149,8",
+        "scrollLine": "112",
+        "docOutlineVisible": "0",
+        "Source": "Source"
     },
     "folds": "",
-    "lastKnownWriteTime": 1618343661,
+    "lastKnownWriteTime": 1620170025,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1618343661335,
+    "last_content_update": 1620170025367,
     "read_only": false,
     "read_only_alternatives": []
 }

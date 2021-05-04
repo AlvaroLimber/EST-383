@@ -1,34 +1,38 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
 # Big Data en R 
 [comment]: <> (Principalmente Big Data Analytics with R, Simon Walkowiak capitulo 3)
 
 R en un software que se adapta perfectamente con las fases del ciclo de vida de los proyectos de datos, ofreciendo herramientas para cada una de ellas; Entre las mas interesantes, R Markdown, Shiny, sweave, etc.
 
-Adicionalmente existen multiples librerias que permite trabajar con otros software, principalmente los asociados a bases de datos.
+Adicionalmente existen múltiples librerías que permite trabajar con otros software, principalmente los asociados a bases de datos.
 
 ![](images/r1.png)
 
-En el capitulo 1 se enfatiza el uso de R para el manejo, procesamiento y análisis de bases de datos, sumado a esto el conocimiento de distintas estadísticas en base a los cursos de formación, en este capitulo se buscar unir ambos topicos y explicar como usar el poder del modelado matematico y de datos en R, considerando bases de datos **grandes**, esto sin necesidad de recurrir a otros equipos. 
+En el capitulo 1 se enfatiza el uso de R para el manejo, procesamiento y análisis de bases de datos, sumado a esto el conocimiento de distintas estadísticas en base a los cursos de formación, en este capitulo se buscar unir ambos tópicos y explicar como usar el poder del modelado matemático y de datos en R, considerando bases de datos **grandes**, esto sin necesidad de recurrir a otros equipos. 
 
 Lo que se espera a partir de este capitulo es: 
 
-* Conocer las limitaciones de R para el Big Data y como ellas pueden resolverse
-* El uso de las librerias ff, ffbase, ffbase2, y bigmemory, para el manejo de la memoria del equipo
-* El uso de metodos estadisticos para objetos grandes en R, atraves de las librerias bigglm y ffbase
-* Mejorar la velocidad del procesamiento de datos con librerias que permiten la computación paralela (parallel computing)
-* Manipulación de datos más rápidos con el uso de la libreria data.table
+  * Conocer las limitaciones de R para el Big Data y como ellas pueden resolverse
+  * El uso de las librerías ff, ffbase, ffbase2, y bigmemory, para el manejo de la memoria del equipo
+  * El uso de métodos estadísticos para objetos grandes en R, a través de las librerías bigglm y ffbase
+  * Mejorar la velocidad del procesamiento de datos con librerías que permiten la computación paralela (parallel computing)
+  * Manipulación de datos más rápidos con el uso de la librería data.table
 
 ## Limitaciones en R
-A manera que uno va aprendiendo mas del R en la universidad o en el trabajo se valora cada vez mas la flexibilidad de R, su constante crecimiento, la ventaja de ser de codigo abierto, etc. Sin embargo, es importante tener en cuenta las limitaciones de R:
+A manera que uno va aprendiendo mas del R en la universidad o en el trabajo se valora cada vez mas la flexibilidad de R, su constante crecimiento, la ventaja de ser de código abierto, etc. Sin embargo, es importante tener en cuenta las limitaciones de R:
 
-* Los datos se ajustan a la RAM
-* R es generalmente muy lento comparado con otros lenguajes
+  * Los datos se ajustan a la RAM
+  * R es generalmente muy lento comparado con otros lenguajes
 
 ### Memoria
 
   * R permite trabajar con bases de datos que no superen el 50-60% de la RAM de la computadora
-  * Existen soluciones en R sin tener que recurrir aun a plataformas como; Microsoft Azure, Amazon EC2, or
-Google Cloud Platform.
-  * Existe tambien la opción de trabajar con RStudio-Cloud, https://rstudio.cloud/plans/free
+  * Existen soluciones en R sin tener que recurrir aun a plataformas como; Microsoft Azure, Amazon EC2, or Google Cloud Platform.
+  * Existe también la opción de trabajar con RStudio-Cloud, https://rstudio.cloud/plans/free
 
 ### Velocidad de procesamiento
 
@@ -50,24 +54,27 @@ install.packages("ffbase")
 ```{r,eval=FALSE}
 library(ff)
 library(ffbase)
-setwd("C:\\Users\\ALVARO\\Desktop\\db_bolivia\\bigdata")
+setwd("C:\\Users\\ALVARO\\Desktop\\_data\\bigdata")
 bd1<-read.csv("200613COVID19MEXICO.csv",sep=",",header=T)
-
 object.size(bd1)/1000000
-head(bd1)
+
 
 #paso 1: tener un directorio para archivos temporales de ff
 system("mkdir ffdf")
 #paso 2: definir la carpeta temporal
-options(fftempdir="C:\\Users\\ALVARO\\Desktop\\db_bolivia\\bigdata\\ffdf")
+options(fftempdir="C:\\Users\\ALVARO\\Desktop\\_data\\bigdata\\ffdf")
 #paso 3: Cargar la base de datos
 
 bd2<-read.csv.ffdf(file="200614COVID19MEXICO.csv",sep=",",header=T,
                    next.rows=100000,colClasses=NA,VERBOSE=F)
+
 bd3<-read.csv.ffdf(file="200614COVID19MEXICO.csv",sep=",",header=T,
                    first.rows=-1,colClasses=NA,VERBOSE=T)
 bd4<-read.csv.ffdf(file="200614COVID19MEXICO.csv",sep=",",header=T,
                    next.rows=10000,colClasses=NA,VERBOSE=T)
+bd5<-read.csv.ffdf(file="201115COVID19MEXICO.csv",sep=",",header=T,
+                   next.rows=100000,colClasses=NA,VERBOSE=F)
+
 
 object.size(bd1)/1000000 # CSV DE R
 object.size(bd2)/1000000 # CSV.FFDF 100000
@@ -78,7 +85,7 @@ str(bd2)
 #USO DE LAS FFDF
 
 table(bd2$SEXO)
-barplot(table(bd4$SEXO))
+table(bd5$SEXO)
 
 install.packages("tictoc")
 library(tictoc)
@@ -90,64 +97,60 @@ tic("ffdf")
 table(bd2$EDAD,bd2$SEXO)
 toc()
 
+tic("ffdf bd5")
+table(bd5$EDAD,bd5$SEXO)
+toc()
+
 tic("ffdf table")
 table.ff(bd2$EDAD,bd2$SEXO)
 toc()
-
-#R: 1 G -> 
-#FFDF: 200 M -> 
-class(bd1)
-class(bd2)
-#bd5<-as.data.frame.ffdf(bd2)
-
-#apropos("as.data.frame")
-#library(Hmisc)
-#describe(bd1)
-#describe(bd5)
-#object.size(bd5)
-#object.size(bd1)
-#object.size(bd2)
 ```
 
 Funciones para objetos ff
 
 ```{r,eval=F}
+mean(bd1$EDAD)
+mean(bd2$EDAD)
+mean(bd5$EDAD)
+median(bd2$EDAD)
+median(bd1$EDAD)
+
 #sobre la bd2
 library(doBy)
 library(dplyr)
 
-#res0<-bd1 %>% group_by(PAIS_NACIONALIDAD,SEXO) %>% #summarise(mean(EDAD))
-#bd2df<-as.data.frame.ffdf(bd2)
-#object.size(bd2df)
-#bd2df %>% group_by(PAIS_NACIONALIDAD,SEXO) %>% summarise(mean(EDAD))
-#summaryBy(EDAD~PAIS_NACIONALIDAD+SEXO,FUN=mean,data=bd1)
-#summaryBy(EDAD~PAIS_NACIONALIDAD+SEXO,FUN=mean,data=bd2df)
+res0<-bd1 %>% group_by(PAIS_NACIONALIDAD,SEXO) %>% summarise(mean(EDAD))
+
+bd2df<-as.data.frame(bd2)
+bd5df<-as.data.frame(bd5)
+
+object.size(bd2df)/10^6
+object.size(bd5df)/10^6
+bd2df %>% group_by(PAIS_NACIONALIDAD,SEXO) %>% summarise(mean(EDAD))
+
+#bd2 %>% group_by(PAIS_NACIONALIDAD,SEXO) %>% summarise(mean(EDAD))
+summaryBy(EDAD~PAIS_NACIONALIDAD+SEXO,FUN=mean,data=bd1)
+summaryBy(EDAD~PAIS_NACIONALIDAD+SEXO,FUN=mean,data=bd2df)
 
 tapply(bd1$EDAD, bd1$PAIS_NACIONALIDAD, mean)
+tapply(bd2df$EDAD, bd2df$PAIS_NACIONALIDAD, mean)
 
-tapply(bd2$EDAD, bd2$PAIS_NACIONALIDAD, mean)
-
-
-res<-ffdfdply(bd2,split=bd2$PAIS_NACIONALIDAD,FUN=function(x){
+res<-ffdfdply(bd2,split=bd2$SEXO,FUN=function(x){
   summaryBy(EDAD~PAIS_NACIONALIDAD+SEXO,FUN=mean,data=x)
 })
-object.size(res0)
-object.size(res)
-
+as.data.frame(res)
 
 ss1<-subset(bd1,EDAD>60)
-
 ss2<-subset(bd2,EDAD>60)
-
-
 ss3<-subset.ffdf(bd2,EDAD>60)
+ss4<-subset(bd5,EDAD>60)
 
 #memoria en R
-object.size("a")
-memory.size()
-memory.limit()
-(memory.size()/memory.limit())*100
-memory.profile()
+#object.size("a")
+#memory.size()
+#memory.limit()
+#(memory.size()/memory.limit())*100
+#memory.profile()
 
 #guardar objetos ffdf
 save.ffdf(res)
@@ -160,22 +163,11 @@ dd<-as.ffdf(bd1)
 bd1$FECHA_ACTUALIZACION<-as.factor(bd1$FECHA_ACTUALIZACION)
 str(bd1)
 
-#forma rapida
+#forma rápida
 i <- sapply(bd1, is.character)
 bd1[,i] <- lapply(bd1[,i], as.factor)
 str(bd1)
 dd<-as.ffdf(bd1)
-
-mx0<-read.csv("201115COVID19MEXICO.csv",sep=",",header=T)
-object.size(mx0)/10^6
-mx1<-read.csv.ffdf(file="201115COVID19MEXICO.csv",sep=",",header=T,
-                   first.rows=-1,colClasses=NA,VERBOSE=T)
-
-object.size(mx0)/10^6
-object.size(mx1)/10^6
-
-table(mx0$SEXO)
-table(mx1$SEXO)
 ```
 
 

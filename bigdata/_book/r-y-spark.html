@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 5 R y Spark | Big Data en R</title>
+  <meta name="description" content="Este libro esta destinado a la materia de Programación Estadística I de la carrera de Estadística de la Universidad Mayor de San Andres." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 5 R y Spark | Big Data en R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Este libro esta destinado a la materia de Programación Estadística I de la carrera de Estadística de la Universidad Mayor de San Andres." />
+  <meta name="github-repo" content="alvarolimber/EST-383" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 R y Spark | Big Data en R" />
+  
+  <meta name="twitter:description" content="Este libro esta destinado a la materia de Programación Estadística I de la carrera de Estadística de la Universidad Mayor de San Andres." />
+  
+
+<meta name="author" content="Alvaro Chirino Gutierrez" />
+
+
+<meta name="date" content="2021-05-04" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="big-data-en-r.html"/>
+
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prefacio</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#audiencia"><i class="fa fa-check"></i>Audiencia</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#estructura-del-libro"><i class="fa fa-check"></i>Estructura del libro</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#software-y-acuerdos"><i class="fa fa-check"></i>Software y acuerdos</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#bases-de-datos"><i class="fa fa-check"></i>Bases de datos</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#agradecimiento"><i class="fa fa-check"></i>Agradecimiento</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="introR.html"><a href="introR.html"><i class="fa fa-check"></i><b>1</b> Introducción a R</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introR.html"><a href="introR.html#qué-es-r"><i class="fa fa-check"></i><b>1.1</b> ¿Qué es R?</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="introR.html"><a href="introR.html#acerca-de-r"><i class="fa fa-check"></i><b>1.1.1</b> Acerca de R</a></li>
+<li class="chapter" data-level="1.1.2" data-path="introR.html"><a href="introR.html#qué-es-r-1"><i class="fa fa-check"></i><b>1.1.2</b> ¿Qué es R?</a></li>
+<li class="chapter" data-level="1.1.3" data-path="introR.html"><a href="introR.html#algunas-referencias"><i class="fa fa-check"></i><b>1.1.3</b> Algunas referencias</a></li>
+<li class="chapter" data-level="1.1.4" data-path="introR.html"><a href="introR.html#rstudio"><i class="fa fa-check"></i><b>1.1.4</b> RStudio</a></li>
+<li class="chapter" data-level="1.1.5" data-path="introR.html"><a href="introR.html#instalación"><i class="fa fa-check"></i><b>1.1.5</b> Instalación</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="introR.html"><a href="introR.html#r-markdown"><i class="fa fa-check"></i><b>1.2</b> R Markdown</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="introR.html"><a href="introR.html#instalación-1"><i class="fa fa-check"></i><b>1.2.1</b> Instalación</a></li>
+<li class="chapter" data-level="1.2.2" data-path="introR.html"><a href="introR.html#yaml-header"><i class="fa fa-check"></i><b>1.2.2</b> YAML Header</a></li>
+<li class="chapter" data-level="1.2.3" data-path="introR.html"><a href="introR.html#sintaxis-básica"><i class="fa fa-check"></i><b>1.2.3</b> Sintaxis básica</a></li>
+<li class="chapter" data-level="1.2.4" data-path="introR.html"><a href="introR.html#tipos-de-documentos"><i class="fa fa-check"></i><b>1.2.4</b> Tipos de documentos</a></li>
+<li class="chapter" data-level="1.2.5" data-path="introR.html"><a href="introR.html#chunks"><i class="fa fa-check"></i><b>1.2.5</b> Chunks</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="introR.html"><a href="introR.html#r-básico"><i class="fa fa-check"></i><b>1.3</b> R básico</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="introR.html"><a href="introR.html#lógica-de-los-comandos-en-r"><i class="fa fa-check"></i><b>1.3.1</b> Lógica de los comandos en R</a></li>
+<li class="chapter" data-level="1.3.2" data-path="introR.html"><a href="introR.html#palabras-reservadas-y-simbolos-especiales-de-r"><i class="fa fa-check"></i><b>1.3.2</b> Palabras reservadas y simbolos especiales de R</a></li>
+<li class="chapter" data-level="1.3.3" data-path="introR.html"><a href="introR.html#símbolos-lógicos"><i class="fa fa-check"></i><b>1.3.3</b> Símbolos Lógicos</a></li>
+<li class="chapter" data-level="1.3.4" data-path="introR.html"><a href="introR.html#asignación-o-creación-de-objetos-estructuras-variables"><i class="fa fa-check"></i><b>1.3.4</b> Asignación o creación de objetos (estructuras, variables)</a></li>
+<li class="chapter" data-level="1.3.5" data-path="introR.html"><a href="introR.html#clases-en-r"><i class="fa fa-check"></i><b>1.3.5</b> Clases en R</a></li>
+<li class="chapter" data-level="1.3.6" data-path="introR.html"><a href="introR.html#algunas-comandos-adicionales"><i class="fa fa-check"></i><b>1.3.6</b> Algunas comandos adicionales</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="introR.html"><a href="introR.html#tipos-de-estructuras"><i class="fa fa-check"></i><b>1.4</b> Tipos de estructuras</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="introR.html"><a href="introR.html#homogéneas"><i class="fa fa-check"></i><b>1.4.1</b> Homogéneas</a></li>
+<li class="chapter" data-level="1.4.2" data-path="introR.html"><a href="introR.html#heterogéneas"><i class="fa fa-check"></i><b>1.4.2</b> Heterogéneas</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="introR.html"><a href="introR.html#indexación"><i class="fa fa-check"></i><b>1.5</b> Indexación</a></li>
+<li class="chapter" data-level="1.6" data-path="introR.html"><a href="introR.html#loops-y-condiciones"><i class="fa fa-check"></i><b>1.6</b> Loops y condiciones</a></li>
+<li class="chapter" data-level="1.7" data-path="introR.html"><a href="introR.html#crear-funciones-en-r."><i class="fa fa-check"></i><b>1.7</b> Crear funciones en R.</a></li>
+<li class="chapter" data-level="1.8" data-path="introR.html"><a href="introR.html#importación-de-datos"><i class="fa fa-check"></i><b>1.8</b> Importación de datos</a></li>
+<li class="chapter" data-level="1.9" data-path="introR.html"><a href="introR.html#exportar-la-base-de-datos"><i class="fa fa-check"></i><b>1.9</b> Exportar la base de datos</a></li>
+<li class="chapter" data-level="1.10" data-path="introR.html"><a href="introR.html#dataframe-y-exploración"><i class="fa fa-check"></i><b>1.10</b> Dataframe y exploración</a></li>
+<li class="chapter" data-level="1.11" data-path="introR.html"><a href="introR.html#estadística-descriptiva"><i class="fa fa-check"></i><b>1.11</b> Estadística descriptiva</a></li>
+<li class="chapter" data-level="1.12" data-path="introR.html"><a href="introR.html#inferencia-en-r"><i class="fa fa-check"></i><b>1.12</b> Inferencia en R</a></li>
+<li class="chapter" data-level="1.13" data-path="introR.html"><a href="introR.html#gráficos-de-origen"><i class="fa fa-check"></i><b>1.13</b> Gráficos de origen</a></li>
+<li class="chapter" data-level="1.14" data-path="introR.html"><a href="introR.html#ggplot"><i class="fa fa-check"></i><b>1.14</b> ggplot</a>
+<ul>
+<li class="chapter" data-level="1.14.1" data-path="introR.html"><a href="introR.html#datos-estetica-y-geometria-layers"><i class="fa fa-check"></i><b>1.14.1</b> Datos, estetica y geometria (layers)</a></li>
+</ul></li>
+<li class="chapter" data-level="1.15" data-path="introR.html"><a href="introR.html#flexdashboard"><i class="fa fa-check"></i><b>1.15</b> Flexdashboard</a></li>
+<li class="chapter" data-level="1.16" data-path="introR.html"><a href="introR.html#shiny"><i class="fa fa-check"></i><b>1.16</b> Shiny</a>
+<ul>
+<li class="chapter" data-level="1.16.1" data-path="introR.html"><a href="introR.html#ui"><i class="fa fa-check"></i><b>1.16.1</b> UI</a></li>
+<li class="chapter" data-level="1.16.2" data-path="introR.html"><a href="introR.html#server"><i class="fa fa-check"></i><b>1.16.2</b> Server</a></li>
+</ul></li>
+<li class="chapter" data-level="1.17" data-path="introR.html"><a href="introR.html#ejercicios-propuestos"><i class="fa fa-check"></i><b>1.17</b> Ejercicios Propuestos</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html"><i class="fa fa-check"></i><b>2</b> Introducción al Big Data</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#definiendo-al-big-data"><i class="fa fa-check"></i><b>2.1</b> Definiendo al Big Data</a></li>
+<li class="chapter" data-level="2.2" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#las-5-v-en-el-big-data"><i class="fa fa-check"></i><b>2.2</b> Las 5 V en el Big Data</a></li>
+<li class="chapter" data-level="2.3" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#ciclo-de-vida-de-un-proyecto-de-análisis-de-datos"><i class="fa fa-check"></i><b>2.3</b> Ciclo de vida de un proyecto de análisis de datos</a></li>
+<li class="chapter" data-level="2.4" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#inferencia-y-big-data"><i class="fa fa-check"></i><b>2.4</b> Inferencia y Big Data</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#descriptivo"><i class="fa fa-check"></i><b>2.4.1</b> Descriptivo</a></li>
+<li class="chapter" data-level="2.4.2" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#causal"><i class="fa fa-check"></i><b>2.4.2</b> Causal</a></li>
+<li class="chapter" data-level="2.4.3" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#predictivo"><i class="fa fa-check"></i><b>2.4.3</b> Predictivo</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#calidad-de-dato-y-big-data"><i class="fa fa-check"></i><b>2.5</b> Calidad de dato y Big Data</a></li>
+<li class="chapter" data-level="2.6" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#captura-y-preservación"><i class="fa fa-check"></i><b>2.6</b> Captura y preservación</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#fuentes-convencionales"><i class="fa fa-check"></i><b>2.6.1</b> Fuentes convencionales</a></li>
+<li class="chapter" data-level="2.6.2" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#datos-web-y-apis"><i class="fa fa-check"></i><b>2.6.2</b> Datos web y APIs</a></li>
+<li class="chapter" data-level="2.6.3" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#record-linkage"><i class="fa fa-check"></i><b>2.6.3</b> Record Linkage</a></li>
+<li class="chapter" data-level="2.6.4" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#bases-de-datos-1"><i class="fa fa-check"></i><b>2.6.4</b> Bases de datos</a></li>
+<li class="chapter" data-level="2.6.5" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#programando-con-big-data"><i class="fa fa-check"></i><b>2.6.5</b> Programando con Big Data</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#análisis-y-modelado"><i class="fa fa-check"></i><b>2.7</b> Análisis y modelado</a>
+<ul>
+<li class="chapter" data-level="2.7.1" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#machine-learning"><i class="fa fa-check"></i><b>2.7.1</b> Machine learning</a></li>
+<li class="chapter" data-level="2.7.2" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#análisis-de-texto-entendiendo-lo-que-la-gente-escribe"><i class="fa fa-check"></i><b>2.7.2</b> Análisis de texto: Entendiendo lo que la gente escribe</a></li>
+<li class="chapter" data-level="2.7.3" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#networks"><i class="fa fa-check"></i><b>2.7.3</b> Networks</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#inferencia-y-ética"><i class="fa fa-check"></i><b>2.8</b> Inferencia y ética</a>
+<ul>
+<li class="chapter" data-level="2.8.1" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#información-y-visualización"><i class="fa fa-check"></i><b>2.8.1</b> Información y visualización</a></li>
+<li class="chapter" data-level="2.8.2" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#error-e-inferencia"><i class="fa fa-check"></i><b>2.8.2</b> Error e inferencia</a></li>
+<li class="chapter" data-level="2.8.3" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#privacidad-y-confidencialidad"><i class="fa fa-check"></i><b>2.8.3</b> Privacidad y confidencialidad</a></li>
+<li class="chapter" data-level="2.8.4" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#workbooks"><i class="fa fa-check"></i><b>2.8.4</b> Workbooks</a></li>
+</ul></li>
+<li class="chapter" data-level="2.9" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#ejercicios-propuestos-1"><i class="fa fa-check"></i><b>2.9</b> Ejercicios Propuestos</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html"><i class="fa fa-check"></i><b>3</b> Scraping Web (Raspado web)</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#pasos-para-la-recopilación-de-información"><i class="fa fa-check"></i><b>3.1</b> Pasos para la recopilación de información</a></li>
+<li class="chapter" data-level="3.2" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#tecnologías-de-diseminación-extracción-y-almacenamiento-web"><i class="fa fa-check"></i><b>3.2</b> Tecnologías de diseminación, extracción y almacenamiento Web</a></li>
+<li class="chapter" data-level="3.3" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#librerías-en-r"><i class="fa fa-check"></i><b>3.3</b> Librerías en R</a></li>
+<li class="chapter" data-level="3.4" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#librería-rvest"><i class="fa fa-check"></i><b>3.4</b> Librería rvest</a></li>
+<li class="chapter" data-level="3.5" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#ejemplo-infocasas-ventas-la-paz"><i class="fa fa-check"></i><b>3.5</b> Ejemplo: Infocasas, ventas La Paz</a></li>
+<li class="chapter" data-level="3.6" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#ejemplo-titulares-de-la-razon"><i class="fa fa-check"></i><b>3.6</b> Ejemplo: Titulares de La Razon</a></li>
+<li class="chapter" data-level="3.7" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#ejemplo-covid-en-el-mundo-worldometers"><i class="fa fa-check"></i><b>3.7</b> Ejemplo: COVID en el mundo, Worldometers</a></li>
+<li class="chapter" data-level="3.8" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#ejemplo-con-unidades-educativas-del-min-edu"><i class="fa fa-check"></i><b>3.8</b> Ejemplo con unidades educativas del MIN-EDU</a></li>
+<li class="chapter" data-level="3.9" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#ejemplo-covid-bolivia-segura-worldometers"><i class="fa fa-check"></i><b>3.9</b> Ejemplo: COVID, Bolivia segura, Worldometers</a></li>
+<li class="chapter" data-level="3.10" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#ejemplo-ultracasas"><i class="fa fa-check"></i><b>3.10</b> Ejemplo: Ultracasas</a></li>
+<li class="chapter" data-level="3.11" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#ejemplo-ketal"><i class="fa fa-check"></i><b>3.11</b> Ejemplo: Ketal</a></li>
+<li class="chapter" data-level="3.12" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#ejemplo-ministerio-de-educación"><i class="fa fa-check"></i><b>3.12</b> Ejemplo: Ministerio de Educación</a></li>
+<li class="chapter" data-level="3.13" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#ejemplo-informacion-covid-19-en-bolivia"><i class="fa fa-check"></i><b>3.13</b> Ejemplo, informacion COVID-19 en Bolivia</a></li>
+<li class="chapter" data-level="3.14" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#apis"><i class="fa fa-check"></i><b>3.14</b> APIs</a>
+<ul>
+<li class="chapter" data-level="3.14.1" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#api-banco-mundial"><i class="fa fa-check"></i><b>3.14.1</b> API Banco Mundial</a></li>
+<li class="chapter" data-level="3.14.2" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#api-google-trends"><i class="fa fa-check"></i><b>3.14.2</b> API Google trends</a></li>
+<li class="chapter" data-level="3.14.3" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#api-twitter"><i class="fa fa-check"></i><b>3.14.3</b> API Twitter</a></li>
+<li class="chapter" data-level="3.14.4" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#api-google-maps"><i class="fa fa-check"></i><b>3.14.4</b> API Google Maps</a></li>
+</ul></li>
+<li class="chapter" data-level="3.15" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#ejercicios-propuestos-2"><i class="fa fa-check"></i><b>3.15</b> Ejercicios Propuestos</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="big-data-en-r.html"><a href="big-data-en-r.html"><i class="fa fa-check"></i><b>4</b> Big Data en R</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="big-data-en-r.html"><a href="big-data-en-r.html#limitaciones-en-r"><i class="fa fa-check"></i><b>4.1</b> Limitaciones en R</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="big-data-en-r.html"><a href="big-data-en-r.html#memoria"><i class="fa fa-check"></i><b>4.1.1</b> Memoria</a></li>
+<li class="chapter" data-level="4.1.2" data-path="big-data-en-r.html"><a href="big-data-en-r.html#velocidad-de-procesamiento"><i class="fa fa-check"></i><b>4.1.2</b> Velocidad de procesamiento</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="big-data-en-r.html"><a href="big-data-en-r.html#a-los-límites-de-la-memoria-y-más-allá"><i class="fa fa-check"></i><b>4.2</b> A los límites de la memoria y más allá</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="big-data-en-r.html"><a href="big-data-en-r.html#transformacion-y-agregación-de-datos-con-la-librería-ff-y-ffbase"><i class="fa fa-check"></i><b>4.2.1</b> Transformacion y agregación de datos con la librería ff y ffbase</a></li>
+<li class="chapter" data-level="4.2.2" data-path="big-data-en-r.html"><a href="big-data-en-r.html#modelos-glm-con-la-las-librerias-ff-y-ffbase"><i class="fa fa-check"></i><b>4.2.2</b> Modelos GLM con la las librerias ff y ffbase</a></li>
+<li class="chapter" data-level="4.2.3" data-path="big-data-en-r.html"><a href="big-data-en-r.html#expandiendo-la-memoria-con-la-libreria-bigmemory"><i class="fa fa-check"></i><b>4.2.3</b> Expandiendo la memoria con la libreria bigmemory</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="big-data-en-r.html"><a href="big-data-en-r.html#parallel-r"><i class="fa fa-check"></i><b>4.3</b> Parallel R</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="big-data-en-r.html"><a href="big-data-en-r.html#libreria-parallel"><i class="fa fa-check"></i><b>4.3.1</b> Libreria parallel</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="r-y-spark.html"><a href="r-y-spark.html"><i class="fa fa-check"></i><b>5</b> R y Spark</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="r-y-spark.html"><a href="r-y-spark.html#introducción"><i class="fa fa-check"></i><b>5.1</b> Introducción</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="r-y-spark.html"><a href="r-y-spark.html#hadoop"><i class="fa fa-check"></i><b>5.1.1</b> Hadoop</a></li>
+<li class="chapter" data-level="5.1.2" data-path="r-y-spark.html"><a href="r-y-spark.html#spark"><i class="fa fa-check"></i><b>5.1.2</b> Spark</a></li>
+<li class="chapter" data-level="5.1.3" data-path="r-y-spark.html"><a href="r-y-spark.html#sparklyr"><i class="fa fa-check"></i><b>5.1.3</b> Sparklyr</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="r-y-spark.html"><a href="r-y-spark.html#librería-dplyr"><i class="fa fa-check"></i><b>5.2</b> Librería dplyr</a></li>
+<li class="chapter" data-level="5.3" data-path="r-y-spark.html"><a href="r-y-spark.html#arrancando-spark"><i class="fa fa-check"></i><b>5.3</b> Arrancando Spark</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="r-y-spark.html"><a href="r-y-spark.html#prerequisitos"><i class="fa fa-check"></i><b>5.3.1</b> Prerequisitos</a></li>
+<li class="chapter" data-level="5.3.2" data-path="r-y-spark.html"><a href="r-y-spark.html#instalación-2"><i class="fa fa-check"></i><b>5.3.2</b> Instalación</a></li>
+<li class="chapter" data-level="5.3.3" data-path="r-y-spark.html"><a href="r-y-spark.html#soluciones-a-problemas-de-instalación"><i class="fa fa-check"></i><b>5.3.3</b> Soluciones a problemas de instalación</a></li>
+<li class="chapter" data-level="5.3.4" data-path="r-y-spark.html"><a href="r-y-spark.html#creando-una-sesión-en-spark"><i class="fa fa-check"></i><b>5.3.4</b> Creando una sesión en Spark</a></li>
+<li class="chapter" data-level="5.3.5" data-path="r-y-spark.html"><a href="r-y-spark.html#interface-web"><i class="fa fa-check"></i><b>5.3.5</b> Interface web</a></li>
+<li class="chapter" data-level="5.3.6" data-path="r-y-spark.html"><a href="r-y-spark.html#configuración"><i class="fa fa-check"></i><b>5.3.6</b> Configuración</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="r-y-spark.html"><a href="r-y-spark.html#análisis-con-spark"><i class="fa fa-check"></i><b>5.4</b> Análisis con Spark</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="r-y-spark.html"><a href="r-y-spark.html#importando-los-datos"><i class="fa fa-check"></i><b>5.4.1</b> Importando los datos</a></li>
+<li class="chapter" data-level="5.4.2" data-path="r-y-spark.html"><a href="r-y-spark.html#librería-dplyr-gramática-de-manipulación-de-datos"><i class="fa fa-check"></i><b>5.4.2</b> Librería DPLYR (Gramática de manipulación de datos)</a></li>
+<li class="chapter" data-level="5.4.3" data-path="r-y-spark.html"><a href="r-y-spark.html#dplyr-en-spark"><i class="fa fa-check"></i><b>5.4.3</b> DPLYR en Spark</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Big Data en R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="r-y-spark" class="section level1" number="5">
+<h1><span class="header-section-number">Chapter 5</span> R y Spark</h1>
+<div id="introducción" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> Introducción</h2>
+<p>En este capítulo emplearemos Spark junto con R para el procesamiento de datos. Spark es un framework que permite realizar procesos de división y paralelismo en un equipo o múltiples equipos.</p>
+<div id="hadoop" class="section level3" number="5.1.1">
+<h3><span class="header-section-number">5.1.1</span> Hadoop</h3>
+<p>Google (2004) publicó un nuevo documento que describe cómo realizar operaciones en todo el Sistema de archivos de Google, un enfoque que se conoció como MapReduce. Como era de esperar, hay dos operaciones en MapReduce: map y reduce. La operación de map proporciona una forma arbitraria de transformar cada archivo en un nuevo archivo, mientras que la operación de reduce combina dos archivos. Ambas operaciones requieren un código de computadora personalizado, pero el marco MapReduce se encarga de ejecutarlas automáticamente en muchas computadoras a la vez. Estas dos operaciones son suficientes para procesar todos los datos disponibles en la web, al tiempo que proporcionan suficiente flexibilidad para extraer información significativa de la misma.</p>
+</div>
+<div id="spark" class="section level3" number="5.1.2">
+<h3><span class="header-section-number">5.1.2</span> Spark</h3>
+<p>En 2009, Apache Spark comenzó como un proyecto de investigación en AMPLab de UC Berkeley para mejorar MapReduce. Específicamente, Spark proporcionó un conjunto más rico de verbos más allá de MapReduce para facilitar la optimización del código que se ejecuta en múltiples máquinas. Spark también cargó datos en la memoria, lo que hace que las operaciones sean mucho más rápidas que el almacenamiento en disco de Hadoop</p>
+<div class="figure">
+<img src="images/spark1.png" alt="" />
+<p class="caption">Spark</p>
+</div>
+<p>Componetes:</p>
+<ol style="list-style-type: decimal">
+<li>Spark Core: Base donde se apoya el resto de los componentes</li>
+<li>Spark SQL: Procesamiento de dato estructurados y no estructurados</li>
+<li>Spark streaming: Procesamiento de datos en tiempo real.</li>
+<li>Spark MLLib: Machine learning</li>
+<li>Spark graph: Procesamiento de grafos</li>
+</ol>
+<p>Algunos conceptos importantes</p>
+<blockquote>
+<p>HDFS: Sistema de ficheros</p>
+</blockquote>
+</div>
+<div id="sparklyr" class="section level3" number="5.1.3">
+<h3><span class="header-section-number">5.1.3</span> Sparklyr</h3>
+<p>Oficialmente, sparklyr es una interfaz R para Apache Spark. Está disponible en CRAN y funciona como cualquier otro paquete de CRAN, lo que significa que es independiente de las versiones de Spark, es fácil de instalar, sirve a la comunidad R, abarca otros paquetes y prácticas de la comunidad R, y así sucesivamente. Está alojado en GitHub y tiene licencia de Apache 2.0, que le permite clonar, modificar y contribuir de nuevo a este proyecto.</p>
+</div>
+</div>
+<div id="librería-dplyr" class="section level2" number="5.2">
+<h2><span class="header-section-number">5.2</span> Librería dplyr</h2>
+<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="r-y-spark.html#cb261-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages(&quot;dplyr&quot;)</span></span>
+<span id="cb261-2"><a href="r-y-spark.html#cb261-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb261-3"><a href="r-y-spark.html#cb261-3" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="fu">url</span>(<span class="st">&quot;https://github.com/AlvaroLimber/EST-384/raw/master/data/eh19.RData&quot;</span>))</span>
+<span id="cb261-4"><a href="r-y-spark.html#cb261-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Obtener el promedio de edad por sexo de los jefes de hogar</span></span>
+<span id="cb261-5"><a href="r-y-spark.html#cb261-5" aria-hidden="true" tabindex="-1"></a>aux<span class="ot">&lt;-</span>eh19p[eh19p<span class="sc">$</span>s02a_05<span class="sc">==</span><span class="st">&quot;1.JEFE O JEFA DEL HOGAR&quot;</span>,<span class="fu">c</span>(<span class="st">&quot;s02a_03&quot;</span>,<span class="st">&quot;s02a_02&quot;</span>)]</span>
+<span id="cb261-6"><a href="r-y-spark.html#cb261-6" aria-hidden="true" tabindex="-1"></a>aux<span class="ot">&lt;-</span><span class="fu">subset</span>(eh19p,s02a_05<span class="sc">==</span><span class="st">&quot;1.JEFE O JEFA DEL HOGAR&quot;</span>,<span class="fu">c</span>(<span class="st">&quot;s02a_03&quot;</span>,<span class="st">&quot;s02a_02&quot;</span>))</span>
+<span id="cb261-7"><a href="r-y-spark.html#cb261-7" aria-hidden="true" tabindex="-1"></a><span class="fu">tapply</span>(aux<span class="sc">$</span>s02a_03, aux<span class="sc">$</span>s02a_02, mean)</span>
+<span id="cb261-8"><a href="r-y-spark.html#cb261-8" aria-hidden="true" tabindex="-1"></a><span class="co">#dplyr</span></span>
+<span id="cb261-9"><a href="r-y-spark.html#cb261-9" aria-hidden="true" tabindex="-1"></a><span class="co"># %&gt;% operador pipe </span></span>
+<span id="cb261-10"><a href="r-y-spark.html#cb261-10" aria-hidden="true" tabindex="-1"></a>t1<span class="ot">&lt;-</span>eh19p <span class="sc">%&gt;%</span> <span class="fu">filter</span>(s02a_05<span class="sc">==</span><span class="st">&quot;1.JEFE O JEFA DEL HOGAR&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(s02a_02) <span class="sc">%&gt;%</span> </span>
+<span id="cb261-11"><a href="r-y-spark.html#cb261-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(<span class="fu">mean</span>(s02a_03))</span>
+<span id="cb261-12"><a href="r-y-spark.html#cb261-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb261-13"><a href="r-y-spark.html#cb261-13" aria-hidden="true" tabindex="-1"></a>t2<span class="ot">&lt;-</span>eh19p <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">sexo=</span>s02a_02,<span class="at">edad=</span>s02a_03,<span class="at">paren=</span>s02a_05) <span class="sc">%&gt;%</span>  <span class="fu">filter</span>(paren<span class="sc">==</span><span class="st">&quot;1.JEFE O JEFA DEL HOGAR&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(sexo) <span class="sc">%&gt;%</span> </span>
+<span id="cb261-14"><a href="r-y-spark.html#cb261-14" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(<span class="at">edad=</span><span class="fu">mean</span>(edad))</span>
+<span id="cb261-15"><a href="r-y-spark.html#cb261-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb261-16"><a href="r-y-spark.html#cb261-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Obtener el promedio de edad y años de educación por sexo de los jefes de hogar</span></span>
+<span id="cb261-17"><a href="r-y-spark.html#cb261-17" aria-hidden="true" tabindex="-1"></a>t3<span class="ot">&lt;-</span>eh19p <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">sexo=</span>s02a_02,<span class="at">edad=</span>s02a_03,<span class="at">paren=</span>s02a_05) <span class="sc">%&gt;%</span>  <span class="fu">filter</span>(paren<span class="sc">==</span><span class="st">&quot;1.JEFE O JEFA DEL HOGAR&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(sexo) <span class="sc">%&gt;%</span> </span>
+<span id="cb261-18"><a href="r-y-spark.html#cb261-18" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(<span class="at">edad=</span><span class="fu">mean</span>(edad),<span class="at">aestudio=</span><span class="fu">mean</span>(aestudio,<span class="at">na.rm =</span> T),<span class="at">med_aestudio=</span><span class="fu">median</span>(aestudio,<span class="at">na.rm =</span> T),<span class="at">n=</span><span class="fu">n</span>())</span>
+<span id="cb261-19"><a href="r-y-spark.html#cb261-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb261-20"><a href="r-y-spark.html#cb261-20" aria-hidden="true" tabindex="-1"></a>eh19p <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">sexo=</span>s02a_02,<span class="at">edad=</span>s02a_03,<span class="at">paren=</span>s02a_05) <span class="sc">%&gt;%</span>  <span class="fu">filter</span>(paren<span class="sc">==</span><span class="st">&quot;1.JEFE O JEFA DEL HOGAR&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(depto,area,sexo) <span class="sc">%&gt;%</span> </span>
+<span id="cb261-21"><a href="r-y-spark.html#cb261-21" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(<span class="at">edad=</span><span class="fu">mean</span>(edad),<span class="at">aestudio=</span><span class="fu">mean</span>(aestudio,<span class="at">na.rm =</span> T),<span class="at">med_aestudio=</span><span class="fu">median</span>(aestudio,<span class="at">na.rm =</span> T),<span class="at">n=</span><span class="fu">n</span>())</span>
+<span id="cb261-22"><a href="r-y-spark.html#cb261-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb261-23"><a href="r-y-spark.html#cb261-23" aria-hidden="true" tabindex="-1"></a><span class="co"># ctr+mayus+m %&gt;% </span></span>
+<span id="cb261-24"><a href="r-y-spark.html#cb261-24" aria-hidden="true" tabindex="-1"></a>eh19p<span class="ot">&lt;-</span>eh19p <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">jefe=</span>(s02a_05<span class="sc">==</span><span class="st">&quot;1.JEFE O JEFA DEL HOGAR&quot;</span>))</span>
+<span id="cb261-25"><a href="r-y-spark.html#cb261-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb261-26"><a href="r-y-spark.html#cb261-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb261-27"><a href="r-y-spark.html#cb261-27" aria-hidden="true" tabindex="-1"></a>eh19p <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">jefe=</span>(s02a_05<span class="sc">==</span><span class="st">&quot;1.JEFE O JEFA DEL HOGAR&quot;</span>)) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(jefe,s02a_02) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="fu">mean</span>(ylab,<span class="at">na.rm =</span> T))</span>
+<span id="cb261-28"><a href="r-y-spark.html#cb261-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb261-29"><a href="r-y-spark.html#cb261-29" aria-hidden="true" tabindex="-1"></a>eh19p<span class="ot">&lt;-</span>eh19p <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">sexo=</span>s02a_02)</span>
+<span id="cb261-30"><a href="r-y-spark.html#cb261-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb261-31"><a href="r-y-spark.html#cb261-31" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(eh19p)[<span class="dv">6</span>]<span class="ot">&lt;-</span><span class="st">&quot;edad&quot;</span></span>
+<span id="cb261-32"><a href="r-y-spark.html#cb261-32" aria-hidden="true" tabindex="-1"></a><span class="co"># personas entre 15 y 30 años, por departamento y sexo, el promedio de horas a la semana de trabajo, años de educación y el mínimo y máximo de ingresos laborales y su rango</span></span>
+<span id="cb261-33"><a href="r-y-spark.html#cb261-33" aria-hidden="true" tabindex="-1"></a>eh19p <span class="sc">%&gt;%</span> <span class="fu">filter</span>(edad<span class="sc">&gt;=</span><span class="dv">15</span> <span class="sc">&amp;</span> edad<span class="sc">&lt;=</span><span class="dv">30</span>) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(depto,sexo) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">horas=</span><span class="fu">mean</span>(tothrs,<span class="at">na.rm =</span> T),<span class="at">edu=</span><span class="fu">mean</span>(aestudio,<span class="at">na.rm =</span> T),<span class="at">min_ylab=</span><span class="fu">min</span>(ylab,<span class="at">na.rm =</span> T),<span class="at">max_ylab=</span><span class="fu">max</span>(ylab,<span class="at">na.rm =</span> T)) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">rango=</span>max_ylab<span class="sc">-</span>min_ylab)</span>
+<span id="cb261-34"><a href="r-y-spark.html#cb261-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb261-35"><a href="r-y-spark.html#cb261-35" aria-hidden="true" tabindex="-1"></a>eh19p <span class="sc">%&gt;%</span> <span class="fu">slice_sample</span>(<span class="at">n=</span><span class="dv">20</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(edad) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">gedad=</span><span class="fu">cut</span>(edad,<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">14</span>,<span class="dv">25</span>,<span class="dv">60</span>,<span class="dv">100</span>),<span class="at">include.lowest =</span>T))</span>
+<span id="cb261-36"><a href="r-y-spark.html#cb261-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb261-37"><a href="r-y-spark.html#cb261-37" aria-hidden="true" tabindex="-1"></a>eh19p <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">gedad=</span><span class="fu">cut</span>(edad,<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">5</span>,<span class="dv">14</span>,<span class="dv">25</span>,<span class="dv">60</span>,<span class="dv">100</span>),<span class="at">include.lowest =</span>T)) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(gedad) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="fu">mean</span>(aestudio,<span class="at">na.rm=</span>T))</span>
+<span id="cb261-38"><a href="r-y-spark.html#cb261-38" aria-hidden="true" tabindex="-1"></a><span class="do">## Por departamento, área y sexo de los jefes del hogar, mostrar el porcentaje de hogares con piso de tierra.</span></span>
+<span id="cb261-39"><a href="r-y-spark.html#cb261-39" aria-hidden="true" tabindex="-1"></a>aux<span class="ot">&lt;-</span>eh19p <span class="sc">%&gt;%</span> <span class="fu">filter</span>(jefe<span class="sc">==</span>T) <span class="sc">%&gt;%</span> <span class="fu">select</span>(folio,sexo,area,depto)</span>
+<span id="cb261-40"><a href="r-y-spark.html#cb261-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb261-41"><a href="r-y-spark.html#cb261-41" aria-hidden="true" tabindex="-1"></a>aa<span class="ot">&lt;-</span><span class="fu">attributes</span>(eh19v)</span>
+<span id="cb261-42"><a href="r-y-spark.html#cb261-42" aria-hidden="true" tabindex="-1"></a>aa<span class="sc">$</span>variable.labels</span>
+<span id="cb261-43"><a href="r-y-spark.html#cb261-43" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(eh19v<span class="sc">$</span>s01a_09)</span>
+<span id="cb261-44"><a href="r-y-spark.html#cb261-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb261-45"><a href="r-y-spark.html#cb261-45" aria-hidden="true" tabindex="-1"></a>aux2<span class="ot">&lt;-</span>eh19v <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">tierra=</span>s01a_09<span class="sc">==</span><span class="st">&quot;1.TIERRA&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(folio,tierra)</span>
+<span id="cb261-46"><a href="r-y-spark.html#cb261-46" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(aux2)</span>
+<span id="cb261-47"><a href="r-y-spark.html#cb261-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb261-48"><a href="r-y-spark.html#cb261-48" aria-hidden="true" tabindex="-1"></a>bd<span class="ot">&lt;-</span><span class="fu">merge</span>(aux,aux2)<span class="do">## 1:1 (), n:1 , 1:n , n:n (X 30) (Y 20) XY 600</span></span>
+<span id="cb261-49"><a href="r-y-spark.html#cb261-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb261-50"><a href="r-y-spark.html#cb261-50" aria-hidden="true" tabindex="-1"></a><span class="co">#x</span></span>
+<span id="cb261-51"><a href="r-y-spark.html#cb261-51" aria-hidden="true" tabindex="-1"></a><span class="co">#Nombre materia  nota ci</span></span>
+<span id="cb261-52"><a href="r-y-spark.html#cb261-52" aria-hidden="true" tabindex="-1"></a><span class="co">#Juan    m1      45   123</span></span>
+<span id="cb261-53"><a href="r-y-spark.html#cb261-53" aria-hidden="true" tabindex="-1"></a><span class="co">#Juan    m2      57   123</span></span>
+<span id="cb261-54"><a href="r-y-spark.html#cb261-54" aria-hidden="true" tabindex="-1"></a><span class="co">#Juan    m3      57   123</span></span>
+<span id="cb261-55"><a href="r-y-spark.html#cb261-55" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb261-56"><a href="r-y-spark.html#cb261-56" aria-hidden="true" tabindex="-1"></a><span class="co">#y</span></span>
+<span id="cb261-57"><a href="r-y-spark.html#cb261-57" aria-hidden="true" tabindex="-1"></a><span class="co">#Nombre  ci   plan_estudio</span></span>
+<span id="cb261-58"><a href="r-y-spark.html#cb261-58" aria-hidden="true" tabindex="-1"></a><span class="co">#Juan    123  2012</span></span>
+<span id="cb261-59"><a href="r-y-spark.html#cb261-59" aria-hidden="true" tabindex="-1"></a><span class="co">#Maria   124  2007</span></span>
+<span id="cb261-60"><a href="r-y-spark.html#cb261-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb261-61"><a href="r-y-spark.html#cb261-61" aria-hidden="true" tabindex="-1"></a><span class="co">#merge(x,y,by=c(&quot;ci&quot;,&quot;Nombre&quot;),all=T)</span></span>
+<span id="cb261-62"><a href="r-y-spark.html#cb261-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb261-63"><a href="r-y-spark.html#cb261-63" aria-hidden="true" tabindex="-1"></a><span class="co">#xy</span></span>
+<span id="cb261-64"><a href="r-y-spark.html#cb261-64" aria-hidden="true" tabindex="-1"></a><span class="co">#Nombre materia  nota ci  plan_estudio</span></span>
+<span id="cb261-65"><a href="r-y-spark.html#cb261-65" aria-hidden="true" tabindex="-1"></a><span class="co">#Juan    m1      45   123  2012</span></span>
+<span id="cb261-66"><a href="r-y-spark.html#cb261-66" aria-hidden="true" tabindex="-1"></a><span class="co">#Juan    m2      57   123  2012  </span></span>
+<span id="cb261-67"><a href="r-y-spark.html#cb261-67" aria-hidden="true" tabindex="-1"></a><span class="co">#Juan    m3      57   123  2012</span></span>
+<span id="cb261-68"><a href="r-y-spark.html#cb261-68" aria-hidden="true" tabindex="-1"></a><span class="co">#Maria                124  2007</span></span>
+<span id="cb261-69"><a href="r-y-spark.html#cb261-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb261-70"><a href="r-y-spark.html#cb261-70" aria-hidden="true" tabindex="-1"></a>bd <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(depto,area,sexo) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">Piso_Tierra=</span><span class="fu">mean</span>(tierra)<span class="sc">*</span><span class="dv">100</span>)</span>
+<span id="cb261-71"><a href="r-y-spark.html#cb261-71" aria-hidden="true" tabindex="-1"></a><span class="co">#se recomienda explorar el comando merge, y la variable folio es la llave para la unión de las bases de datos</span></span>
+<span id="cb261-72"><a href="r-y-spark.html#cb261-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb261-73"><a href="r-y-spark.html#cb261-73" aria-hidden="true" tabindex="-1"></a><span class="co"># Ejercicio. Obtener una tabla por departamento y área con la siguiente información</span></span>
+<span id="cb261-74"><a href="r-y-spark.html#cb261-74" aria-hidden="true" tabindex="-1"></a><span class="co">#  * % de hogares pobres extremos</span></span>
+<span id="cb261-75"><a href="r-y-spark.html#cb261-75" aria-hidden="true" tabindex="-1"></a><span class="co">#  * % de hogares con jefes del hogar mujeres</span></span>
+<span id="cb261-76"><a href="r-y-spark.html#cb261-76" aria-hidden="true" tabindex="-1"></a><span class="co">#  * Promedio de personas en el hogar</span></span>
+<span id="cb261-77"><a href="r-y-spark.html#cb261-77" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="fu">url</span>(<span class="st">&quot;https://github.com/AlvaroLimber/EST-384/raw/master/data/eh19.RData&quot;</span>))</span>
+<span id="cb261-78"><a href="r-y-spark.html#cb261-78" aria-hidden="true" tabindex="-1"></a>bd<span class="ot">&lt;-</span>eh19p <span class="sc">%&gt;%</span> <span class="fu">filter</span>(s02a_02<span class="sc">==</span><span class="st">&quot;2.Mujer&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">pobreza=</span>pext0<span class="sc">==</span><span class="st">&quot;Pobre extremo&quot;</span>,<span class="at">mujer=</span>s02a_05<span class="sc">==</span><span class="st">&quot;JEFE O JEFA DEL HOGAR&quot;</span> ) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(depto,area) <span class="sc">%&gt;%</span>  <span class="fu">summarise</span>(<span class="at">pobre=</span><span class="fu">mean</span>(pobreza)<span class="sc">*</span><span class="dv">100</span>,<span class="at">mujer1=</span><span class="fu">mean</span>(mujer))</span>
+<span id="cb261-79"><a href="r-y-spark.html#cb261-79" aria-hidden="true" tabindex="-1"></a>bd</span>
+<span id="cb261-80"><a href="r-y-spark.html#cb261-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb261-81"><a href="r-y-spark.html#cb261-81" aria-hidden="true" tabindex="-1"></a>eh19p <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">pobreza=</span>(pext0<span class="sc">==</span><span class="st">&quot;Pobre extremo&quot;</span>)<span class="sc">*</span><span class="dv">1</span>,<span class="at">jefa=</span>(s02a_05<span class="sc">==</span><span class="st">&quot;1.JEFE O JEFA DEL HOGAR&quot;</span> <span class="sc">&amp;</span> s02a_02<span class="sc">==</span><span class="st">&quot;2.Mujer&quot;</span>)<span class="sc">*</span><span class="dv">1</span>, <span class="at">nper=</span><span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(depto,area,folio) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">nper=</span><span class="fu">sum</span>(nper),<span class="at">jefa=</span><span class="fu">max</span>(jefa),<span class="at">pobreza=</span><span class="fu">max</span>(pobreza)) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(depto,area) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">pobreza=</span><span class="fu">mean</span>(pobreza,<span class="at">na.rm=</span>T)<span class="sc">*</span><span class="dv">100</span>,<span class="at">jefa=</span><span class="fu">mean</span>(jefa)<span class="sc">*</span><span class="dv">100</span>,<span class="at">nper=</span><span class="fu">mean</span>(nper)) </span>
+<span id="cb261-82"><a href="r-y-spark.html#cb261-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb261-83"><a href="r-y-spark.html#cb261-83" aria-hidden="true" tabindex="-1"></a>t1<span class="ot">&lt;-</span>eh19p <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">pobreza=</span>(pext0<span class="sc">==</span><span class="st">&quot;Pobre extremo&quot;</span>)<span class="sc">*</span><span class="dv">1</span>,<span class="at">jefa=</span>(s02a_05<span class="sc">==</span><span class="st">&quot;1.JEFE O JEFA DEL HOGAR&quot;</span> <span class="sc">&amp;</span> s02a_02<span class="sc">==</span><span class="st">&quot;2.Mujer&quot;</span>)<span class="sc">*</span><span class="dv">1</span>, <span class="at">nper=</span><span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(depto,area,folio) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">nper=</span><span class="fu">sum</span>(nper),<span class="at">jefa=</span><span class="fu">max</span>(jefa),<span class="at">pobreza=</span><span class="fu">max</span>(pobreza)) </span>
+<span id="cb261-84"><a href="r-y-spark.html#cb261-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb261-85"><a href="r-y-spark.html#cb261-85" aria-hidden="true" tabindex="-1"></a>t2<span class="ot">&lt;-</span>t1 <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(depto,area) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">pobreza=</span><span class="fu">mean</span>(pobreza,<span class="at">na.rm=</span>T)<span class="sc">*</span><span class="dv">100</span>,<span class="at">jefa=</span><span class="fu">mean</span>(jefa)<span class="sc">*</span><span class="dv">100</span>,<span class="at">nper=</span><span class="fu">mean</span>(nper)) </span>
+<span id="cb261-86"><a href="r-y-spark.html#cb261-86" aria-hidden="true" tabindex="-1"></a>t2</span>
+<span id="cb261-87"><a href="r-y-spark.html#cb261-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb261-88"><a href="r-y-spark.html#cb261-88" aria-hidden="true" tabindex="-1"></a>xtable<span class="sc">::</span><span class="fu">xtable</span>(t2)</span>
+<span id="cb261-89"><a href="r-y-spark.html#cb261-89" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(t2)</span></code></pre></div>
+</div>
+<div id="arrancando-spark" class="section level2" number="5.3">
+<h2><span class="header-section-number">5.3</span> Arrancando Spark</h2>
+<div id="prerequisitos" class="section level3" number="5.3.1">
+<h3><span class="header-section-number">5.3.1</span> Prerequisitos</h3>
+<ul>
+<li>R</li>
+<li>RStudio</li>
+<li>Java 8</li>
+</ul>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="r-y-spark.html#cb262-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system</span>(<span class="st">&quot;java -version&quot;</span>)</span></code></pre></div>
+</div>
+<div id="instalación-2" class="section level3" number="5.3.2">
+<h3><span class="header-section-number">5.3.2</span> Instalación</h3>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="r-y-spark.html#cb263-1" aria-hidden="true" tabindex="-1"></a><span class="co">#instalar la librería sparlyr</span></span>
+<span id="cb263-2"><a href="r-y-spark.html#cb263-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;sparklyr&quot;</span>)</span>
+<span id="cb263-3"><a href="r-y-spark.html#cb263-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Habilitando la librería</span></span>
+<span id="cb263-4"><a href="r-y-spark.html#cb263-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sparklyr)</span>
+<span id="cb263-5"><a href="r-y-spark.html#cb263-5" aria-hidden="true" tabindex="-1"></a><span class="co">#versiones disponibles</span></span>
+<span id="cb263-6"><a href="r-y-spark.html#cb263-6" aria-hidden="true" tabindex="-1"></a><span class="fu">spark_available_versions</span>()</span>
+<span id="cb263-7"><a href="r-y-spark.html#cb263-7" aria-hidden="true" tabindex="-1"></a><span class="co">#versiones instaladas</span></span>
+<span id="cb263-8"><a href="r-y-spark.html#cb263-8" aria-hidden="true" tabindex="-1"></a><span class="fu">spark_installed_versions</span>()</span>
+<span id="cb263-9"><a href="r-y-spark.html#cb263-9" aria-hidden="true" tabindex="-1"></a><span class="co">#instalando spark desde R</span></span>
+<span id="cb263-10"><a href="r-y-spark.html#cb263-10" aria-hidden="true" tabindex="-1"></a><span class="fu">spark_install</span>(<span class="st">&quot;3.0&quot;</span>)</span>
+<span id="cb263-11"><a href="r-y-spark.html#cb263-11" aria-hidden="true" tabindex="-1"></a><span class="co">#spark_install(version=&quot;2.3&quot;)</span></span></code></pre></div>
+</div>
+<div id="soluciones-a-problemas-de-instalación" class="section level3" number="5.3.3">
+<h3><span class="header-section-number">5.3.3</span> Soluciones a problemas de instalación</h3>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="r-y-spark.html#cb264-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;rJava&quot;</span>)</span>
+<span id="cb264-2"><a href="r-y-spark.html#cb264-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rJava)</span></code></pre></div>
+</div>
+<div id="creando-una-sesión-en-spark" class="section level3" number="5.3.4">
+<h3><span class="header-section-number">5.3.4</span> Creando una sesión en Spark</h3>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="r-y-spark.html#cb265-1" aria-hidden="true" tabindex="-1"></a><span class="co">#inicia la sesión</span></span>
+<span id="cb265-2"><a href="r-y-spark.html#cb265-2" aria-hidden="true" tabindex="-1"></a>sc <span class="ot">&lt;-</span> <span class="fu">spark_connect</span>(<span class="at">master =</span> <span class="st">&quot;local&quot;</span>)</span>
+<span id="cb265-3"><a href="r-y-spark.html#cb265-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb265-4"><a href="r-y-spark.html#cb265-4" aria-hidden="true" tabindex="-1"></a><span class="co">#sc &lt;- spark_connect(master = &quot;local&quot;, spark_home = &quot;C:\\Users\\ALVARO\\AppData\\Local\\spark&quot;,version=&quot;3.0.1&quot;)</span></span></code></pre></div>
+</div>
+<div id="interface-web" class="section level3" number="5.3.5">
+<h3><span class="header-section-number">5.3.5</span> Interface web</h3>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="r-y-spark.html#cb266-1" aria-hidden="true" tabindex="-1"></a><span class="fu">spark_web</span>(sc)</span></code></pre></div>
+<ul>
+<li><p><a href="http://localhost:4040/jobs/" class="uri">http://localhost:4040/jobs/</a></p></li>
+<li><p><a href="http://127.0.0.1:4040/executors/" class="uri">http://127.0.0.1:4040/executors/</a></p></li>
+<li><p>Jobs</p></li>
+<li><p>Stages</p></li>
+<li><p>Storage</p></li>
+<li><p>Environment</p></li>
+<li><p>Executors</p></li>
+<li><p>SQL</p></li>
+</ul>
+</div>
+<div id="configuración" class="section level3" number="5.3.6">
+<h3><span class="header-section-number">5.3.6</span> Configuración</h3>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="r-y-spark.html#cb267-1" aria-hidden="true" tabindex="-1"></a>conf <span class="ot">&lt;-</span> <span class="fu">spark_config</span>()</span>
+<span id="cb267-2"><a href="r-y-spark.html#cb267-2" aria-hidden="true" tabindex="-1"></a>  conf<span class="sc">$</span><span class="st">`</span><span class="at">sparklyr.shell.driver-memory</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="st">&quot;2G&quot;</span></span>
+<span id="cb267-3"><a href="r-y-spark.html#cb267-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">#conf$spark.memory.fraction &lt;- 0.8 </span></span>
+<span id="cb267-4"><a href="r-y-spark.html#cb267-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">#spark_home=&quot;C:\\Users\\ALVARO\\AppData\\Local\\spark\\spark-2.4.3-bin-hadoop2.7&quot;</span></span>
+<span id="cb267-5"><a href="r-y-spark.html#cb267-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">#conf$sparklyr.gateway.port &lt;- 9090</span></span>
+<span id="cb267-6"><a href="r-y-spark.html#cb267-6" aria-hidden="true" tabindex="-1"></a><span class="co">#conección  </span></span>
+<span id="cb267-7"><a href="r-y-spark.html#cb267-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb267-8"><a href="r-y-spark.html#cb267-8" aria-hidden="true" tabindex="-1"></a><span class="co">#apagar conexión</span></span>
+<span id="cb267-9"><a href="r-y-spark.html#cb267-9" aria-hidden="true" tabindex="-1"></a><span class="fu">spark_disconnect</span>(sc)</span>
+<span id="cb267-10"><a href="r-y-spark.html#cb267-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb267-11"><a href="r-y-spark.html#cb267-11" aria-hidden="true" tabindex="-1"></a><span class="fu">spark_disconnect_all</span>()</span></code></pre></div>
+</div>
+</div>
+<div id="análisis-con-spark" class="section level2" number="5.4">
+<h2><span class="header-section-number">5.4</span> Análisis con Spark</h2>
+<div class="figure">
+<img src="images/spark2.png" alt="" />
+<p class="caption">Pasos en el análisis de datos</p>
+</div>
+<div id="importando-los-datos" class="section level3" number="5.4.1">
+<h3><span class="header-section-number">5.4.1</span> Importando los datos</h3>
+<p>Por lo general, importar significa que R leerá los archivos y los cargará en la memoria; cuando se usa Spark, los datos se importan a Spark, no a R.</p>
+<p><img src="images/spark3.png" /></p>
+<p><img src="images/spark4.PNG" /></p>
+<p>Colección de documentos</p>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="r-y-spark.html#cb268-1" aria-hidden="true" tabindex="-1"></a><span class="co">#csv/importaciones</span></span>
+<span id="cb268-2"><a href="r-y-spark.html#cb268-2" aria-hidden="true" tabindex="-1"></a>sp_importaciones<span class="ot">&lt;-</span><span class="fu">spark_read_csv</span>(sc,</span>
+<span id="cb268-3"><a href="r-y-spark.html#cb268-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">name=</span><span class="st">&quot;importaciones&quot;</span>,</span>
+<span id="cb268-4"><a href="r-y-spark.html#cb268-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">path =</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">Users</span><span class="sc">\\</span><span class="st">ALVARO</span><span class="sc">\\</span><span class="st">Desktop</span><span class="sc">\\</span><span class="st">db_bolivia</span><span class="sc">\\</span><span class="st">importaciones</span><span class="sc">\\</span><span class="st">importaciones_csv&quot;</span>)</span>
+<span id="cb268-5"><a href="r-y-spark.html#cb268-5" aria-hidden="true" tabindex="-1"></a><span class="do">###########</span></span>
+<span id="cb268-6"><a href="r-y-spark.html#cb268-6" aria-hidden="true" tabindex="-1"></a><span class="co">#esquema</span></span>
+<span id="cb268-7"><a href="r-y-spark.html#cb268-7" aria-hidden="true" tabindex="-1"></a><span class="do">###########</span></span>
+<span id="cb268-8"><a href="r-y-spark.html#cb268-8" aria-hidden="true" tabindex="-1"></a>top_rows <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">Users</span><span class="sc">\\</span><span class="st">ALVARO</span><span class="sc">\\</span><span class="st">Desktop</span><span class="sc">\\</span><span class="st">db_bolivia</span><span class="sc">\\</span><span class="st">importaciones</span><span class="sc">\\</span><span class="st">importaciones_csv</span><span class="sc">\\</span><span class="st">1993.csv&quot;</span>,<span class="at">sep=</span><span class="st">&quot;,&quot;</span>, <span class="at">nrows =</span> <span class="dv">5</span>)</span>
+<span id="cb268-9"><a href="r-y-spark.html#cb268-9" aria-hidden="true" tabindex="-1"></a>spec_with_r <span class="ot">&lt;-</span> <span class="fu">sapply</span>(top_rows, class)</span>
+<span id="cb268-10"><a href="r-y-spark.html#cb268-10" aria-hidden="true" tabindex="-1"></a>spec_with_r[<span class="dv">6</span>]<span class="ot">&lt;-</span><span class="st">&quot;factor&quot;</span></span>
+<span id="cb268-11"><a href="r-y-spark.html#cb268-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb268-12"><a href="r-y-spark.html#cb268-12" aria-hidden="true" tabindex="-1"></a>sp_importaciones2<span class="ot">&lt;-</span><span class="fu">spark_read_csv</span>(sc,</span>
+<span id="cb268-13"><a href="r-y-spark.html#cb268-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">name=</span><span class="st">&quot;importaciones2&quot;</span>,</span>
+<span id="cb268-14"><a href="r-y-spark.html#cb268-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">path =</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">Users</span><span class="sc">\\</span><span class="st">ALVARO</span><span class="sc">\\</span><span class="st">Desktop</span><span class="sc">\\</span><span class="st">db_bolivia</span><span class="sc">\\</span><span class="st">importaciones</span><span class="sc">\\</span><span class="st">importaciones_csv&quot;</span>,</span>
+<span id="cb268-15"><a href="r-y-spark.html#cb268-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">columns =</span> spec_with_r)</span>
+<span id="cb268-16"><a href="r-y-spark.html#cb268-16" aria-hidden="true" tabindex="-1"></a><span class="co"># memoria</span></span>
+<span id="cb268-17"><a href="r-y-spark.html#cb268-17" aria-hidden="true" tabindex="-1"></a><span class="fu">object.size</span>(sp_importaciones)</span></code></pre></div>
+<p>Comando copy_to</p>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="r-y-spark.html#cb269-1" aria-hidden="true" tabindex="-1"></a>m1<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">10</span><span class="sc">^</span><span class="dv">7</span>),<span class="at">ncol=</span><span class="dv">20</span>))</span>
+<span id="cb269-2"><a href="r-y-spark.html#cb269-2" aria-hidden="true" tabindex="-1"></a><span class="fu">object.size</span>(m1)<span class="sc">/</span>(<span class="dv">10</span><span class="sc">^</span><span class="dv">6</span>)</span>
+<span id="cb269-3"><a href="r-y-spark.html#cb269-3" aria-hidden="true" tabindex="-1"></a>sp_m1<span class="ot">&lt;-</span><span class="fu">copy_to</span>(sc,m1)</span>
+<span id="cb269-4"><a href="r-y-spark.html#cb269-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(m1)</span>
+<span id="cb269-5"><a href="r-y-spark.html#cb269-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb269-6"><a href="r-y-spark.html#cb269-6" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">Users</span><span class="sc">\\</span><span class="st">ALVARO</span><span class="sc">\\</span><span class="st">Documents</span><span class="sc">\\</span><span class="st">GitHub</span><span class="sc">\\</span><span class="st">EST-383</span><span class="sc">\\</span><span class="st">data</span><span class="sc">\\</span><span class="st">oct20.RData&quot;</span>)</span>
+<span id="cb269-7"><a href="r-y-spark.html#cb269-7" aria-hidden="true" tabindex="-1"></a><span class="fu">object.size</span>(computo)<span class="sc">/</span><span class="dv">10</span><span class="sc">^</span><span class="dv">6</span></span>
+<span id="cb269-8"><a href="r-y-spark.html#cb269-8" aria-hidden="true" tabindex="-1"></a>sp_computo<span class="ot">&lt;-</span><span class="fu">copy_to</span>(sc,computo)</span>
+<span id="cb269-9"><a href="r-y-spark.html#cb269-9" aria-hidden="true" tabindex="-1"></a>sp_eh19p<span class="ot">&lt;-</span><span class="fu">copy_to</span>(sc,eh19p)</span>
+<span id="cb269-10"><a href="r-y-spark.html#cb269-10" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(computo)</span></code></pre></div>
+<p>Documento específico</p>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="r-y-spark.html#cb270-1" aria-hidden="true" tabindex="-1"></a>sp_covid<span class="ot">&lt;-</span><span class="fu">spark_read_csv</span>(sc,</span>
+<span id="cb270-2"><a href="r-y-spark.html#cb270-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">name=</span><span class="st">&quot;covid&quot;</span>,</span>
+<span id="cb270-3"><a href="r-y-spark.html#cb270-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">path =</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">Users</span><span class="sc">\\</span><span class="st">ALVARO</span><span class="sc">\\</span><span class="st">Desktop</span><span class="sc">\\</span><span class="st">db_bolivia</span><span class="sc">\\</span><span class="st">bigdata</span><span class="sc">\\</span><span class="st">200614COVID19MEXICO.csv&quot;</span>)</span>
+<span id="cb270-4"><a href="r-y-spark.html#cb270-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb270-5"><a href="r-y-spark.html#cb270-5" aria-hidden="true" tabindex="-1"></a>sp_covid2<span class="ot">&lt;-</span><span class="fu">spark_read_csv</span>(sc,</span>
+<span id="cb270-6"><a href="r-y-spark.html#cb270-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">name=</span><span class="st">&quot;covid2&quot;</span>,</span>
+<span id="cb270-7"><a href="r-y-spark.html#cb270-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">path =</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">Users</span><span class="sc">\\</span><span class="st">ALVARO</span><span class="sc">\\</span><span class="st">Desktop</span><span class="sc">\\</span><span class="st">db_bolivia</span><span class="sc">\\</span><span class="st">bigdata</span><span class="sc">\\</span><span class="st">201115COVID19MEXICO.csv&quot;</span>)</span></code></pre></div>
+</div>
+<div id="librería-dplyr-gramática-de-manipulación-de-datos" class="section level3" number="5.4.2">
+<h3><span class="header-section-number">5.4.2</span> Librería DPLYR (Gramática de manipulación de datos)</h3>
+<ul>
+<li><a href="https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html" class="uri">https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html</a></li>
+</ul>
+<p>Eliminar un objeto en spark</p>
+<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="r-y-spark.html#cb271-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb271-2"><a href="r-y-spark.html#cb271-2" aria-hidden="true" tabindex="-1"></a><span class="fu">db_drop_table</span>(sc,<span class="st">&quot;importaciones2&quot;</span>)</span>
+<span id="cb271-3"><a href="r-y-spark.html#cb271-3" aria-hidden="true" tabindex="-1"></a><span class="fu">db_drop_table</span>(sc,<span class="st">&quot;m1&quot;</span>)</span></code></pre></div>
+<p>DPLYR en Spark</p>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="r-y-spark.html#cb272-1" aria-hidden="true" tabindex="-1"></a>sp_importaciones <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(GESTION) <span class="sc">%&gt;%</span> <span class="fu">count</span>()</span>
+<span id="cb272-2"><a href="r-y-spark.html#cb272-2" aria-hidden="true" tabindex="-1"></a>sp_covid2 <span class="sc">%&gt;%</span> <span class="fu">count</span>()</span>
+<span id="cb272-3"><a href="r-y-spark.html#cb272-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb272-4"><a href="r-y-spark.html#cb272-4" aria-hidden="true" tabindex="-1"></a>eh19v <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(depto) <span class="sc">%&gt;%</span> <span class="fu">count</span>() <span class="co"># R</span></span>
+<span id="cb272-5"><a href="r-y-spark.html#cb272-5" aria-hidden="true" tabindex="-1"></a>sp_eh19v <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(depto) <span class="sc">%&gt;%</span> <span class="fu">count</span>() <span class="co"># Spark</span></span></code></pre></div>
+<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="r-y-spark.html#cb273-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb273-2"><a href="r-y-spark.html#cb273-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="fu">url</span>(<span class="st">&quot;https://github.com/AlvaroLimber/EST-383/raw/master/data/oct20.RData&quot;</span>))</span>
+<span id="cb273-3"><a href="r-y-spark.html#cb273-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(computo)[<span class="dv">1</span>]<span class="ot">&lt;-</span><span class="st">&quot;pais&quot;</span></span>
+<span id="cb273-4"><a href="r-y-spark.html#cb273-4" aria-hidden="true" tabindex="-1"></a><span class="do">##############################</span></span>
+<span id="cb273-5"><a href="r-y-spark.html#cb273-5" aria-hidden="true" tabindex="-1"></a><span class="do">### Columnas -&gt; variables</span></span>
+<span id="cb273-6"><a href="r-y-spark.html#cb273-6" aria-hidden="true" tabindex="-1"></a><span class="do">##############################</span></span>
+<span id="cb273-7"><a href="r-y-spark.html#cb273-7" aria-hidden="true" tabindex="-1"></a><span class="co">#cambio de nombre de las variables</span></span>
+<span id="cb273-8"><a href="r-y-spark.html#cb273-8" aria-hidden="true" tabindex="-1"></a>computo<span class="ot">&lt;-</span>computo <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">mas=</span><span class="st">`</span><span class="at">MAS - IPSP</span><span class="st">`</span>,<span class="at">cc=</span>CC)</span>
+<span id="cb273-9"><a href="r-y-spark.html#cb273-9" aria-hidden="true" tabindex="-1"></a>computo<span class="ot">&lt;-</span>computo <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">idep=</span><span class="st">`</span><span class="at">Número departamento</span><span class="st">`</span>,<span class="at">imun=</span><span class="dv">5</span>)</span>
+<span id="cb273-10"><a href="r-y-spark.html#cb273-10" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(computo)</span>
+<span id="cb273-11"><a href="r-y-spark.html#cb273-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Selección de variables</span></span>
+<span id="cb273-12"><a href="r-y-spark.html#cb273-12" aria-hidden="true" tabindex="-1"></a>bd1<span class="ot">&lt;-</span>computo <span class="sc">%&gt;%</span> <span class="fu">select</span>(pais,cc,mas)</span>
+<span id="cb273-13"><a href="r-y-spark.html#cb273-13" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(bd1)</span>
+<span id="cb273-14"><a href="r-y-spark.html#cb273-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear nuevas variables</span></span>
+<span id="cb273-15"><a href="r-y-spark.html#cb273-15" aria-hidden="true" tabindex="-1"></a>bd1<span class="ot">&lt;-</span>bd1 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">a=</span><span class="dv">1</span>,<span class="at">s_mas_cc=</span>cc<span class="sc">+</span>mas,<span class="at">raiz_mas=</span><span class="fu">sqrt</span>(mas),<span class="at">lcc=</span><span class="fu">log</span>(cc))</span>
+<span id="cb273-16"><a href="r-y-spark.html#cb273-16" aria-hidden="true" tabindex="-1"></a>bd1<span class="ot">&lt;-</span>bd1 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">mas100=</span>mas<span class="sc">&gt;</span><span class="dv">100</span>,<span class="at">mean_mas=</span>mas<span class="sc">&gt;</span><span class="fu">mean</span>(mas))</span>
+<span id="cb273-17"><a href="r-y-spark.html#cb273-17" aria-hidden="true" tabindex="-1"></a><span class="co"># ordenando las variables  </span></span>
+<span id="cb273-18"><a href="r-y-spark.html#cb273-18" aria-hidden="true" tabindex="-1"></a>bd1<span class="ot">&lt;-</span>bd1 <span class="sc">%&gt;%</span> <span class="fu">relocate</span>(lcc<span class="sc">:</span>mas,<span class="at">before=</span>a)<span class="co">#pendiente</span></span>
+<span id="cb273-19"><a href="r-y-spark.html#cb273-19" aria-hidden="true" tabindex="-1"></a>bd1[,<span class="fu">c</span>(<span class="st">&quot;cc&quot;</span>,<span class="st">&quot;pais&quot;</span>,<span class="st">&quot;a&quot;</span>)]</span>
+<span id="cb273-20"><a href="r-y-spark.html#cb273-20" aria-hidden="true" tabindex="-1"></a><span class="do">##############################</span></span>
+<span id="cb273-21"><a href="r-y-spark.html#cb273-21" aria-hidden="true" tabindex="-1"></a><span class="do">### Filas-&gt; Observaciones</span></span>
+<span id="cb273-22"><a href="r-y-spark.html#cb273-22" aria-hidden="true" tabindex="-1"></a><span class="do">##############################</span></span>
+<span id="cb273-23"><a href="r-y-spark.html#cb273-23" aria-hidden="true" tabindex="-1"></a><span class="co">#filtrado</span></span>
+<span id="cb273-24"><a href="r-y-spark.html#cb273-24" aria-hidden="true" tabindex="-1"></a><span class="co"># elección presidencial solo Bolivia </span></span>
+<span id="cb273-25"><a href="r-y-spark.html#cb273-25" aria-hidden="true" tabindex="-1"></a>pv<span class="ot">&lt;-</span>computo <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Elección<span class="sc">==</span><span class="st">&quot;Presidente y Vicepresidente&quot;</span>)</span>
+<span id="cb273-26"><a href="r-y-spark.html#cb273-26" aria-hidden="true" tabindex="-1"></a>pvbol<span class="ot">&lt;-</span>computo <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Elección<span class="sc">==</span><span class="st">&quot;Presidente y Vicepresidente&quot;</span> <span class="sc">&amp;</span> pais<span class="sc">==</span><span class="st">&quot;Bolivia&quot;</span>)</span>
+<span id="cb273-27"><a href="r-y-spark.html#cb273-27" aria-hidden="true" tabindex="-1"></a><span class="do">##############################</span></span>
+<span id="cb273-28"><a href="r-y-spark.html#cb273-28" aria-hidden="true" tabindex="-1"></a><span class="do">### Resumen estadístico</span></span>
+<span id="cb273-29"><a href="r-y-spark.html#cb273-29" aria-hidden="true" tabindex="-1"></a><span class="do">##############################</span></span>
+<span id="cb273-30"><a href="r-y-spark.html#cb273-30" aria-hidden="true" tabindex="-1"></a><span class="co"># summarise</span></span>
+<span id="cb273-31"><a href="r-y-spark.html#cb273-31" aria-hidden="true" tabindex="-1"></a>pvbol <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">media_mas=</span><span class="fu">mean</span>(mas),<span class="at">media_cc=</span><span class="fu">mean</span>(cc),<span class="at">max_mas=</span><span class="fu">max</span>(mas),<span class="at">max_cc=</span><span class="fu">max</span>(cc))</span>
+<span id="cb273-32"><a href="r-y-spark.html#cb273-32" aria-hidden="true" tabindex="-1"></a>pvbol <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">p100mas=</span><span class="fu">mean</span>(mas<span class="sc">&gt;</span><span class="dv">100</span>)<span class="sc">*</span><span class="dv">100</span>,<span class="at">p100cc=</span><span class="fu">mean</span>(cc<span class="sc">&gt;</span><span class="dv">100</span>)<span class="sc">*</span><span class="dv">100</span>)</span>
+<span id="cb273-33"><a href="r-y-spark.html#cb273-33" aria-hidden="true" tabindex="-1"></a><span class="co"># group_by</span></span>
+<span id="cb273-34"><a href="r-y-spark.html#cb273-34" aria-hidden="true" tabindex="-1"></a>pvbol <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Departamento) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">p100mas=</span><span class="fu">mean</span>(mas<span class="sc">&gt;</span><span class="dv">100</span>)<span class="sc">*</span><span class="dv">100</span>,<span class="at">p100cc=</span><span class="fu">mean</span>(cc<span class="sc">&gt;</span><span class="dv">100</span>)<span class="sc">*</span><span class="dv">100</span>)</span>
+<span id="cb273-35"><a href="r-y-spark.html#cb273-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb273-36"><a href="r-y-spark.html#cb273-36" aria-hidden="true" tabindex="-1"></a>pvbol <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Departamento,Provincia) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">p100mas=</span><span class="fu">mean</span>(mas<span class="sc">&gt;</span><span class="dv">100</span>)<span class="sc">*</span><span class="dv">100</span>,<span class="at">p100cc=</span><span class="fu">mean</span>(cc<span class="sc">&gt;</span><span class="dv">100</span>)<span class="sc">*</span><span class="dv">100</span>)</span>
+<span id="cb273-37"><a href="r-y-spark.html#cb273-37" aria-hidden="true" tabindex="-1"></a><span class="co">#count tally</span></span>
+<span id="cb273-38"><a href="r-y-spark.html#cb273-38" aria-hidden="true" tabindex="-1"></a>pvbol <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Departamento,Provincia) <span class="sc">%&gt;%</span> <span class="fu">count</span>()</span>
+<span id="cb273-39"><a href="r-y-spark.html#cb273-39" aria-hidden="true" tabindex="-1"></a>pvbol <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Departamento,Provincia) <span class="sc">%&gt;%</span> <span class="fu">tally</span>()</span>
+<span id="cb273-40"><a href="r-y-spark.html#cb273-40" aria-hidden="true" tabindex="-1"></a><span class="co"># encadenamiento masivo</span></span>
+<span id="cb273-41"><a href="r-y-spark.html#cb273-41" aria-hidden="true" tabindex="-1"></a>pvbol <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Departamento<span class="sc">==</span><span class="st">&quot;Beni&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(mas,cc) <span class="sc">%&gt;%</span> <span class="fu">plot</span>()</span>
+<span id="cb273-42"><a href="r-y-spark.html#cb273-42" aria-hidden="true" tabindex="-1"></a>pvbol <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Departamento<span class="sc">==</span><span class="st">&quot;Beni&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(mas,cc) <span class="sc">%&gt;%</span> <span class="fu">cor</span>()</span></code></pre></div>
+</div>
+<div id="dplyr-en-spark" class="section level3" number="5.4.3">
+<h3><span class="header-section-number">5.4.3</span> DPLYR en Spark</h3>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="r-y-spark.html#cb274-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 0. Habilitar la librería</span></span>
+<span id="cb274-2"><a href="r-y-spark.html#cb274-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sparklyr)</span>
+<span id="cb274-3"><a href="r-y-spark.html#cb274-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb274-4"><a href="r-y-spark.html#cb274-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb274-5"><a href="r-y-spark.html#cb274-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Conexión con Spark</span></span>
+<span id="cb274-6"><a href="r-y-spark.html#cb274-6" aria-hidden="true" tabindex="-1"></a>sc <span class="ot">&lt;-</span> <span class="fu">spark_connect</span>(<span class="at">master =</span> <span class="st">&quot;local&quot;</span>, <span class="at">version =</span> <span class="st">&quot;2.4.3&quot;</span>)</span>
+<span id="cb274-7"><a href="r-y-spark.html#cb274-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Definir la data (importación)</span></span>
+<span id="cb274-8"><a href="r-y-spark.html#cb274-8" aria-hidden="true" tabindex="-1"></a>sp_covid<span class="ot">&lt;-</span><span class="fu">spark_read_csv</span>(sc,</span>
+<span id="cb274-9"><a href="r-y-spark.html#cb274-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">name=</span><span class="st">&quot;covid&quot;</span>,</span>
+<span id="cb274-10"><a href="r-y-spark.html#cb274-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">path =</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">Users</span><span class="sc">\\</span><span class="st">ALVARO</span><span class="sc">\\</span><span class="st">Desktop</span><span class="sc">\\</span><span class="st">db_bolivia</span><span class="sc">\\</span><span class="st">bigdata</span><span class="sc">\\</span><span class="st">200614COVID19MEXICO.csv&quot;</span>)<span class="co">#específico</span></span>
+<span id="cb274-11"><a href="r-y-spark.html#cb274-11" aria-hidden="true" tabindex="-1"></a>sp_importaciones<span class="ot">&lt;-</span><span class="fu">spark_read_csv</span>(sc,</span>
+<span id="cb274-12"><a href="r-y-spark.html#cb274-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">name=</span><span class="st">&quot;importaciones&quot;</span>,</span>
+<span id="cb274-13"><a href="r-y-spark.html#cb274-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">path =</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">Users</span><span class="sc">\\</span><span class="st">ALVARO</span><span class="sc">\\</span><span class="st">Desktop</span><span class="sc">\\</span><span class="st">db_bolivia</span><span class="sc">\\</span><span class="st">importaciones</span><span class="sc">\\</span><span class="st">importaciones_csv&quot;</span>)<span class="co">#carpeta</span></span>
+<span id="cb274-14"><a href="r-y-spark.html#cb274-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb274-15"><a href="r-y-spark.html#cb274-15" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="fu">url</span>(<span class="st">&quot;https://github.com/AlvaroLimber/EST-383/raw/master/data/oct20.RData&quot;</span>))</span>
+<span id="cb274-16"><a href="r-y-spark.html#cb274-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb274-17"><a href="r-y-spark.html#cb274-17" aria-hidden="true" tabindex="-1"></a>pvbol<span class="ot">&lt;-</span>computo <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">eleccion=</span>Elección) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(eleccion<span class="sc">==</span><span class="st">&quot;Presidente y Vicepresidente&quot;</span>)</span>
+<span id="cb274-18"><a href="r-y-spark.html#cb274-18" aria-hidden="true" tabindex="-1"></a>sp_pvbol<span class="ot">&lt;-</span><span class="fu">copy_to</span>(sc,pvbol)</span>
+<span id="cb274-19"><a href="r-y-spark.html#cb274-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb274-20"><a href="r-y-spark.html#cb274-20" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Exploración de los datos / (&quot;Modelado&quot;)</span></span>
+<span id="cb274-21"><a href="r-y-spark.html#cb274-21" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(pvbol)</span>
+<span id="cb274-22"><a href="r-y-spark.html#cb274-22" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(sp_pvbol)</span>
+<span id="cb274-23"><a href="r-y-spark.html#cb274-23" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(sp_importaciones)</span>
+<span id="cb274-24"><a href="r-y-spark.html#cb274-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb274-25"><a href="r-y-spark.html#cb274-25" aria-hidden="true" tabindex="-1"></a><span class="fu">sdf_describe</span>(sp_importaciones)</span>
+<span id="cb274-26"><a href="r-y-spark.html#cb274-26" aria-hidden="true" tabindex="-1"></a><span class="fu">sdf_describe</span>(sp_pvbol,<span class="fu">c</span>(<span class="st">&quot;CC&quot;</span>))</span>
+<span id="cb274-27"><a href="r-y-spark.html#cb274-27" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pvbol<span class="sc">$</span>CC)</span>
+<span id="cb274-28"><a href="r-y-spark.html#cb274-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb274-29"><a href="r-y-spark.html#cb274-29" aria-hidden="true" tabindex="-1"></a>sp_importaciones <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(DESADU) <span class="sc">%&gt;%</span> <span class="fu">count</span>()</span>
+<span id="cb274-30"><a href="r-y-spark.html#cb274-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb274-31"><a href="r-y-spark.html#cb274-31" aria-hidden="true" tabindex="-1"></a>a1<span class="ot">&lt;-</span>sp_importaciones <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(DESADU) <span class="sc">%&gt;%</span> <span class="fu">count</span>() <span class="sc">%&gt;%</span> <span class="fu">collect</span>() <span class="co"># guardar la salida en R</span></span>
+<span id="cb274-32"><a href="r-y-spark.html#cb274-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb274-33"><a href="r-y-spark.html#cb274-33" aria-hidden="true" tabindex="-1"></a>sp_a2<span class="ot">&lt;-</span>sp_importaciones <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(DESADU) <span class="sc">%&gt;%</span> <span class="fu">count</span>() <span class="sc">%&gt;%</span> <span class="fu">compute</span>(<span class="st">&quot;a2&quot;</span>) <span class="co"># guardar la salida en Spark</span></span>
+<span id="cb274-34"><a href="r-y-spark.html#cb274-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb274-35"><a href="r-y-spark.html#cb274-35" aria-hidden="true" tabindex="-1"></a>sp_importaciones <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(GESTION,DESADU) <span class="sc">%&gt;%</span> <span class="fu">count</span>()</span>
+<span id="cb274-36"><a href="r-y-spark.html#cb274-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb274-37"><a href="r-y-spark.html#cb274-37" aria-hidden="true" tabindex="-1"></a>sp_importaciones <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(DESADU, GESTION) <span class="sc">%&gt;%</span> <span class="fu">count</span>()</span>
+<span id="cb274-38"><a href="r-y-spark.html#cb274-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb274-39"><a href="r-y-spark.html#cb274-39" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb274-40"><a href="r-y-spark.html#cb274-40" aria-hidden="true" tabindex="-1"></a>sp_importaciones <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(DESADU, GESTION) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>()</span>
+<span id="cb274-41"><a href="r-y-spark.html#cb274-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb274-42"><a href="r-y-spark.html#cb274-42" aria-hidden="true" tabindex="-1"></a>sp_importaciones <span class="sc">%&gt;%</span> <span class="fu">count</span>()</span>
+<span id="cb274-43"><a href="r-y-spark.html#cb274-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb274-44"><a href="r-y-spark.html#cb274-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Generar un cuadro por gestión y producto, respecto el total de peso bruto y guardarlo en R.</span></span>
+<span id="cb274-45"><a href="r-y-spark.html#cb274-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb274-46"><a href="r-y-spark.html#cb274-46" aria-hidden="true" tabindex="-1"></a>t1<span class="ot">&lt;-</span>sp_importaciones <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(GESTION,NANDINA,DESNAN) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">peso_ton=</span><span class="fu">sum</span>(KILBRU,<span class="at">na.rm=</span>T)<span class="sc">/</span><span class="dv">1000</span>) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(GESTION,<span class="fu">desc</span>(peso_ton)) <span class="sc">%&gt;%</span> <span class="fu">collect</span>()</span>
+<span id="cb274-47"><a href="r-y-spark.html#cb274-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb274-48"><a href="r-y-spark.html#cb274-48" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DBI)</span>
+<span id="cb274-49"><a href="r-y-spark.html#cb274-49" aria-hidden="true" tabindex="-1"></a>aux<span class="ot">&lt;-</span><span class="fu">dbGetQuery</span>(sc,<span class="st">&quot;Select * from importaciones limit 5&quot;</span>)</span>
+<span id="cb274-50"><a href="r-y-spark.html#cb274-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb274-51"><a href="r-y-spark.html#cb274-51" aria-hidden="true" tabindex="-1"></a><span class="co">#lm(FOB~PAG,data=sp_importaciones)</span></span>
+<span id="cb274-52"><a href="r-y-spark.html#cb274-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb274-53"><a href="r-y-spark.html#cb274-53" aria-hidden="true" tabindex="-1"></a>mod1<span class="ot">&lt;-</span>sp_importaciones <span class="sc">%&gt;%</span> <span class="fu">select</span>(FOB,PAG) <span class="sc">%&gt;%</span> <span class="fu">ml_linear_regression</span>(FOB<span class="sc">~</span>.)</span>
+<span id="cb274-54"><a href="r-y-spark.html#cb274-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb274-55"><a href="r-y-spark.html#cb274-55" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Análisis de los resultados</span></span>
+<span id="cb274-56"><a href="r-y-spark.html#cb274-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb274-57"><a href="r-y-spark.html#cb274-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb274-58"><a href="r-y-spark.html#cb274-58" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Salida. Visualización  </span></span>
+<span id="cb274-59"><a href="r-y-spark.html#cb274-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb274-60"><a href="r-y-spark.html#cb274-60" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sp_importaciones,<span class="fu">aes</span>(DESDEPTO))<span class="sc">+</span><span class="fu">geom_bar</span>()<span class="sc">+</span><span class="fu">facet_wrap</span>(<span class="sc">~</span>GESTION)</span>
+<span id="cb274-61"><a href="r-y-spark.html#cb274-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb274-62"><a href="r-y-spark.html#cb274-62" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sp_importaciones,<span class="fu">aes</span>(DESDEPTO))<span class="sc">+</span><span class="fu">geom_bar</span>()</span>
+<span id="cb274-63"><a href="r-y-spark.html#cb274-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb274-64"><a href="r-y-spark.html#cb274-64" aria-hidden="true" tabindex="-1"></a><span class="co">#ggplot(sp_importaciones,aes(KILBRU))+geom_histogram()</span></span>
+<span id="cb274-65"><a href="r-y-spark.html#cb274-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb274-66"><a href="r-y-spark.html#cb274-66" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dbplot)</span>
+<span id="cb274-67"><a href="r-y-spark.html#cb274-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb274-68"><a href="r-y-spark.html#cb274-68" aria-hidden="true" tabindex="-1"></a>sp_importaciones <span class="sc">%&gt;%</span> <span class="fu">dbplot_bar</span>(DESDEPTO)</span>
+<span id="cb274-69"><a href="r-y-spark.html#cb274-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb274-70"><a href="r-y-spark.html#cb274-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb274-71"><a href="r-y-spark.html#cb274-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb274-72"><a href="r-y-spark.html#cb274-72" aria-hidden="true" tabindex="-1"></a><span class="co"># Final. Cerrar la conexión a Spark</span></span>
+<span id="cb274-73"><a href="r-y-spark.html#cb274-73" aria-hidden="true" tabindex="-1"></a><span class="fu">spark_disconnect_all</span>()</span>
+<span id="cb274-74"><a href="r-y-spark.html#cb274-74" aria-hidden="true" tabindex="-1"></a><span class="do">###########################################################</span></span>
+<span id="cb274-75"><a href="r-y-spark.html#cb274-75" aria-hidden="true" tabindex="-1"></a><span class="co"># cargar el pvbol</span></span>
+<span id="cb274-76"><a href="r-y-spark.html#cb274-76" aria-hidden="true" tabindex="-1"></a>sp_pvbol<span class="ot">&lt;-</span><span class="fu">copy_to</span>(sc,pvbol,<span class="at">name=</span><span class="st">&quot;elecciones&quot;</span>)</span>
+<span id="cb274-77"><a href="r-y-spark.html#cb274-77" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(pvbol)</span>
+<span id="cb274-78"><a href="r-y-spark.html#cb274-78" aria-hidden="true" tabindex="-1"></a><span class="co"># interactuar con la base en spark</span></span>
+<span id="cb274-79"><a href="r-y-spark.html#cb274-79" aria-hidden="true" tabindex="-1"></a>sp_pvbol <span class="sc">%&gt;%</span> <span class="fu">count</span>()</span>
+<span id="cb274-80"><a href="r-y-spark.html#cb274-80" aria-hidden="true" tabindex="-1"></a>t0<span class="ot">&lt;-</span>sp_pvbol <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Departamento) <span class="sc">%&gt;%</span> <span class="fu">count</span>()</span>
+<span id="cb274-81"><a href="r-y-spark.html#cb274-81" aria-hidden="true" tabindex="-1"></a><span class="co">#collect es para guardar la salida en la memoria de R</span></span>
+<span id="cb274-82"><a href="r-y-spark.html#cb274-82" aria-hidden="true" tabindex="-1"></a>t1<span class="ot">&lt;-</span>sp_pvbol <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Departamento) <span class="sc">%&gt;%</span> <span class="fu">count</span>() <span class="sc">%&gt;%</span> <span class="fu">collect</span>()</span>
+<span id="cb274-83"><a href="r-y-spark.html#cb274-83" aria-hidden="true" tabindex="-1"></a><span class="co"># compute es para guardar la salida en la memoria de spark</span></span>
+<span id="cb274-84"><a href="r-y-spark.html#cb274-84" aria-hidden="true" tabindex="-1"></a>sp_t2<span class="ot">&lt;-</span>sp_pvbol <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Departamento) <span class="sc">%&gt;%</span> <span class="fu">count</span>() <span class="sc">%&gt;%</span> <span class="fu">compute</span>(<span class="st">&quot;t2&quot;</span>)</span>
+<span id="cb274-85"><a href="r-y-spark.html#cb274-85" aria-hidden="true" tabindex="-1"></a><span class="co"># consultas a spark</span></span>
+<span id="cb274-86"><a href="r-y-spark.html#cb274-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb274-87"><a href="r-y-spark.html#cb274-87" aria-hidden="true" tabindex="-1"></a>sp_pvbol <span class="sc">%&gt;%</span>  <span class="fu">group_by</span>(Departamento,Provincia) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">media_mas=</span><span class="fu">mean</span>(mas),<span class="at">media_cc=</span><span class="fu">mean</span>(cc),<span class="fu">sd</span>(mas))</span>
+<span id="cb274-88"><a href="r-y-spark.html#cb274-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb274-89"><a href="r-y-spark.html#cb274-89" aria-hidden="true" tabindex="-1"></a><span class="co"># SQL show_query</span></span>
+<span id="cb274-90"><a href="r-y-spark.html#cb274-90" aria-hidden="true" tabindex="-1"></a>sp_pvbol <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Departamento) <span class="sc">%&gt;%</span> <span class="fu">count</span>() <span class="sc">%&gt;%</span> <span class="fu">show_query</span>()</span>
+<span id="cb274-91"><a href="r-y-spark.html#cb274-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb274-92"><a href="r-y-spark.html#cb274-92" aria-hidden="true" tabindex="-1"></a>sp_pvbol <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Departamento) <span class="sc">%&gt;%</span> <span class="fu">select</span>(mas,cc) <span class="sc">%&gt;%</span> <span class="fu">summarise_all</span>(mean) <span class="sc">%&gt;%</span> <span class="fu">show_query</span>()</span>
+<span id="cb274-93"><a href="r-y-spark.html#cb274-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb274-94"><a href="r-y-spark.html#cb274-94" aria-hidden="true" tabindex="-1"></a><span class="co"># spark SQL</span></span>
+<span id="cb274-95"><a href="r-y-spark.html#cb274-95" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DBI)</span>
+<span id="cb274-96"><a href="r-y-spark.html#cb274-96" aria-hidden="true" tabindex="-1"></a>e10<span class="ot">&lt;-</span><span class="fu">dbGetQuery</span>(sc,<span class="st">&quot;Select * from elecciones limit 10&quot;</span>)</span>
+<span id="cb274-97"><a href="r-y-spark.html#cb274-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb274-98"><a href="r-y-spark.html#cb274-98" aria-hidden="true" tabindex="-1"></a><span class="co"># figuras </span></span>
+<span id="cb274-99"><a href="r-y-spark.html#cb274-99" aria-hidden="true" tabindex="-1"></a>sp_pvbol <span class="sc">%&gt;%</span> <span class="fu">select</span>(cc) <span class="sc">%&gt;%</span> <span class="fu">hist</span>()</span>
+<span id="cb274-100"><a href="r-y-spark.html#cb274-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb274-101"><a href="r-y-spark.html#cb274-101" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb274-102"><a href="r-y-spark.html#cb274-102" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sp_pvbol,<span class="fu">aes</span>(cc))<span class="sc">+</span><span class="fu">geom_histogram</span>()</span>
+<span id="cb274-103"><a href="r-y-spark.html#cb274-103" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sp_pvbol,<span class="fu">aes</span>(cc,mas))<span class="sc">+</span><span class="fu">geom_point</span>()</span>
+<span id="cb274-104"><a href="r-y-spark.html#cb274-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb274-105"><a href="r-y-spark.html#cb274-105" aria-hidden="true" tabindex="-1"></a><span class="co"># recomendación ml</span></span></code></pre></div>
+<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="r-y-spark.html#cb275-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">Users</span><span class="sc">\\</span><span class="st">ALVARO</span><span class="sc">\\</span><span class="st">Documents</span><span class="sc">\\</span><span class="st">GitHub</span><span class="sc">\\</span><span class="st">EST-383</span><span class="sc">\\</span><span class="st">data</span><span class="sc">\\</span><span class="st">oct20.RData&quot;</span>)</span>
+<span id="cb275-2"><a href="r-y-spark.html#cb275-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(computo)</span>
+<span id="cb275-3"><a href="r-y-spark.html#cb275-3" aria-hidden="true" tabindex="-1"></a><span class="co">#filtrado</span></span>
+<span id="cb275-4"><a href="r-y-spark.html#cb275-4" aria-hidden="true" tabindex="-1"></a>aux<span class="ot">&lt;-</span>computo[computo<span class="sc">$</span>País<span class="sc">==</span><span class="st">&quot;Bolivia&quot;</span>,] <span class="co">#en R</span></span>
+<span id="cb275-5"><a href="r-y-spark.html#cb275-5" aria-hidden="true" tabindex="-1"></a>aux2<span class="ot">&lt;-</span>computo <span class="sc">%&gt;%</span> <span class="fu">filter</span>(País<span class="sc">==</span><span class="st">&quot;Bolivia&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="r-y-spark.html#cb276-1" aria-hidden="true" tabindex="-1"></a><span class="co">#spark SQL</span></span>
+<span id="cb276-2"><a href="r-y-spark.html#cb276-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DBI)</span>
+<span id="cb276-3"><a href="r-y-spark.html#cb276-3" aria-hidden="true" tabindex="-1"></a>top10 <span class="ot">&lt;-</span> <span class="fu">dbGetQuery</span>(sc, <span class="st">&quot;Select * from importaciones limit 10&quot;</span>)</span>
+<span id="cb276-4"><a href="r-y-spark.html#cb276-4" aria-hidden="true" tabindex="-1"></a>top10</span>
+<span id="cb276-5"><a href="r-y-spark.html#cb276-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb276-6"><a href="r-y-spark.html#cb276-6" aria-hidden="true" tabindex="-1"></a>sp_importaciones <span class="sc">%&gt;%</span> tally</span>
+<span id="cb276-7"><a href="r-y-spark.html#cb276-7" aria-hidden="true" tabindex="-1"></a>sp_covid2 <span class="sc">%&gt;%</span> tally</span>
+<span id="cb276-8"><a href="r-y-spark.html#cb276-8" aria-hidden="true" tabindex="-1"></a>oct20 <span class="sc">%&gt;%</span> tally</span>
+<span id="cb276-9"><a href="r-y-spark.html#cb276-9" aria-hidden="true" tabindex="-1"></a>covid_cache <span class="ot">&lt;-</span> sp_covid2 <span class="sc">%&gt;%</span> </span>
+<span id="cb276-10"><a href="r-y-spark.html#cb276-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">compute</span>(<span class="st">&quot;covid_ch&quot;</span>)</span>
+<span id="cb276-11"><a href="r-y-spark.html#cb276-11" aria-hidden="true" tabindex="-1"></a>covid_cache <span class="sc">%&gt;%</span> tally</span></code></pre></div>
+<p>Para correr con las bases de la parte de importaciones</p>
+<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="r-y-spark.html#cb277-1" aria-hidden="true" tabindex="-1"></a><span class="co">#importaciones</span></span>
+<span id="cb277-2"><a href="r-y-spark.html#cb277-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dimnames</span>(sp_importaciones)</span>
+<span id="cb277-3"><a href="r-y-spark.html#cb277-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb277-4"><a href="r-y-spark.html#cb277-4" aria-hidden="true" tabindex="-1"></a>sp_t1<span class="ot">&lt;-</span>sp_importaciones <span class="sc">%&gt;%</span> <span class="fu">count</span>(GESTION) <span class="sc">%&gt;%</span> <span class="fu">compute</span>(<span class="st">&quot;t1&quot;</span>)</span>
+<span id="cb277-5"><a href="r-y-spark.html#cb277-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb277-6"><a href="r-y-spark.html#cb277-6" aria-hidden="true" tabindex="-1"></a>aa<span class="ot">&lt;-</span>sp_importaciones <span class="sc">%&gt;%</span> <span class="fu">count</span>(GESTION) <span class="sc">%&gt;%</span> <span class="fu">collect</span>()</span>
+<span id="cb277-7"><a href="r-y-spark.html#cb277-7" aria-hidden="true" tabindex="-1"></a>aa<span class="ot">&lt;-</span>sp_importaciones <span class="sc">%&gt;%</span> <span class="fu">count</span>(GESTION,DESDEPTO) <span class="sc">%&gt;%</span> <span class="fu">collect</span>()</span>
+<span id="cb277-8"><a href="r-y-spark.html#cb277-8" aria-hidden="true" tabindex="-1"></a>sp_covid2 <span class="sc">%&gt;%</span> <span class="fu">count</span>(SEXO,NEUMONIA)</span>
+<span id="cb277-9"><a href="r-y-spark.html#cb277-9" aria-hidden="true" tabindex="-1"></a>sp_covid2 <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(SEXO) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="fu">mean</span>(EDAD),<span class="at">na.rm=</span>T)</span>
+<span id="cb277-10"><a href="r-y-spark.html#cb277-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb277-11"><a href="r-y-spark.html#cb277-11" aria-hidden="true" tabindex="-1"></a>ww<span class="ot">&lt;-</span>sp_importaciones <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(GESTION,DESDEPTO,NANDINA) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">total=</span><span class="fu">sum</span>(FOB,<span class="at">na.rm=</span>T)) <span class="sc">%&gt;%</span> <span class="fu">collect</span>()</span>
+<span id="cb277-12"><a href="r-y-spark.html#cb277-12" aria-hidden="true" tabindex="-1"></a>sp_importaciones <span class="sc">%&gt;%</span>  <span class="fu">tbl</span>(GESTION)</span>
+<span id="cb277-13"><a href="r-y-spark.html#cb277-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb277-14"><a href="r-y-spark.html#cb277-14" aria-hidden="true" tabindex="-1"></a>oct20 <span class="sc">%&gt;%</span> <span class="fu">select</span>(MAS__IPSP,CC)<span class="sc">%&gt;%</span>  <span class="fu">summarise_all</span>(mean)</span>
+<span id="cb277-15"><a href="r-y-spark.html#cb277-15" aria-hidden="true" tabindex="-1"></a>oct20 <span class="sc">%&gt;%</span> <span class="fu">select</span>(MAS__IPSP,CC)<span class="sc">%&gt;%</span>  <span class="fu">summarise_all</span>(mean) <span class="sc">%&gt;%</span> <span class="fu">show_query</span>()</span>
+<span id="cb277-16"><a href="r-y-spark.html#cb277-16" aria-hidden="true" tabindex="-1"></a>oct20 <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">qq=</span><span class="fu">quantile</span>(CC,<span class="at">probs=</span><span class="fl">0.5</span>))</span>
+<span id="cb277-17"><a href="r-y-spark.html#cb277-17" aria-hidden="true" tabindex="-1"></a>oct20 <span class="sc">%&gt;%</span> <span class="fu">select</span>(MAS__IPSP,CC) <span class="sc">%&gt;%</span> <span class="fu">ml_corr</span>()</span>
+<span id="cb277-18"><a href="r-y-spark.html#cb277-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb277-19"><a href="r-y-spark.html#cb277-19" aria-hidden="true" tabindex="-1"></a><span class="co">#figuras</span></span>
+<span id="cb277-20"><a href="r-y-spark.html#cb277-20" aria-hidden="true" tabindex="-1"></a>oct20 <span class="sc">%&gt;%</span> <span class="fu">select</span>(CC) <span class="sc">%&gt;%</span> <span class="fu">hist</span>()</span>
+<span id="cb277-21"><a href="r-y-spark.html#cb277-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb277-22"><a href="r-y-spark.html#cb277-22" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dbplot)</span>
+<span id="cb277-23"><a href="r-y-spark.html#cb277-23" aria-hidden="true" tabindex="-1"></a>oct20 <span class="sc">%&gt;%</span> <span class="fu">dbplot_histogram</span>(CC,<span class="at">binwidth =</span> <span class="dv">3</span>)</span>
+<span id="cb277-24"><a href="r-y-spark.html#cb277-24" aria-hidden="true" tabindex="-1"></a>sp_importaciones <span class="sc">%&gt;%</span>  <span class="fu">dbplot_bar</span>(GESTION)</span>
+<span id="cb277-25"><a href="r-y-spark.html#cb277-25" aria-hidden="true" tabindex="-1"></a>oct20 <span class="sc">%&gt;%</span>  <span class="fu">dbplot_raster</span>(CC,MAS__IPSP)</span>
+<span id="cb277-26"><a href="r-y-spark.html#cb277-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb277-27"><a href="r-y-spark.html#cb277-27" aria-hidden="true" tabindex="-1"></a>oct20 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(PaAs<span class="sc">==</span><span class="st">&quot;Bolivia&quot;</span>)<span class="sc">%&gt;%</span>  <span class="fu">group_by</span>(Departamento) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">voto=</span><span class="fu">mean</span>(CC)) <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(Departamento,voto))<span class="sc">+</span><span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>)</span>
+<span id="cb277-28"><a href="r-y-spark.html#cb277-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb277-29"><a href="r-y-spark.html#cb277-29" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(oct20,<span class="fu">aes</span>(CC,MAS__IPSP))<span class="sc">+</span><span class="fu">geom_point</span>()</span></code></pre></div>
+
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-R-rmarkdown" class="csl-entry">
+Allaire, JJ, Yihui Xie, Jonathan McPherson, Javier Luraschi, Kevin Ushey, Aron Atkins, Hadley Wickham, Joe Cheng, Winston Chang, and Richard Iannone. 2020. <em>Rmarkdown: Dynamic Documents for r</em>. <a href="https://CRAN.R-project.org/package=rmarkdown">https://CRAN.R-project.org/package=rmarkdown</a>.
+</div>
+<div id="ref-R-base" class="csl-entry">
+R Core Team. 2019. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>.
+</div>
+<div id="ref-R-knitr" class="csl-entry">
+Xie, Yihui. 2019. <em>Knitr: A General-Purpose Package for Dynamic Report Generation in r</em>. <a href="https://CRAN.R-project.org/package=knitr">https://CRAN.R-project.org/package=knitr</a>.
+</div>
+<div id="ref-R-bookdown" class="csl-entry">
+———. 2020. <em>Bookdown: Authoring Books and Technical Documents with r Markdown</em>. <a href="https://CRAN.R-project.org/package=bookdown">https://CRAN.R-project.org/package=bookdown</a>.
+</div>
+<div id="ref-Xie2018" class="csl-entry">
+Xie, Yihui, J. J. Allaire, and Garrett Grolemund. 2018. <span>“<span class="nocase">How to Read This Book</span>.”</span> <em>Transforming Climate Finance and Green Investment with Blockchains</em>, 1. <a href="https://doi.org/10.1016/b978-0-12-814447-3.00041-0">https://doi.org/10.1016/b978-0-12-814447-3.00041-0</a>.
+</div>
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="big-data-en-r.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

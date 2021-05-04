@@ -24,7 +24,7 @@
 <meta name="author" content="Alvaro Chirino Gutierrez" />
 
 
-<meta name="date" content="2021-04-13" />
+<meta name="date" content="2021-05-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,6 +33,7 @@
   
 <link rel="prev" href="introR.html"/>
 <link rel="next" href="scraping-web-raspado-web.html"/>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,22 +51,21 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -85,7 +85,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -130,29 +130,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prefacio</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prefacio</a>
+<ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#audiencia"><i class="fa fa-check"></i>Audiencia</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#estructura-del-libro"><i class="fa fa-check"></i>Estructura del libro</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#software-y-acuerdos"><i class="fa fa-check"></i>Software y acuerdos</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#bases-de-datos"><i class="fa fa-check"></i>Bases de datos</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#agradecimiento"><i class="fa fa-check"></i>Agradecimiento</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="introR.html"><a href="introR.html"><i class="fa fa-check"></i><b>1</b> Introducción a R</a><ul>
-<li class="chapter" data-level="1.1" data-path="introR.html"><a href="introR.html#qué-es-r"><i class="fa fa-check"></i><b>1.1</b> ¿Qué es R?</a><ul>
+<li class="chapter" data-level="1" data-path="introR.html"><a href="introR.html"><i class="fa fa-check"></i><b>1</b> Introducción a R</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introR.html"><a href="introR.html#qué-es-r"><i class="fa fa-check"></i><b>1.1</b> ¿Qué es R?</a>
+<ul>
 <li class="chapter" data-level="1.1.1" data-path="introR.html"><a href="introR.html#acerca-de-r"><i class="fa fa-check"></i><b>1.1.1</b> Acerca de R</a></li>
 <li class="chapter" data-level="1.1.2" data-path="introR.html"><a href="introR.html#qué-es-r-1"><i class="fa fa-check"></i><b>1.1.2</b> ¿Qué es R?</a></li>
 <li class="chapter" data-level="1.1.3" data-path="introR.html"><a href="introR.html#algunas-referencias"><i class="fa fa-check"></i><b>1.1.3</b> Algunas referencias</a></li>
 <li class="chapter" data-level="1.1.4" data-path="introR.html"><a href="introR.html#rstudio"><i class="fa fa-check"></i><b>1.1.4</b> RStudio</a></li>
 <li class="chapter" data-level="1.1.5" data-path="introR.html"><a href="introR.html#instalación"><i class="fa fa-check"></i><b>1.1.5</b> Instalación</a></li>
 </ul></li>
-<li class="chapter" data-level="1.2" data-path="introR.html"><a href="introR.html#r-markdown"><i class="fa fa-check"></i><b>1.2</b> R Markdown</a><ul>
+<li class="chapter" data-level="1.2" data-path="introR.html"><a href="introR.html#r-markdown"><i class="fa fa-check"></i><b>1.2</b> R Markdown</a>
+<ul>
 <li class="chapter" data-level="1.2.1" data-path="introR.html"><a href="introR.html#instalación-1"><i class="fa fa-check"></i><b>1.2.1</b> Instalación</a></li>
 <li class="chapter" data-level="1.2.2" data-path="introR.html"><a href="introR.html#yaml-header"><i class="fa fa-check"></i><b>1.2.2</b> YAML Header</a></li>
 <li class="chapter" data-level="1.2.3" data-path="introR.html"><a href="introR.html#sintaxis-básica"><i class="fa fa-check"></i><b>1.2.3</b> Sintaxis básica</a></li>
 <li class="chapter" data-level="1.2.4" data-path="introR.html"><a href="introR.html#tipos-de-documentos"><i class="fa fa-check"></i><b>1.2.4</b> Tipos de documentos</a></li>
 <li class="chapter" data-level="1.2.5" data-path="introR.html"><a href="introR.html#chunks"><i class="fa fa-check"></i><b>1.2.5</b> Chunks</a></li>
 </ul></li>
-<li class="chapter" data-level="1.3" data-path="introR.html"><a href="introR.html#r-básico"><i class="fa fa-check"></i><b>1.3</b> R básico</a><ul>
+<li class="chapter" data-level="1.3" data-path="introR.html"><a href="introR.html#r-básico"><i class="fa fa-check"></i><b>1.3</b> R básico</a>
+<ul>
 <li class="chapter" data-level="1.3.1" data-path="introR.html"><a href="introR.html#lógica-de-los-comandos-en-r"><i class="fa fa-check"></i><b>1.3.1</b> Lógica de los comandos en R</a></li>
 <li class="chapter" data-level="1.3.2" data-path="introR.html"><a href="introR.html#palabras-reservadas-y-simbolos-especiales-de-r"><i class="fa fa-check"></i><b>1.3.2</b> Palabras reservadas y simbolos especiales de R</a></li>
 <li class="chapter" data-level="1.3.3" data-path="introR.html"><a href="introR.html#símbolos-lógicos"><i class="fa fa-check"></i><b>1.3.3</b> Símbolos Lógicos</a></li>
@@ -160,7 +165,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.3.5" data-path="introR.html"><a href="introR.html#clases-en-r"><i class="fa fa-check"></i><b>1.3.5</b> Clases en R</a></li>
 <li class="chapter" data-level="1.3.6" data-path="introR.html"><a href="introR.html#algunas-comandos-adicionales"><i class="fa fa-check"></i><b>1.3.6</b> Algunas comandos adicionales</a></li>
 </ul></li>
-<li class="chapter" data-level="1.4" data-path="introR.html"><a href="introR.html#tipos-de-estructuras"><i class="fa fa-check"></i><b>1.4</b> Tipos de estructuras</a><ul>
+<li class="chapter" data-level="1.4" data-path="introR.html"><a href="introR.html#tipos-de-estructuras"><i class="fa fa-check"></i><b>1.4</b> Tipos de estructuras</a>
+<ul>
 <li class="chapter" data-level="1.4.1" data-path="introR.html"><a href="introR.html#homogéneas"><i class="fa fa-check"></i><b>1.4.1</b> Homogéneas</a></li>
 <li class="chapter" data-level="1.4.2" data-path="introR.html"><a href="introR.html#heterogéneas"><i class="fa fa-check"></i><b>1.4.2</b> Heterogéneas</a></li>
 </ul></li>
@@ -173,39 +179,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.11" data-path="introR.html"><a href="introR.html#estadística-descriptiva"><i class="fa fa-check"></i><b>1.11</b> Estadística descriptiva</a></li>
 <li class="chapter" data-level="1.12" data-path="introR.html"><a href="introR.html#inferencia-en-r"><i class="fa fa-check"></i><b>1.12</b> Inferencia en R</a></li>
 <li class="chapter" data-level="1.13" data-path="introR.html"><a href="introR.html#gráficos-de-origen"><i class="fa fa-check"></i><b>1.13</b> Gráficos de origen</a></li>
-<li class="chapter" data-level="1.14" data-path="introR.html"><a href="introR.html#ggplot"><i class="fa fa-check"></i><b>1.14</b> ggplot</a><ul>
+<li class="chapter" data-level="1.14" data-path="introR.html"><a href="introR.html#ggplot"><i class="fa fa-check"></i><b>1.14</b> ggplot</a>
+<ul>
 <li class="chapter" data-level="1.14.1" data-path="introR.html"><a href="introR.html#datos-estetica-y-geometria-layers"><i class="fa fa-check"></i><b>1.14.1</b> Datos, estetica y geometria (layers)</a></li>
 </ul></li>
 <li class="chapter" data-level="1.15" data-path="introR.html"><a href="introR.html#flexdashboard"><i class="fa fa-check"></i><b>1.15</b> Flexdashboard</a></li>
-<li class="chapter" data-level="1.16" data-path="introR.html"><a href="introR.html#shiny"><i class="fa fa-check"></i><b>1.16</b> Shiny</a><ul>
+<li class="chapter" data-level="1.16" data-path="introR.html"><a href="introR.html#shiny"><i class="fa fa-check"></i><b>1.16</b> Shiny</a>
+<ul>
 <li class="chapter" data-level="1.16.1" data-path="introR.html"><a href="introR.html#ui"><i class="fa fa-check"></i><b>1.16.1</b> UI</a></li>
 <li class="chapter" data-level="1.16.2" data-path="introR.html"><a href="introR.html#server"><i class="fa fa-check"></i><b>1.16.2</b> Server</a></li>
 </ul></li>
 <li class="chapter" data-level="1.17" data-path="introR.html"><a href="introR.html#ejercicios-propuestos"><i class="fa fa-check"></i><b>1.17</b> Ejercicios Propuestos</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html"><i class="fa fa-check"></i><b>2</b> Introducción al Big Data</a><ul>
+<li class="chapter" data-level="2" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html"><i class="fa fa-check"></i><b>2</b> Introducción al Big Data</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#definiendo-al-big-data"><i class="fa fa-check"></i><b>2.1</b> Definiendo al Big Data</a></li>
 <li class="chapter" data-level="2.2" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#las-5-v-en-el-big-data"><i class="fa fa-check"></i><b>2.2</b> Las 5 V en el Big Data</a></li>
 <li class="chapter" data-level="2.3" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#ciclo-de-vida-de-un-proyecto-de-análisis-de-datos"><i class="fa fa-check"></i><b>2.3</b> Ciclo de vida de un proyecto de análisis de datos</a></li>
-<li class="chapter" data-level="2.4" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#inferencia-y-big-data"><i class="fa fa-check"></i><b>2.4</b> Inferencia y Big Data</a><ul>
+<li class="chapter" data-level="2.4" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#inferencia-y-big-data"><i class="fa fa-check"></i><b>2.4</b> Inferencia y Big Data</a>
+<ul>
 <li class="chapter" data-level="2.4.1" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#descriptivo"><i class="fa fa-check"></i><b>2.4.1</b> Descriptivo</a></li>
 <li class="chapter" data-level="2.4.2" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#causal"><i class="fa fa-check"></i><b>2.4.2</b> Causal</a></li>
 <li class="chapter" data-level="2.4.3" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#predictivo"><i class="fa fa-check"></i><b>2.4.3</b> Predictivo</a></li>
 </ul></li>
 <li class="chapter" data-level="2.5" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#calidad-de-dato-y-big-data"><i class="fa fa-check"></i><b>2.5</b> Calidad de dato y Big Data</a></li>
-<li class="chapter" data-level="2.6" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#captura-y-preservación"><i class="fa fa-check"></i><b>2.6</b> Captura y preservación</a><ul>
+<li class="chapter" data-level="2.6" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#captura-y-preservación"><i class="fa fa-check"></i><b>2.6</b> Captura y preservación</a>
+<ul>
 <li class="chapter" data-level="2.6.1" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#fuentes-convencionales"><i class="fa fa-check"></i><b>2.6.1</b> Fuentes convencionales</a></li>
 <li class="chapter" data-level="2.6.2" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#datos-web-y-apis"><i class="fa fa-check"></i><b>2.6.2</b> Datos web y APIs</a></li>
 <li class="chapter" data-level="2.6.3" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#record-linkage"><i class="fa fa-check"></i><b>2.6.3</b> Record Linkage</a></li>
 <li class="chapter" data-level="2.6.4" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#bases-de-datos-1"><i class="fa fa-check"></i><b>2.6.4</b> Bases de datos</a></li>
 <li class="chapter" data-level="2.6.5" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#programando-con-big-data"><i class="fa fa-check"></i><b>2.6.5</b> Programando con Big Data</a></li>
 </ul></li>
-<li class="chapter" data-level="2.7" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#análisis-y-modelado"><i class="fa fa-check"></i><b>2.7</b> Análisis y modelado</a><ul>
+<li class="chapter" data-level="2.7" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#análisis-y-modelado"><i class="fa fa-check"></i><b>2.7</b> Análisis y modelado</a>
+<ul>
 <li class="chapter" data-level="2.7.1" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#machine-learning"><i class="fa fa-check"></i><b>2.7.1</b> Machine learning</a></li>
 <li class="chapter" data-level="2.7.2" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#análisis-de-texto-entendiendo-lo-que-la-gente-escribe"><i class="fa fa-check"></i><b>2.7.2</b> Análisis de texto: Entendiendo lo que la gente escribe</a></li>
 <li class="chapter" data-level="2.7.3" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#networks"><i class="fa fa-check"></i><b>2.7.3</b> Networks</a></li>
 </ul></li>
-<li class="chapter" data-level="2.8" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#inferencia-y-ética"><i class="fa fa-check"></i><b>2.8</b> Inferencia y ética</a><ul>
+<li class="chapter" data-level="2.8" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#inferencia-y-ética"><i class="fa fa-check"></i><b>2.8</b> Inferencia y ética</a>
+<ul>
 <li class="chapter" data-level="2.8.1" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#información-y-visualización"><i class="fa fa-check"></i><b>2.8.1</b> Información y visualización</a></li>
 <li class="chapter" data-level="2.8.2" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#error-e-inferencia"><i class="fa fa-check"></i><b>2.8.2</b> Error e inferencia</a></li>
 <li class="chapter" data-level="2.8.3" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#privacidad-y-confidencialidad"><i class="fa fa-check"></i><b>2.8.3</b> Privacidad y confidencialidad</a></li>
@@ -213,7 +226,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="2.9" data-path="introducción-al-big-data.html"><a href="introducción-al-big-data.html#ejercicios-propuestos-1"><i class="fa fa-check"></i><b>2.9</b> Ejercicios Propuestos</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html"><i class="fa fa-check"></i><b>3</b> Scraping Web (Raspado web)</a><ul>
+<li class="chapter" data-level="3" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html"><i class="fa fa-check"></i><b>3</b> Scraping Web (Raspado web)</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#pasos-para-la-recopilación-de-información"><i class="fa fa-check"></i><b>3.1</b> Pasos para la recopilación de información</a></li>
 <li class="chapter" data-level="3.2" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#tecnologías-de-diseminación-extracción-y-almacenamiento-web"><i class="fa fa-check"></i><b>3.2</b> Tecnologías de diseminación, extracción y almacenamiento Web</a></li>
 <li class="chapter" data-level="3.3" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#librerías-en-r"><i class="fa fa-check"></i><b>3.3</b> Librerías en R</a></li>
@@ -221,17 +235,63 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.5" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#ejemplo-infocasas-ventas-la-paz"><i class="fa fa-check"></i><b>3.5</b> Ejemplo: Infocasas, ventas La Paz</a></li>
 <li class="chapter" data-level="3.6" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#ejemplo-titulares-de-la-razon"><i class="fa fa-check"></i><b>3.6</b> Ejemplo: Titulares de La Razon</a></li>
 <li class="chapter" data-level="3.7" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#ejemplo-covid-en-el-mundo-worldometers"><i class="fa fa-check"></i><b>3.7</b> Ejemplo: COVID en el mundo, Worldometers</a></li>
-<li class="chapter" data-level="3.8" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#ejemplo-covid-bolivia-segura-worldometers"><i class="fa fa-check"></i><b>3.8</b> Ejemplo: COVID, Bolivia segura, Worldometers</a></li>
-<li class="chapter" data-level="3.9" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#ejemplo-ultracasas"><i class="fa fa-check"></i><b>3.9</b> Ejemplo: Ultracasas</a></li>
-<li class="chapter" data-level="3.10" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#ejemplo-ketal"><i class="fa fa-check"></i><b>3.10</b> Ejemplo: Ketal</a></li>
-<li class="chapter" data-level="3.11" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#ejemplo-ministerio-de-educación"><i class="fa fa-check"></i><b>3.11</b> Ejemplo: Ministerio de Educación</a></li>
-<li class="chapter" data-level="3.12" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#ejemplo-informacion-covid-19-en-bolivia"><i class="fa fa-check"></i><b>3.12</b> Ejemplo, informacion COVID-19 en Bolivia</a></li>
-<li class="chapter" data-level="3.13" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#apis"><i class="fa fa-check"></i><b>3.13</b> APIs</a><ul>
-<li class="chapter" data-level="3.13.1" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#api-banco-mundial"><i class="fa fa-check"></i><b>3.13.1</b> API Banco Mundial</a></li>
-<li class="chapter" data-level="3.13.2" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#api-google-trends"><i class="fa fa-check"></i><b>3.13.2</b> API Google trends</a></li>
-<li class="chapter" data-level="3.13.3" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#api-google-maps"><i class="fa fa-check"></i><b>3.13.3</b> API Google Maps</a></li>
+<li class="chapter" data-level="3.8" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#ejemplo-con-unidades-educativas-del-min-edu"><i class="fa fa-check"></i><b>3.8</b> Ejemplo con unidades educativas del MIN-EDU</a></li>
+<li class="chapter" data-level="3.9" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#ejemplo-covid-bolivia-segura-worldometers"><i class="fa fa-check"></i><b>3.9</b> Ejemplo: COVID, Bolivia segura, Worldometers</a></li>
+<li class="chapter" data-level="3.10" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#ejemplo-ultracasas"><i class="fa fa-check"></i><b>3.10</b> Ejemplo: Ultracasas</a></li>
+<li class="chapter" data-level="3.11" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#ejemplo-ketal"><i class="fa fa-check"></i><b>3.11</b> Ejemplo: Ketal</a></li>
+<li class="chapter" data-level="3.12" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#ejemplo-ministerio-de-educación"><i class="fa fa-check"></i><b>3.12</b> Ejemplo: Ministerio de Educación</a></li>
+<li class="chapter" data-level="3.13" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#ejemplo-informacion-covid-19-en-bolivia"><i class="fa fa-check"></i><b>3.13</b> Ejemplo, informacion COVID-19 en Bolivia</a></li>
+<li class="chapter" data-level="3.14" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#apis"><i class="fa fa-check"></i><b>3.14</b> APIs</a>
+<ul>
+<li class="chapter" data-level="3.14.1" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#api-banco-mundial"><i class="fa fa-check"></i><b>3.14.1</b> API Banco Mundial</a></li>
+<li class="chapter" data-level="3.14.2" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#api-google-trends"><i class="fa fa-check"></i><b>3.14.2</b> API Google trends</a></li>
+<li class="chapter" data-level="3.14.3" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#api-twitter"><i class="fa fa-check"></i><b>3.14.3</b> API Twitter</a></li>
+<li class="chapter" data-level="3.14.4" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#api-google-maps"><i class="fa fa-check"></i><b>3.14.4</b> API Google Maps</a></li>
 </ul></li>
-<li class="chapter" data-level="3.14" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#ejercicios-propuestos-2"><i class="fa fa-check"></i><b>3.14</b> Ejercicios Propuestos</a></li>
+<li class="chapter" data-level="3.15" data-path="scraping-web-raspado-web.html"><a href="scraping-web-raspado-web.html#ejercicios-propuestos-2"><i class="fa fa-check"></i><b>3.15</b> Ejercicios Propuestos</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="big-data-en-r.html"><a href="big-data-en-r.html"><i class="fa fa-check"></i><b>4</b> Big Data en R</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="big-data-en-r.html"><a href="big-data-en-r.html#limitaciones-en-r"><i class="fa fa-check"></i><b>4.1</b> Limitaciones en R</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="big-data-en-r.html"><a href="big-data-en-r.html#memoria"><i class="fa fa-check"></i><b>4.1.1</b> Memoria</a></li>
+<li class="chapter" data-level="4.1.2" data-path="big-data-en-r.html"><a href="big-data-en-r.html#velocidad-de-procesamiento"><i class="fa fa-check"></i><b>4.1.2</b> Velocidad de procesamiento</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="big-data-en-r.html"><a href="big-data-en-r.html#a-los-límites-de-la-memoria-y-más-allá"><i class="fa fa-check"></i><b>4.2</b> A los límites de la memoria y más allá</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="big-data-en-r.html"><a href="big-data-en-r.html#transformacion-y-agregación-de-datos-con-la-librería-ff-y-ffbase"><i class="fa fa-check"></i><b>4.2.1</b> Transformacion y agregación de datos con la librería ff y ffbase</a></li>
+<li class="chapter" data-level="4.2.2" data-path="big-data-en-r.html"><a href="big-data-en-r.html#modelos-glm-con-la-las-librerias-ff-y-ffbase"><i class="fa fa-check"></i><b>4.2.2</b> Modelos GLM con la las librerias ff y ffbase</a></li>
+<li class="chapter" data-level="4.2.3" data-path="big-data-en-r.html"><a href="big-data-en-r.html#expandiendo-la-memoria-con-la-libreria-bigmemory"><i class="fa fa-check"></i><b>4.2.3</b> Expandiendo la memoria con la libreria bigmemory</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="big-data-en-r.html"><a href="big-data-en-r.html#parallel-r"><i class="fa fa-check"></i><b>4.3</b> Parallel R</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="big-data-en-r.html"><a href="big-data-en-r.html#libreria-parallel"><i class="fa fa-check"></i><b>4.3.1</b> Libreria parallel</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="r-y-spark.html"><a href="r-y-spark.html"><i class="fa fa-check"></i><b>5</b> R y Spark</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="r-y-spark.html"><a href="r-y-spark.html#introducción"><i class="fa fa-check"></i><b>5.1</b> Introducción</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="r-y-spark.html"><a href="r-y-spark.html#hadoop"><i class="fa fa-check"></i><b>5.1.1</b> Hadoop</a></li>
+<li class="chapter" data-level="5.1.2" data-path="r-y-spark.html"><a href="r-y-spark.html#spark"><i class="fa fa-check"></i><b>5.1.2</b> Spark</a></li>
+<li class="chapter" data-level="5.1.3" data-path="r-y-spark.html"><a href="r-y-spark.html#sparklyr"><i class="fa fa-check"></i><b>5.1.3</b> Sparklyr</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="r-y-spark.html"><a href="r-y-spark.html#librería-dplyr"><i class="fa fa-check"></i><b>5.2</b> Librería dplyr</a></li>
+<li class="chapter" data-level="5.3" data-path="r-y-spark.html"><a href="r-y-spark.html#arrancando-spark"><i class="fa fa-check"></i><b>5.3</b> Arrancando Spark</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="r-y-spark.html"><a href="r-y-spark.html#prerequisitos"><i class="fa fa-check"></i><b>5.3.1</b> Prerequisitos</a></li>
+<li class="chapter" data-level="5.3.2" data-path="r-y-spark.html"><a href="r-y-spark.html#instalación-2"><i class="fa fa-check"></i><b>5.3.2</b> Instalación</a></li>
+<li class="chapter" data-level="5.3.3" data-path="r-y-spark.html"><a href="r-y-spark.html#soluciones-a-problemas-de-instalación"><i class="fa fa-check"></i><b>5.3.3</b> Soluciones a problemas de instalación</a></li>
+<li class="chapter" data-level="5.3.4" data-path="r-y-spark.html"><a href="r-y-spark.html#creando-una-sesión-en-spark"><i class="fa fa-check"></i><b>5.3.4</b> Creando una sesión en Spark</a></li>
+<li class="chapter" data-level="5.3.5" data-path="r-y-spark.html"><a href="r-y-spark.html#interface-web"><i class="fa fa-check"></i><b>5.3.5</b> Interface web</a></li>
+<li class="chapter" data-level="5.3.6" data-path="r-y-spark.html"><a href="r-y-spark.html#configuración"><i class="fa fa-check"></i><b>5.3.6</b> Configuración</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="r-y-spark.html"><a href="r-y-spark.html#análisis-con-spark"><i class="fa fa-check"></i><b>5.4</b> Análisis con Spark</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="r-y-spark.html"><a href="r-y-spark.html#importando-los-datos"><i class="fa fa-check"></i><b>5.4.1</b> Importando los datos</a></li>
+<li class="chapter" data-level="5.4.2" data-path="r-y-spark.html"><a href="r-y-spark.html#librería-dplyr-gramática-de-manipulación-de-datos"><i class="fa fa-check"></i><b>5.4.2</b> Librería DPLYR (Gramática de manipulación de datos)</a></li>
+<li class="chapter" data-level="5.4.3" data-path="r-y-spark.html"><a href="r-y-spark.html#dplyr-en-spark"><i class="fa fa-check"></i><b>5.4.3</b> DPLYR en Spark</a></li>
+</ul></li>
 </ul></li>
 </ul>
 
@@ -250,16 +310,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="introducción-al-big-data" class="section level1">
+<div id="introducción-al-big-data" class="section level1" number="2">
 <h1><span class="header-section-number">Chapter 2</span> Introducción al Big Data</h1>
-<div id="definiendo-al-big-data" class="section level2">
+<div id="definiendo-al-big-data" class="section level2" number="2.1">
 <h2><span class="header-section-number">2.1</span> Definiendo al Big Data</h2>
 <p>De forma simple el Big Data se define como:</p>
 <p><span class="math display">\[DATA&gt;RAM\]</span></p>
 <p>O de forma mas literal “cualquier cosa demasiado grande para caber en su computadora.”</p>
-<p>La Asociación Americana de Investigación de Opinión Pública menciona: “El término” Big Data “es una descripción imprecisa de un conjunto rico y complicado de características, prácticas, técnicas, cuestiones éticas y resultados, todos asociados con los datos”.</p>
+<p>La Asociación Americana de Investigación de Opinión Pública menciona: “El término” Big Data “es una descripción imprecisa de un conjunto rico y complicado de características, prácticas, técnicas, cuestiones éticas y resultados, todos asociados con los datos.”</p>
 </div>
-<div id="las-5-v-en-el-big-data" class="section level2">
+<div id="las-5-v-en-el-big-data" class="section level2" number="2.2">
 <h2><span class="header-section-number">2.2</span> Las 5 V en el Big Data</h2>
 <ul>
 <li>Velocidad</li>
@@ -269,7 +329,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Veracidad</li>
 </ul>
 </div>
-<div id="ciclo-de-vida-de-un-proyecto-de-análisis-de-datos" class="section level2">
+<div id="ciclo-de-vida-de-un-proyecto-de-análisis-de-datos" class="section level2" number="2.3">
 <h2><span class="header-section-number">2.3</span> Ciclo de vida de un proyecto de análisis de datos</h2>
 <p>Se pueden identificar 4 fases:</p>
 <ol style="list-style-type: decimal">
@@ -296,7 +356,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Visualizar los datos</li>
 </ol>
 </div>
-<div id="inferencia-y-big-data" class="section level2">
+<div id="inferencia-y-big-data" class="section level2" number="2.4">
 <h2><span class="header-section-number">2.4</span> Inferencia y Big Data</h2>
 <p>El objetivo de la inferencia es poder decir algo de la población objetivo a partir de la información disponibles. Se debe tener en cuenta los tipos de estudio provenientes; ya sean de encuestas probabilísticas, diseño experimentales o estudios de observación. Se debe estar seguro de la calidad de la base de datos proveniente, ya sean estos los errores de muestreo, procesos de calibración, ponderación, post estratificación en el caso de muestreo o el propensity score y la estratificación principal para reparar diseño experimentales rotos.</p>
 <p>Se puede distinguir tres metas en el proceso de inferencia:</p>
@@ -305,7 +365,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Causal</li>
 <li>Predictivo</li>
 </ul>
-<div id="descriptivo" class="section level3">
+<div id="descriptivo" class="section level3" number="2.4.1">
 <h3><span class="header-section-number">2.4.1</span> Descriptivo</h3>
 <p>La estadística descriptiva puede ser; (1) a un nivel simple de descripción de una base de datos sin la búsqueda de querer expandir los resultados (registros administrativos, censos, estudios de observación) o (2) para encuestas probabilisticas, realizar las estimaciones de la muestra con sus respectivos errores muestrales y a partir de estas estimaciones describir a la población</p>
 <blockquote>
@@ -313,7 +373,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </blockquote>
 <p>Ejemplos como este muestra que el propósito es puramente descriptivo en cuanto a la pobreza.</p>
 </div>
-<div id="causal" class="section level3">
+<div id="causal" class="section level3" number="2.4.2">
 <h3><span class="header-section-number">2.4.2</span> Causal</h3>
 <p>Muchos investigadores buscan explorar hipótesis, aveces originadas en la teoría o en alguna relación observada de forma empírica, con la idea central de permitir la inferencia causal.</p>
 <p>La data para esto proviene de diseños experimentales o fuertes estudios no experimentales (cuasi-experimentales), el interés de estos estudios es principalmente encontrar el efecto de de una variable entre otra.</p>
@@ -337,7 +397,7 @@ Aspecto que es logrado fácilmente mediante los diseños experimentales. En este
 </ul></li>
 </ul>
 </div>
-<div id="predictivo" class="section level3">
+<div id="predictivo" class="section level3" number="2.4.3">
 <h3><span class="header-section-number">2.4.3</span> Predictivo</h3>
 <p>El pronóstico o predicción tiene un rol diferenciado según la ciencia de aplicación, teniendo un rol significativo dentro de las estadística oficiales, principalmente en lo social (proyecciones poblacionales) y económico (indicadores macroeconómicos), principalmente para hacedores de política, gobernantes y empresarios. Similar a
 En la configuración de inferencia causal, es de suma importancia que conozcamos el proceso que generó los datos, y podemos descartar cualquier mecanismo de selección sistemática desconocido o no observado.</p>
@@ -346,7 +406,7 @@ En la configuración de inferencia causal, es de suma importancia que conozcamos
 </blockquote>
 </div>
 </div>
-<div id="calidad-de-dato-y-big-data" class="section level2">
+<div id="calidad-de-dato-y-big-data" class="section level2" number="2.5">
 <h2><span class="header-section-number">2.5</span> Calidad de dato y Big Data</h2>
 <p>La mayoría de los datos en el mundo real son ruidosos, inconsistentes y adolecen de valores perdidos, independientemente de su origen. Incluso si la recopilación de datos es barata, los costos de crear datos de alta calidad a partir de la fuente (limpieza, conservación, estandarización e integración) son considerables. La calidad de los datos se puede caracterizar de múltiples maneras:</p>
 <ul>
@@ -364,10 +424,10 @@ En la configuración de inferencia causal, es de suma importancia que conozcamos
 <li><strong>Normalización (Normalization):</strong> Es el proceso de garantizar que los campos que se comparan entre archivos sean lo más similares posible en el sentido de que podrían haber sido generados por el mismo proceso. Como mínimo, se deben aplicar las mismas reglas de estandarización a ambos archivos.</li>
 </ul>
 </div>
-<div id="captura-y-preservación" class="section level2">
+<div id="captura-y-preservación" class="section level2" number="2.6">
 <h2><span class="header-section-number">2.6</span> Captura y preservación</h2>
 <p>Se refiere al proceso de obtener la información de las distintas fuentes posibles y luego pasar a un proceso de preservación.</p>
-<div id="fuentes-convencionales" class="section level3">
+<div id="fuentes-convencionales" class="section level3" number="2.6.1">
 <h3><span class="header-section-number">2.6.1</span> Fuentes convencionales</h3>
 <p>Estas están basadas en la información que se distribuye de forma tradicional mediante bases de datos estructuradas, normalmente estas las distribuyen instituciones con amplios conocimientos en la gestión de bases de datos, para el caso de Bolivia se puede citar algunas:</p>
 <ul>
@@ -378,12 +438,12 @@ En la configuración de inferencia causal, es de suma importancia que conozcamos
 <li>Ministerios …</li>
 </ul>
 </div>
-<div id="datos-web-y-apis" class="section level3">
+<div id="datos-web-y-apis" class="section level3" number="2.6.2">
 <h3><span class="header-section-number">2.6.2</span> Datos web y APIs</h3>
 <p>Se refiere a la captura y uso de la información que se genera en espacios digitales, web, redes sociales, etc.</p>
 <p>Referirse al capítulo 3 de scraping web, estos son los mecanismos para extraer información en internet</p>
 </div>
-<div id="record-linkage" class="section level3">
+<div id="record-linkage" class="section level3" number="2.6.3">
 <h3><span class="header-section-number">2.6.3</span> Record Linkage</h3>
 <p>Se refiere al proceso de concatenar o unir observaciones dispuestas en múltiples bases de datos.</p>
 <ul>
@@ -403,7 +463,7 @@ En la configuración de inferencia causal, es de suma importancia que conozcamos
 </ul>
 <p><img src="images/bd2.PNG" /></p>
 </div>
-<div id="bases-de-datos-1" class="section level3">
+<div id="bases-de-datos-1" class="section level3" number="2.6.4">
 <h3><span class="header-section-number">2.6.4</span> Bases de datos</h3>
 <p>Una vez que los datos fueron recolectados y enlazados entre diferentes fuentes, es necesario guardar la información. Ahora se discute las alternativas para guardar la información.</p>
 <ul>
@@ -415,7 +475,7 @@ En la configuración de inferencia causal, es de suma importancia que conozcamos
 <li>Múltiples formatos: <a href="https://juliael.carto.com/" class="uri">https://juliael.carto.com/</a></li>
 </ul>
 </div>
-<div id="programando-con-big-data" class="section level3">
+<div id="programando-con-big-data" class="section level3" number="2.6.5">
 <h3><span class="header-section-number">2.6.5</span> Programando con Big Data</h3>
 <ul>
 <li>MapReduce: map, shuffle y reduce</li>
@@ -428,9 +488,9 @@ En la configuración de inferencia causal, es de suma importancia que conozcamos
 <p><img src="images/bd4.PNG" /></p>
 </div>
 </div>
-<div id="análisis-y-modelado" class="section level2">
+<div id="análisis-y-modelado" class="section level2" number="2.7">
 <h2><span class="header-section-number">2.7</span> Análisis y modelado</h2>
-<div id="machine-learning" class="section level3">
+<div id="machine-learning" class="section level3" number="2.7.1">
 <h3><span class="header-section-number">2.7.1</span> Machine learning</h3>
 <p><strong>¿Machine learning = Statistics?</strong></p>
 <p>Verán que muchos métodos discutidos a lo largo de su formación como estadísticos aparecen dentro del maching learning y que son llamados con otros nombres.</p>
@@ -443,7 +503,7 @@ En la configuración de inferencia causal, es de suma importancia que conozcamos
 <li>Ayudan a conocer que estudiantes necesitan un apoyo adicional</li>
 <li>Ayudan a persuadir por que candidato votar en las elecciones.</li>
 </ul>
-<div id="el-proceso-del-machine-learning" class="section level4">
+<div id="el-proceso-del-machine-learning" class="section level4" number="2.7.1.1">
 <h4><span class="header-section-number">2.7.1.1</span> El proceso del machine learning</h4>
 <ul>
 <li>Entender el problema y la meta</li>
@@ -455,7 +515,7 @@ En la configuración de inferencia causal, es de suma importancia que conozcamos
 <li>Deployment</li>
 </ul>
 </div>
-<div id="formulación-del-problema" class="section level4">
+<div id="formulación-del-problema" class="section level4" number="2.7.1.2">
 <h4><span class="header-section-number">2.7.1.2</span> Formulación del problema</h4>
 <p>En ML existen 2 grandes categorías</p>
 <ol style="list-style-type: decimal">
@@ -470,7 +530,7 @@ En la configuración de inferencia causal, es de suma importancia que conozcamos
 <p><img src="images/bd6.PNG" /></p>
 </div>
 </div>
-<div id="análisis-de-texto-entendiendo-lo-que-la-gente-escribe" class="section level3">
+<div id="análisis-de-texto-entendiendo-lo-que-la-gente-escribe" class="section level3" number="2.7.2">
 <h3><span class="header-section-number">2.7.2</span> Análisis de texto: Entendiendo lo que la gente escribe</h3>
 <ul>
 <li>Clasificación de documentos</li>
@@ -478,15 +538,15 @@ En la configuración de inferencia causal, es de suma importancia que conozcamos
 <li>Etiquetado de discursos</li>
 </ul>
 </div>
-<div id="networks" class="section level3">
+<div id="networks" class="section level3" number="2.7.3">
 <h3><span class="header-section-number">2.7.3</span> Networks</h3>
 <p><img src="images/bd7.PNG" />
 <img src="images/bd8.PNG" /></p>
 </div>
 </div>
-<div id="inferencia-y-ética" class="section level2">
+<div id="inferencia-y-ética" class="section level2" number="2.8">
 <h2><span class="header-section-number">2.8</span> Inferencia y ética</h2>
-<div id="información-y-visualización" class="section level3">
+<div id="información-y-visualización" class="section level3" number="2.8.1">
 <h3><span class="header-section-number">2.8.1</span> Información y visualización</h3>
 <blockquote>
 <p>Los usuarios pueden escanear, reconocer, comprender y recordar representaciones visualmente estructuradas más rápidamente de lo que pueden procesar representaciones no estructuradas</p>
@@ -511,16 +571,16 @@ En la configuración de inferencia causal, es de suma importancia que conozcamos
 <li>Implementar (supervisar el uso, proporcionar soporte al usuario, gestionar el proceso de revisión).</li>
 </ul>
 <p><img src="https://www.babynamewizard.com/voyager" /></p>
-<div id="dashboards" class="section level4">
+<div id="dashboards" class="section level4" number="2.8.1.1">
 <h4><span class="header-section-number">2.8.1.1</span> Dashboards</h4>
 <p><img src="images/bd9.PNG" />
 <img src="images/bd10.PNG" /></p>
 </div>
-<div id="elementos" class="section level4">
+<div id="elementos" class="section level4" number="2.8.1.2">
 <h4><span class="header-section-number">2.8.1.2</span> Elementos</h4>
 <p><img src="images/bd11.PNG" /></p>
 </div>
-<div id="datos-espaciales" class="section level4">
+<div id="datos-espaciales" class="section level4" number="2.8.1.3">
 <h4><span class="header-section-number">2.8.1.3</span> Datos espaciales</h4>
 <p><img src="images/bd12.PNG" /></p>
 <ul>
@@ -532,17 +592,17 @@ En la configuración de inferencia causal, es de suma importancia que conozcamos
 <p>Tarea: resumir los siguientes puntos del libro: Big Data and Social Science, Ian Foster.</p>
 </div>
 </div>
-<div id="error-e-inferencia" class="section level3">
+<div id="error-e-inferencia" class="section level3" number="2.8.2">
 <h3><span class="header-section-number">2.8.2</span> Error e inferencia</h3>
 </div>
-<div id="privacidad-y-confidencialidad" class="section level3">
+<div id="privacidad-y-confidencialidad" class="section level3" number="2.8.3">
 <h3><span class="header-section-number">2.8.3</span> Privacidad y confidencialidad</h3>
 </div>
-<div id="workbooks" class="section level3">
+<div id="workbooks" class="section level3" number="2.8.4">
 <h3><span class="header-section-number">2.8.4</span> Workbooks</h3>
 </div>
 </div>
-<div id="ejercicios-propuestos-1" class="section level2">
+<div id="ejercicios-propuestos-1" class="section level2" number="2.9">
 <h2><span class="header-section-number">2.9</span> Ejercicios Propuestos</h2>
 <ol style="list-style-type: decimal">
 <li>Explorar los métodos cuasi-experimentales que existen</li>

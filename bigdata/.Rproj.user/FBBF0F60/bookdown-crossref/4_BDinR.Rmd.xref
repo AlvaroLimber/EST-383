@@ -1,0 +1,11 @@
+h1:big-data-en-r Big Data en R
+h2:limitaciones-en-r Limitaciones en R
+h3:memoria Memoria
+h3:velocidad-de-procesamiento Velocidad de procesamiento
+h2:a-los-límites-de-la-memoria-y-más-allá A los límites de la memoria y más allá
+h3:transformacion-y-agregación-de-datos-con-la-librería-ff-y-ffbase Transformacion y agregación de datos con la librería ff y ffbase
+h3:modelos-glm-con-la-las-librerias-ff-y-ffbase Modelos GLM con la las librerias ff y ffbase
+h3:expandiendo-la-memoria-con-la-libreria-bigmemory Expandiendo la memoria con la libreria bigmemory
+h2:parallel-r Parallel R
+h3:libreria-parallel Libreria parallel
+

@@ -1,0 +1,38 @@
+h1:introR Introducción a R
+h2:qué-es-r ¿Qué es R?
+h3:algo-de-historia-de-r Algo de historia de R
+h3:acerca-de-r Acerca de R
+h3:qué-es-r-1 ¿Qué es R?
+h3:algunas-referencias Algunas referencias
+h3:rstudio RStudio
+h3:instalación Instalación
+h2:r-markdown R Markdown
+h3:instalación-1 Instalación
+h3:yaml-header YAML Header
+h3:sintaxis-básica Sintaxis básica
+h3:tipos-de-documentos Tipos de documentos
+h3:chunks Chunks
+h2:r-básico R básico
+h3:lógica-de-los-comandos-en-r Lógica de los comandos en R
+h3:palabras-reservadas-y-simbolos-especiales-de-r Palabras reservadas y simbolos especiales de R
+h3:símbolos-lógicos Símbolos Lógicos
+h3:asignación-o-creación-de-objetos-estructuras-variables Asignación o creación de objetos (estructuras, variables)
+h3:clases-en-r Clases en R
+h3:algunas-comandos-adicionales Algunas comandos adicionales
+h2:tipos-de-estructuras Tipos de estructuras
+h3:homogéneas Homogéneas
+h3:heterogéneas Heterogéneas
+h2:indexación Indexación
+h2:loops-y-condiciones Loops y condiciones
+h2:funciones Funciones
+h2:importacion-de-datos Importacion de datos
+h2:dataframe-y-exploración Dataframe y exploración
+h2:estadística-descriptiva Estadística descriptiva
+h2:muestreo-e-inferencia Muestreo e inferencia
+h2:gráficos-de-origen Gráficos de origen
+h2:ggplot ggplot
+h2:shiny Shiny
+h3:ui UI
+h3:server Server
+h2:ejercicios-propuestos Ejercicios Propuestos
+
